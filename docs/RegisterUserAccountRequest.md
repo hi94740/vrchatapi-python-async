@@ -1,0 +1,37 @@
+# RegisterUserAccountRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**accepted_tos_version** | **int** | The most recent version of the TOS | 
+**captcha_code** | **str** | Captcha code | 
+**day** | **str** | Birth day of month | 
+**email** | **str** | Email address | 
+**month** | **str** | Birth month of year | 
+**password** | **str** | Password | 
+**subscribe** | **bool** | Whether to receive promotional emails | 
+**username** | **str** | Display Name / Username (Username is a sanitized version) | 
+**year** | **str** | Birth year | 
+
+## Example
+
+```python
+from vrchatapi.models.register_user_account_request import RegisterUserAccountRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of RegisterUserAccountRequest from a JSON string
+register_user_account_request_instance = RegisterUserAccountRequest.from_json(json)
+# print the JSON string representation of the object
+print(RegisterUserAccountRequest.to_json())
+
+# convert the object into a dict
+register_user_account_request_dict = register_user_account_request_instance.to_dict()
+# create an instance of RegisterUserAccountRequest from a dict
+register_user_account_request_from_dict = RegisterUserAccountRequest.from_dict(register_user_account_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

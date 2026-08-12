@@ -1,0 +1,169 @@
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+  repository_dispatch:
+    types: [release]
+  workflow_dispatch:
+    inputs:
+      json:
+        description: Passed json from repository_dispatch
+        required: true
+        type: string
+      version_postfix:
+        description: Additional string to concatenate onto the existing version before release
+        required: false
+        type: string
+        default: ""
+  workflow_call:
+    inputs:
+      ref:
+        description: Ref of this repository to build.
+        required: false
+        type: string
+        default: main
+
+name: CI
+
+env:
+  PASSED_VERSION: ${{ (github.event_name == 'repository_dispatch' && github.event.client_payload || fromJSON(inputs.json || '{}'))['version'] }}
+  VERSION_POSTPEND: ${{ github.event_name == 'workflow_dispatch' && inputs.version_postfix || '' }}
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ inputs.ref || github.ref }}
+
+      - uses: vrchatapi/specification/.github/actions/setup-generator@main
+
+      - uses: vrchatapi/specification/.github/actions/download@main
+        with:
+          bundle: openapi-legacy.yaml
+
+      # PyPI wants `.dev` where the specification says `-nightly.`
+      - id: version
+        run: |
+          version="${PASSED_VERSION}${VERSION_POSTPEND}"
+          version="${version:-$(yq -r '.info.version' openapi-legacy.yaml)}"
+
+          echo "version=${version/-nightly./.dev}" >> $GITHUB_OUTPUT
+
+      - if: env.VERSION_POSTPEND != ''
+        run: yq '--inplace' ".info.version |= \"${{ steps.version.outputs.version }}\"" openapi-legacy.yaml
+
+      - run: bash ./generate.sh "${{ steps.version.outputs.version }}" openapi-legacy.yaml
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: python-generated
+          path: .
+          include-hidden-files: true
+
+  test:
+    needs: generate
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-generated
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - run: python -m pip install --upgrade pip
+
+      - run: python -m pip install -r requirements.txt -r test-requirements.txt
+
+      - run: pytest --cov=vrchatapi
+
+  build:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-generated
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+          cache: pip
+
+      - run: python -m pip install build
+
+      - run: python -m build --sdist --wheel --outdir dist/ .
+
+      - uses: actions/upload-artifact@v7
+        with:
+          name: python-package
+          path: dist
+
+  install:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-package
+          path: dist
+
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.14"
+
+      - run: python -m pip install dist/*.whl
+
+      - run: python -c "import vrchatapi; print(vrchatapi.__name__)"
+
+  publish:
+    needs:
+      - generate
+      - test
+      - build
+      - install
+    if: github.event_name == 'repository_dispatch' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    # Human approval before publishing is configured on the `pypi` GitHub
+    # environment (Settings -> Environments -> pypi -> Required reviewers).
+    # Any branch may trigger a (pre)release via workflow_dispatch /
+    # repository_dispatch; approval is the release gate.
+    environment: pypi
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          repository: ${{ github.repository }}
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-generated
+
+      - run: rm -f openapi-legacy.yaml
+
+      - uses: JamesIves/github-pages-deploy-action@v4.9.0
+        with:
+          branch: main
+          folder: .
+          commit-message: Upgrade Python SDK to spec ${{ needs.generate.outputs.version }}
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-package
+          path: dist
+
+      - uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: true

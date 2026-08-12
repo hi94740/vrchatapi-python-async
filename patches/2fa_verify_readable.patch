@@ -1,0 +1,17 @@
+--- a/vrchatapi/api_client.py
++++ b/vrchatapi/api_client.py
+@@ -331,6 +331,14 @@
+ 
+         msg = "RESTResponse.read() must be called before passing it to response_deserialize()"
+         assert response_data.data is not None, msg
++
++        # VRChatAPI: Make 2FA required errors readable
++        if re.match(rb'{"\w{21}":\["totp","otp"]}', response_data.data) is not None:
++            response_data.reason = "2 Factor Authentication verification is required"
++            raise UnauthorizedException(http_resp=response_data)
++        elif re.match(rb'{"\w{21}":\["emailOtp"]}', response_data.data) is not None:
++            response_data.reason = "Email 2 Factor Authentication verification is required"
++            raise UnauthorizedException(http_resp=response_data)
+ 
+         response_type = response_types_map.get(str(response_data.status), None)
+         if not response_type and isinstance(response_data.status, int) and 100 <= response_data.status <= 599:

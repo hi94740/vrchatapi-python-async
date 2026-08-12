@@ -1,0 +1,62 @@
+# World
+
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**author_id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | 
+**author_name** | **str** |  | 
+**capacity** | **int** |  | 
+**created_at** | **datetime** |  | 
+**default_content_settings** | [**InstanceContentSettings**](InstanceContentSettings.md) |  | [optional] 
+**description** | **str** |  | 
+**favorites** | **int** |  | [optional] [default to 0]
+**featured** | **bool** |  | [default to False]
+**heat** | **int** |  | [default to 0]
+**id** | **str** | WorldID be \&quot;offline\&quot; on User profiles if you are not friends with that user. | 
+**image_url** | **str** |  | 
+**instances** | **List[List[object]]** | Will always be an empty list when unauthenticated. | [optional] 
+**labs_publication_date** | **str** |  | 
+**name** | **str** |  | 
+**namespace** | **str** |  | [optional] 
+**occupants** | **int** | Will always be &#x60;0&#x60; when unauthenticated. | [optional] [default to 0]
+**organization** | **str** |  | [default to 'vrchat']
+**popularity** | **int** |  | [default to 0]
+**preview_youtube_id** | **str** |  | [optional] 
+**private_occupants** | **int** | Will always be &#x60;0&#x60; when unauthenticated. | [optional] [default to 0]
+**public_occupants** | **int** | Will always be &#x60;0&#x60; when unauthenticated. | [optional] [default to 0]
+**publication_date** | **str** |  | 
+**recommended_capacity** | **int** |  | 
+**release_status** | [**ReleaseStatus**](ReleaseStatus.md) |  | [default to ReleaseStatus.PUBLIC]
+**store_id** | **str** |  | [optional] 
+**tags** | **List[str]** |   | 
+**thumbnail_image_url** | **str** |  | 
+**udon_products** | **List[str]** |  | [optional] 
+**unity_packages** | [**List[UnityPackage]**](UnityPackage.md) | Empty if unauthenticated. | [optional] 
+**updated_at** | **datetime** |  | 
+**url_list** | **List[str]** |  | [optional] 
+**version** | **int** |  | [default to 0]
+**visits** | **int** |  | [default to 0]
+
+## Example
+
+```python
+from vrchatapi.models.world import World
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of World from a JSON string
+world_instance = World.from_json(json)
+# print the JSON string representation of the object
+print(World.to_json())
+
+# convert the object into a dict
+world_dict = world_instance.to_dict()
+# create an instance of World from a dict
+world_from_dict = World.from_dict(world_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

@@ -1,0 +1,47 @@
+# UpdateUserRequest
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**accepted_tos_version** | **int** |  | [optional] 
+**bio** | **str** |  | [optional] 
+**bio_links** | **List[str]** |  | [optional] 
+**birthday** | **date** |  | [optional] 
+**content_filters** | [**List[ContentFilter]**](ContentFilter.md) | These tags begin with &#x60;content_&#x60; and control content gating | [optional] 
+**current_password** | **str** |  | [optional] 
+**display_name** | **str** | MUST specify currentPassword as well to change display name | [optional] 
+**email** | **str** |  | [optional] 
+**has_discord_friends_opt_out** | **bool** | Opt out of the Discord Friend Connections feature | [optional] 
+**has_shared_connections_opt_out** | **bool** | Opt out of the Mutuals feature | [optional] 
+**is_booping_enabled** | **bool** |  | [optional] 
+**password** | **str** | MUST specify currentPassword as well to change password | [optional] 
+**pronouns** | **str** |  | [optional] 
+**revert_display_name** | **bool** | MUST specify currentPassword as well to revert display name | [optional] 
+**status** | [**UserStatus**](UserStatus.md) |  | [optional] [default to UserStatus.OFFLINE]
+**status_description** | **str** |  | [optional] 
+**tags** | **List[str]** |   | [optional] 
+**unsubscribe** | **bool** |  | [optional] 
+**user_icon** | **str** | MUST be a valid VRChat /file/ url. | [optional] 
+
+## Example
+
+```python
+from vrchatapi.models.update_user_request import UpdateUserRequest
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of UpdateUserRequest from a JSON string
+update_user_request_instance = UpdateUserRequest.from_json(json)
+# print the JSON string representation of the object
+print(UpdateUserRequest.to_json())
+
+# convert the object into a dict
+update_user_request_dict = update_user_request_instance.to_dict()
+# create an instance of UpdateUserRequest from a dict
+update_user_request_from_dict = UpdateUserRequest.from_dict(update_user_request_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

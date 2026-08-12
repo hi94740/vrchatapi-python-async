@@ -1,0 +1,24 @@
+--- a/vrchatapi/configuration.py
++++ b/vrchatapi/configuration.py
+@@ -19,6 +19,7 @@
+ import logging
+ from logging import FileHandler
+ import sys
++import urllib.parse
+ from typing import Any, ClassVar, Dict, List, Literal, Optional, TypedDict, Union
+ from typing_extensions import NotRequired, Self
+ 
+@@ -564,8 +565,12 @@
+         if self.password is not None:
+             password = self.password
+ 
++        # URL-encode username/password to avoid issues with special characters
++        encoded_username = urllib.parse.quote(username)
++        encoded_password = urllib.parse.quote(password)
++
+         return "Basic " + base64.b64encode(
+-            (username + ":" + password).encode('utf-8')
++            (encoded_username + ":" + encoded_password).encode('utf-8')
+         ).decode('utf-8')
+ 
+     def auth_settings(self)-> AuthSettings:

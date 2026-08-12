@@ -1,0 +1,10 @@
+--- a/vrchatapi/models/mime_type.py
++++ b/vrchatapi/models/mime_type.py
+@@ -38,7 +38,7 @@
+     IMAGE_SLASH_JPEG = 'image/jpeg'
+     IMAGE_SLASH_JPG = 'image/jpg'
+     IMAGE_SLASH_PNG = 'image/png'
+-    IMAGE_SLASH_SVG＋XML = 'image/svg＋xml'
++    IMAGE_SLASH_SVG_XML = 'image/svg+xml'
+     IMAGE_SLASH_TIFF = 'image/tiff'
+     IMAGE_SLASH_WEBP = 'image/webp'

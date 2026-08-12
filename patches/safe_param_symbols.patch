@@ -1,0 +1,11 @@
+--- a/vrchatapi/configuration.py
++++ b/vrchatapi/configuration.py
+@@ -254,7 +255,7 @@
+         connection_pool_maxsize: Optional[int]=None,
+         proxy: Optional[str]=None,
+         proxy_headers: Optional[Any]=None,
+-        safe_chars_for_path_param: str='',
++        safe_chars_for_path_param: str='~()',
+         client_side_validation: bool=True,
+         socket_options: Optional[Any]=None,
+         datetime_format: str="%Y-%m-%dT%H:%M:%S.%f%z",

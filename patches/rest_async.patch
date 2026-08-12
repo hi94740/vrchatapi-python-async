@@ -1,0 +1,85 @@
+--- a/vrchatapi/rest.py
++++ b/vrchatapi/rest.py
+@@ -23,10 +23,32 @@
+ import aiohttp_retry
+ 
+ from vrchatapi.exceptions import ApiException, ApiValueError
++from http.cookiejar import CookieJar
++from urllib.request import Request as _UrlLibRequest
+ 
+ RESTResponseType = aiohttp.ClientResponse
+ 
+ ALLOW_RETRY_METHODS = frozenset({'DELETE', 'GET', 'HEAD', 'OPTIONS', 'PUT', 'TRACE'})
++
++
++class _CookieHeaderAdapter:
++    """Minimal ``email.message``-like view over aiohttp headers for http.cookiejar."""
++
++    def __init__(self, headers) -> None:
++        self._headers = headers
++
++    def get_all(self, name, default=None):
++        return self._headers.getall(name, default)
++
++
++class _CookieResponseAdapter:
++    """Adapter exposing ``info()`` so ``CookieJar.extract_cookies`` works with aiohttp."""
++
++    def __init__(self, headers) -> None:
++        self._headers = headers
++
++    def info(self):
++        return _CookieHeaderAdapter(self._headers)
+ 
+ class RESTResponse(io.IOBase):
+ 
+@@ -100,6 +122,9 @@
+         self.pool_manager: Optional[aiohttp.ClientSession] = None
+         self.retry_client: Optional[aiohttp_retry.RetryClient] = None
+ 
++        # VRChatAPI: Init global cookie storage
++        self.cookie_jar = CookieJar()
++
+     async def close(self) -> None:
+         if self.pool_manager:
+             await self.pool_manager.close()
+@@ -131,7 +156,7 @@
+         extra = getattr(self.configuration, "client_session_kwargs", None)
+         kwargs: Dict[str, Any] = {
+             "connector": self._create_connector(),
+-            "trust_env": True,
++            "trust_env": False,
+         }
+         trace_configs = getattr(self.configuration, "trace_configs", None)
+         if trace_configs is not None:
+@@ -182,7 +207,13 @@
+         post_params = post_params or {}
+         headers = headers or {}
+         # url already contains the URL query string
+-        timeout = _request_timeout or 5 * 60
++        if isinstance(_request_timeout, tuple) and len(_request_timeout) == 2:
++            timeout = aiohttp.ClientTimeout(
++                connect=_request_timeout[0],
++                sock_read=_request_timeout[1],
++            )
++        else:
++            timeout = aiohttp.ClientTimeout(total=_request_timeout or 5 * 60)
+ 
+         if 'Content-Type' not in headers:
+             headers['Content-Type'] = 'application/json'
+@@ -259,6 +290,15 @@
+                 )
+             pool_manager = self.retry_client
+ 
++        # VRChatAPI: Attach session cookies to the outgoing request
++        mock_request_object = _UrlLibRequest(url=url, method=method, headers=headers)
++        self.cookie_jar.add_cookie_header(mock_request_object)
++        if "Cookie" in mock_request_object.unredirected_hdrs:
++            headers["Cookie"] = mock_request_object.unredirected_hdrs["Cookie"]
++
+         r = await pool_manager.request(**args)
+ 
++        # VRChatAPI: Store any cookies set by the response for later requests
++        self.cookie_jar.extract_cookies(_CookieResponseAdapter(r.headers), mock_request_object)
++
+         return RESTResponse(r)

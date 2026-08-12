@@ -1,0 +1,37 @@
+# GroupAuditLogEntry
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**actor_display_name** | **str** |  | [optional] 
+**actor_id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | [optional] 
+**created_at** | **datetime** |  | [optional] 
+**data** | **object** | The data associated with the event. The format of this data is dependent on the event type. | [optional] 
+**description** | **str** | A human-readable description of the event. | [optional] 
+**event_type** | **str** | The type of event that occurred. This is a string that is prefixed with the type of object that the event occurred on. For example, a group role update event would be prefixed with &#x60;group.role&#x60;. | [optional] [default to 'group.update']
+**group_id** | **str** |  | [optional] 
+**id** | **str** |  | [optional] 
+**target_id** | **str** | Typically a UserID, GroupID, GroupRoleID, or Location, but could be other types of IDs. | [optional] 
+
+## Example
+
+```python
+from vrchatapi.models.group_audit_log_entry import GroupAuditLogEntry
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GroupAuditLogEntry from a JSON string
+group_audit_log_entry_instance = GroupAuditLogEntry.from_json(json)
+# print the JSON string representation of the object
+print(GroupAuditLogEntry.to_json())
+
+# convert the object into a dict
+group_audit_log_entry_dict = group_audit_log_entry_instance.to_dict()
+# create an instance of GroupAuditLogEntry from a dict
+group_audit_log_entry_from_dict = GroupAuditLogEntry.from_dict(group_audit_log_entry_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+
