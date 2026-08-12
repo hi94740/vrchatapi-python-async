@@ -76,7 +76,13 @@ jobs:
       - uses: actions/upload-artifact@v7
         with:
           name: python-generated
-          path: .
+          # Exclude .git: the publish job downloads this artifact over a fresh
+          # checkout, and extracting an artifact that contains .git over the
+          # checkout's .git makes download-artifact fail with "download failed
+          # after 5 retries".
+          path: |
+            .
+            !.git
           include-hidden-files: true
 
   test:
