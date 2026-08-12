@@ -257,10 +257,15 @@ Caveats:
 
 The `publish` job runs only on `repository_dispatch` or manual
 `workflow_dispatch` (not on push/PR), and **any branch may trigger it** — the
-release gate is human approval, not a branch check. To publish a prerelease
-from a branch, run `workflow_dispatch` with a `version_postfix` such as `rc1`
-or `dev1`; the resulting version (e.g. `1.20.8rc1`) is what PyPI treats as a
-prerelease.
+release gate is human approval, not a branch check. On `workflow_dispatch` the
+`release` input selects the mode:
+
+- `none` (default) — CI only (generate/test/build/install), skip publish.
+- `latest` — publish the latest spec version (read from the spec's
+  `info.version`), no version typing needed.
+- `prerelease` — publish `info.version` + `version_postfix` (e.g. `rc1` →
+  `1.20.8rc1`), which PyPI treats as a prerelease; `version_postfix` is
+  required in this mode.
 
 Human approval is configured on the `pypi` GitHub environment, **not** in the
 workflow YAML: Settings → Environments → `pypi` → Required reviewers. Until a
