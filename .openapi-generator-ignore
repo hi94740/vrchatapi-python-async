@@ -31,3 +31,4 @@ pyproject.toml
 
 .github/workflows/python.yml
 git_push.sh
+vrchatapi/websocket.py

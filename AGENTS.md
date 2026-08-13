@@ -45,6 +45,12 @@ Hand-maintained — the generator never emits these:
 - `generate.sh` — the single source of truth for building the SDK.
 - `patches/` — behavior patches applied after generation.
 - `tools/make_models_lenient.py` — model post-processor.
+- `websocket/websocket.py` — canonical source of the hand-written WebSocket
+  (Pipeline) client. `generate.sh` copies it to `vrchatapi/websocket.py` after
+  every regeneration (and lists it in `.openapi-generator-ignore`), so the
+  shipped `vrchatapi/websocket.py` is a generated output with a hand-maintained
+  source. Never edit `vrchatapi/websocket.py` directly — edit
+  `websocket/websocket.py` and re-copy.
 - `examples/`, `AGENTS.md`, `LICENSE` — documentation, kept async.
 - `tests/`, `pytest.ini` — hand-written test suite. It lives in `tests/` (plural)
   so it never collides with the generator's `test/` (singular, ignored).
