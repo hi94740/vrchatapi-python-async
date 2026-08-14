@@ -124,9 +124,15 @@ perl -pi -e 's/abcdefvrc//g' ./setup.py
 find vrchatapi -type f -exec perl -ni -e 'print unless /VRChat API Banner/' {} \;
 
 # Keep hand-maintained files from being overwritten on regeneration
-for entry in README.md test/ .travis.yml .gitignore pyproject.toml .github/workflows/python.yml git_push.sh; do
+for entry in README.md test/ .travis.yml .gitignore pyproject.toml .github/workflows/python.yml git_push.sh vrchatapi/websocket.py; do
   grep -qxF "$entry" .openapi-generator-ignore || echo "$entry" >> .openapi-generator-ignore
 done
+
+# Restore the hand-written WebSocket (Pipeline) client. The generator does not
+# emit it, so it is copied from the canonical hand-maintained source after the
+# generated tree is produced. The copy-back runs even with --no-patch so the
+# pristine baseline is a faithful picture of the full pipeline output.
+cp websocket/websocket.py vrchatapi/websocket.py
 
 # Stop here for the pristine baseline: exactly the state the `patch` steps
 # below operate on. Useful for rewriting patches when upstream changes.

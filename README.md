@@ -103,3 +103,49 @@ Compared to [the synchronous SDK](https://github.com/vrchatapi/vrchatapi-python)
 ## Contributing
 
 Contributions are welcome, but do not add features that should be handled by the OpenAPI specification.
+
+## Websocket (Pipeline) API
+
+The SDK also ships a hand-written async client for VRChat's real-time
+WebSocket (Pipeline) API (`wss://pipeline.vrchat.cloud`), which pushes invites,
+friend requests, friend online/offline events, user and group updates to the
+authenticated client. The connection is receive-only; every message's
+double-encoded `content` field is automatically unpacked into a plain dict.
+
+```python
+import asyncio
+
+import vrchatapi
+from vrchatapi.api import authentication_api
+from vrchatapi.websocket import VRChatWebSocket
+
+
+async def main():
+    configuration = vrchatapi.Configuration(username="username", password="password")
+    async with vrchatapi.ApiClient(configuration) as api_client:
+        api_client.user_agent = "ExampleProgram/0.0.1 my@email.com"
+        await authentication_api.AuthenticationApi(api_client).get_current_user()
+
+        # Reads the auth cookie + User-Agent from the logged-in client.
+        ws = VRChatWebSocket.from_client(api_client)
+
+        @ws.on("friend-online")
+        async def on_friend_online(event):
+            print("online:", event.content["user"]["displayName"])
+
+        # Or consume the same stream as an async iterator:
+        #   async for event in ws:
+        #       print(event.type, event.content)
+
+        await ws.run()  # blocks; reconnects automatically by default
+```
+
+`VRChatWebSocket` supports callback registration (`ws.on("friend-online", ...)`
+/ `@ws.on(...)`, a catch-all `ws.on_event(...)`), an async iterator over the
+same event stream, error/connect/disconnect/reconnect hooks, automatic
+reconnection with exponential backoff (`auto_reconnect=False` disables it), and
+a configurable application-level heartbeat (default 30s;
+`heartbeat_interval=None` disables it). See
+[examples/examples-source/websocket.py](examples/examples-source/websocket.py)
+and the [Websocket API reference](https://vrchat.community/websocket) for
+details.

@@ -164,3 +164,56 @@ async def main():
 if __name__ == "__main__":
     asyncio.run(main())
 ```
+
+### Websocket (Pipeline) API
+
+The SDK ships a hand-written async client for VRChat's real-time WebSocket
+(Pipeline) API. It pushes invites, friend requests, friend online/offline
+events, user/group updates and more to the authenticated client. See
+[vrchat.community/websocket](https://vrchat.community/websocket) for the full
+event reference.
+
+```Python
+import asyncio
+
+import vrchatapi
+from vrchatapi.api import authentication_api
+from vrchatapi.websocket import VRChatWebSocket
+
+
+async def main():
+    configuration = vrchatapi.Configuration(
+        username = 'username',
+        password = 'password',
+    )
+
+    async with vrchatapi.ApiClient(configuration) as api_client:
+        api_client.user_agent = "ExampleProgram/0.0.1 my@email.com"
+        auth_api = authentication_api.AuthenticationApi(api_client)
+        await auth_api.get_current_user()  # logs in and stores the auth cookie
+
+        # Reads the auth cookie + User-Agent from the logged-in client.
+        ws = VRChatWebSocket.from_client(api_client)
+
+        @ws.on("friend-online")
+        async def on_friend_online(event):
+            user = event.content["user"]
+            print(f"{user['displayName']} is now online in {user['location']}")
+
+        # Callbacks and the async iterator work at the same time:
+        async def print_all():
+            async for event in ws:
+                print("event:", event.type, event.content)
+
+        await asyncio.gather(ws.run(), print_all())
+
+
+if __name__ == "__main__":
+    asyncio.run(main())
+```
+
+The connection is receive-only. The client automatically unpacks the
+double-encoded `content` field into a plain dict, reconnects with exponential
+backoff by default, and sends an application-level heartbeat every 30s
+(disable with `heartbeat_interval=None`, disable reconnect with
+`auto_reconnect=False`).
