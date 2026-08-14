@@ -506,6 +506,8 @@ class VRChatWebSocket:
             await self._fire(self._error_handlers, exc)
         finally:
             await self._fire(self._disconnect_handlers)
+            if not self._auto_reconnect:
+                self._put_end()
 
     async def _dispatch_message(self, raw: str) -> bool:
         """Decode and dispatch one text frame.

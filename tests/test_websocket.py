@@ -308,6 +308,22 @@ async def test_async_iterator_yields_events(pipeline_server):
     assert collected == ["friend-online", "notification"]
 
 
+@pytest.mark.asyncio
+async def test_async_iterator_stops_on_disconnect(pipeline_server):
+    pipeline_server.set_script(
+        0, [friend_online_frame(), notification_frame()], close_after_send=True
+    )
+    ws = make_ws(pipeline_server)
+    await ws.connect()
+
+    collected = []
+    async for event in ws:
+        collected.append(event.type)
+
+    assert collected == ["friend-online", "notification"]
+    assert not ws.is_connected
+
+
 # ---------------------------------------------------------------------------
 # Errors / lifecycle
 # ---------------------------------------------------------------------------
