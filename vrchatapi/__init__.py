@@ -739,4 +739,3 @@ from vrchatapi.models.verify_auth_token_result import VerifyAuthTokenResult as V
 from vrchatapi.models.world import World as World
 from vrchatapi.models.world_metadata import WorldMetadata as WorldMetadata
 from vrchatapi.models.world_publish_status import WorldPublishStatus as WorldPublishStatus
-

@@ -322,8 +322,6 @@ async def test_async_iterator_stops_on_disconnect(pipeline_server):
 
     assert collected == ["friend-online", "notification"]
     assert not ws.is_connected
-
-
 # ---------------------------------------------------------------------------
 # Errors / lifecycle
 # ---------------------------------------------------------------------------
