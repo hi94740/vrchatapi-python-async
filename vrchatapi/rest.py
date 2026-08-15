@@ -12,7 +12,6 @@
 """  # noqa: E501
 
 
-import asyncio
 import io
 import json
 import re
@@ -49,7 +48,6 @@ class _CookieResponseAdapter:
 
     def info(self):
         return _CookieHeaderAdapter(self._headers)
-
 
 class RESTResponse(io.IOBase):
 
@@ -89,7 +87,18 @@ class RESTClientObject:
         # maxsize is number of requests to host that are allowed in parallel
         self.maxsize = configuration.connection_pool_maxsize
 
-        self.ssl_context: Optional[ssl.SSLContext] = None
+        self.ssl_context = ssl.create_default_context(
+            cafile=configuration.ssl_ca_cert,
+            cadata=configuration.ca_cert_data,
+        )
+        if configuration.cert_file:
+            self.ssl_context.load_cert_chain(
+                configuration.cert_file, keyfile=configuration.key_file
+            )
+
+        if not configuration.verify_ssl:
+            self.ssl_context.check_hostname = False
+            self.ssl_context.verify_mode = ssl.CERT_NONE
 
         self.proxy = configuration.proxy
         self.proxy_headers = configuration.proxy_headers
@@ -120,34 +129,6 @@ class RESTClientObject:
             await self.pool_manager.close()
         if self.retry_client is not None:
             await self.retry_client.close()
-
-    def _build_ssl_context(self) -> ssl.SSLContext:
-        """Build the SSL context.
-
-        Blocking (loads CA certs from disk), so it must run in a worker
-        thread, not on the event loop.
-        """
-        context = ssl.create_default_context(
-            cafile=self.configuration.ssl_ca_cert,
-            cadata=self.configuration.ca_cert_data,
-        )
-        if self.configuration.cert_file:
-            context.load_cert_chain(
-                self.configuration.cert_file,
-                keyfile=self.configuration.key_file,
-            )
-        if not self.configuration.verify_ssl:
-            context.check_hostname = False
-            context.verify_mode = ssl.CERT_NONE
-        return context
-
-    async def _ensure_session(self) -> None:
-        """Create the aiohttp session lazily, building the SSL context off the loop."""
-        if self.pool_manager is None:
-            if self.ssl_context is None:
-                self.ssl_context = await asyncio.to_thread(self._build_ssl_context)
-            if self.pool_manager is None:
-                self.pool_manager = self._create_pool_manager()
 
     def _create_connector(self) -> aiohttp.TCPConnector:
         """Build the TCPConnector used by the ClientSession.
@@ -297,7 +278,7 @@ class RESTClientObject:
 
         # https pool manager
         if self.pool_manager is None:
-            await self._ensure_session()
+            self.pool_manager = self._create_pool_manager()
         pool_manager = self.pool_manager
 
         if self._effective_retry_options is not None and method in ALLOW_RETRY_METHODS:
