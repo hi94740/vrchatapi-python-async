@@ -95,7 +95,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_calendar_event_serialize(
+        _param = await self._create_group_calendar_event_serialize(
             group_id=group_id,
             create_calendar_event_request=create_calendar_event_request,
             _request_auth=_request_auth,
@@ -115,10 +115,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -169,7 +169,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_calendar_event_serialize(
+        _param = await self._create_group_calendar_event_serialize(
             group_id=group_id,
             create_calendar_event_request=create_calendar_event_request,
             _request_auth=_request_auth,
@@ -189,7 +189,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -243,7 +243,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_calendar_event_serialize(
+        _param = await self._create_group_calendar_event_serialize(
             group_id=group_id,
             create_calendar_event_request=create_calendar_event_request,
             _request_auth=_request_auth,
@@ -265,7 +265,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _create_group_calendar_event_serialize(
+    async def _create_group_calendar_event_serialize(
         self,
         group_id,
         create_calendar_event_request,
@@ -327,7 +327,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/calendar/{groupId}/event',
             path_params=_path_params,
@@ -393,7 +393,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_calendar_event_serialize(
+        _param = await self._delete_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -412,10 +412,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -466,7 +466,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_calendar_event_serialize(
+        _param = await self._delete_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -485,7 +485,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -539,7 +539,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_calendar_event_serialize(
+        _param = await self._delete_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -560,7 +560,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _delete_group_calendar_event_serialize(
+    async def _delete_group_calendar_event_serialize(
         self,
         group_id,
         calendar_id,
@@ -609,7 +609,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/calendar/{groupId}/{calendarId}',
             path_params=_path_params,
@@ -702,7 +702,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._discover_calendar_events_serialize(
+        _param = await self._discover_calendar_events_serialize(
             scope=scope,
             categories=categories,
             tags=tags,
@@ -729,10 +729,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -810,7 +810,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._discover_calendar_events_serialize(
+        _param = await self._discover_calendar_events_serialize(
             scope=scope,
             categories=categories,
             tags=tags,
@@ -837,7 +837,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -918,7 +918,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._discover_calendar_events_serialize(
+        _param = await self._discover_calendar_events_serialize(
             scope=scope,
             categories=categories,
             tags=tags,
@@ -947,7 +947,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _discover_calendar_events_serialize(
+    async def _discover_calendar_events_serialize(
         self,
         scope,
         categories,
@@ -1045,7 +1045,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/discover',
             path_params=_path_params,
@@ -1114,7 +1114,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._follow_group_calendar_event_serialize(
+        _param = await self._follow_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             follow_calendar_event_request=follow_calendar_event_request,
@@ -1133,10 +1133,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1190,7 +1190,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._follow_group_calendar_event_serialize(
+        _param = await self._follow_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             follow_calendar_event_request=follow_calendar_event_request,
@@ -1209,7 +1209,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1266,7 +1266,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._follow_group_calendar_event_serialize(
+        _param = await self._follow_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             follow_calendar_event_request=follow_calendar_event_request,
@@ -1287,7 +1287,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _follow_group_calendar_event_serialize(
+    async def _follow_group_calendar_event_serialize(
         self,
         group_id,
         calendar_id,
@@ -1352,7 +1352,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/calendar/{groupId}/{calendarId}/follow',
             path_params=_path_params,
@@ -1421,7 +1421,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_calendar_events_serialize(
+        _param = await self._get_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -1440,10 +1440,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1497,7 +1497,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_calendar_events_serialize(
+        _param = await self._get_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -1516,7 +1516,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1573,7 +1573,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_calendar_events_serialize(
+        _param = await self._get_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -1594,7 +1594,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _get_calendar_events_serialize(
+    async def _get_calendar_events_serialize(
         self,
         var_date,
         n,
@@ -1661,7 +1661,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar',
             path_params=_path_params,
@@ -1730,7 +1730,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_featured_calendar_events_serialize(
+        _param = await self._get_featured_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -1749,10 +1749,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1806,7 +1806,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_featured_calendar_events_serialize(
+        _param = await self._get_featured_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -1825,7 +1825,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1882,7 +1882,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_featured_calendar_events_serialize(
+        _param = await self._get_featured_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -1903,7 +1903,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _get_featured_calendar_events_serialize(
+    async def _get_featured_calendar_events_serialize(
         self,
         var_date,
         n,
@@ -1970,7 +1970,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/featured',
             path_params=_path_params,
@@ -2039,7 +2039,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_followed_calendar_events_serialize(
+        _param = await self._get_followed_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -2058,10 +2058,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2115,7 +2115,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_followed_calendar_events_serialize(
+        _param = await self._get_followed_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -2134,7 +2134,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2191,7 +2191,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_followed_calendar_events_serialize(
+        _param = await self._get_followed_calendar_events_serialize(
             var_date=var_date,
             n=n,
             offset=offset,
@@ -2212,7 +2212,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _get_followed_calendar_events_serialize(
+    async def _get_followed_calendar_events_serialize(
         self,
         var_date,
         n,
@@ -2279,7 +2279,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/following',
             path_params=_path_params,
@@ -2345,7 +2345,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_event_serialize(
+        _param = await self._get_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -2363,10 +2363,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2417,7 +2417,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_event_serialize(
+        _param = await self._get_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -2435,7 +2435,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2489,7 +2489,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_event_serialize(
+        _param = await self._get_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -2509,7 +2509,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _get_group_calendar_event_serialize(
+    async def _get_group_calendar_event_serialize(
         self,
         group_id,
         calendar_id,
@@ -2558,7 +2558,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/{groupId}/{calendarId}',
             path_params=_path_params,
@@ -2624,7 +2624,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_event_ics_serialize(
+        _param = await self._get_group_calendar_event_ics_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -2643,10 +2643,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2697,7 +2697,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_event_ics_serialize(
+        _param = await self._get_group_calendar_event_ics_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -2716,7 +2716,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2770,7 +2770,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_event_ics_serialize(
+        _param = await self._get_group_calendar_event_ics_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             _request_auth=_request_auth,
@@ -2791,7 +2791,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _get_group_calendar_event_ics_serialize(
+    async def _get_group_calendar_event_ics_serialize(
         self,
         group_id,
         calendar_id,
@@ -2840,7 +2840,7 @@ class CalendarApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/{groupId}/{calendarId}.ics',
             path_params=_path_params,
@@ -2912,7 +2912,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_events_serialize(
+        _param = await self._get_group_calendar_events_serialize(
             group_id=group_id,
             var_date=var_date,
             n=n,
@@ -2932,10 +2932,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2992,7 +2992,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_events_serialize(
+        _param = await self._get_group_calendar_events_serialize(
             group_id=group_id,
             var_date=var_date,
             n=n,
@@ -3012,7 +3012,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3072,7 +3072,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_calendar_events_serialize(
+        _param = await self._get_group_calendar_events_serialize(
             group_id=group_id,
             var_date=var_date,
             n=n,
@@ -3094,7 +3094,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _get_group_calendar_events_serialize(
+    async def _get_group_calendar_events_serialize(
         self,
         group_id,
         var_date,
@@ -3164,7 +3164,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/{groupId}',
             path_params=_path_params,
@@ -3227,7 +3227,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_next_calendar_event_serialize(
+        _param = await self._get_group_next_calendar_event_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3245,10 +3245,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3296,7 +3296,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_next_calendar_event_serialize(
+        _param = await self._get_group_next_calendar_event_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3314,7 +3314,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3365,7 +3365,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_next_calendar_event_serialize(
+        _param = await self._get_group_next_calendar_event_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3385,7 +3385,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _get_group_next_calendar_event_serialize(
+    async def _get_group_next_calendar_event_serialize(
         self,
         group_id,
         _request_auth,
@@ -3431,7 +3431,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/{groupId}/next',
             path_params=_path_params,
@@ -3506,7 +3506,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_calendar_events_serialize(
+        _param = await self._search_calendar_events_serialize(
             search_term=search_term,
             utc_offset=utc_offset,
             n=n,
@@ -3527,10 +3527,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3590,7 +3590,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_calendar_events_serialize(
+        _param = await self._search_calendar_events_serialize(
             search_term=search_term,
             utc_offset=utc_offset,
             n=n,
@@ -3611,7 +3611,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3674,7 +3674,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_calendar_events_serialize(
+        _param = await self._search_calendar_events_serialize(
             search_term=search_term,
             utc_offset=utc_offset,
             n=n,
@@ -3697,7 +3697,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _search_calendar_events_serialize(
+    async def _search_calendar_events_serialize(
         self,
         search_term,
         utc_offset,
@@ -3765,7 +3765,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/calendar/search',
             path_params=_path_params,
@@ -3834,7 +3834,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_calendar_event_serialize(
+        _param = await self._update_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             update_calendar_event_request=update_calendar_event_request,
@@ -3853,10 +3853,10 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3910,7 +3910,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_calendar_event_serialize(
+        _param = await self._update_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             update_calendar_event_request=update_calendar_event_request,
@@ -3929,7 +3929,7 @@ class CalendarApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3986,7 +3986,7 @@ class CalendarApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_calendar_event_serialize(
+        _param = await self._update_group_calendar_event_serialize(
             group_id=group_id,
             calendar_id=calendar_id,
             update_calendar_event_request=update_calendar_event_request,
@@ -4007,7 +4007,7 @@ class CalendarApi:
         return response_data.response
 
 
-    def _update_group_calendar_event_serialize(
+    async def _update_group_calendar_event_serialize(
         self,
         group_id,
         calendar_id,
@@ -4072,7 +4072,7 @@ class CalendarApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/calendar/{groupId}/{calendarId}/event',
             path_params=_path_params,

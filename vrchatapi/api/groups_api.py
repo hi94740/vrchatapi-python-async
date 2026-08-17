@@ -123,7 +123,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_gallery_image_serialize(
+        _param = await self._add_group_gallery_image_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             add_group_gallery_image_request=add_group_gallery_image_request,
@@ -143,10 +143,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -200,7 +200,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_gallery_image_serialize(
+        _param = await self._add_group_gallery_image_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             add_group_gallery_image_request=add_group_gallery_image_request,
@@ -220,7 +220,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -277,7 +277,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_gallery_image_serialize(
+        _param = await self._add_group_gallery_image_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             add_group_gallery_image_request=add_group_gallery_image_request,
@@ -299,7 +299,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _add_group_gallery_image_serialize(
+    async def _add_group_gallery_image_serialize(
         self,
         group_id,
         group_gallery_id,
@@ -364,7 +364,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/galleries/{groupGalleryId}/images',
             path_params=_path_params,
@@ -433,7 +433,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_member_role_serialize(
+        _param = await self._add_group_member_role_serialize(
             group_id=group_id,
             user_id=user_id,
             group_role_id=group_role_id,
@@ -453,10 +453,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -510,7 +510,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_member_role_serialize(
+        _param = await self._add_group_member_role_serialize(
             group_id=group_id,
             user_id=user_id,
             group_role_id=group_role_id,
@@ -530,7 +530,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -587,7 +587,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_member_role_serialize(
+        _param = await self._add_group_member_role_serialize(
             group_id=group_id,
             user_id=user_id,
             group_role_id=group_role_id,
@@ -609,7 +609,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _add_group_member_role_serialize(
+    async def _add_group_member_role_serialize(
         self,
         group_id,
         user_id,
@@ -661,7 +661,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/members/{userId}/roles/{groupRoleId}',
             path_params=_path_params,
@@ -727,7 +727,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_post_serialize(
+        _param = await self._add_group_post_serialize(
             group_id=group_id,
             create_group_post_request=create_group_post_request,
             _request_auth=_request_auth,
@@ -745,10 +745,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -799,7 +799,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_post_serialize(
+        _param = await self._add_group_post_serialize(
             group_id=group_id,
             create_group_post_request=create_group_post_request,
             _request_auth=_request_auth,
@@ -817,7 +817,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -871,7 +871,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_group_post_serialize(
+        _param = await self._add_group_post_serialize(
             group_id=group_id,
             create_group_post_request=create_group_post_request,
             _request_auth=_request_auth,
@@ -891,7 +891,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _add_group_post_serialize(
+    async def _add_group_post_serialize(
         self,
         group_id,
         create_group_post_request,
@@ -953,7 +953,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/posts',
             path_params=_path_params,
@@ -1019,7 +1019,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ban_group_member_serialize(
+        _param = await self._ban_group_member_serialize(
             group_id=group_id,
             ban_group_member_request=ban_group_member_request,
             _request_auth=_request_auth,
@@ -1039,10 +1039,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1093,7 +1093,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ban_group_member_serialize(
+        _param = await self._ban_group_member_serialize(
             group_id=group_id,
             ban_group_member_request=ban_group_member_request,
             _request_auth=_request_auth,
@@ -1113,7 +1113,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1167,7 +1167,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._ban_group_member_serialize(
+        _param = await self._ban_group_member_serialize(
             group_id=group_id,
             ban_group_member_request=ban_group_member_request,
             _request_auth=_request_auth,
@@ -1189,7 +1189,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _ban_group_member_serialize(
+    async def _ban_group_member_serialize(
         self,
         group_id,
         ban_group_member_request,
@@ -1251,7 +1251,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/bans',
             path_params=_path_params,
@@ -1314,7 +1314,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._block_group_serialize(
+        _param = await self._block_group_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1334,10 +1334,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1385,7 +1385,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._block_group_serialize(
+        _param = await self._block_group_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1405,7 +1405,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1456,7 +1456,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._block_group_serialize(
+        _param = await self._block_group_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1478,7 +1478,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _block_group_serialize(
+    async def _block_group_serialize(
         self,
         group_id,
         _request_auth,
@@ -1524,7 +1524,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/block',
             path_params=_path_params,
@@ -1587,7 +1587,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_group_request_serialize(
+        _param = await self._cancel_group_request_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1606,10 +1606,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1657,7 +1657,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_group_request_serialize(
+        _param = await self._cancel_group_request_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1676,7 +1676,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1727,7 +1727,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_group_request_serialize(
+        _param = await self._cancel_group_request_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1748,7 +1748,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _cancel_group_request_serialize(
+    async def _cancel_group_request_serialize(
         self,
         group_id,
         _request_auth,
@@ -1794,7 +1794,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/requests',
             path_params=_path_params,
@@ -1857,7 +1857,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_group_transfer_serialize(
+        _param = await self._cancel_group_transfer_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1876,10 +1876,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1927,7 +1927,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_group_transfer_serialize(
+        _param = await self._cancel_group_transfer_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1946,7 +1946,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1997,7 +1997,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_group_transfer_serialize(
+        _param = await self._cancel_group_transfer_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2018,7 +2018,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _cancel_group_transfer_serialize(
+    async def _cancel_group_transfer_serialize(
         self,
         group_id,
         _request_auth,
@@ -2064,7 +2064,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/transfer',
             path_params=_path_params,
@@ -2127,7 +2127,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_serialize(
+        _param = await self._create_group_serialize(
             create_group_request=create_group_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2144,10 +2144,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2195,7 +2195,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_serialize(
+        _param = await self._create_group_serialize(
             create_group_request=create_group_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2212,7 +2212,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2263,7 +2263,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_serialize(
+        _param = await self._create_group_serialize(
             create_group_request=create_group_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2282,7 +2282,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _create_group_serialize(
+    async def _create_group_serialize(
         self,
         create_group_request,
         _request_auth,
@@ -2341,7 +2341,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups',
             path_params=_path_params,
@@ -2407,7 +2407,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_announcement_serialize(
+        _param = await self._create_group_announcement_serialize(
             group_id=group_id,
             create_group_announcement_request=create_group_announcement_request,
             _request_auth=_request_auth,
@@ -2426,10 +2426,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2480,7 +2480,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_announcement_serialize(
+        _param = await self._create_group_announcement_serialize(
             group_id=group_id,
             create_group_announcement_request=create_group_announcement_request,
             _request_auth=_request_auth,
@@ -2499,7 +2499,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2553,7 +2553,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_announcement_serialize(
+        _param = await self._create_group_announcement_serialize(
             group_id=group_id,
             create_group_announcement_request=create_group_announcement_request,
             _request_auth=_request_auth,
@@ -2574,7 +2574,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _create_group_announcement_serialize(
+    async def _create_group_announcement_serialize(
         self,
         group_id,
         create_group_announcement_request,
@@ -2636,7 +2636,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/announcement',
             path_params=_path_params,
@@ -2702,7 +2702,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_gallery_serialize(
+        _param = await self._create_group_gallery_serialize(
             group_id=group_id,
             create_group_gallery_request=create_group_gallery_request,
             _request_auth=_request_auth,
@@ -2721,10 +2721,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2775,7 +2775,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_gallery_serialize(
+        _param = await self._create_group_gallery_serialize(
             group_id=group_id,
             create_group_gallery_request=create_group_gallery_request,
             _request_auth=_request_auth,
@@ -2794,7 +2794,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2848,7 +2848,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_gallery_serialize(
+        _param = await self._create_group_gallery_serialize(
             group_id=group_id,
             create_group_gallery_request=create_group_gallery_request,
             _request_auth=_request_auth,
@@ -2869,7 +2869,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _create_group_gallery_serialize(
+    async def _create_group_gallery_serialize(
         self,
         group_id,
         create_group_gallery_request,
@@ -2931,7 +2931,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/galleries',
             path_params=_path_params,
@@ -2997,7 +2997,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_invite_serialize(
+        _param = await self._create_group_invite_serialize(
             group_id=group_id,
             create_group_invite_request=create_group_invite_request,
             _request_auth=_request_auth,
@@ -3018,10 +3018,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3072,7 +3072,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_invite_serialize(
+        _param = await self._create_group_invite_serialize(
             group_id=group_id,
             create_group_invite_request=create_group_invite_request,
             _request_auth=_request_auth,
@@ -3093,7 +3093,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3147,7 +3147,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_invite_serialize(
+        _param = await self._create_group_invite_serialize(
             group_id=group_id,
             create_group_invite_request=create_group_invite_request,
             _request_auth=_request_auth,
@@ -3170,7 +3170,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _create_group_invite_serialize(
+    async def _create_group_invite_serialize(
         self,
         group_id,
         create_group_invite_request,
@@ -3232,7 +3232,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/invites',
             path_params=_path_params,
@@ -3298,7 +3298,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_role_serialize(
+        _param = await self._create_group_role_serialize(
             group_id=group_id,
             create_group_role_request=create_group_role_request,
             _request_auth=_request_auth,
@@ -3317,10 +3317,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3371,7 +3371,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_role_serialize(
+        _param = await self._create_group_role_serialize(
             group_id=group_id,
             create_group_role_request=create_group_role_request,
             _request_auth=_request_auth,
@@ -3390,7 +3390,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3444,7 +3444,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_group_role_serialize(
+        _param = await self._create_group_role_serialize(
             group_id=group_id,
             create_group_role_request=create_group_role_request,
             _request_auth=_request_auth,
@@ -3465,7 +3465,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _create_group_role_serialize(
+    async def _create_group_role_serialize(
         self,
         group_id,
         create_group_role_request,
@@ -3527,7 +3527,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/roles',
             path_params=_path_params,
@@ -3593,7 +3593,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._decline_group_invite_serialize(
+        _param = await self._decline_group_invite_serialize(
             group_id=group_id,
             decline_group_invite_request=decline_group_invite_request,
             _request_auth=_request_auth,
@@ -3613,10 +3613,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3667,7 +3667,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._decline_group_invite_serialize(
+        _param = await self._decline_group_invite_serialize(
             group_id=group_id,
             decline_group_invite_request=decline_group_invite_request,
             _request_auth=_request_auth,
@@ -3687,7 +3687,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3741,7 +3741,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._decline_group_invite_serialize(
+        _param = await self._decline_group_invite_serialize(
             group_id=group_id,
             decline_group_invite_request=decline_group_invite_request,
             _request_auth=_request_auth,
@@ -3763,7 +3763,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _decline_group_invite_serialize(
+    async def _decline_group_invite_serialize(
         self,
         group_id,
         decline_group_invite_request,
@@ -3825,7 +3825,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/invites',
             path_params=_path_params,
@@ -3891,7 +3891,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_serialize(
+        _param = await self._delete_group_serialize(
             group_id=group_id,
             hard_delete=hard_delete,
             _request_auth=_request_auth,
@@ -3910,10 +3910,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3964,7 +3964,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_serialize(
+        _param = await self._delete_group_serialize(
             group_id=group_id,
             hard_delete=hard_delete,
             _request_auth=_request_auth,
@@ -3983,7 +3983,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4037,7 +4037,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_serialize(
+        _param = await self._delete_group_serialize(
             group_id=group_id,
             hard_delete=hard_delete,
             _request_auth=_request_auth,
@@ -4058,7 +4058,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _delete_group_serialize(
+    async def _delete_group_serialize(
         self,
         group_id,
         hard_delete,
@@ -4109,7 +4109,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}',
             path_params=_path_params,
@@ -4172,7 +4172,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_announcement_serialize(
+        _param = await self._delete_group_announcement_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4190,10 +4190,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4241,7 +4241,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_announcement_serialize(
+        _param = await self._delete_group_announcement_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4259,7 +4259,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4310,7 +4310,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_announcement_serialize(
+        _param = await self._delete_group_announcement_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4330,7 +4330,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _delete_group_announcement_serialize(
+    async def _delete_group_announcement_serialize(
         self,
         group_id,
         _request_auth,
@@ -4376,7 +4376,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/announcement',
             path_params=_path_params,
@@ -4442,7 +4442,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_gallery_serialize(
+        _param = await self._delete_group_gallery_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             _request_auth=_request_auth,
@@ -4461,10 +4461,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4515,7 +4515,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_gallery_serialize(
+        _param = await self._delete_group_gallery_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             _request_auth=_request_auth,
@@ -4534,7 +4534,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4588,7 +4588,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_gallery_serialize(
+        _param = await self._delete_group_gallery_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             _request_auth=_request_auth,
@@ -4609,7 +4609,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _delete_group_gallery_serialize(
+    async def _delete_group_gallery_serialize(
         self,
         group_id,
         group_gallery_id,
@@ -4658,7 +4658,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/galleries/{groupGalleryId}',
             path_params=_path_params,
@@ -4727,7 +4727,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_gallery_image_serialize(
+        _param = await self._delete_group_gallery_image_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             group_gallery_image_id=group_gallery_image_id,
@@ -4748,10 +4748,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4805,7 +4805,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_gallery_image_serialize(
+        _param = await self._delete_group_gallery_image_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             group_gallery_image_id=group_gallery_image_id,
@@ -4826,7 +4826,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4883,7 +4883,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_gallery_image_serialize(
+        _param = await self._delete_group_gallery_image_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             group_gallery_image_id=group_gallery_image_id,
@@ -4906,7 +4906,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _delete_group_gallery_image_serialize(
+    async def _delete_group_gallery_image_serialize(
         self,
         group_id,
         group_gallery_id,
@@ -4958,7 +4958,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/galleries/{groupGalleryId}/images/{groupGalleryImageId}',
             path_params=_path_params,
@@ -5024,7 +5024,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_invite_serialize(
+        _param = await self._delete_group_invite_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -5043,10 +5043,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5097,7 +5097,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_invite_serialize(
+        _param = await self._delete_group_invite_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -5116,7 +5116,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5170,7 +5170,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_invite_serialize(
+        _param = await self._delete_group_invite_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -5191,7 +5191,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _delete_group_invite_serialize(
+    async def _delete_group_invite_serialize(
         self,
         group_id,
         user_id,
@@ -5240,7 +5240,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/invites/{userId}',
             path_params=_path_params,
@@ -5306,7 +5306,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_post_serialize(
+        _param = await self._delete_group_post_serialize(
             group_id=group_id,
             notification_id=notification_id,
             _request_auth=_request_auth,
@@ -5325,10 +5325,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5379,7 +5379,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_post_serialize(
+        _param = await self._delete_group_post_serialize(
             group_id=group_id,
             notification_id=notification_id,
             _request_auth=_request_auth,
@@ -5398,7 +5398,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5452,7 +5452,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_post_serialize(
+        _param = await self._delete_group_post_serialize(
             group_id=group_id,
             notification_id=notification_id,
             _request_auth=_request_auth,
@@ -5473,7 +5473,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _delete_group_post_serialize(
+    async def _delete_group_post_serialize(
         self,
         group_id,
         notification_id,
@@ -5522,7 +5522,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/posts/{notificationId}',
             path_params=_path_params,
@@ -5588,7 +5588,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_role_serialize(
+        _param = await self._delete_group_role_serialize(
             group_id=group_id,
             group_role_id=group_role_id,
             _request_auth=_request_auth,
@@ -5607,10 +5607,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5661,7 +5661,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_role_serialize(
+        _param = await self._delete_group_role_serialize(
             group_id=group_id,
             group_role_id=group_role_id,
             _request_auth=_request_auth,
@@ -5680,7 +5680,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5734,7 +5734,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_group_role_serialize(
+        _param = await self._delete_group_role_serialize(
             group_id=group_id,
             group_role_id=group_role_id,
             _request_auth=_request_auth,
@@ -5755,7 +5755,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _delete_group_role_serialize(
+    async def _delete_group_role_serialize(
         self,
         group_id,
         group_role_id,
@@ -5804,7 +5804,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/roles/{groupRoleId}',
             path_params=_path_params,
@@ -5870,7 +5870,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_serialize(
+        _param = await self._get_group_serialize(
             group_id=group_id,
             include_roles=include_roles,
             _request_auth=_request_auth,
@@ -5889,10 +5889,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5943,7 +5943,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_serialize(
+        _param = await self._get_group_serialize(
             group_id=group_id,
             include_roles=include_roles,
             _request_auth=_request_auth,
@@ -5962,7 +5962,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6016,7 +6016,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_serialize(
+        _param = await self._get_group_serialize(
             group_id=group_id,
             include_roles=include_roles,
             _request_auth=_request_auth,
@@ -6037,7 +6037,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_serialize(
+    async def _get_group_serialize(
         self,
         group_id,
         include_roles,
@@ -6088,7 +6088,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}',
             path_params=_path_params,
@@ -6151,7 +6151,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_announcements_serialize(
+        _param = await self._get_group_announcements_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6169,10 +6169,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6220,7 +6220,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_announcements_serialize(
+        _param = await self._get_group_announcements_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6238,7 +6238,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6289,7 +6289,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_announcements_serialize(
+        _param = await self._get_group_announcements_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6309,7 +6309,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_announcements_serialize(
+    async def _get_group_announcements_serialize(
         self,
         group_id,
         _request_auth,
@@ -6355,7 +6355,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/announcement',
             path_params=_path_params,
@@ -6418,7 +6418,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_audit_log_entry_types_serialize(
+        _param = await self._get_group_audit_log_entry_types_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6436,10 +6436,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6487,7 +6487,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_audit_log_entry_types_serialize(
+        _param = await self._get_group_audit_log_entry_types_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6505,7 +6505,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6556,7 +6556,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_audit_log_entry_types_serialize(
+        _param = await self._get_group_audit_log_entry_types_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6576,7 +6576,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_audit_log_entry_types_serialize(
+    async def _get_group_audit_log_entry_types_serialize(
         self,
         group_id,
         _request_auth,
@@ -6622,7 +6622,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/auditLogTypes',
             path_params=_path_params,
@@ -6706,7 +6706,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_audit_logs_serialize(
+        _param = await self._get_group_audit_logs_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -6731,10 +6731,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6803,7 +6803,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_audit_logs_serialize(
+        _param = await self._get_group_audit_logs_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -6828,7 +6828,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6900,7 +6900,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_audit_logs_serialize(
+        _param = await self._get_group_audit_logs_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -6927,7 +6927,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_audit_logs_serialize(
+    async def _get_group_audit_logs_serialize(
         self,
         group_id,
         n,
@@ -7026,7 +7026,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/auditLogs',
             path_params=_path_params,
@@ -7095,7 +7095,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_bans_serialize(
+        _param = await self._get_group_bans_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -7116,10 +7116,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7173,7 +7173,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_bans_serialize(
+        _param = await self._get_group_bans_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -7194,7 +7194,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7251,7 +7251,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_bans_serialize(
+        _param = await self._get_group_bans_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -7274,7 +7274,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_bans_serialize(
+    async def _get_group_bans_serialize(
         self,
         group_id,
         n,
@@ -7330,7 +7330,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/bans',
             path_params=_path_params,
@@ -7405,7 +7405,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_gallery_images_serialize(
+        _param = await self._get_group_gallery_images_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             n=n,
@@ -7427,10 +7427,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7490,7 +7490,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_gallery_images_serialize(
+        _param = await self._get_group_gallery_images_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             n=n,
@@ -7512,7 +7512,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7575,7 +7575,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_gallery_images_serialize(
+        _param = await self._get_group_gallery_images_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             n=n,
@@ -7599,7 +7599,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_gallery_images_serialize(
+    async def _get_group_gallery_images_serialize(
         self,
         group_id,
         group_gallery_id,
@@ -7663,7 +7663,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/galleries/{groupGalleryId}',
             path_params=_path_params,
@@ -7726,7 +7726,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_instances_serialize(
+        _param = await self._get_group_instances_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7744,10 +7744,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7795,7 +7795,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_instances_serialize(
+        _param = await self._get_group_instances_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7813,7 +7813,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7864,7 +7864,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_instances_serialize(
+        _param = await self._get_group_instances_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7884,7 +7884,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_instances_serialize(
+    async def _get_group_instances_serialize(
         self,
         group_id,
         _request_auth,
@@ -7930,7 +7930,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/instances',
             path_params=_path_params,
@@ -7999,7 +7999,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_invites_serialize(
+        _param = await self._get_group_invites_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -8020,10 +8020,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8077,7 +8077,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_invites_serialize(
+        _param = await self._get_group_invites_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -8098,7 +8098,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -8155,7 +8155,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_invites_serialize(
+        _param = await self._get_group_invites_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -8178,7 +8178,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_invites_serialize(
+    async def _get_group_invites_serialize(
         self,
         group_id,
         n,
@@ -8234,7 +8234,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/invites',
             path_params=_path_params,
@@ -8300,7 +8300,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_member_serialize(
+        _param = await self._get_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -8320,10 +8320,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8374,7 +8374,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_member_serialize(
+        _param = await self._get_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -8394,7 +8394,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -8448,7 +8448,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_member_serialize(
+        _param = await self._get_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -8470,7 +8470,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_member_serialize(
+    async def _get_group_member_serialize(
         self,
         group_id,
         user_id,
@@ -8519,7 +8519,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/members/{userId}',
             path_params=_path_params,
@@ -8594,7 +8594,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_members_serialize(
+        _param = await self._get_group_members_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -8617,10 +8617,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8680,7 +8680,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_members_serialize(
+        _param = await self._get_group_members_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -8703,7 +8703,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -8766,7 +8766,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_members_serialize(
+        _param = await self._get_group_members_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -8791,7 +8791,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_members_serialize(
+    async def _get_group_members_serialize(
         self,
         group_id,
         n,
@@ -8857,7 +8857,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/members',
             path_params=_path_params,
@@ -8920,7 +8920,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_permissions_serialize(
+        _param = await self._get_group_permissions_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8939,10 +8939,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8990,7 +8990,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_permissions_serialize(
+        _param = await self._get_group_permissions_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -9009,7 +9009,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9060,7 +9060,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_permissions_serialize(
+        _param = await self._get_group_permissions_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -9081,7 +9081,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_permissions_serialize(
+    async def _get_group_permissions_serialize(
         self,
         group_id,
         _request_auth,
@@ -9127,7 +9127,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/permissions',
             path_params=_path_params,
@@ -9199,7 +9199,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_posts_serialize(
+        _param = await self._get_group_posts_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -9219,10 +9219,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -9279,7 +9279,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_posts_serialize(
+        _param = await self._get_group_posts_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -9299,7 +9299,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9359,7 +9359,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_posts_serialize(
+        _param = await self._get_group_posts_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -9381,7 +9381,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_posts_serialize(
+    async def _get_group_posts_serialize(
         self,
         group_id,
         n,
@@ -9442,7 +9442,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/posts',
             path_params=_path_params,
@@ -9514,7 +9514,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_requests_serialize(
+        _param = await self._get_group_requests_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -9536,10 +9536,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -9596,7 +9596,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_requests_serialize(
+        _param = await self._get_group_requests_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -9618,7 +9618,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9678,7 +9678,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_requests_serialize(
+        _param = await self._get_group_requests_serialize(
             group_id=group_id,
             n=n,
             offset=offset,
@@ -9702,7 +9702,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_requests_serialize(
+    async def _get_group_requests_serialize(
         self,
         group_id,
         n,
@@ -9763,7 +9763,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/requests',
             path_params=_path_params,
@@ -9823,7 +9823,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_role_templates_serialize(
+        _param = await self._get_group_role_templates_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9839,10 +9839,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -9887,7 +9887,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_role_templates_serialize(
+        _param = await self._get_group_role_templates_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9903,7 +9903,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9951,7 +9951,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_role_templates_serialize(
+        _param = await self._get_group_role_templates_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -9969,7 +9969,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_role_templates_serialize(
+    async def _get_group_role_templates_serialize(
         self,
         _request_auth,
         _content_type,
@@ -10012,7 +10012,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/roleTemplates',
             path_params=_path_params,
@@ -10075,7 +10075,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_roles_serialize(
+        _param = await self._get_group_roles_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -10093,10 +10093,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -10144,7 +10144,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_roles_serialize(
+        _param = await self._get_group_roles_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -10162,7 +10162,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -10213,7 +10213,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_roles_serialize(
+        _param = await self._get_group_roles_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -10233,7 +10233,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_roles_serialize(
+    async def _get_group_roles_serialize(
         self,
         group_id,
         _request_auth,
@@ -10279,7 +10279,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/roles',
             path_params=_path_params,
@@ -10345,7 +10345,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_transferability_serialize(
+        _param = await self._get_group_transferability_serialize(
             group_id=group_id,
             transfer_target_id=transfer_target_id,
             _request_auth=_request_auth,
@@ -10365,10 +10365,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -10419,7 +10419,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_transferability_serialize(
+        _param = await self._get_group_transferability_serialize(
             group_id=group_id,
             transfer_target_id=transfer_target_id,
             _request_auth=_request_auth,
@@ -10439,7 +10439,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -10493,7 +10493,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_group_transferability_serialize(
+        _param = await self._get_group_transferability_serialize(
             group_id=group_id,
             transfer_target_id=transfer_target_id,
             _request_auth=_request_auth,
@@ -10515,7 +10515,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _get_group_transferability_serialize(
+    async def _get_group_transferability_serialize(
         self,
         group_id,
         transfer_target_id,
@@ -10566,7 +10566,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/transfer',
             path_params=_path_params,
@@ -10632,7 +10632,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._initiate_or_accept_group_transfer_serialize(
+        _param = await self._initiate_or_accept_group_transfer_serialize(
             group_id=group_id,
             transfer_group_request=transfer_group_request,
             _request_auth=_request_auth,
@@ -10652,10 +10652,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -10706,7 +10706,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._initiate_or_accept_group_transfer_serialize(
+        _param = await self._initiate_or_accept_group_transfer_serialize(
             group_id=group_id,
             transfer_group_request=transfer_group_request,
             _request_auth=_request_auth,
@@ -10726,7 +10726,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -10780,7 +10780,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._initiate_or_accept_group_transfer_serialize(
+        _param = await self._initiate_or_accept_group_transfer_serialize(
             group_id=group_id,
             transfer_group_request=transfer_group_request,
             _request_auth=_request_auth,
@@ -10802,7 +10802,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _initiate_or_accept_group_transfer_serialize(
+    async def _initiate_or_accept_group_transfer_serialize(
         self,
         group_id,
         transfer_group_request,
@@ -10864,7 +10864,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/transfer',
             path_params=_path_params,
@@ -10933,7 +10933,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._join_group_serialize(
+        _param = await self._join_group_serialize(
             group_id=group_id,
             confirm_override_block=confirm_override_block,
             join_group_request=join_group_request,
@@ -10954,10 +10954,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -11011,7 +11011,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._join_group_serialize(
+        _param = await self._join_group_serialize(
             group_id=group_id,
             confirm_override_block=confirm_override_block,
             join_group_request=join_group_request,
@@ -11032,7 +11032,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -11089,7 +11089,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._join_group_serialize(
+        _param = await self._join_group_serialize(
             group_id=group_id,
             confirm_override_block=confirm_override_block,
             join_group_request=join_group_request,
@@ -11112,7 +11112,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _join_group_serialize(
+    async def _join_group_serialize(
         self,
         group_id,
         confirm_override_block,
@@ -11179,7 +11179,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/join',
             path_params=_path_params,
@@ -11245,7 +11245,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._kick_group_member_serialize(
+        _param = await self._kick_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -11265,10 +11265,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -11319,7 +11319,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._kick_group_member_serialize(
+        _param = await self._kick_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -11339,7 +11339,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -11393,7 +11393,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._kick_group_member_serialize(
+        _param = await self._kick_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -11415,7 +11415,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _kick_group_member_serialize(
+    async def _kick_group_member_serialize(
         self,
         group_id,
         user_id,
@@ -11464,7 +11464,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/members/{userId}',
             path_params=_path_params,
@@ -11527,7 +11527,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._leave_group_serialize(
+        _param = await self._leave_group_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -11545,10 +11545,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -11596,7 +11596,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._leave_group_serialize(
+        _param = await self._leave_group_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -11614,7 +11614,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -11665,7 +11665,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._leave_group_serialize(
+        _param = await self._leave_group_serialize(
             group_id=group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -11685,7 +11685,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _leave_group_serialize(
+    async def _leave_group_serialize(
         self,
         group_id,
         _request_auth,
@@ -11731,7 +11731,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/groups/{groupId}/leave',
             path_params=_path_params,
@@ -11800,7 +11800,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_group_member_role_serialize(
+        _param = await self._remove_group_member_role_serialize(
             group_id=group_id,
             user_id=user_id,
             group_role_id=group_role_id,
@@ -11820,10 +11820,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -11877,7 +11877,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_group_member_role_serialize(
+        _param = await self._remove_group_member_role_serialize(
             group_id=group_id,
             user_id=user_id,
             group_role_id=group_role_id,
@@ -11897,7 +11897,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -11954,7 +11954,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_group_member_role_serialize(
+        _param = await self._remove_group_member_role_serialize(
             group_id=group_id,
             user_id=user_id,
             group_role_id=group_role_id,
@@ -11976,7 +11976,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _remove_group_member_role_serialize(
+    async def _remove_group_member_role_serialize(
         self,
         group_id,
         user_id,
@@ -12028,7 +12028,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/members/{userId}/roles/{groupRoleId}',
             path_params=_path_params,
@@ -12097,7 +12097,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_group_join_request_serialize(
+        _param = await self._respond_group_join_request_serialize(
             group_id=group_id,
             user_id=user_id,
             respond_group_join_request=respond_group_join_request,
@@ -12117,10 +12117,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -12174,7 +12174,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_group_join_request_serialize(
+        _param = await self._respond_group_join_request_serialize(
             group_id=group_id,
             user_id=user_id,
             respond_group_join_request=respond_group_join_request,
@@ -12194,7 +12194,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -12251,7 +12251,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_group_join_request_serialize(
+        _param = await self._respond_group_join_request_serialize(
             group_id=group_id,
             user_id=user_id,
             respond_group_join_request=respond_group_join_request,
@@ -12273,7 +12273,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _respond_group_join_request_serialize(
+    async def _respond_group_join_request_serialize(
         self,
         group_id,
         user_id,
@@ -12338,7 +12338,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/requests/{userId}',
             path_params=_path_params,
@@ -12410,7 +12410,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_group_members_serialize(
+        _param = await self._search_group_members_serialize(
             group_id=group_id,
             query=query,
             n=n,
@@ -12432,10 +12432,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -12492,7 +12492,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_group_members_serialize(
+        _param = await self._search_group_members_serialize(
             group_id=group_id,
             query=query,
             n=n,
@@ -12514,7 +12514,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -12574,7 +12574,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_group_members_serialize(
+        _param = await self._search_group_members_serialize(
             group_id=group_id,
             query=query,
             n=n,
@@ -12598,7 +12598,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _search_group_members_serialize(
+    async def _search_group_members_serialize(
         self,
         group_id,
         query,
@@ -12659,7 +12659,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups/{groupId}/members/search',
             path_params=_path_params,
@@ -12728,7 +12728,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_groups_serialize(
+        _param = await self._search_groups_serialize(
             query=query,
             offset=offset,
             n=n,
@@ -12747,10 +12747,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -12804,7 +12804,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_groups_serialize(
+        _param = await self._search_groups_serialize(
             query=query,
             offset=offset,
             n=n,
@@ -12823,7 +12823,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -12880,7 +12880,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_groups_serialize(
+        _param = await self._search_groups_serialize(
             query=query,
             offset=offset,
             n=n,
@@ -12901,7 +12901,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _search_groups_serialize(
+    async def _search_groups_serialize(
         self,
         query,
         offset,
@@ -12958,7 +12958,7 @@ class GroupsApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/groups',
             path_params=_path_params,
@@ -13024,7 +13024,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unban_group_member_serialize(
+        _param = await self._unban_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -13043,10 +13043,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -13097,7 +13097,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unban_group_member_serialize(
+        _param = await self._unban_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -13116,7 +13116,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -13170,7 +13170,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unban_group_member_serialize(
+        _param = await self._unban_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -13191,7 +13191,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _unban_group_member_serialize(
+    async def _unban_group_member_serialize(
         self,
         group_id,
         user_id,
@@ -13240,7 +13240,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/groups/{groupId}/bans/{userId}',
             path_params=_path_params,
@@ -13306,7 +13306,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_serialize(
+        _param = await self._update_group_serialize(
             group_id=group_id,
             update_group_request=update_group_request,
             _request_auth=_request_auth,
@@ -13325,10 +13325,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -13379,7 +13379,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_serialize(
+        _param = await self._update_group_serialize(
             group_id=group_id,
             update_group_request=update_group_request,
             _request_auth=_request_auth,
@@ -13398,7 +13398,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -13452,7 +13452,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_serialize(
+        _param = await self._update_group_serialize(
             group_id=group_id,
             update_group_request=update_group_request,
             _request_auth=_request_auth,
@@ -13473,7 +13473,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _update_group_serialize(
+    async def _update_group_serialize(
         self,
         group_id,
         update_group_request,
@@ -13535,7 +13535,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}',
             path_params=_path_params,
@@ -13604,7 +13604,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_gallery_serialize(
+        _param = await self._update_group_gallery_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             update_group_gallery_request=update_group_gallery_request,
@@ -13624,10 +13624,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -13681,7 +13681,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_gallery_serialize(
+        _param = await self._update_group_gallery_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             update_group_gallery_request=update_group_gallery_request,
@@ -13701,7 +13701,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -13758,7 +13758,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_gallery_serialize(
+        _param = await self._update_group_gallery_serialize(
             group_id=group_id,
             group_gallery_id=group_gallery_id,
             update_group_gallery_request=update_group_gallery_request,
@@ -13780,7 +13780,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _update_group_gallery_serialize(
+    async def _update_group_gallery_serialize(
         self,
         group_id,
         group_gallery_id,
@@ -13845,7 +13845,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/galleries/{groupGalleryId}',
             path_params=_path_params,
@@ -13914,7 +13914,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_member_serialize(
+        _param = await self._update_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             update_group_member_request=update_group_member_request,
@@ -13934,10 +13934,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -13991,7 +13991,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_member_serialize(
+        _param = await self._update_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             update_group_member_request=update_group_member_request,
@@ -14011,7 +14011,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -14068,7 +14068,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_member_serialize(
+        _param = await self._update_group_member_serialize(
             group_id=group_id,
             user_id=user_id,
             update_group_member_request=update_group_member_request,
@@ -14090,7 +14090,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _update_group_member_serialize(
+    async def _update_group_member_serialize(
         self,
         group_id,
         user_id,
@@ -14155,7 +14155,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/members/{userId}',
             path_params=_path_params,
@@ -14224,7 +14224,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_post_serialize(
+        _param = await self._update_group_post_serialize(
             group_id=group_id,
             notification_id=notification_id,
             create_group_post_request=create_group_post_request,
@@ -14244,10 +14244,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -14301,7 +14301,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_post_serialize(
+        _param = await self._update_group_post_serialize(
             group_id=group_id,
             notification_id=notification_id,
             create_group_post_request=create_group_post_request,
@@ -14321,7 +14321,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -14378,7 +14378,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_post_serialize(
+        _param = await self._update_group_post_serialize(
             group_id=group_id,
             notification_id=notification_id,
             create_group_post_request=create_group_post_request,
@@ -14400,7 +14400,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _update_group_post_serialize(
+    async def _update_group_post_serialize(
         self,
         group_id,
         notification_id,
@@ -14465,7 +14465,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/posts/{notificationId}',
             path_params=_path_params,
@@ -14531,7 +14531,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_representation_serialize(
+        _param = await self._update_group_representation_serialize(
             group_id=group_id,
             update_group_representation_request=update_group_representation_request,
             _request_auth=_request_auth,
@@ -14550,10 +14550,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -14604,7 +14604,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_representation_serialize(
+        _param = await self._update_group_representation_serialize(
             group_id=group_id,
             update_group_representation_request=update_group_representation_request,
             _request_auth=_request_auth,
@@ -14623,7 +14623,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -14677,7 +14677,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_representation_serialize(
+        _param = await self._update_group_representation_serialize(
             group_id=group_id,
             update_group_representation_request=update_group_representation_request,
             _request_auth=_request_auth,
@@ -14698,7 +14698,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _update_group_representation_serialize(
+    async def _update_group_representation_serialize(
         self,
         group_id,
         update_group_representation_request,
@@ -14760,7 +14760,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/representation',
             path_params=_path_params,
@@ -14829,7 +14829,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_role_serialize(
+        _param = await self._update_group_role_serialize(
             group_id=group_id,
             group_role_id=group_role_id,
             update_group_role_request=update_group_role_request,
@@ -14848,10 +14848,10 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -14905,7 +14905,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_role_serialize(
+        _param = await self._update_group_role_serialize(
             group_id=group_id,
             group_role_id=group_role_id,
             update_group_role_request=update_group_role_request,
@@ -14924,7 +14924,7 @@ class GroupsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -14981,7 +14981,7 @@ class GroupsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_group_role_serialize(
+        _param = await self._update_group_role_serialize(
             group_id=group_id,
             group_role_id=group_role_id,
             update_group_role_request=update_group_role_request,
@@ -15002,7 +15002,7 @@ class GroupsApi:
         return response_data.response
 
 
-    def _update_group_role_serialize(
+    async def _update_group_role_serialize(
         self,
         group_id,
         group_role_id,
@@ -15067,7 +15067,7 @@ class GroupsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/groups/{groupId}/roles/{groupRoleId}',
             path_params=_path_params,

@@ -98,7 +98,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._consume_own_inventory_item_serialize(
+        _param = await self._consume_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -116,10 +116,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -167,7 +167,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._consume_own_inventory_item_serialize(
+        _param = await self._consume_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -185,7 +185,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -236,7 +236,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._consume_own_inventory_item_serialize(
+        _param = await self._consume_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -256,7 +256,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _consume_own_inventory_item_serialize(
+    async def _consume_own_inventory_item_serialize(
         self,
         inventory_item_id,
         _request_auth,
@@ -302,7 +302,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/inventory/{inventoryItemId}/consume',
             path_params=_path_params,
@@ -365,7 +365,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_own_inventory_item_serialize(
+        _param = await self._delete_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -382,10 +382,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -433,7 +433,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_own_inventory_item_serialize(
+        _param = await self._delete_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -450,7 +450,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -501,7 +501,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_own_inventory_item_serialize(
+        _param = await self._delete_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -520,7 +520,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _delete_own_inventory_item_serialize(
+    async def _delete_own_inventory_item_serialize(
         self,
         inventory_item_id,
         _request_auth,
@@ -566,7 +566,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/inventory/{inventoryItemId}',
             path_params=_path_params,
@@ -632,7 +632,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._equip_own_inventory_item_serialize(
+        _param = await self._equip_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             equip_inventory_item_request=equip_inventory_item_request,
             _request_auth=_request_auth,
@@ -651,10 +651,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -705,7 +705,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._equip_own_inventory_item_serialize(
+        _param = await self._equip_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             equip_inventory_item_request=equip_inventory_item_request,
             _request_auth=_request_auth,
@@ -724,7 +724,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -778,7 +778,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._equip_own_inventory_item_serialize(
+        _param = await self._equip_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             equip_inventory_item_request=equip_inventory_item_request,
             _request_auth=_request_auth,
@@ -799,7 +799,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _equip_own_inventory_item_serialize(
+    async def _equip_own_inventory_item_serialize(
         self,
         inventory_item_id,
         equip_inventory_item_request,
@@ -861,7 +861,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/inventory/{inventoryItemId}/equip',
             path_params=_path_params,
@@ -954,7 +954,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_serialize(
+        _param = await self._get_inventory_serialize(
             n=n,
             offset=offset,
             holder_id=holder_id,
@@ -982,10 +982,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1063,7 +1063,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_serialize(
+        _param = await self._get_inventory_serialize(
             n=n,
             offset=offset,
             holder_id=holder_id,
@@ -1091,7 +1091,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1172,7 +1172,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_serialize(
+        _param = await self._get_inventory_serialize(
             n=n,
             offset=offset,
             holder_id=holder_id,
@@ -1202,7 +1202,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _get_inventory_serialize(
+    async def _get_inventory_serialize(
         self,
         n,
         offset,
@@ -1300,7 +1300,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/inventory',
             path_params=_path_params,
@@ -1360,7 +1360,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_collections_serialize(
+        _param = await self._get_inventory_collections_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1376,10 +1376,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1424,7 +1424,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_collections_serialize(
+        _param = await self._get_inventory_collections_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1440,7 +1440,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1488,7 +1488,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_collections_serialize(
+        _param = await self._get_inventory_collections_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1506,7 +1506,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _get_inventory_collections_serialize(
+    async def _get_inventory_collections_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1549,7 +1549,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/inventory/collections',
             path_params=_path_params,
@@ -1612,7 +1612,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_drops_serialize(
+        _param = await self._get_inventory_drops_serialize(
             active=active,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1629,10 +1629,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1680,7 +1680,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_drops_serialize(
+        _param = await self._get_inventory_drops_serialize(
             active=active,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1697,7 +1697,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1748,7 +1748,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_drops_serialize(
+        _param = await self._get_inventory_drops_serialize(
             active=active,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1767,7 +1767,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _get_inventory_drops_serialize(
+    async def _get_inventory_drops_serialize(
         self,
         active,
         _request_auth,
@@ -1815,7 +1815,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/inventory/drops',
             path_params=_path_params,
@@ -1878,7 +1878,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_template_serialize(
+        _param = await self._get_inventory_template_serialize(
             inventory_template_id=inventory_template_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1895,10 +1895,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1946,7 +1946,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_template_serialize(
+        _param = await self._get_inventory_template_serialize(
             inventory_template_id=inventory_template_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1963,7 +1963,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2014,7 +2014,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_inventory_template_serialize(
+        _param = await self._get_inventory_template_serialize(
             inventory_template_id=inventory_template_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2033,7 +2033,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _get_inventory_template_serialize(
+    async def _get_inventory_template_serialize(
         self,
         inventory_template_id,
         _request_auth,
@@ -2079,7 +2079,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/inventory/template/{inventoryTemplateId}',
             path_params=_path_params,
@@ -2142,7 +2142,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_own_inventory_item_serialize(
+        _param = await self._get_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2159,10 +2159,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2210,7 +2210,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_own_inventory_item_serialize(
+        _param = await self._get_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2227,7 +2227,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2278,7 +2278,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_own_inventory_item_serialize(
+        _param = await self._get_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2297,7 +2297,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _get_own_inventory_item_serialize(
+    async def _get_own_inventory_item_serialize(
         self,
         inventory_item_id,
         _request_auth,
@@ -2343,7 +2343,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/inventory/{inventoryItemId}',
             path_params=_path_params,
@@ -2409,7 +2409,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_inventory_item_serialize(
+        _param = await self._get_user_inventory_item_serialize(
             user_id=user_id,
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
@@ -2427,10 +2427,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2481,7 +2481,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_inventory_item_serialize(
+        _param = await self._get_user_inventory_item_serialize(
             user_id=user_id,
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
@@ -2499,7 +2499,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2553,7 +2553,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_inventory_item_serialize(
+        _param = await self._get_user_inventory_item_serialize(
             user_id=user_id,
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
@@ -2573,7 +2573,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _get_user_inventory_item_serialize(
+    async def _get_user_inventory_item_serialize(
         self,
         user_id,
         inventory_item_id,
@@ -2622,7 +2622,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/inventory/{inventoryItemId}',
             path_params=_path_params,
@@ -2685,7 +2685,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._redeem_reward_serialize(
+        _param = await self._redeem_reward_serialize(
             reward_redemption_request=reward_redemption_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2702,10 +2702,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2753,7 +2753,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._redeem_reward_serialize(
+        _param = await self._redeem_reward_serialize(
             reward_redemption_request=reward_redemption_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2770,7 +2770,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2821,7 +2821,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._redeem_reward_serialize(
+        _param = await self._redeem_reward_serialize(
             reward_redemption_request=reward_redemption_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2840,7 +2840,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _redeem_reward_serialize(
+    async def _redeem_reward_serialize(
         self,
         reward_redemption_request,
         _request_auth,
@@ -2899,7 +2899,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/reward/redeem',
             path_params=_path_params,
@@ -2968,7 +2968,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._share_inventory_item_direct_serialize(
+        _param = await self._share_inventory_item_direct_serialize(
             item_id=item_id,
             duration=duration,
             share_inventory_item_direct_request=share_inventory_item_direct_request,
@@ -2987,10 +2987,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3044,7 +3044,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._share_inventory_item_direct_serialize(
+        _param = await self._share_inventory_item_direct_serialize(
             item_id=item_id,
             duration=duration,
             share_inventory_item_direct_request=share_inventory_item_direct_request,
@@ -3063,7 +3063,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3120,7 +3120,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._share_inventory_item_direct_serialize(
+        _param = await self._share_inventory_item_direct_serialize(
             item_id=item_id,
             duration=duration,
             share_inventory_item_direct_request=share_inventory_item_direct_request,
@@ -3141,7 +3141,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _share_inventory_item_direct_serialize(
+    async def _share_inventory_item_direct_serialize(
         self,
         item_id,
         duration,
@@ -3210,7 +3210,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/inventory/cloning/direct',
             path_params=_path_params,
@@ -3276,7 +3276,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._share_inventory_item_pedestal_serialize(
+        _param = await self._share_inventory_item_pedestal_serialize(
             item_id=item_id,
             duration=duration,
             _request_auth=_request_auth,
@@ -3294,10 +3294,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3348,7 +3348,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._share_inventory_item_pedestal_serialize(
+        _param = await self._share_inventory_item_pedestal_serialize(
             item_id=item_id,
             duration=duration,
             _request_auth=_request_auth,
@@ -3366,7 +3366,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3420,7 +3420,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._share_inventory_item_pedestal_serialize(
+        _param = await self._share_inventory_item_pedestal_serialize(
             item_id=item_id,
             duration=duration,
             _request_auth=_request_auth,
@@ -3440,7 +3440,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _share_inventory_item_pedestal_serialize(
+    async def _share_inventory_item_pedestal_serialize(
         self,
         item_id,
         duration,
@@ -3493,7 +3493,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/inventory/cloning/pedestal',
             path_params=_path_params,
@@ -3556,7 +3556,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._spawn_inventory_item_serialize(
+        _param = await self._spawn_inventory_item_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3573,10 +3573,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3624,7 +3624,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._spawn_inventory_item_serialize(
+        _param = await self._spawn_inventory_item_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3641,7 +3641,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3692,7 +3692,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._spawn_inventory_item_serialize(
+        _param = await self._spawn_inventory_item_serialize(
             id=id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3711,7 +3711,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _spawn_inventory_item_serialize(
+    async def _spawn_inventory_item_serialize(
         self,
         id,
         _request_auth,
@@ -3759,7 +3759,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/inventory/spawn',
             path_params=_path_params,
@@ -3822,7 +3822,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unequip_own_inventory_slot_serialize(
+        _param = await self._unequip_own_inventory_slot_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3839,10 +3839,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3890,7 +3890,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unequip_own_inventory_slot_serialize(
+        _param = await self._unequip_own_inventory_slot_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3907,7 +3907,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3958,7 +3958,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unequip_own_inventory_slot_serialize(
+        _param = await self._unequip_own_inventory_slot_serialize(
             inventory_item_id=inventory_item_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3977,7 +3977,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _unequip_own_inventory_slot_serialize(
+    async def _unequip_own_inventory_slot_serialize(
         self,
         inventory_item_id,
         _request_auth,
@@ -4023,7 +4023,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/inventory/{inventoryItemId}/equip',
             path_params=_path_params,
@@ -4089,7 +4089,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_own_inventory_item_serialize(
+        _param = await self._update_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             update_inventory_item_request=update_inventory_item_request,
             _request_auth=_request_auth,
@@ -4107,10 +4107,10 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4161,7 +4161,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_own_inventory_item_serialize(
+        _param = await self._update_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             update_inventory_item_request=update_inventory_item_request,
             _request_auth=_request_auth,
@@ -4179,7 +4179,7 @@ class InventoryApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4233,7 +4233,7 @@ class InventoryApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_own_inventory_item_serialize(
+        _param = await self._update_own_inventory_item_serialize(
             inventory_item_id=inventory_item_id,
             update_inventory_item_request=update_inventory_item_request,
             _request_auth=_request_auth,
@@ -4253,7 +4253,7 @@ class InventoryApi:
         return response_data.response
 
 
-    def _update_own_inventory_item_serialize(
+    async def _update_own_inventory_item_serialize(
         self,
         inventory_item_id,
         update_inventory_item_request,
@@ -4315,7 +4315,7 @@ class InventoryApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/inventory/{inventoryItemId}',
             path_params=_path_params,

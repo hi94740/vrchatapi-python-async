@@ -97,7 +97,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_world_tags_serialize(
+        _param = await self._add_world_tags_serialize(
             world_id=world_id,
             change_world_tags_request=change_world_tags_request,
             _request_auth=_request_auth,
@@ -116,10 +116,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -170,7 +170,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_world_tags_serialize(
+        _param = await self._add_world_tags_serialize(
             world_id=world_id,
             change_world_tags_request=change_world_tags_request,
             _request_auth=_request_auth,
@@ -189,7 +189,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -243,7 +243,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_world_tags_serialize(
+        _param = await self._add_world_tags_serialize(
             world_id=world_id,
             change_world_tags_request=change_world_tags_request,
             _request_auth=_request_auth,
@@ -264,7 +264,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _add_world_tags_serialize(
+    async def _add_world_tags_serialize(
         self,
         world_id,
         change_world_tags_request,
@@ -326,7 +326,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/worlds/{worldId}/addTags',
             path_params=_path_params,
@@ -392,7 +392,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_persistence_exists_serialize(
+        _param = await self._check_user_persistence_exists_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -411,10 +411,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -465,7 +465,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_persistence_exists_serialize(
+        _param = await self._check_user_persistence_exists_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -484,7 +484,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -538,7 +538,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_persistence_exists_serialize(
+        _param = await self._check_user_persistence_exists_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -559,7 +559,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _check_user_persistence_exists_serialize(
+    async def _check_user_persistence_exists_serialize(
         self,
         user_id,
         world_id,
@@ -608,7 +608,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/{worldId}/persist/exists',
             path_params=_path_params,
@@ -671,7 +671,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_world_serialize(
+        _param = await self._create_world_serialize(
             create_world_request=create_world_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -689,10 +689,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -740,7 +740,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_world_serialize(
+        _param = await self._create_world_serialize(
             create_world_request=create_world_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -758,7 +758,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -809,7 +809,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_world_serialize(
+        _param = await self._create_world_serialize(
             create_world_request=create_world_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -829,7 +829,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _create_world_serialize(
+    async def _create_world_serialize(
         self,
         create_world_request,
         _request_auth,
@@ -887,7 +887,7 @@ class WorldsApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/worlds',
             path_params=_path_params,
@@ -950,7 +950,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_user_persistence_data_serialize(
+        _param = await self._delete_all_user_persistence_data_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -967,10 +967,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1018,7 +1018,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_user_persistence_data_serialize(
+        _param = await self._delete_all_user_persistence_data_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1035,7 +1035,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1086,7 +1086,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_user_persistence_data_serialize(
+        _param = await self._delete_all_user_persistence_data_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1105,7 +1105,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _delete_all_user_persistence_data_serialize(
+    async def _delete_all_user_persistence_data_serialize(
         self,
         user_id,
         _request_auth,
@@ -1151,7 +1151,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/users/{userId}/persist',
             path_params=_path_params,
@@ -1217,7 +1217,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_persistence_serialize(
+        _param = await self._delete_user_persistence_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -1236,10 +1236,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1290,7 +1290,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_persistence_serialize(
+        _param = await self._delete_user_persistence_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -1309,7 +1309,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1363,7 +1363,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_persistence_serialize(
+        _param = await self._delete_user_persistence_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -1384,7 +1384,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _delete_user_persistence_serialize(
+    async def _delete_user_persistence_serialize(
         self,
         user_id,
         world_id,
@@ -1433,7 +1433,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/users/{userId}/{worldId}/persist',
             path_params=_path_params,
@@ -1496,7 +1496,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_world_serialize(
+        _param = await self._delete_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1514,10 +1514,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1565,7 +1565,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_world_serialize(
+        _param = await self._delete_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1583,7 +1583,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1634,7 +1634,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_world_serialize(
+        _param = await self._delete_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1654,7 +1654,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _delete_world_serialize(
+    async def _delete_world_serialize(
         self,
         world_id,
         _request_auth,
@@ -1700,7 +1700,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/worlds/{worldId}',
             path_params=_path_params,
@@ -1766,7 +1766,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_world_platform_serialize(
+        _param = await self._delete_world_platform_serialize(
             world_id=world_id,
             published_platform=published_platform,
             _request_auth=_request_auth,
@@ -1785,10 +1785,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1839,7 +1839,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_world_platform_serialize(
+        _param = await self._delete_world_platform_serialize(
             world_id=world_id,
             published_platform=published_platform,
             _request_auth=_request_auth,
@@ -1858,7 +1858,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1912,7 +1912,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_world_platform_serialize(
+        _param = await self._delete_world_platform_serialize(
             world_id=world_id,
             published_platform=published_platform,
             _request_auth=_request_auth,
@@ -1933,7 +1933,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _delete_world_platform_serialize(
+    async def _delete_world_platform_serialize(
         self,
         world_id,
         published_platform,
@@ -1982,7 +1982,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/worlds/{worldId}/platform/{publishedPlatform}',
             path_params=_path_params,
@@ -2081,7 +2081,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_active_worlds_serialize(
+        _param = await self._get_active_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -2110,10 +2110,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2197,7 +2197,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_active_worlds_serialize(
+        _param = await self._get_active_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -2226,7 +2226,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2313,7 +2313,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_active_worlds_serialize(
+        _param = await self._get_active_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -2344,7 +2344,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _get_active_worlds_serialize(
+    async def _get_active_worlds_serialize(
         self,
         featured,
         sort,
@@ -2452,7 +2452,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds/active',
             path_params=_path_params,
@@ -2551,7 +2551,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorited_worlds_serialize(
+        _param = await self._get_favorited_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -2581,10 +2581,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2668,7 +2668,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorited_worlds_serialize(
+        _param = await self._get_favorited_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -2698,7 +2698,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2785,7 +2785,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorited_worlds_serialize(
+        _param = await self._get_favorited_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -2817,7 +2817,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _get_favorited_worlds_serialize(
+    async def _get_favorited_worlds_serialize(
         self,
         featured,
         sort,
@@ -2925,7 +2925,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds/favorites',
             path_params=_path_params,
@@ -3024,7 +3024,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_worlds_serialize(
+        _param = await self._get_recent_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -3054,10 +3054,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3141,7 +3141,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_worlds_serialize(
+        _param = await self._get_recent_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -3171,7 +3171,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3258,7 +3258,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_worlds_serialize(
+        _param = await self._get_recent_worlds_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -3290,7 +3290,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _get_recent_worlds_serialize(
+    async def _get_recent_worlds_serialize(
         self,
         featured,
         sort,
@@ -3398,7 +3398,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds/recent',
             path_params=_path_params,
@@ -3461,7 +3461,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_serialize(
+        _param = await self._get_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3478,10 +3478,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3529,7 +3529,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_serialize(
+        _param = await self._get_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3546,7 +3546,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3597,7 +3597,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_serialize(
+        _param = await self._get_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3616,7 +3616,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _get_world_serialize(
+    async def _get_world_serialize(
         self,
         world_id,
         _request_auth,
@@ -3661,7 +3661,7 @@ class WorldsApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds/{worldId}',
             path_params=_path_params,
@@ -3727,7 +3727,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_instance_serialize(
+        _param = await self._get_world_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -3745,10 +3745,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3799,7 +3799,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_instance_serialize(
+        _param = await self._get_world_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -3817,7 +3817,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3871,7 +3871,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_instance_serialize(
+        _param = await self._get_world_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -3891,7 +3891,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _get_world_instance_serialize(
+    async def _get_world_instance_serialize(
         self,
         world_id,
         instance_id,
@@ -3940,7 +3940,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds/{worldId}/{instanceId}',
             path_params=_path_params,
@@ -4004,7 +4004,7 @@ class WorldsApi:
         """ # noqa: E501
         warnings.warn("GET /worlds/{worldId}/metadata is deprecated.", DeprecationWarning)
 
-        _param = self._get_world_metadata_serialize(
+        _param = await self._get_world_metadata_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4021,10 +4021,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4073,7 +4073,7 @@ class WorldsApi:
         """ # noqa: E501
         warnings.warn("GET /worlds/{worldId}/metadata is deprecated.", DeprecationWarning)
 
-        _param = self._get_world_metadata_serialize(
+        _param = await self._get_world_metadata_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4090,7 +4090,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4142,7 +4142,7 @@ class WorldsApi:
         """ # noqa: E501
         warnings.warn("GET /worlds/{worldId}/metadata is deprecated.", DeprecationWarning)
 
-        _param = self._get_world_metadata_serialize(
+        _param = await self._get_world_metadata_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4161,7 +4161,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _get_world_metadata_serialize(
+    async def _get_world_metadata_serialize(
         self,
         world_id,
         _request_auth,
@@ -4206,7 +4206,7 @@ class WorldsApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds/{worldId}/metadata',
             path_params=_path_params,
@@ -4269,7 +4269,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_publish_status_serialize(
+        _param = await self._get_world_publish_status_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4287,10 +4287,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4338,7 +4338,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_publish_status_serialize(
+        _param = await self._get_world_publish_status_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4356,7 +4356,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4407,7 +4407,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_world_publish_status_serialize(
+        _param = await self._get_world_publish_status_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4427,7 +4427,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _get_world_publish_status_serialize(
+    async def _get_world_publish_status_serialize(
         self,
         world_id,
         _request_auth,
@@ -4473,7 +4473,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds/{worldId}/publish',
             path_params=_path_params,
@@ -4536,7 +4536,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._publish_world_serialize(
+        _param = await self._publish_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4554,10 +4554,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4605,7 +4605,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._publish_world_serialize(
+        _param = await self._publish_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4623,7 +4623,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4674,7 +4674,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._publish_world_serialize(
+        _param = await self._publish_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4694,7 +4694,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _publish_world_serialize(
+    async def _publish_world_serialize(
         self,
         world_id,
         _request_auth,
@@ -4740,7 +4740,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/worlds/{worldId}/publish',
             path_params=_path_params,
@@ -4806,7 +4806,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_world_tags_serialize(
+        _param = await self._remove_world_tags_serialize(
             world_id=world_id,
             change_world_tags_request=change_world_tags_request,
             _request_auth=_request_auth,
@@ -4825,10 +4825,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4879,7 +4879,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_world_tags_serialize(
+        _param = await self._remove_world_tags_serialize(
             world_id=world_id,
             change_world_tags_request=change_world_tags_request,
             _request_auth=_request_auth,
@@ -4898,7 +4898,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4952,7 +4952,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_world_tags_serialize(
+        _param = await self._remove_world_tags_serialize(
             world_id=world_id,
             change_world_tags_request=change_world_tags_request,
             _request_auth=_request_auth,
@@ -4973,7 +4973,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _remove_world_tags_serialize(
+    async def _remove_world_tags_serialize(
         self,
         world_id,
         change_world_tags_request,
@@ -5035,7 +5035,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/worlds/{worldId}/removeTags',
             path_params=_path_params,
@@ -5146,7 +5146,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_worlds_serialize(
+        _param = await self._search_worlds_serialize(
             featured=featured,
             sort=sort,
             user=user,
@@ -5179,10 +5179,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5278,7 +5278,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_worlds_serialize(
+        _param = await self._search_worlds_serialize(
             featured=featured,
             sort=sort,
             user=user,
@@ -5311,7 +5311,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5410,7 +5410,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_worlds_serialize(
+        _param = await self._search_worlds_serialize(
             featured=featured,
             sort=sort,
             user=user,
@@ -5445,7 +5445,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _search_worlds_serialize(
+    async def _search_worlds_serialize(
         self,
         featured,
         sort,
@@ -5573,7 +5573,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/worlds',
             path_params=_path_params,
@@ -5636,7 +5636,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unpublish_world_serialize(
+        _param = await self._unpublish_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5654,10 +5654,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5705,7 +5705,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unpublish_world_serialize(
+        _param = await self._unpublish_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5723,7 +5723,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5774,7 +5774,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unpublish_world_serialize(
+        _param = await self._unpublish_world_serialize(
             world_id=world_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5794,7 +5794,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _unpublish_world_serialize(
+    async def _unpublish_world_serialize(
         self,
         world_id,
         _request_auth,
@@ -5840,7 +5840,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/worlds/{worldId}/publish',
             path_params=_path_params,
@@ -5906,7 +5906,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_world_serialize(
+        _param = await self._update_world_serialize(
             world_id=world_id,
             update_world_request=update_world_request,
             _request_auth=_request_auth,
@@ -5925,10 +5925,10 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5979,7 +5979,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_world_serialize(
+        _param = await self._update_world_serialize(
             world_id=world_id,
             update_world_request=update_world_request,
             _request_auth=_request_auth,
@@ -5998,7 +5998,7 @@ class WorldsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6052,7 +6052,7 @@ class WorldsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_world_serialize(
+        _param = await self._update_world_serialize(
             world_id=world_id,
             update_world_request=update_world_request,
             _request_auth=_request_auth,
@@ -6073,7 +6073,7 @@ class WorldsApi:
         return response_data.response
 
 
-    def _update_world_serialize(
+    async def _update_world_serialize(
         self,
         world_id,
         update_world_request,
@@ -6135,7 +6135,7 @@ class WorldsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/worlds/{worldId}',
             path_params=_path_params,

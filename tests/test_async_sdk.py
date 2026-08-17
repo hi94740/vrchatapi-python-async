@@ -13,9 +13,11 @@ the async conversion:
   - request timeouts map to aiohttp.ClientTimeout
 """
 
+import asyncio
 import base64
 import json
-from unittest.mock import AsyncMock, Mock
+from pathlib import Path
+from unittest.mock import AsyncMock, Mock, patch
 
 import aiohttp
 from multidict import CIMultiDict
@@ -215,7 +217,7 @@ async def test_error_status_mapping(server, status, exc_type):
 @pytest.mark.asyncio
 async def test_boolean_query_params_serialize_lowercase():
     client = ApiClient(Configuration(host="http://localhost"))
-    _, url, _, _, _ = client.param_serialize(
+    _, url, _, _, _ = await client.param_serialize(
         "GET",
         "/auth/user",
         query_params=[("active", True), ("include", "x")],
@@ -227,7 +229,7 @@ async def test_boolean_query_params_serialize_lowercase():
 @pytest.mark.asyncio
 async def test_path_params_use_safe_chars():
     client = ApiClient(Configuration(host="http://localhost"))
-    _, url, _, _, _ = client.param_serialize(
+    _, url, _, _, _ = await client.param_serialize(
         "GET",
         "/users/{userId}",
         path_params=[("userId", "usr_a~b/c d")],
@@ -240,6 +242,34 @@ def test_basic_auth_token_url_encodes_credentials():
     token = config.get_basic_auth_token()
     decoded = base64.b64decode(token.split(" ", 1)[1]).decode()
     assert decoded == "user%2Bname:p%40ss%3Aword"
+
+
+@pytest.mark.asyncio
+async def test_files_parameters_reads_file_off_event_loop(tmp_path: Path):
+    upload_file = tmp_path / "upload.txt"
+    upload_file.write_bytes(b"upload data")
+    client = ApiClient(Configuration(host="http://localhost"))
+
+    with patch("vrchatapi.api_client.asyncio.to_thread", wraps=asyncio.to_thread) as to_thread:
+        parameters = await client.files_parameters({"file": str(upload_file)})
+
+    assert parameters == [
+        ("file", ("upload.txt", b"upload data", "text/plain"))
+    ]
+    to_thread.assert_awaited_once_with(client._read_file, str(upload_file))
+
+
+@pytest.mark.asyncio
+async def test_deserialize_file_writes_off_event_loop(tmp_path: Path):
+    response = Mock(headers={}, data=b"download data")
+    client = ApiClient(Configuration(host="http://localhost"))
+    client.configuration.temp_folder_path = str(tmp_path)
+
+    with patch("vrchatapi.api_client.asyncio.to_thread", wraps=asyncio.to_thread) as to_thread:
+        path = await client._ApiClient__deserialize_file(response)
+
+    assert Path(path).read_bytes() == b"download data"
+    to_thread.assert_awaited_once_with(client._deserialize_file, response)
 
 
 @pytest.mark.asyncio

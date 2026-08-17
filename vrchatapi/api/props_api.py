@@ -86,7 +86,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_prop_serialize(
+        _param = await self._create_prop_serialize(
             create_prop_request=create_prop_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -104,10 +104,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -155,7 +155,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_prop_serialize(
+        _param = await self._create_prop_serialize(
             create_prop_request=create_prop_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -173,7 +173,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -224,7 +224,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_prop_serialize(
+        _param = await self._create_prop_serialize(
             create_prop_request=create_prop_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -244,7 +244,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _create_prop_serialize(
+    async def _create_prop_serialize(
         self,
         create_prop_request,
         _request_auth,
@@ -303,7 +303,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/props',
             path_params=_path_params,
@@ -366,7 +366,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_prop_serialize(
+        _param = await self._delete_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -385,10 +385,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -436,7 +436,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_prop_serialize(
+        _param = await self._delete_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -455,7 +455,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -506,7 +506,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_prop_serialize(
+        _param = await self._delete_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -527,7 +527,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _delete_prop_serialize(
+    async def _delete_prop_serialize(
         self,
         prop_id,
         _request_auth,
@@ -573,7 +573,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/props/{propId}',
             path_params=_path_params,
@@ -636,7 +636,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_prop_serialize(
+        _param = await self._get_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -654,10 +654,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -705,7 +705,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_prop_serialize(
+        _param = await self._get_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -723,7 +723,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -774,7 +774,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_prop_serialize(
+        _param = await self._get_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -794,7 +794,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _get_prop_serialize(
+    async def _get_prop_serialize(
         self,
         prop_id,
         _request_auth,
@@ -840,7 +840,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/props/{propId}',
             path_params=_path_params,
@@ -903,7 +903,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_prop_publish_status_serialize(
+        _param = await self._get_prop_publish_status_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -922,10 +922,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -973,7 +973,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_prop_publish_status_serialize(
+        _param = await self._get_prop_publish_status_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -992,7 +992,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1043,7 +1043,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_prop_publish_status_serialize(
+        _param = await self._get_prop_publish_status_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1064,7 +1064,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _get_prop_publish_status_serialize(
+    async def _get_prop_publish_status_serialize(
         self,
         prop_id,
         _request_auth,
@@ -1110,7 +1110,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/props/{propId}/publish',
             path_params=_path_params,
@@ -1179,7 +1179,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_props_serialize(
+        _param = await self._list_props_serialize(
             author_id=author_id,
             n=n,
             offset=offset,
@@ -1199,10 +1199,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1256,7 +1256,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_props_serialize(
+        _param = await self._list_props_serialize(
             author_id=author_id,
             n=n,
             offset=offset,
@@ -1276,7 +1276,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1333,7 +1333,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_props_serialize(
+        _param = await self._list_props_serialize(
             author_id=author_id,
             n=n,
             offset=offset,
@@ -1355,7 +1355,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _list_props_serialize(
+    async def _list_props_serialize(
         self,
         author_id,
         n,
@@ -1413,7 +1413,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/props',
             path_params=_path_params,
@@ -1476,7 +1476,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._publish_prop_serialize(
+        _param = await self._publish_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1495,10 +1495,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1546,7 +1546,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._publish_prop_serialize(
+        _param = await self._publish_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1565,7 +1565,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1616,7 +1616,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._publish_prop_serialize(
+        _param = await self._publish_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1637,7 +1637,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _publish_prop_serialize(
+    async def _publish_prop_serialize(
         self,
         prop_id,
         _request_auth,
@@ -1683,7 +1683,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/props/{propId}/publish',
             path_params=_path_params,
@@ -1746,7 +1746,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unpublish_prop_serialize(
+        _param = await self._unpublish_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1765,10 +1765,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1816,7 +1816,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unpublish_prop_serialize(
+        _param = await self._unpublish_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1835,7 +1835,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1886,7 +1886,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unpublish_prop_serialize(
+        _param = await self._unpublish_prop_serialize(
             prop_id=prop_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1907,7 +1907,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _unpublish_prop_serialize(
+    async def _unpublish_prop_serialize(
         self,
         prop_id,
         _request_auth,
@@ -1953,7 +1953,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/props/{propId}/publish',
             path_params=_path_params,
@@ -2019,7 +2019,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_prop_serialize(
+        _param = await self._update_prop_serialize(
             prop_id=prop_id,
             update_prop_request=update_prop_request,
             _request_auth=_request_auth,
@@ -2039,10 +2039,10 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2093,7 +2093,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_prop_serialize(
+        _param = await self._update_prop_serialize(
             prop_id=prop_id,
             update_prop_request=update_prop_request,
             _request_auth=_request_auth,
@@ -2113,7 +2113,7 @@ class PropsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2167,7 +2167,7 @@ class PropsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_prop_serialize(
+        _param = await self._update_prop_serialize(
             prop_id=prop_id,
             update_prop_request=update_prop_request,
             _request_auth=_request_auth,
@@ -2189,7 +2189,7 @@ class PropsApi:
         return response_data.response
 
 
-    def _update_prop_serialize(
+    async def _update_prop_serialize(
         self,
         prop_id,
         update_prop_request,
@@ -2251,7 +2251,7 @@ class PropsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/props/{propId}',
             path_params=_path_params,

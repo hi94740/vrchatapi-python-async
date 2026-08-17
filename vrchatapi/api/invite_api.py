@@ -96,7 +96,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invite_message_serialize(
+        _param = await self._get_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -117,10 +117,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -174,7 +174,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invite_message_serialize(
+        _param = await self._get_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -195,7 +195,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -252,7 +252,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invite_message_serialize(
+        _param = await self._get_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -275,7 +275,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _get_invite_message_serialize(
+    async def _get_invite_message_serialize(
         self,
         user_id,
         message_type,
@@ -327,7 +327,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/message/{userId}/{messageType}/{slot}',
             path_params=_path_params,
@@ -393,7 +393,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invite_messages_serialize(
+        _param = await self._get_invite_messages_serialize(
             user_id=user_id,
             message_type=message_type,
             _request_auth=_request_auth,
@@ -412,10 +412,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -466,7 +466,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invite_messages_serialize(
+        _param = await self._get_invite_messages_serialize(
             user_id=user_id,
             message_type=message_type,
             _request_auth=_request_auth,
@@ -485,7 +485,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -539,7 +539,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invite_messages_serialize(
+        _param = await self._get_invite_messages_serialize(
             user_id=user_id,
             message_type=message_type,
             _request_auth=_request_auth,
@@ -560,7 +560,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _get_invite_messages_serialize(
+    async def _get_invite_messages_serialize(
         self,
         user_id,
         message_type,
@@ -609,7 +609,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/message/{userId}/{messageType}',
             path_params=_path_params,
@@ -675,7 +675,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_myself_to_serialize(
+        _param = await self._invite_myself_to_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -694,10 +694,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -748,7 +748,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_myself_to_serialize(
+        _param = await self._invite_myself_to_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -767,7 +767,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -821,7 +821,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_myself_to_serialize(
+        _param = await self._invite_myself_to_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -842,7 +842,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _invite_myself_to_serialize(
+    async def _invite_myself_to_serialize(
         self,
         world_id,
         instance_id,
@@ -891,7 +891,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/invite/myself/to/{worldId}:{instanceId}',
             path_params=_path_params,
@@ -957,7 +957,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_user_serialize(
+        _param = await self._invite_user_serialize(
             user_id=user_id,
             invite_request=invite_request,
             _request_auth=_request_auth,
@@ -975,10 +975,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1029,7 +1029,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_user_serialize(
+        _param = await self._invite_user_serialize(
             user_id=user_id,
             invite_request=invite_request,
             _request_auth=_request_auth,
@@ -1047,7 +1047,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1101,7 +1101,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_user_serialize(
+        _param = await self._invite_user_serialize(
             user_id=user_id,
             invite_request=invite_request,
             _request_auth=_request_auth,
@@ -1121,7 +1121,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _invite_user_serialize(
+    async def _invite_user_serialize(
         self,
         user_id,
         invite_request,
@@ -1183,7 +1183,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/invite/{userId}',
             path_params=_path_params,
@@ -1252,7 +1252,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_user_with_photo_serialize(
+        _param = await self._invite_user_with_photo_serialize(
             user_id=user_id,
             data=data,
             image=image,
@@ -1271,10 +1271,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1328,7 +1328,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_user_with_photo_serialize(
+        _param = await self._invite_user_with_photo_serialize(
             user_id=user_id,
             data=data,
             image=image,
@@ -1347,7 +1347,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1404,7 +1404,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._invite_user_with_photo_serialize(
+        _param = await self._invite_user_with_photo_serialize(
             user_id=user_id,
             data=data,
             image=image,
@@ -1425,7 +1425,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _invite_user_with_photo_serialize(
+    async def _invite_user_with_photo_serialize(
         self,
         user_id,
         data,
@@ -1490,7 +1490,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/invite/{userId}/photo',
             path_params=_path_params,
@@ -1556,7 +1556,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._request_invite_serialize(
+        _param = await self._request_invite_serialize(
             user_id=user_id,
             request_invite_request=request_invite_request,
             _request_auth=_request_auth,
@@ -1574,10 +1574,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1628,7 +1628,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._request_invite_serialize(
+        _param = await self._request_invite_serialize(
             user_id=user_id,
             request_invite_request=request_invite_request,
             _request_auth=_request_auth,
@@ -1646,7 +1646,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1700,7 +1700,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._request_invite_serialize(
+        _param = await self._request_invite_serialize(
             user_id=user_id,
             request_invite_request=request_invite_request,
             _request_auth=_request_auth,
@@ -1720,7 +1720,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _request_invite_serialize(
+    async def _request_invite_serialize(
         self,
         user_id,
         request_invite_request,
@@ -1782,7 +1782,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/requestInvite/{userId}',
             path_params=_path_params,
@@ -1851,7 +1851,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._request_invite_with_photo_serialize(
+        _param = await self._request_invite_with_photo_serialize(
             user_id=user_id,
             data=data,
             image=image,
@@ -1870,10 +1870,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1927,7 +1927,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._request_invite_with_photo_serialize(
+        _param = await self._request_invite_with_photo_serialize(
             user_id=user_id,
             data=data,
             image=image,
@@ -1946,7 +1946,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2003,7 +2003,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._request_invite_with_photo_serialize(
+        _param = await self._request_invite_with_photo_serialize(
             user_id=user_id,
             data=data,
             image=image,
@@ -2024,7 +2024,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _request_invite_with_photo_serialize(
+    async def _request_invite_with_photo_serialize(
         self,
         user_id,
         data,
@@ -2089,7 +2089,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/requestInvite/{userId}/photo',
             path_params=_path_params,
@@ -2158,7 +2158,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reset_invite_message_serialize(
+        _param = await self._reset_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -2180,10 +2180,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2237,7 +2237,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reset_invite_message_serialize(
+        _param = await self._reset_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -2259,7 +2259,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2316,7 +2316,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reset_invite_message_serialize(
+        _param = await self._reset_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -2340,7 +2340,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _reset_invite_message_serialize(
+    async def _reset_invite_message_serialize(
         self,
         user_id,
         message_type,
@@ -2392,7 +2392,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/message/{userId}/{messageType}/{slot}',
             path_params=_path_params,
@@ -2458,7 +2458,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_invite_serialize(
+        _param = await self._respond_invite_serialize(
             notification_id=notification_id,
             invite_response=invite_response,
             _request_auth=_request_auth,
@@ -2476,10 +2476,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2530,7 +2530,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_invite_serialize(
+        _param = await self._respond_invite_serialize(
             notification_id=notification_id,
             invite_response=invite_response,
             _request_auth=_request_auth,
@@ -2548,7 +2548,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2602,7 +2602,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_invite_serialize(
+        _param = await self._respond_invite_serialize(
             notification_id=notification_id,
             invite_response=invite_response,
             _request_auth=_request_auth,
@@ -2622,7 +2622,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _respond_invite_serialize(
+    async def _respond_invite_serialize(
         self,
         notification_id,
         invite_response,
@@ -2684,7 +2684,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/invite/{notificationId}/response',
             path_params=_path_params,
@@ -2753,7 +2753,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_invite_with_photo_serialize(
+        _param = await self._respond_invite_with_photo_serialize(
             notification_id=notification_id,
             data=data,
             image=image,
@@ -2772,10 +2772,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2829,7 +2829,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_invite_with_photo_serialize(
+        _param = await self._respond_invite_with_photo_serialize(
             notification_id=notification_id,
             data=data,
             image=image,
@@ -2848,7 +2848,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2905,7 +2905,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_invite_with_photo_serialize(
+        _param = await self._respond_invite_with_photo_serialize(
             notification_id=notification_id,
             data=data,
             image=image,
@@ -2926,7 +2926,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _respond_invite_with_photo_serialize(
+    async def _respond_invite_with_photo_serialize(
         self,
         notification_id,
         data,
@@ -2991,7 +2991,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/invite/{notificationId}/response/photo',
             path_params=_path_params,
@@ -3063,7 +3063,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_invite_message_serialize(
+        _param = await self._update_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -3085,10 +3085,10 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3145,7 +3145,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_invite_message_serialize(
+        _param = await self._update_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -3167,7 +3167,7 @@ class InviteApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3227,7 +3227,7 @@ class InviteApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_invite_message_serialize(
+        _param = await self._update_invite_message_serialize(
             user_id=user_id,
             message_type=message_type,
             slot=slot,
@@ -3251,7 +3251,7 @@ class InviteApi:
         return response_data.response
 
 
-    def _update_invite_message_serialize(
+    async def _update_invite_message_serialize(
         self,
         user_id,
         message_type,
@@ -3319,7 +3319,7 @@ class InviteApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/message/{userId}/{messageType}/{slot}',
             path_params=_path_params,

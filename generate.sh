@@ -150,6 +150,10 @@ patch ./vrchatapi/rest.py < ./patches/lazy_ssl.patch
 # Make 2fa required error readable
 patch ./vrchatapi/api_client.py < ./patches/2fa_verify_readable.patch
 
+# Move generated file I/O off the event loop and await serialization helpers
+patch ./vrchatapi/api_client.py < ./patches/async_file_io.patch
+python3 ./tools/make_api_methods_async.py vrchatapi/api
+
 # Add common symbols to safe path parameter symbols
 patch ./vrchatapi/configuration.py < ./patches/safe_param_symbols.patch
 

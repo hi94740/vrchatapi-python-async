@@ -90,7 +90,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._boop_serialize(
+        _param = await self._boop_serialize(
             user_id=user_id,
             boop_request=boop_request,
             _request_auth=_request_auth,
@@ -110,10 +110,10 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -164,7 +164,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._boop_serialize(
+        _param = await self._boop_serialize(
             user_id=user_id,
             boop_request=boop_request,
             _request_auth=_request_auth,
@@ -184,7 +184,7 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -238,7 +238,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._boop_serialize(
+        _param = await self._boop_serialize(
             user_id=user_id,
             boop_request=boop_request,
             _request_auth=_request_auth,
@@ -260,7 +260,7 @@ class FriendsApi:
         return response_data.response
 
 
-    def _boop_serialize(
+    async def _boop_serialize(
         self,
         user_id,
         boop_request,
@@ -322,7 +322,7 @@ class FriendsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/users/{userId}/boop',
             path_params=_path_params,
@@ -385,7 +385,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_friend_request_serialize(
+        _param = await self._delete_friend_request_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -403,10 +403,10 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -454,7 +454,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_friend_request_serialize(
+        _param = await self._delete_friend_request_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -472,7 +472,7 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -523,7 +523,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_friend_request_serialize(
+        _param = await self._delete_friend_request_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -543,7 +543,7 @@ class FriendsApi:
         return response_data.response
 
 
-    def _delete_friend_request_serialize(
+    async def _delete_friend_request_serialize(
         self,
         user_id,
         _request_auth,
@@ -589,7 +589,7 @@ class FriendsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/user/{userId}/friendRequest',
             path_params=_path_params,
@@ -652,7 +652,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._friend_serialize(
+        _param = await self._friend_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -671,10 +671,10 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -722,7 +722,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._friend_serialize(
+        _param = await self._friend_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -741,7 +741,7 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -792,7 +792,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._friend_serialize(
+        _param = await self._friend_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -813,7 +813,7 @@ class FriendsApi:
         return response_data.response
 
 
-    def _friend_serialize(
+    async def _friend_serialize(
         self,
         user_id,
         _request_auth,
@@ -859,7 +859,7 @@ class FriendsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/user/{userId}/friendRequest',
             path_params=_path_params,
@@ -922,7 +922,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_friend_status_serialize(
+        _param = await self._get_friend_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -939,10 +939,10 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -990,7 +990,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_friend_status_serialize(
+        _param = await self._get_friend_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1007,7 +1007,7 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1058,7 +1058,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_friend_status_serialize(
+        _param = await self._get_friend_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1077,7 +1077,7 @@ class FriendsApi:
         return response_data.response
 
 
-    def _get_friend_status_serialize(
+    async def _get_friend_status_serialize(
         self,
         user_id,
         _request_auth,
@@ -1123,7 +1123,7 @@ class FriendsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/friendStatus',
             path_params=_path_params,
@@ -1192,7 +1192,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_friends_serialize(
+        _param = await self._get_friends_serialize(
             offset=offset,
             n=n,
             offline=offline,
@@ -1211,10 +1211,10 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1268,7 +1268,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_friends_serialize(
+        _param = await self._get_friends_serialize(
             offset=offset,
             n=n,
             offline=offline,
@@ -1287,7 +1287,7 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1344,7 +1344,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_friends_serialize(
+        _param = await self._get_friends_serialize(
             offset=offset,
             n=n,
             offline=offline,
@@ -1365,7 +1365,7 @@ class FriendsApi:
         return response_data.response
 
 
-    def _get_friends_serialize(
+    async def _get_friends_serialize(
         self,
         offset,
         n,
@@ -1423,7 +1423,7 @@ class FriendsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/friends',
             path_params=_path_params,
@@ -1486,7 +1486,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unfriend_serialize(
+        _param = await self._unfriend_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1504,10 +1504,10 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1555,7 +1555,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unfriend_serialize(
+        _param = await self._unfriend_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1573,7 +1573,7 @@ class FriendsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1624,7 +1624,7 @@ class FriendsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unfriend_serialize(
+        _param = await self._unfriend_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1644,7 +1644,7 @@ class FriendsApi:
         return response_data.response
 
 
-    def _unfriend_serialize(
+    async def _unfriend_serialize(
         self,
         user_id,
         _request_auth,
@@ -1690,7 +1690,7 @@ class FriendsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/auth/user/friends/{userId}',
             path_params=_path_params,

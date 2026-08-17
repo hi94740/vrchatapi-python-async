@@ -92,7 +92,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_avatar_serialize(
+        _param = await self._create_avatar_serialize(
             create_avatar_request=create_avatar_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -110,10 +110,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -161,7 +161,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_avatar_serialize(
+        _param = await self._create_avatar_serialize(
             create_avatar_request=create_avatar_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -179,7 +179,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -230,7 +230,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_avatar_serialize(
+        _param = await self._create_avatar_serialize(
             create_avatar_request=create_avatar_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -250,7 +250,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _create_avatar_serialize(
+    async def _create_avatar_serialize(
         self,
         create_avatar_request,
         _request_auth,
@@ -309,7 +309,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/avatars',
             path_params=_path_params,
@@ -372,7 +372,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_avatar_serialize(
+        _param = await self._delete_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -390,10 +390,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -441,7 +441,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_avatar_serialize(
+        _param = await self._delete_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -459,7 +459,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -510,7 +510,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_avatar_serialize(
+        _param = await self._delete_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -530,7 +530,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _delete_avatar_serialize(
+    async def _delete_avatar_serialize(
         self,
         avatar_id,
         _request_auth,
@@ -576,7 +576,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/avatars/{avatarId}',
             path_params=_path_params,
@@ -639,7 +639,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_impostor_serialize(
+        _param = await self._delete_impostor_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -657,10 +657,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -708,7 +708,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_impostor_serialize(
+        _param = await self._delete_impostor_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -726,7 +726,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -777,7 +777,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_impostor_serialize(
+        _param = await self._delete_impostor_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -797,7 +797,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _delete_impostor_serialize(
+    async def _delete_impostor_serialize(
         self,
         avatar_id,
         _request_auth,
@@ -843,7 +843,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/avatars/{avatarId}/impostor',
             path_params=_path_params,
@@ -906,7 +906,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._enqueue_impostor_serialize(
+        _param = await self._enqueue_impostor_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -924,10 +924,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -975,7 +975,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._enqueue_impostor_serialize(
+        _param = await self._enqueue_impostor_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -993,7 +993,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1044,7 +1044,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._enqueue_impostor_serialize(
+        _param = await self._enqueue_impostor_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1064,7 +1064,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _enqueue_impostor_serialize(
+    async def _enqueue_impostor_serialize(
         self,
         avatar_id,
         _request_auth,
@@ -1110,7 +1110,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/avatars/{avatarId}/impostor/enqueue',
             path_params=_path_params,
@@ -1173,7 +1173,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_avatar_serialize(
+        _param = await self._get_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1191,10 +1191,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1242,7 +1242,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_avatar_serialize(
+        _param = await self._get_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1260,7 +1260,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1311,7 +1311,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_avatar_serialize(
+        _param = await self._get_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1331,7 +1331,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _get_avatar_serialize(
+    async def _get_avatar_serialize(
         self,
         avatar_id,
         _request_auth,
@@ -1377,7 +1377,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/avatars/{avatarId}',
             path_params=_path_params,
@@ -1437,7 +1437,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_avatar_styles_serialize(
+        _param = await self._get_avatar_styles_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1452,10 +1452,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1500,7 +1500,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_avatar_styles_serialize(
+        _param = await self._get_avatar_styles_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1515,7 +1515,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1563,7 +1563,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_avatar_styles_serialize(
+        _param = await self._get_avatar_styles_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1580,7 +1580,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _get_avatar_styles_serialize(
+    async def _get_avatar_styles_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1622,7 +1622,7 @@ class AvatarsApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/avatarStyles',
             path_params=_path_params,
@@ -1721,7 +1721,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorited_avatars_serialize(
+        _param = await self._get_favorited_avatars_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -1751,10 +1751,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1838,7 +1838,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorited_avatars_serialize(
+        _param = await self._get_favorited_avatars_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -1868,7 +1868,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1955,7 +1955,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorited_avatars_serialize(
+        _param = await self._get_favorited_avatars_serialize(
             featured=featured,
             sort=sort,
             n=n,
@@ -1987,7 +1987,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _get_favorited_avatars_serialize(
+    async def _get_favorited_avatars_serialize(
         self,
         featured,
         sort,
@@ -2095,7 +2095,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/avatars/favorites',
             path_params=_path_params,
@@ -2155,7 +2155,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_impostor_queue_stats_serialize(
+        _param = await self._get_impostor_queue_stats_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2171,10 +2171,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2219,7 +2219,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_impostor_queue_stats_serialize(
+        _param = await self._get_impostor_queue_stats_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2235,7 +2235,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2283,7 +2283,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_impostor_queue_stats_serialize(
+        _param = await self._get_impostor_queue_stats_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2301,7 +2301,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _get_impostor_queue_stats_serialize(
+    async def _get_impostor_queue_stats_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2344,7 +2344,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/avatars/impostor/queue/stats',
             path_params=_path_params,
@@ -2410,7 +2410,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_licensed_avatars_serialize(
+        _param = await self._get_licensed_avatars_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -2428,10 +2428,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2482,7 +2482,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_licensed_avatars_serialize(
+        _param = await self._get_licensed_avatars_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -2500,7 +2500,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2554,7 +2554,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_licensed_avatars_serialize(
+        _param = await self._get_licensed_avatars_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -2574,7 +2574,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _get_licensed_avatars_serialize(
+    async def _get_licensed_avatars_serialize(
         self,
         n,
         offset,
@@ -2627,7 +2627,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/avatars/licensed',
             path_params=_path_params,
@@ -2690,7 +2690,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_own_avatar_serialize(
+        _param = await self._get_own_avatar_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2708,10 +2708,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2759,7 +2759,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_own_avatar_serialize(
+        _param = await self._get_own_avatar_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2777,7 +2777,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2828,7 +2828,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_own_avatar_serialize(
+        _param = await self._get_own_avatar_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2848,7 +2848,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _get_own_avatar_serialize(
+    async def _get_own_avatar_serialize(
         self,
         user_id,
         _request_auth,
@@ -2894,7 +2894,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/avatar',
             path_params=_path_params,
@@ -2996,7 +2996,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_avatars_serialize(
+        _param = await self._search_avatars_serialize(
             featured=featured,
             sort=sort,
             user=user,
@@ -3026,10 +3026,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3116,7 +3116,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_avatars_serialize(
+        _param = await self._search_avatars_serialize(
             featured=featured,
             sort=sort,
             user=user,
@@ -3146,7 +3146,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3236,7 +3236,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_avatars_serialize(
+        _param = await self._search_avatars_serialize(
             featured=featured,
             sort=sort,
             user=user,
@@ -3268,7 +3268,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _search_avatars_serialize(
+    async def _search_avatars_serialize(
         self,
         featured,
         sort,
@@ -3381,7 +3381,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/avatars',
             path_params=_path_params,
@@ -3444,7 +3444,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._select_avatar_serialize(
+        _param = await self._select_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3462,10 +3462,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3513,7 +3513,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._select_avatar_serialize(
+        _param = await self._select_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3531,7 +3531,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3582,7 +3582,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._select_avatar_serialize(
+        _param = await self._select_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3602,7 +3602,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _select_avatar_serialize(
+    async def _select_avatar_serialize(
         self,
         avatar_id,
         _request_auth,
@@ -3648,7 +3648,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/avatars/{avatarId}/select',
             path_params=_path_params,
@@ -3712,7 +3712,7 @@ class AvatarsApi:
         """ # noqa: E501
         warnings.warn("PUT /avatars/{avatarId}/selectFallback is deprecated.", DeprecationWarning)
 
-        _param = self._select_fallback_avatar_serialize(
+        _param = await self._select_fallback_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3731,10 +3731,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3783,7 +3783,7 @@ class AvatarsApi:
         """ # noqa: E501
         warnings.warn("PUT /avatars/{avatarId}/selectFallback is deprecated.", DeprecationWarning)
 
-        _param = self._select_fallback_avatar_serialize(
+        _param = await self._select_fallback_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3802,7 +3802,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3854,7 +3854,7 @@ class AvatarsApi:
         """ # noqa: E501
         warnings.warn("PUT /avatars/{avatarId}/selectFallback is deprecated.", DeprecationWarning)
 
-        _param = self._select_fallback_avatar_serialize(
+        _param = await self._select_fallback_avatar_serialize(
             avatar_id=avatar_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3875,7 +3875,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _select_fallback_avatar_serialize(
+    async def _select_fallback_avatar_serialize(
         self,
         avatar_id,
         _request_auth,
@@ -3921,7 +3921,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/avatars/{avatarId}/selectFallback',
             path_params=_path_params,
@@ -3987,7 +3987,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_avatar_serialize(
+        _param = await self._update_avatar_serialize(
             avatar_id=avatar_id,
             update_avatar_request=update_avatar_request,
             _request_auth=_request_auth,
@@ -4006,10 +4006,10 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4060,7 +4060,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_avatar_serialize(
+        _param = await self._update_avatar_serialize(
             avatar_id=avatar_id,
             update_avatar_request=update_avatar_request,
             _request_auth=_request_auth,
@@ -4079,7 +4079,7 @@ class AvatarsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4133,7 +4133,7 @@ class AvatarsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_avatar_serialize(
+        _param = await self._update_avatar_serialize(
             avatar_id=avatar_id,
             update_avatar_request=update_avatar_request,
             _request_auth=_request_auth,
@@ -4154,7 +4154,7 @@ class AvatarsApi:
         return response_data.response
 
 
-    def _update_avatar_serialize(
+    async def _update_avatar_serialize(
         self,
         avatar_id,
         update_avatar_request,
@@ -4216,7 +4216,7 @@ class AvatarsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/avatars/{avatarId}',
             path_params=_path_params,

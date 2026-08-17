@@ -1,0 +1,101 @@
+--- a/vrchatapi/api_client.py
++++ b/vrchatapi/api_client.py
+@@ -11,6 +11,7 @@
+ 
+ 
+ 
++import asyncio
+ import datetime
+ from dateutil.parser import parse
+ from enum import Enum
+@@ -173,7 +174,7 @@ class ApiClient:
+         """
+         cls._default = default
+ 
+-    def param_serialize(
++    async def param_serialize(
+         self,
+         method,
+         resource_path,
+@@ -246,7 +247,7 @@ class ApiClient:
+                 collection_formats
+             )
+             if files:
+-                post_params.extend(self.files_parameters(files))
++                post_params.extend(await self.files_parameters(files))
+ 
+         # auth setting
+         self.update_params_for_auth(
+@@ -317,7 +318,7 @@ class ApiClient:
+ 
+         return response_data
+ 
+-    def response_deserialize(
++    async def response_deserialize(
+         self,
+         response_data: rest.RESTResponse,
+         response_types_map: Optional[Dict[str, ApiResponseT]]=None
+@@ -357,7 +358,7 @@ class ApiClient:
+             if response_type in ("bytearray", "bytes"):
+                 return_data = response_data.data
+             elif response_type == "file":
+-                return_data = self.__deserialize_file(response_data)
++                return_data = await self.__deserialize_file(response_data)
+             elif response_type is not None:
+                 match = None
+                 content_type = response_data.headers.get('content-type')
+@@ -592,7 +593,7 @@ class ApiClient:
+ 
+         return "&".join(["=".join(map(str, item)) for item in new_params])
+ 
+-    def files_parameters(
++    async def files_parameters(
+         self,
+         files: Dict[str, Union[str, bytes, List[str], List[bytes], Tuple[str, bytes]]],
+     ):
+@@ -604,9 +605,7 @@ class ApiClient:
+         params = []
+         for k, v in files.items():
+             if isinstance(v, str):
+-                with open(v, 'rb') as f:
+-                    filename = os.path.basename(f.name)
+-                    filedata = f.read()
++                filename, filedata = await asyncio.to_thread(self._read_file, v)
+             elif isinstance(v, bytes):
+                 filename = k
+                 filedata = v
+@@ -614,7 +613,7 @@ class ApiClient:
+                 filename, filedata = v
+             elif isinstance(v, list):
+                 for file_param in v:
+-                    params.extend(self.files_parameters({k: file_param}))
++                    params.extend(await self.files_parameters({k: file_param}))
+                 continue
+             else:
+                 raise ValueError("Unsupported file value")
+@@ -627,6 +626,12 @@ class ApiClient:
+             )
+         return params
+ 
++    @staticmethod
++    def _read_file(path: str) -> tuple[str, bytes]:
++        """Read an upload file outside the event loop."""
++        with open(path, "rb") as file:
++            return os.path.basename(file.name), file.read()
++
+     def select_header_accept(self, accepts: List[str]) -> Optional[str]:
+         """Returns `Accept` based on an array of accepts provided.
+ 
+@@ -744,7 +749,11 @@ class ApiClient:
+                 'Authentication token must be in `query` or `header`'
+             )
+ 
+-    def __deserialize_file(self, response):
++    async def __deserialize_file(self, response):
++        """Deserialize a response body to a file outside the event loop."""
++        return await asyncio.to_thread(self._deserialize_file, response)
++
++    def _deserialize_file(self, response):
+         """Deserializes body to file
+ 
+         Saves response body into a file in a temporary folder,

@@ -83,7 +83,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_all_player_moderations_serialize(
+        _param = await self._clear_all_player_moderations_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -99,10 +99,10 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -147,7 +147,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_all_player_moderations_serialize(
+        _param = await self._clear_all_player_moderations_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -163,7 +163,7 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -211,7 +211,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_all_player_moderations_serialize(
+        _param = await self._clear_all_player_moderations_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -229,7 +229,7 @@ class PlayermoderationApi:
         return response_data.response
 
 
-    def _clear_all_player_moderations_serialize(
+    async def _clear_all_player_moderations_serialize(
         self,
         _request_auth,
         _content_type,
@@ -272,7 +272,7 @@ class PlayermoderationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/auth/user/playermoderations',
             path_params=_path_params,
@@ -338,7 +338,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_player_moderations_serialize(
+        _param = await self._get_player_moderations_serialize(
             type=type,
             target_user_id=target_user_id,
             _request_auth=_request_auth,
@@ -356,10 +356,10 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -410,7 +410,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_player_moderations_serialize(
+        _param = await self._get_player_moderations_serialize(
             type=type,
             target_user_id=target_user_id,
             _request_auth=_request_auth,
@@ -428,7 +428,7 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -482,7 +482,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_player_moderations_serialize(
+        _param = await self._get_player_moderations_serialize(
             type=type,
             target_user_id=target_user_id,
             _request_auth=_request_auth,
@@ -502,7 +502,7 @@ class PlayermoderationApi:
         return response_data.response
 
 
-    def _get_player_moderations_serialize(
+    async def _get_player_moderations_serialize(
         self,
         type,
         target_user_id,
@@ -555,7 +555,7 @@ class PlayermoderationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/playermoderations',
             path_params=_path_params,
@@ -618,7 +618,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._moderate_user_serialize(
+        _param = await self._moderate_user_serialize(
             moderate_user_request=moderate_user_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -635,10 +635,10 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -686,7 +686,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._moderate_user_serialize(
+        _param = await self._moderate_user_serialize(
             moderate_user_request=moderate_user_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -703,7 +703,7 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -754,7 +754,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._moderate_user_serialize(
+        _param = await self._moderate_user_serialize(
             moderate_user_request=moderate_user_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -773,7 +773,7 @@ class PlayermoderationApi:
         return response_data.response
 
 
-    def _moderate_user_serialize(
+    async def _moderate_user_serialize(
         self,
         moderate_user_request,
         _request_auth,
@@ -832,7 +832,7 @@ class PlayermoderationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/user/playermoderations',
             path_params=_path_params,
@@ -895,7 +895,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unmoderate_user_serialize(
+        _param = await self._unmoderate_user_serialize(
             moderate_user_request=moderate_user_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -912,10 +912,10 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -963,7 +963,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unmoderate_user_serialize(
+        _param = await self._unmoderate_user_serialize(
             moderate_user_request=moderate_user_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -980,7 +980,7 @@ class PlayermoderationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1031,7 +1031,7 @@ class PlayermoderationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._unmoderate_user_serialize(
+        _param = await self._unmoderate_user_serialize(
             moderate_user_request=moderate_user_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1050,7 +1050,7 @@ class PlayermoderationApi:
         return response_data.response
 
 
-    def _unmoderate_user_serialize(
+    async def _unmoderate_user_serialize(
         self,
         moderate_user_request,
         _request_auth,
@@ -1109,7 +1109,7 @@ class PlayermoderationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/auth/user/unplayermoderate',
             path_params=_path_params,

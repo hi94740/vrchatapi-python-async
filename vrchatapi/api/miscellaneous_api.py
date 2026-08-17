@@ -84,7 +84,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_assigned_permissions_serialize(
+        _param = await self._get_assigned_permissions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -100,10 +100,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -148,7 +148,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_assigned_permissions_serialize(
+        _param = await self._get_assigned_permissions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -164,7 +164,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -212,7 +212,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_assigned_permissions_serialize(
+        _param = await self._get_assigned_permissions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -230,7 +230,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_assigned_permissions_serialize(
+    async def _get_assigned_permissions_serialize(
         self,
         _request_auth,
         _content_type,
@@ -273,7 +273,7 @@ class MiscellaneousApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/permissions',
             path_params=_path_params,
@@ -333,7 +333,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_config_serialize(
+        _param = await self._get_config_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -348,10 +348,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -396,7 +396,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_config_serialize(
+        _param = await self._get_config_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -411,7 +411,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -459,7 +459,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_config_serialize(
+        _param = await self._get_config_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -476,7 +476,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_config_serialize(
+    async def _get_config_serialize(
         self,
         _request_auth,
         _content_type,
@@ -518,7 +518,7 @@ class MiscellaneousApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/config',
             path_params=_path_params,
@@ -584,7 +584,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_css_serialize(
+        _param = await self._get_css_serialize(
             variant=variant,
             branch=branch,
             _request_auth=_request_auth,
@@ -602,10 +602,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -656,7 +656,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_css_serialize(
+        _param = await self._get_css_serialize(
             variant=variant,
             branch=branch,
             _request_auth=_request_auth,
@@ -674,7 +674,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -728,7 +728,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_css_serialize(
+        _param = await self._get_css_serialize(
             variant=variant,
             branch=branch,
             _request_auth=_request_auth,
@@ -748,7 +748,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_css_serialize(
+    async def _get_css_serialize(
         self,
         variant,
         branch,
@@ -801,7 +801,7 @@ class MiscellaneousApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/css/app.css',
             path_params=_path_params,
@@ -861,7 +861,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_online_users_serialize(
+        _param = await self._get_current_online_users_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -876,10 +876,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -924,7 +924,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_online_users_serialize(
+        _param = await self._get_current_online_users_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -939,7 +939,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -987,7 +987,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_online_users_serialize(
+        _param = await self._get_current_online_users_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1004,7 +1004,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_current_online_users_serialize(
+    async def _get_current_online_users_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1046,7 +1046,7 @@ class MiscellaneousApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/visits',
             path_params=_path_params,
@@ -1107,7 +1107,7 @@ class MiscellaneousApi:
         """ # noqa: E501
         warnings.warn("GET /health is deprecated.", DeprecationWarning)
 
-        _param = self._get_health_serialize(
+        _param = await self._get_health_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1122,10 +1122,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1171,7 +1171,7 @@ class MiscellaneousApi:
         """ # noqa: E501
         warnings.warn("GET /health is deprecated.", DeprecationWarning)
 
-        _param = self._get_health_serialize(
+        _param = await self._get_health_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1186,7 +1186,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1235,7 +1235,7 @@ class MiscellaneousApi:
         """ # noqa: E501
         warnings.warn("GET /health is deprecated.", DeprecationWarning)
 
-        _param = self._get_health_serialize(
+        _param = await self._get_health_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1252,7 +1252,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_health_serialize(
+    async def _get_health_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1294,7 +1294,7 @@ class MiscellaneousApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/health',
             path_params=_path_params,
@@ -1360,7 +1360,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_info_push_serialize(
+        _param = await self._get_info_push_serialize(
             require=require,
             include=include,
             _request_auth=_request_auth,
@@ -1377,10 +1377,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1431,7 +1431,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_info_push_serialize(
+        _param = await self._get_info_push_serialize(
             require=require,
             include=include,
             _request_auth=_request_auth,
@@ -1448,7 +1448,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1502,7 +1502,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_info_push_serialize(
+        _param = await self._get_info_push_serialize(
             require=require,
             include=include,
             _request_auth=_request_auth,
@@ -1521,7 +1521,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_info_push_serialize(
+    async def _get_info_push_serialize(
         self,
         require,
         include,
@@ -1574,7 +1574,7 @@ class MiscellaneousApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/infoPush',
             path_params=_path_params,
@@ -1640,7 +1640,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_java_script_serialize(
+        _param = await self._get_java_script_serialize(
             variant=variant,
             branch=branch,
             _request_auth=_request_auth,
@@ -1658,10 +1658,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1712,7 +1712,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_java_script_serialize(
+        _param = await self._get_java_script_serialize(
             variant=variant,
             branch=branch,
             _request_auth=_request_auth,
@@ -1730,7 +1730,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1784,7 +1784,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_java_script_serialize(
+        _param = await self._get_java_script_serialize(
             variant=variant,
             branch=branch,
             _request_auth=_request_auth,
@@ -1804,7 +1804,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_java_script_serialize(
+    async def _get_java_script_serialize(
         self,
         variant,
         branch,
@@ -1857,7 +1857,7 @@ class MiscellaneousApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/js/app.js',
             path_params=_path_params,
@@ -1920,7 +1920,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_permission_serialize(
+        _param = await self._get_permission_serialize(
             permission_id=permission_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1937,10 +1937,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1988,7 +1988,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_permission_serialize(
+        _param = await self._get_permission_serialize(
             permission_id=permission_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2005,7 +2005,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2056,7 +2056,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_permission_serialize(
+        _param = await self._get_permission_serialize(
             permission_id=permission_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2075,7 +2075,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_permission_serialize(
+    async def _get_permission_serialize(
         self,
         permission_id,
         _request_auth,
@@ -2121,7 +2121,7 @@ class MiscellaneousApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/permissions/{permissionId}',
             path_params=_path_params,
@@ -2181,7 +2181,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_system_time_serialize(
+        _param = await self._get_system_time_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2196,10 +2196,10 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2244,7 +2244,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_system_time_serialize(
+        _param = await self._get_system_time_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2259,7 +2259,7 @@ class MiscellaneousApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2307,7 +2307,7 @@ class MiscellaneousApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_system_time_serialize(
+        _param = await self._get_system_time_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2324,7 +2324,7 @@ class MiscellaneousApi:
         return response_data.response
 
 
-    def _get_system_time_serialize(
+    async def _get_system_time_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2366,7 +2366,7 @@ class MiscellaneousApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/time',
             path_params=_path_params,

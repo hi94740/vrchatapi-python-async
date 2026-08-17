@@ -86,7 +86,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._accept_friend_request_serialize(
+        _param = await self._accept_friend_request_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -104,10 +104,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -155,7 +155,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._accept_friend_request_serialize(
+        _param = await self._accept_friend_request_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -173,7 +173,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -224,7 +224,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._accept_friend_request_serialize(
+        _param = await self._accept_friend_request_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -244,7 +244,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _accept_friend_request_serialize(
+    async def _accept_friend_request_serialize(
         self,
         notification_id,
         _request_auth,
@@ -290,7 +290,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/auth/user/notifications/{notificationId}/accept',
             path_params=_path_params,
@@ -353,7 +353,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._acknowledge_notification_v2_serialize(
+        _param = await self._acknowledge_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -371,10 +371,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -422,7 +422,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._acknowledge_notification_v2_serialize(
+        _param = await self._acknowledge_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -440,7 +440,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -491,7 +491,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._acknowledge_notification_v2_serialize(
+        _param = await self._acknowledge_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -511,7 +511,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _acknowledge_notification_v2_serialize(
+    async def _acknowledge_notification_v2_serialize(
         self,
         notification_id,
         _request_auth,
@@ -557,7 +557,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/notifications/{notificationId}/see',
             path_params=_path_params,
@@ -617,7 +617,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_notifications_serialize(
+        _param = await self._clear_notifications_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -633,10 +633,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -681,7 +681,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_notifications_serialize(
+        _param = await self._clear_notifications_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -697,7 +697,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -745,7 +745,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_notifications_serialize(
+        _param = await self._clear_notifications_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -763,7 +763,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _clear_notifications_serialize(
+    async def _clear_notifications_serialize(
         self,
         _request_auth,
         _content_type,
@@ -806,7 +806,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/auth/user/notifications/clear',
             path_params=_path_params,
@@ -866,7 +866,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_notification_v2s_serialize(
+        _param = await self._delete_all_notification_v2s_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -882,10 +882,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -930,7 +930,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_notification_v2s_serialize(
+        _param = await self._delete_all_notification_v2s_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -946,7 +946,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -994,7 +994,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_notification_v2s_serialize(
+        _param = await self._delete_all_notification_v2s_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1012,7 +1012,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _delete_all_notification_v2s_serialize(
+    async def _delete_all_notification_v2s_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1055,7 +1055,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/notifications',
             path_params=_path_params,
@@ -1118,7 +1118,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_notification_serialize(
+        _param = await self._delete_notification_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1135,10 +1135,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1186,7 +1186,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_notification_serialize(
+        _param = await self._delete_notification_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1203,7 +1203,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1254,7 +1254,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_notification_serialize(
+        _param = await self._delete_notification_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1273,7 +1273,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _delete_notification_serialize(
+    async def _delete_notification_serialize(
         self,
         notification_id,
         _request_auth,
@@ -1319,7 +1319,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/auth/user/notifications/{notificationId}/hide',
             path_params=_path_params,
@@ -1382,7 +1382,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_notification_v2_serialize(
+        _param = await self._delete_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1401,10 +1401,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1452,7 +1452,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_notification_v2_serialize(
+        _param = await self._delete_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1471,7 +1471,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1522,7 +1522,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_notification_v2_serialize(
+        _param = await self._delete_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1543,7 +1543,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _delete_notification_v2_serialize(
+    async def _delete_notification_v2_serialize(
         self,
         notification_id,
         _request_auth,
@@ -1589,7 +1589,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/notifications/{notificationId}',
             path_params=_path_params,
@@ -1652,7 +1652,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notification_serialize(
+        _param = await self._get_notification_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1670,10 +1670,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1721,7 +1721,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notification_serialize(
+        _param = await self._get_notification_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1739,7 +1739,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1790,7 +1790,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notification_serialize(
+        _param = await self._get_notification_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1810,7 +1810,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _get_notification_serialize(
+    async def _get_notification_serialize(
         self,
         notification_id,
         _request_auth,
@@ -1856,7 +1856,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/notifications/{notificationId}',
             path_params=_path_params,
@@ -1920,7 +1920,7 @@ class NotificationsApi:
         """ # noqa: E501
         warnings.warn("GET /notifications/{notificationId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_notification_v2_serialize(
+        _param = await self._get_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1939,10 +1939,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1991,7 +1991,7 @@ class NotificationsApi:
         """ # noqa: E501
         warnings.warn("GET /notifications/{notificationId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_notification_v2_serialize(
+        _param = await self._get_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2010,7 +2010,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2062,7 +2062,7 @@ class NotificationsApi:
         """ # noqa: E501
         warnings.warn("GET /notifications/{notificationId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_notification_v2_serialize(
+        _param = await self._get_notification_v2_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2083,7 +2083,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _get_notification_v2_serialize(
+    async def _get_notification_v2_serialize(
         self,
         notification_id,
         _request_auth,
@@ -2129,7 +2129,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/notifications/{notificationId}',
             path_params=_path_params,
@@ -2192,7 +2192,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notification_v2s_serialize(
+        _param = await self._get_notification_v2s_serialize(
             limit=limit,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2209,10 +2209,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2260,7 +2260,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notification_v2s_serialize(
+        _param = await self._get_notification_v2s_serialize(
             limit=limit,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2277,7 +2277,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2328,7 +2328,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notification_v2s_serialize(
+        _param = await self._get_notification_v2s_serialize(
             limit=limit,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2347,7 +2347,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _get_notification_v2s_serialize(
+    async def _get_notification_v2s_serialize(
         self,
         limit,
         _request_auth,
@@ -2395,7 +2395,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/notifications',
             path_params=_path_params,
@@ -2473,7 +2473,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notifications_serialize(
+        _param = await self._get_notifications_serialize(
             type=type,
             sent=sent,
             hidden=hidden,
@@ -2495,10 +2495,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2561,7 +2561,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notifications_serialize(
+        _param = await self._get_notifications_serialize(
             type=type,
             sent=sent,
             hidden=hidden,
@@ -2583,7 +2583,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2649,7 +2649,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_notifications_serialize(
+        _param = await self._get_notifications_serialize(
             type=type,
             sent=sent,
             hidden=hidden,
@@ -2673,7 +2673,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _get_notifications_serialize(
+    async def _get_notifications_serialize(
         self,
         type,
         sent,
@@ -2746,7 +2746,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/notifications',
             path_params=_path_params,
@@ -2809,7 +2809,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._mark_notification_as_read_serialize(
+        _param = await self._mark_notification_as_read_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2826,10 +2826,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2877,7 +2877,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._mark_notification_as_read_serialize(
+        _param = await self._mark_notification_as_read_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2894,7 +2894,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2945,7 +2945,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._mark_notification_as_read_serialize(
+        _param = await self._mark_notification_as_read_serialize(
             notification_id=notification_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2964,7 +2964,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _mark_notification_as_read_serialize(
+    async def _mark_notification_as_read_serialize(
         self,
         notification_id,
         _request_auth,
@@ -3010,7 +3010,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/auth/user/notifications/{notificationId}/see',
             path_params=_path_params,
@@ -3076,7 +3076,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reply_notification_v2_serialize(
+        _param = await self._reply_notification_v2_serialize(
             notification_id=notification_id,
             body=body,
             _request_auth=_request_auth,
@@ -3096,10 +3096,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3150,7 +3150,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reply_notification_v2_serialize(
+        _param = await self._reply_notification_v2_serialize(
             notification_id=notification_id,
             body=body,
             _request_auth=_request_auth,
@@ -3170,7 +3170,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3224,7 +3224,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._reply_notification_v2_serialize(
+        _param = await self._reply_notification_v2_serialize(
             notification_id=notification_id,
             body=body,
             _request_auth=_request_auth,
@@ -3246,7 +3246,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _reply_notification_v2_serialize(
+    async def _reply_notification_v2_serialize(
         self,
         notification_id,
         body,
@@ -3308,7 +3308,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/notifications/{notificationId}/reply',
             path_params=_path_params,
@@ -3374,7 +3374,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_notification_v2_serialize(
+        _param = await self._respond_notification_v2_serialize(
             notification_id=notification_id,
             respond_notification_v2_request=respond_notification_v2_request,
             _request_auth=_request_auth,
@@ -3394,10 +3394,10 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3448,7 +3448,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_notification_v2_serialize(
+        _param = await self._respond_notification_v2_serialize(
             notification_id=notification_id,
             respond_notification_v2_request=respond_notification_v2_request,
             _request_auth=_request_auth,
@@ -3468,7 +3468,7 @@ class NotificationsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3522,7 +3522,7 @@ class NotificationsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._respond_notification_v2_serialize(
+        _param = await self._respond_notification_v2_serialize(
             notification_id=notification_id,
             respond_notification_v2_request=respond_notification_v2_request,
             _request_auth=_request_auth,
@@ -3544,7 +3544,7 @@ class NotificationsApi:
         return response_data.response
 
 
-    def _respond_notification_v2_serialize(
+    async def _respond_notification_v2_serialize(
         self,
         notification_id,
         respond_notification_v2_request,
@@ -3606,7 +3606,7 @@ class NotificationsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/notifications/{notificationId}/respond',
             path_params=_path_params,

@@ -89,7 +89,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_favorite_serialize(
+        _param = await self._add_favorite_serialize(
             add_favorite_request=add_favorite_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -107,10 +107,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -158,7 +158,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_favorite_serialize(
+        _param = await self._add_favorite_serialize(
             add_favorite_request=add_favorite_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -176,7 +176,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -227,7 +227,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_favorite_serialize(
+        _param = await self._add_favorite_serialize(
             add_favorite_request=add_favorite_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -247,7 +247,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _add_favorite_serialize(
+    async def _add_favorite_serialize(
         self,
         add_favorite_request,
         _request_auth,
@@ -306,7 +306,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/favorites',
             path_params=_path_params,
@@ -375,7 +375,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_favorite_group_serialize(
+        _param = await self._clear_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -393,10 +393,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -450,7 +450,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_favorite_group_serialize(
+        _param = await self._clear_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -468,7 +468,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -525,7 +525,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._clear_favorite_group_serialize(
+        _param = await self._clear_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -545,7 +545,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _clear_favorite_group_serialize(
+    async def _clear_favorite_group_serialize(
         self,
         favorite_group_type,
         favorite_group_name,
@@ -597,7 +597,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}',
             path_params=_path_params,
@@ -666,7 +666,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_group_serialize(
+        _param = await self._get_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -684,10 +684,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -741,7 +741,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_group_serialize(
+        _param = await self._get_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -759,7 +759,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -816,7 +816,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_group_serialize(
+        _param = await self._get_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -836,7 +836,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _get_favorite_group_serialize(
+    async def _get_favorite_group_serialize(
         self,
         favorite_group_type,
         favorite_group_name,
@@ -888,7 +888,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}',
             path_params=_path_params,
@@ -960,7 +960,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_groups_serialize(
+        _param = await self._get_favorite_groups_serialize(
             n=n,
             offset=offset,
             user_id=user_id,
@@ -980,10 +980,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1040,7 +1040,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_groups_serialize(
+        _param = await self._get_favorite_groups_serialize(
             n=n,
             offset=offset,
             user_id=user_id,
@@ -1060,7 +1060,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1120,7 +1120,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_groups_serialize(
+        _param = await self._get_favorite_groups_serialize(
             n=n,
             offset=offset,
             user_id=user_id,
@@ -1142,7 +1142,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _get_favorite_groups_serialize(
+    async def _get_favorite_groups_serialize(
         self,
         n,
         offset,
@@ -1205,7 +1205,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/favorite/groups',
             path_params=_path_params,
@@ -1265,7 +1265,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_limits_serialize(
+        _param = await self._get_favorite_limits_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1281,10 +1281,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1329,7 +1329,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_limits_serialize(
+        _param = await self._get_favorite_limits_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1345,7 +1345,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1393,7 +1393,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorite_limits_serialize(
+        _param = await self._get_favorite_limits_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1411,7 +1411,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _get_favorite_limits_serialize(
+    async def _get_favorite_limits_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1454,7 +1454,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/favoritelimits',
             path_params=_path_params,
@@ -1526,7 +1526,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorites_serialize(
+        _param = await self._get_favorites_serialize(
             n=n,
             offset=offset,
             type=type,
@@ -1546,10 +1546,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1606,7 +1606,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorites_serialize(
+        _param = await self._get_favorites_serialize(
             n=n,
             offset=offset,
             type=type,
@@ -1626,7 +1626,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1686,7 +1686,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_favorites_serialize(
+        _param = await self._get_favorites_serialize(
             n=n,
             offset=offset,
             type=type,
@@ -1708,7 +1708,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _get_favorites_serialize(
+    async def _get_favorites_serialize(
         self,
         n,
         offset,
@@ -1771,7 +1771,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/favorites',
             path_params=_path_params,
@@ -1834,7 +1834,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_favorite_serialize(
+        _param = await self._remove_favorite_serialize(
             favorite_id=favorite_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1852,10 +1852,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1903,7 +1903,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_favorite_serialize(
+        _param = await self._remove_favorite_serialize(
             favorite_id=favorite_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1921,7 +1921,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1972,7 +1972,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_favorite_serialize(
+        _param = await self._remove_favorite_serialize(
             favorite_id=favorite_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1992,7 +1992,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _remove_favorite_serialize(
+    async def _remove_favorite_serialize(
         self,
         favorite_id,
         _request_auth,
@@ -2038,7 +2038,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/favorites/{favoriteId}',
             path_params=_path_params,
@@ -2110,7 +2110,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_favorite_group_serialize(
+        _param = await self._update_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -2129,10 +2129,10 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2189,7 +2189,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_favorite_group_serialize(
+        _param = await self._update_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -2208,7 +2208,7 @@ class FavoritesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2268,7 +2268,7 @@ class FavoritesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_favorite_group_serialize(
+        _param = await self._update_favorite_group_serialize(
             favorite_group_type=favorite_group_type,
             favorite_group_name=favorite_group_name,
             user_id=user_id,
@@ -2289,7 +2289,7 @@ class FavoritesApi:
         return response_data.response
 
 
-    def _update_favorite_group_serialize(
+    async def _update_favorite_group_serialize(
         self,
         favorite_group_type,
         favorite_group_name,
@@ -2350,7 +2350,7 @@ class FavoritesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId}',
             path_params=_path_params,

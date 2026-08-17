@@ -100,7 +100,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_pending2_fa_serialize(
+        _param = await self._cancel_pending2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -116,10 +116,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -164,7 +164,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_pending2_fa_serialize(
+        _param = await self._cancel_pending2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -180,7 +180,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -228,7 +228,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._cancel_pending2_fa_serialize(
+        _param = await self._cancel_pending2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -246,7 +246,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _cancel_pending2_fa_serialize(
+    async def _cancel_pending2_fa_serialize(
         self,
         _request_auth,
         _content_type,
@@ -289,7 +289,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/auth/twofactorauth/totp/pending',
             path_params=_path_params,
@@ -361,7 +361,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_exists_serialize(
+        _param = await self._check_user_exists_serialize(
             email=email,
             display_name=display_name,
             username=username,
@@ -381,10 +381,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -441,7 +441,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_exists_serialize(
+        _param = await self._check_user_exists_serialize(
             email=email,
             display_name=display_name,
             username=username,
@@ -461,7 +461,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -521,7 +521,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_exists_serialize(
+        _param = await self._check_user_exists_serialize(
             email=email,
             display_name=display_name,
             username=username,
@@ -543,7 +543,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _check_user_exists_serialize(
+    async def _check_user_exists_serialize(
         self,
         email,
         display_name,
@@ -605,7 +605,7 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/exists',
             path_params=_path_params,
@@ -671,7 +671,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._confirm_email_serialize(
+        _param = await self._confirm_email_serialize(
             id=id,
             verify_email=verify_email,
             _request_auth=_request_auth,
@@ -688,10 +688,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -742,7 +742,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._confirm_email_serialize(
+        _param = await self._confirm_email_serialize(
             id=id,
             verify_email=verify_email,
             _request_auth=_request_auth,
@@ -759,7 +759,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -813,7 +813,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._confirm_email_serialize(
+        _param = await self._confirm_email_serialize(
             id=id,
             verify_email=verify_email,
             _request_auth=_request_auth,
@@ -832,7 +832,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _confirm_email_serialize(
+    async def _confirm_email_serialize(
         self,
         id,
         verify_email,
@@ -877,7 +877,7 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/confirmEmail',
             path_params=_path_params,
@@ -940,7 +940,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_global_avatar_moderation_serialize(
+        _param = await self._create_global_avatar_moderation_serialize(
             create_avatar_moderation_request=create_avatar_moderation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -957,10 +957,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1008,7 +1008,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_global_avatar_moderation_serialize(
+        _param = await self._create_global_avatar_moderation_serialize(
             create_avatar_moderation_request=create_avatar_moderation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1025,7 +1025,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1076,7 +1076,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_global_avatar_moderation_serialize(
+        _param = await self._create_global_avatar_moderation_serialize(
             create_avatar_moderation_request=create_avatar_moderation_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1095,7 +1095,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _create_global_avatar_moderation_serialize(
+    async def _create_global_avatar_moderation_serialize(
         self,
         create_avatar_moderation_request,
         _request_auth,
@@ -1154,7 +1154,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/user/avatarmoderations',
             path_params=_path_params,
@@ -1220,7 +1220,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_global_avatar_moderation_serialize(
+        _param = await self._delete_global_avatar_moderation_serialize(
             target_avatar_id=target_avatar_id,
             avatar_moderation_type=avatar_moderation_type,
             _request_auth=_request_auth,
@@ -1238,10 +1238,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1292,7 +1292,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_global_avatar_moderation_serialize(
+        _param = await self._delete_global_avatar_moderation_serialize(
             target_avatar_id=target_avatar_id,
             avatar_moderation_type=avatar_moderation_type,
             _request_auth=_request_auth,
@@ -1310,7 +1310,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1364,7 +1364,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_global_avatar_moderation_serialize(
+        _param = await self._delete_global_avatar_moderation_serialize(
             target_avatar_id=target_avatar_id,
             avatar_moderation_type=avatar_moderation_type,
             _request_auth=_request_auth,
@@ -1384,7 +1384,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _delete_global_avatar_moderation_serialize(
+    async def _delete_global_avatar_moderation_serialize(
         self,
         target_avatar_id,
         avatar_moderation_type,
@@ -1437,7 +1437,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/auth/user/avatarmoderations',
             path_params=_path_params,
@@ -1500,7 +1500,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_moderation_report_serialize(
+        _param = await self._delete_moderation_report_serialize(
             moderation_report_id=moderation_report_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1518,10 +1518,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1569,7 +1569,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_moderation_report_serialize(
+        _param = await self._delete_moderation_report_serialize(
             moderation_report_id=moderation_report_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1587,7 +1587,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1638,7 +1638,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_moderation_report_serialize(
+        _param = await self._delete_moderation_report_serialize(
             moderation_report_id=moderation_report_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1658,7 +1658,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _delete_moderation_report_serialize(
+    async def _delete_moderation_report_serialize(
         self,
         moderation_report_id,
         _request_auth,
@@ -1704,7 +1704,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/moderationReports/{moderationReportId}',
             path_params=_path_params,
@@ -1767,7 +1767,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_serialize(
+        _param = await self._delete_user_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1784,10 +1784,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1835,7 +1835,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_serialize(
+        _param = await self._delete_user_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1852,7 +1852,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1903,7 +1903,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_serialize(
+        _param = await self._delete_user_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1922,7 +1922,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _delete_user_serialize(
+    async def _delete_user_serialize(
         self,
         user_id,
         _request_auth,
@@ -1968,7 +1968,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/users/{userId}/delete',
             path_params=_path_params,
@@ -2028,7 +2028,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._disable2_fa_serialize(
+        _param = await self._disable2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2044,10 +2044,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2092,7 +2092,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._disable2_fa_serialize(
+        _param = await self._disable2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2108,7 +2108,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2156,7 +2156,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._disable2_fa_serialize(
+        _param = await self._disable2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2174,7 +2174,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _disable2_fa_serialize(
+    async def _disable2_fa_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2217,7 +2217,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/auth/twofactorauth',
             path_params=_path_params,
@@ -2277,7 +2277,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._enable2_fa_serialize(
+        _param = await self._enable2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2293,10 +2293,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2341,7 +2341,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._enable2_fa_serialize(
+        _param = await self._enable2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2357,7 +2357,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2405,7 +2405,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._enable2_fa_serialize(
+        _param = await self._enable2_fa_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2423,7 +2423,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _enable2_fa_serialize(
+    async def _enable2_fa_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2466,7 +2466,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/twofactorauth/totp/pending',
             path_params=_path_params,
@@ -2526,7 +2526,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_user_serialize(
+        _param = await self._get_current_user_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2542,10 +2542,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2590,7 +2590,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_user_serialize(
+        _param = await self._get_current_user_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2606,7 +2606,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2654,7 +2654,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_user_serialize(
+        _param = await self._get_current_user_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2672,7 +2672,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _get_current_user_serialize(
+    async def _get_current_user_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2717,7 +2717,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user',
             path_params=_path_params,
@@ -2777,7 +2777,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_global_avatar_moderations_serialize(
+        _param = await self._get_global_avatar_moderations_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2793,10 +2793,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2841,7 +2841,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_global_avatar_moderations_serialize(
+        _param = await self._get_global_avatar_moderations_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2857,7 +2857,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2905,7 +2905,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_global_avatar_moderations_serialize(
+        _param = await self._get_global_avatar_moderations_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2923,7 +2923,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _get_global_avatar_moderations_serialize(
+    async def _get_global_avatar_moderations_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2966,7 +2966,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/avatarmoderations',
             path_params=_path_params,
@@ -3041,7 +3041,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_moderation_reports_serialize(
+        _param = await self._get_moderation_reports_serialize(
             offset=offset,
             n=n,
             reporting_user_id=reporting_user_id,
@@ -3063,10 +3063,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3126,7 +3126,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_moderation_reports_serialize(
+        _param = await self._get_moderation_reports_serialize(
             offset=offset,
             n=n,
             reporting_user_id=reporting_user_id,
@@ -3148,7 +3148,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3211,7 +3211,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_moderation_reports_serialize(
+        _param = await self._get_moderation_reports_serialize(
             offset=offset,
             n=n,
             reporting_user_id=reporting_user_id,
@@ -3235,7 +3235,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _get_moderation_reports_serialize(
+    async def _get_moderation_reports_serialize(
         self,
         offset,
         n,
@@ -3303,7 +3303,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/moderationReports',
             path_params=_path_params,
@@ -3363,7 +3363,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recovery_codes_serialize(
+        _param = await self._get_recovery_codes_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3379,10 +3379,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3427,7 +3427,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recovery_codes_serialize(
+        _param = await self._get_recovery_codes_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3443,7 +3443,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3491,7 +3491,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recovery_codes_serialize(
+        _param = await self._get_recovery_codes_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3509,7 +3509,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _get_recovery_codes_serialize(
+    async def _get_recovery_codes_serialize(
         self,
         _request_auth,
         _content_type,
@@ -3552,7 +3552,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/twofactorauth/otp',
             path_params=_path_params,
@@ -3612,7 +3612,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._logout_serialize(
+        _param = await self._logout_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3628,10 +3628,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3676,7 +3676,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._logout_serialize(
+        _param = await self._logout_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3692,7 +3692,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3740,7 +3740,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._logout_serialize(
+        _param = await self._logout_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -3758,7 +3758,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _logout_serialize(
+    async def _logout_serialize(
         self,
         _request_auth,
         _content_type,
@@ -3801,7 +3801,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/logout',
             path_params=_path_params,
@@ -3865,7 +3865,7 @@ class AuthenticationApi:
         """ # noqa: E501
         warnings.warn("POST /auth/register is deprecated.", DeprecationWarning)
 
-        _param = self._register_user_account_serialize(
+        _param = await self._register_user_account_serialize(
             register_user_account_request=register_user_account_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3882,10 +3882,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3934,7 +3934,7 @@ class AuthenticationApi:
         """ # noqa: E501
         warnings.warn("POST /auth/register is deprecated.", DeprecationWarning)
 
-        _param = self._register_user_account_serialize(
+        _param = await self._register_user_account_serialize(
             register_user_account_request=register_user_account_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3951,7 +3951,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4003,7 +4003,7 @@ class AuthenticationApi:
         """ # noqa: E501
         warnings.warn("POST /auth/register is deprecated.", DeprecationWarning)
 
-        _param = self._register_user_account_serialize(
+        _param = await self._register_user_account_serialize(
             register_user_account_request=register_user_account_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4022,7 +4022,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _register_user_account_serialize(
+    async def _register_user_account_serialize(
         self,
         register_user_account_request,
         _request_auth,
@@ -4080,7 +4080,7 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/register',
             path_params=_path_params,
@@ -4140,7 +4140,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._resend_email_confirmation_serialize(
+        _param = await self._resend_email_confirmation_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4156,10 +4156,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4204,7 +4204,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._resend_email_confirmation_serialize(
+        _param = await self._resend_email_confirmation_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4220,7 +4220,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4268,7 +4268,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._resend_email_confirmation_serialize(
+        _param = await self._resend_email_confirmation_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -4286,7 +4286,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _resend_email_confirmation_serialize(
+    async def _resend_email_confirmation_serialize(
         self,
         _request_auth,
         _content_type,
@@ -4329,7 +4329,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/user/resendEmail',
             path_params=_path_params,
@@ -4392,7 +4392,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_moderation_report_serialize(
+        _param = await self._submit_moderation_report_serialize(
             submit_moderation_report_request=submit_moderation_report_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4409,10 +4409,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4460,7 +4460,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_moderation_report_serialize(
+        _param = await self._submit_moderation_report_serialize(
             submit_moderation_report_request=submit_moderation_report_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4477,7 +4477,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4528,7 +4528,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_moderation_report_serialize(
+        _param = await self._submit_moderation_report_serialize(
             submit_moderation_report_request=submit_moderation_report_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4547,7 +4547,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _submit_moderation_report_serialize(
+    async def _submit_moderation_report_serialize(
         self,
         submit_moderation_report_request,
         _request_auth,
@@ -4606,7 +4606,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/moderationReports',
             path_params=_path_params,
@@ -4669,7 +4669,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify2_fa_serialize(
+        _param = await self._verify2_fa_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4686,10 +4686,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4737,7 +4737,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify2_fa_serialize(
+        _param = await self._verify2_fa_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4754,7 +4754,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4805,7 +4805,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify2_fa_serialize(
+        _param = await self._verify2_fa_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4824,7 +4824,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _verify2_fa_serialize(
+    async def _verify2_fa_serialize(
         self,
         two_factor_auth_code,
         _request_auth,
@@ -4883,7 +4883,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/twofactorauth/totp/verify',
             path_params=_path_params,
@@ -4946,7 +4946,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify2_fa_email_code_serialize(
+        _param = await self._verify2_fa_email_code_serialize(
             two_factor_email_code=two_factor_email_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4963,10 +4963,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5014,7 +5014,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify2_fa_email_code_serialize(
+        _param = await self._verify2_fa_email_code_serialize(
             two_factor_email_code=two_factor_email_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5031,7 +5031,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5082,7 +5082,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify2_fa_email_code_serialize(
+        _param = await self._verify2_fa_email_code_serialize(
             two_factor_email_code=two_factor_email_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5101,7 +5101,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _verify2_fa_email_code_serialize(
+    async def _verify2_fa_email_code_serialize(
         self,
         two_factor_email_code,
         _request_auth,
@@ -5160,7 +5160,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/twofactorauth/emailotp/verify',
             path_params=_path_params,
@@ -5220,7 +5220,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_auth_token_serialize(
+        _param = await self._verify_auth_token_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5236,10 +5236,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5284,7 +5284,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_auth_token_serialize(
+        _param = await self._verify_auth_token_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5300,7 +5300,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5348,7 +5348,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_auth_token_serialize(
+        _param = await self._verify_auth_token_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -5366,7 +5366,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _verify_auth_token_serialize(
+    async def _verify_auth_token_serialize(
         self,
         _request_auth,
         _content_type,
@@ -5409,7 +5409,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth',
             path_params=_path_params,
@@ -5475,7 +5475,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_login_place_serialize(
+        _param = await self._verify_login_place_serialize(
             token=token,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -5492,10 +5492,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5546,7 +5546,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_login_place_serialize(
+        _param = await self._verify_login_place_serialize(
             token=token,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -5563,7 +5563,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5617,7 +5617,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_login_place_serialize(
+        _param = await self._verify_login_place_serialize(
             token=token,
             user_id=user_id,
             _request_auth=_request_auth,
@@ -5636,7 +5636,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _verify_login_place_serialize(
+    async def _verify_login_place_serialize(
         self,
         token,
         user_id,
@@ -5681,7 +5681,7 @@ class AuthenticationApi:
         _auth_settings: List[str] = [
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/verifyLoginPlace',
             path_params=_path_params,
@@ -5744,7 +5744,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_pending2_fa_serialize(
+        _param = await self._verify_pending2_fa_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5761,10 +5761,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5812,7 +5812,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_pending2_fa_serialize(
+        _param = await self._verify_pending2_fa_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5829,7 +5829,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5880,7 +5880,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_pending2_fa_serialize(
+        _param = await self._verify_pending2_fa_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5899,7 +5899,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _verify_pending2_fa_serialize(
+    async def _verify_pending2_fa_serialize(
         self,
         two_factor_auth_code,
         _request_auth,
@@ -5958,7 +5958,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/twofactorauth/totp/pending/verify',
             path_params=_path_params,
@@ -6021,7 +6021,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_recovery_code_serialize(
+        _param = await self._verify_recovery_code_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6038,10 +6038,10 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6089,7 +6089,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_recovery_code_serialize(
+        _param = await self._verify_recovery_code_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6106,7 +6106,7 @@ class AuthenticationApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6157,7 +6157,7 @@ class AuthenticationApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._verify_recovery_code_serialize(
+        _param = await self._verify_recovery_code_serialize(
             two_factor_auth_code=two_factor_auth_code,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6176,7 +6176,7 @@ class AuthenticationApi:
         return response_data.response
 
 
-    def _verify_recovery_code_serialize(
+    async def _verify_recovery_code_serialize(
         self,
         two_factor_auth_code,
         _request_auth,
@@ -6235,7 +6235,7 @@ class AuthenticationApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/auth/twofactorauth/otp/verify',
             path_params=_path_params,

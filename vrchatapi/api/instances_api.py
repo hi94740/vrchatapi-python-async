@@ -95,7 +95,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._close_instance_serialize(
+        _param = await self._close_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             hard_close=hard_close,
@@ -117,10 +117,10 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -177,7 +177,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._close_instance_serialize(
+        _param = await self._close_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             hard_close=hard_close,
@@ -199,7 +199,7 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -259,7 +259,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._close_instance_serialize(
+        _param = await self._close_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             hard_close=hard_close,
@@ -283,7 +283,7 @@ class InstancesApi:
         return response_data.response
 
 
-    def _close_instance_serialize(
+    async def _close_instance_serialize(
         self,
         world_id,
         instance_id,
@@ -351,7 +351,7 @@ class InstancesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/instances/{worldId}:{instanceId}',
             path_params=_path_params,
@@ -414,7 +414,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_instance_serialize(
+        _param = await self._create_instance_serialize(
             create_instance_request=create_instance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -431,10 +431,10 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -482,7 +482,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_instance_serialize(
+        _param = await self._create_instance_serialize(
             create_instance_request=create_instance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -499,7 +499,7 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -550,7 +550,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_instance_serialize(
+        _param = await self._create_instance_serialize(
             create_instance_request=create_instance_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -569,7 +569,7 @@ class InstancesApi:
         return response_data.response
 
 
-    def _create_instance_serialize(
+    async def _create_instance_serialize(
         self,
         create_instance_request,
         _request_auth,
@@ -628,7 +628,7 @@ class InstancesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/instances',
             path_params=_path_params,
@@ -694,7 +694,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_instance_serialize(
+        _param = await self._get_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -712,10 +712,10 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -766,7 +766,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_instance_serialize(
+        _param = await self._get_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -784,7 +784,7 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -838,7 +838,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_instance_serialize(
+        _param = await self._get_instance_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -858,7 +858,7 @@ class InstancesApi:
         return response_data.response
 
 
-    def _get_instance_serialize(
+    async def _get_instance_serialize(
         self,
         world_id,
         instance_id,
@@ -907,7 +907,7 @@ class InstancesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/instances/{worldId}:{instanceId}',
             path_params=_path_params,
@@ -970,7 +970,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_instance_by_short_name_serialize(
+        _param = await self._get_instance_by_short_name_serialize(
             short_name=short_name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -988,10 +988,10 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1039,7 +1039,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_instance_by_short_name_serialize(
+        _param = await self._get_instance_by_short_name_serialize(
             short_name=short_name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1057,7 +1057,7 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1108,7 +1108,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_instance_by_short_name_serialize(
+        _param = await self._get_instance_by_short_name_serialize(
             short_name=short_name,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1128,7 +1128,7 @@ class InstancesApi:
         return response_data.response
 
 
-    def _get_instance_by_short_name_serialize(
+    async def _get_instance_by_short_name_serialize(
         self,
         short_name,
         _request_auth,
@@ -1174,7 +1174,7 @@ class InstancesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/instances/s/{shortName}',
             path_params=_path_params,
@@ -1240,7 +1240,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_locations_serialize(
+        _param = await self._get_recent_locations_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -1258,10 +1258,10 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1312,7 +1312,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_locations_serialize(
+        _param = await self._get_recent_locations_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -1330,7 +1330,7 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1384,7 +1384,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_locations_serialize(
+        _param = await self._get_recent_locations_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -1404,7 +1404,7 @@ class InstancesApi:
         return response_data.response
 
 
-    def _get_recent_locations_serialize(
+    async def _get_recent_locations_serialize(
         self,
         n,
         offset,
@@ -1457,7 +1457,7 @@ class InstancesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/instances/recent',
             path_params=_path_params,
@@ -1523,7 +1523,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_short_name_serialize(
+        _param = await self._get_short_name_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -1541,10 +1541,10 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1595,7 +1595,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_short_name_serialize(
+        _param = await self._get_short_name_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -1613,7 +1613,7 @@ class InstancesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1667,7 +1667,7 @@ class InstancesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_short_name_serialize(
+        _param = await self._get_short_name_serialize(
             world_id=world_id,
             instance_id=instance_id,
             _request_auth=_request_auth,
@@ -1687,7 +1687,7 @@ class InstancesApi:
         return response_data.response
 
 
-    def _get_short_name_serialize(
+    async def _get_short_name_serialize(
         self,
         world_id,
         instance_id,
@@ -1736,7 +1736,7 @@ class InstancesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/instances/{worldId}:{instanceId}/shortName',
             path_params=_path_params,

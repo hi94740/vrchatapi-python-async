@@ -101,7 +101,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_file_serialize(
+        _param = await self._create_file_serialize(
             create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -117,10 +117,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -168,7 +168,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_file_serialize(
+        _param = await self._create_file_serialize(
             create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -184,7 +184,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -235,7 +235,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_file_serialize(
+        _param = await self._create_file_serialize(
             create_file_request=create_file_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -253,7 +253,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _create_file_serialize(
+    async def _create_file_serialize(
         self,
         create_file_request,
         _request_auth,
@@ -312,7 +312,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/file',
             path_params=_path_params,
@@ -378,7 +378,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_file_version_serialize(
+        _param = await self._create_file_version_serialize(
             file_id=file_id,
             create_file_version_request=create_file_version_request,
             _request_auth=_request_auth,
@@ -395,10 +395,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -449,7 +449,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_file_version_serialize(
+        _param = await self._create_file_version_serialize(
             file_id=file_id,
             create_file_version_request=create_file_version_request,
             _request_auth=_request_auth,
@@ -466,7 +466,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -520,7 +520,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_file_version_serialize(
+        _param = await self._create_file_version_serialize(
             file_id=file_id,
             create_file_version_request=create_file_version_request,
             _request_auth=_request_auth,
@@ -539,7 +539,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _create_file_version_serialize(
+    async def _create_file_version_serialize(
         self,
         file_id,
         create_file_version_request,
@@ -601,7 +601,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/file/{fileId}',
             path_params=_path_params,
@@ -664,7 +664,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_file_serialize(
+        _param = await self._delete_file_serialize(
             file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -681,10 +681,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -732,7 +732,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_file_serialize(
+        _param = await self._delete_file_serialize(
             file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -749,7 +749,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -800,7 +800,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_file_serialize(
+        _param = await self._delete_file_serialize(
             file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -819,7 +819,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _delete_file_serialize(
+    async def _delete_file_serialize(
         self,
         file_id,
         _request_auth,
@@ -865,7 +865,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/file/{fileId}',
             path_params=_path_params,
@@ -931,7 +931,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_file_version_serialize(
+        _param = await self._delete_file_version_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -950,10 +950,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1004,7 +1004,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_file_version_serialize(
+        _param = await self._delete_file_version_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -1023,7 +1023,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1077,7 +1077,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_file_version_serialize(
+        _param = await self._delete_file_version_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -1098,7 +1098,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _delete_file_version_serialize(
+    async def _delete_file_version_serialize(
         self,
         file_id,
         version_id,
@@ -1147,7 +1147,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/file/{fileId}/{versionId}',
             path_params=_path_params,
@@ -1213,7 +1213,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._download_file_version_serialize(
+        _param = await self._download_file_version_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -1231,10 +1231,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1285,7 +1285,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._download_file_version_serialize(
+        _param = await self._download_file_version_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -1303,7 +1303,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1357,7 +1357,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._download_file_version_serialize(
+        _param = await self._download_file_version_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -1377,7 +1377,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _download_file_version_serialize(
+    async def _download_file_version_serialize(
         self,
         file_id,
         version_id,
@@ -1427,7 +1427,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/file/{fileId}/{versionId}',
             path_params=_path_params,
@@ -1499,7 +1499,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._finish_file_data_upload_serialize(
+        _param = await self._finish_file_data_upload_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -1518,10 +1518,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1578,7 +1578,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._finish_file_data_upload_serialize(
+        _param = await self._finish_file_data_upload_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -1597,7 +1597,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1657,7 +1657,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._finish_file_data_upload_serialize(
+        _param = await self._finish_file_data_upload_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -1678,7 +1678,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _finish_file_data_upload_serialize(
+    async def _finish_file_data_upload_serialize(
         self,
         file_id,
         version_id,
@@ -1746,7 +1746,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/file/{fileId}/{versionId}/{fileType}/finish',
             path_params=_path_params,
@@ -1809,7 +1809,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_admin_asset_bundle_serialize(
+        _param = await self._get_admin_asset_bundle_serialize(
             admin_asset_bundle_id=admin_asset_bundle_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1825,10 +1825,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1876,7 +1876,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_admin_asset_bundle_serialize(
+        _param = await self._get_admin_asset_bundle_serialize(
             admin_asset_bundle_id=admin_asset_bundle_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1892,7 +1892,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1943,7 +1943,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_admin_asset_bundle_serialize(
+        _param = await self._get_admin_asset_bundle_serialize(
             admin_asset_bundle_id=admin_asset_bundle_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1961,7 +1961,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_admin_asset_bundle_serialize(
+    async def _get_admin_asset_bundle_serialize(
         self,
         admin_asset_bundle_id,
         _request_auth,
@@ -2007,7 +2007,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/adminassetbundles/{adminAssetBundleId}',
             path_params=_path_params,
@@ -2076,7 +2076,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_content_agreement_status_serialize(
+        _param = await self._get_content_agreement_status_serialize(
             agreement_code=agreement_code,
             content_id=content_id,
             version=version,
@@ -2095,10 +2095,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2152,7 +2152,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_content_agreement_status_serialize(
+        _param = await self._get_content_agreement_status_serialize(
             agreement_code=agreement_code,
             content_id=content_id,
             version=version,
@@ -2171,7 +2171,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2228,7 +2228,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_content_agreement_status_serialize(
+        _param = await self._get_content_agreement_status_serialize(
             agreement_code=agreement_code,
             content_id=content_id,
             version=version,
@@ -2249,7 +2249,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_content_agreement_status_serialize(
+    async def _get_content_agreement_status_serialize(
         self,
         agreement_code,
         content_id,
@@ -2307,7 +2307,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/agreement',
             path_params=_path_params,
@@ -2370,7 +2370,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_serialize(
+        _param = await self._get_file_serialize(
             file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2387,10 +2387,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2438,7 +2438,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_serialize(
+        _param = await self._get_file_serialize(
             file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2455,7 +2455,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2506,7 +2506,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_serialize(
+        _param = await self._get_file_serialize(
             file_id=file_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2525,7 +2525,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_file_serialize(
+    async def _get_file_serialize(
         self,
         file_id,
         _request_auth,
@@ -2571,7 +2571,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/file/{fileId}',
             path_params=_path_params,
@@ -2637,7 +2637,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_serialize(
+        _param = await self._get_file_analysis_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -2656,10 +2656,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2710,7 +2710,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_serialize(
+        _param = await self._get_file_analysis_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -2729,7 +2729,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2783,7 +2783,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_serialize(
+        _param = await self._get_file_analysis_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -2804,7 +2804,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_file_analysis_serialize(
+    async def _get_file_analysis_serialize(
         self,
         file_id,
         version_id,
@@ -2853,7 +2853,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/analysis/{fileId}/{versionId}',
             path_params=_path_params,
@@ -2919,7 +2919,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_security_serialize(
+        _param = await self._get_file_analysis_security_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -2938,10 +2938,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2992,7 +2992,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_security_serialize(
+        _param = await self._get_file_analysis_security_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -3011,7 +3011,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3065,7 +3065,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_security_serialize(
+        _param = await self._get_file_analysis_security_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -3086,7 +3086,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_file_analysis_security_serialize(
+    async def _get_file_analysis_security_serialize(
         self,
         file_id,
         version_id,
@@ -3135,7 +3135,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/analysis/{fileId}/{versionId}/security',
             path_params=_path_params,
@@ -3201,7 +3201,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_standard_serialize(
+        _param = await self._get_file_analysis_standard_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -3220,10 +3220,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3274,7 +3274,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_standard_serialize(
+        _param = await self._get_file_analysis_standard_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -3293,7 +3293,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3347,7 +3347,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_analysis_standard_serialize(
+        _param = await self._get_file_analysis_standard_serialize(
             file_id=file_id,
             version_id=version_id,
             _request_auth=_request_auth,
@@ -3368,7 +3368,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_file_analysis_standard_serialize(
+    async def _get_file_analysis_standard_serialize(
         self,
         file_id,
         version_id,
@@ -3417,7 +3417,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/analysis/{fileId}/{versionId}/standard',
             path_params=_path_params,
@@ -3486,7 +3486,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_data_upload_status_serialize(
+        _param = await self._get_file_data_upload_status_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -3504,10 +3504,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3561,7 +3561,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_data_upload_status_serialize(
+        _param = await self._get_file_data_upload_status_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -3579,7 +3579,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3636,7 +3636,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_file_data_upload_status_serialize(
+        _param = await self._get_file_data_upload_status_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -3656,7 +3656,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_file_data_upload_status_serialize(
+    async def _get_file_data_upload_status_serialize(
         self,
         file_id,
         version_id,
@@ -3708,7 +3708,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/file/{fileId}/{versionId}/{fileType}/status',
             path_params=_path_params,
@@ -3780,7 +3780,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_files_serialize(
+        _param = await self._get_files_serialize(
             tag=tag,
             user_id=user_id,
             n=n,
@@ -3799,10 +3799,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3859,7 +3859,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_files_serialize(
+        _param = await self._get_files_serialize(
             tag=tag,
             user_id=user_id,
             n=n,
@@ -3878,7 +3878,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3938,7 +3938,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_files_serialize(
+        _param = await self._get_files_serialize(
             tag=tag,
             user_id=user_id,
             n=n,
@@ -3959,7 +3959,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _get_files_serialize(
+    async def _get_files_serialize(
         self,
         tag,
         user_id,
@@ -4022,7 +4022,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/files',
             path_params=_path_params,
@@ -4085,7 +4085,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._set_group_gallery_file_order_serialize(
+        _param = await self._set_group_gallery_file_order_serialize(
             group_gallery_file_order_request=group_gallery_file_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4102,10 +4102,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4153,7 +4153,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._set_group_gallery_file_order_serialize(
+        _param = await self._set_group_gallery_file_order_serialize(
             group_gallery_file_order_request=group_gallery_file_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4170,7 +4170,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4221,7 +4221,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._set_group_gallery_file_order_serialize(
+        _param = await self._set_group_gallery_file_order_serialize(
             group_gallery_file_order_request=group_gallery_file_order_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4240,7 +4240,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _set_group_gallery_file_order_serialize(
+    async def _set_group_gallery_file_order_serialize(
         self,
         group_gallery_file_order_request,
         _request_auth,
@@ -4299,7 +4299,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/files/order',
             path_params=_path_params,
@@ -4371,7 +4371,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_file_data_upload_serialize(
+        _param = await self._start_file_data_upload_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -4391,10 +4391,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4451,7 +4451,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_file_data_upload_serialize(
+        _param = await self._start_file_data_upload_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -4471,7 +4471,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4531,7 +4531,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._start_file_data_upload_serialize(
+        _param = await self._start_file_data_upload_serialize(
             file_id=file_id,
             version_id=version_id,
             file_type=file_type,
@@ -4553,7 +4553,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _start_file_data_upload_serialize(
+    async def _start_file_data_upload_serialize(
         self,
         file_id,
         version_id,
@@ -4610,7 +4610,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/file/{fileId}/{versionId}/{fileType}/start',
             path_params=_path_params,
@@ -4673,7 +4673,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_content_agreement_serialize(
+        _param = await self._submit_content_agreement_serialize(
             agreement_request=agreement_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4690,10 +4690,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4741,7 +4741,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_content_agreement_serialize(
+        _param = await self._submit_content_agreement_serialize(
             agreement_request=agreement_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4758,7 +4758,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4809,7 +4809,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_content_agreement_serialize(
+        _param = await self._submit_content_agreement_serialize(
             agreement_request=agreement_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4828,7 +4828,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _submit_content_agreement_serialize(
+    async def _submit_content_agreement_serialize(
         self,
         agreement_request,
         _request_auth,
@@ -4887,7 +4887,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/agreement',
             path_params=_path_params,
@@ -4953,7 +4953,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_asset_review_notes_serialize(
+        _param = await self._update_asset_review_notes_serialize(
             asset_review_id=asset_review_id,
             update_asset_review_notes_request=update_asset_review_notes_request,
             _request_auth=_request_auth,
@@ -4971,10 +4971,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5025,7 +5025,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_asset_review_notes_serialize(
+        _param = await self._update_asset_review_notes_serialize(
             asset_review_id=asset_review_id,
             update_asset_review_notes_request=update_asset_review_notes_request,
             _request_auth=_request_auth,
@@ -5043,7 +5043,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5097,7 +5097,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_asset_review_notes_serialize(
+        _param = await self._update_asset_review_notes_serialize(
             asset_review_id=asset_review_id,
             update_asset_review_notes_request=update_asset_review_notes_request,
             _request_auth=_request_auth,
@@ -5117,7 +5117,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _update_asset_review_notes_serialize(
+    async def _update_asset_review_notes_serialize(
         self,
         asset_review_id,
         update_asset_review_notes_request,
@@ -5179,7 +5179,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/assetReview/{assetReviewId}/notes',
             path_params=_path_params,
@@ -5242,7 +5242,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_gallery_image_serialize(
+        _param = await self._upload_gallery_image_serialize(
             file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5258,10 +5258,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5309,7 +5309,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_gallery_image_serialize(
+        _param = await self._upload_gallery_image_serialize(
             file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5325,7 +5325,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5376,7 +5376,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_gallery_image_serialize(
+        _param = await self._upload_gallery_image_serialize(
             file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5394,7 +5394,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _upload_gallery_image_serialize(
+    async def _upload_gallery_image_serialize(
         self,
         file,
         _request_auth,
@@ -5453,7 +5453,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/gallery',
             path_params=_path_params,
@@ -5516,7 +5516,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_icon_serialize(
+        _param = await self._upload_icon_serialize(
             file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5532,10 +5532,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5583,7 +5583,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_icon_serialize(
+        _param = await self._upload_icon_serialize(
             file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5599,7 +5599,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5650,7 +5650,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_icon_serialize(
+        _param = await self._upload_icon_serialize(
             file=file,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5668,7 +5668,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _upload_icon_serialize(
+    async def _upload_icon_serialize(
         self,
         file,
         _request_auth,
@@ -5727,7 +5727,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/icon',
             path_params=_path_params,
@@ -5808,7 +5808,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_image_serialize(
+        _param = await self._upload_image_serialize(
             file=file,
             tag=tag,
             animation_style=animation_style,
@@ -5830,10 +5830,10 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5899,7 +5899,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_image_serialize(
+        _param = await self._upload_image_serialize(
             file=file,
             tag=tag,
             animation_style=animation_style,
@@ -5921,7 +5921,7 @@ class FilesApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5990,7 +5990,7 @@ class FilesApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_image_serialize(
+        _param = await self._upload_image_serialize(
             file=file,
             tag=tag,
             animation_style=animation_style,
@@ -6014,7 +6014,7 @@ class FilesApi:
         return response_data.response
 
 
-    def _upload_image_serialize(
+    async def _upload_image_serialize(
         self,
         file,
         tag,
@@ -6091,7 +6091,7 @@ class FilesApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/file/image',
             path_params=_path_params,

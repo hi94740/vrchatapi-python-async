@@ -104,7 +104,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_tags_serialize(
+        _param = await self._add_tags_serialize(
             user_id=user_id,
             change_user_tags_request=change_user_tags_request,
             _request_auth=_request_auth,
@@ -123,10 +123,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -177,7 +177,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_tags_serialize(
+        _param = await self._add_tags_serialize(
             user_id=user_id,
             change_user_tags_request=change_user_tags_request,
             _request_auth=_request_auth,
@@ -196,7 +196,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -250,7 +250,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._add_tags_serialize(
+        _param = await self._add_tags_serialize(
             user_id=user_id,
             change_user_tags_request=change_user_tags_request,
             _request_auth=_request_auth,
@@ -271,7 +271,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _add_tags_serialize(
+    async def _add_tags_serialize(
         self,
         user_id,
         change_user_tags_request,
@@ -333,7 +333,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/users/{userId}/addTags',
             path_params=_path_params,
@@ -399,7 +399,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_persistence_exists_serialize(
+        _param = await self._check_user_persistence_exists_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -418,10 +418,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -472,7 +472,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_persistence_exists_serialize(
+        _param = await self._check_user_persistence_exists_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -491,7 +491,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -545,7 +545,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._check_user_persistence_exists_serialize(
+        _param = await self._check_user_persistence_exists_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -566,7 +566,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _check_user_persistence_exists_serialize(
+    async def _check_user_persistence_exists_serialize(
         self,
         user_id,
         world_id,
@@ -615,7 +615,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/{worldId}/persist/exists',
             path_params=_path_params,
@@ -678,7 +678,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_user_persistence_data_serialize(
+        _param = await self._delete_all_user_persistence_data_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -695,10 +695,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -746,7 +746,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_user_persistence_data_serialize(
+        _param = await self._delete_all_user_persistence_data_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -763,7 +763,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -814,7 +814,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_all_user_persistence_data_serialize(
+        _param = await self._delete_all_user_persistence_data_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -833,7 +833,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _delete_all_user_persistence_data_serialize(
+    async def _delete_all_user_persistence_data_serialize(
         self,
         user_id,
         _request_auth,
@@ -879,7 +879,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/users/{userId}/persist',
             path_params=_path_params,
@@ -945,7 +945,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_persistence_serialize(
+        _param = await self._delete_user_persistence_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -964,10 +964,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1018,7 +1018,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_persistence_serialize(
+        _param = await self._delete_user_persistence_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -1037,7 +1037,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1091,7 +1091,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_user_persistence_serialize(
+        _param = await self._delete_user_persistence_serialize(
             user_id=user_id,
             world_id=world_id,
             _request_auth=_request_auth,
@@ -1112,7 +1112,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _delete_user_persistence_serialize(
+    async def _delete_user_persistence_serialize(
         self,
         user_id,
         world_id,
@@ -1161,7 +1161,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/users/{userId}/{worldId}/persist',
             path_params=_path_params,
@@ -1224,7 +1224,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_blocked_groups_serialize(
+        _param = await self._get_blocked_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1241,10 +1241,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1292,7 +1292,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_blocked_groups_serialize(
+        _param = await self._get_blocked_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1309,7 +1309,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1360,7 +1360,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_blocked_groups_serialize(
+        _param = await self._get_blocked_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1379,7 +1379,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_blocked_groups_serialize(
+    async def _get_blocked_groups_serialize(
         self,
         user_id,
         _request_auth,
@@ -1425,7 +1425,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/groups/userblocked',
             path_params=_path_params,
@@ -1488,7 +1488,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invited_groups_serialize(
+        _param = await self._get_invited_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1505,10 +1505,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1556,7 +1556,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invited_groups_serialize(
+        _param = await self._get_invited_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1573,7 +1573,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1624,7 +1624,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_invited_groups_serialize(
+        _param = await self._get_invited_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1643,7 +1643,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_invited_groups_serialize(
+    async def _get_invited_groups_serialize(
         self,
         user_id,
         _request_auth,
@@ -1689,7 +1689,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/groups/invited',
             path_params=_path_params,
@@ -1758,7 +1758,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutual_friends_serialize(
+        _param = await self._get_mutual_friends_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -1777,10 +1777,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1834,7 +1834,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutual_friends_serialize(
+        _param = await self._get_mutual_friends_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -1853,7 +1853,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1910,7 +1910,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutual_friends_serialize(
+        _param = await self._get_mutual_friends_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -1931,7 +1931,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_mutual_friends_serialize(
+    async def _get_mutual_friends_serialize(
         self,
         user_id,
         n,
@@ -1987,7 +1987,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/mutuals/friends',
             path_params=_path_params,
@@ -2056,7 +2056,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutual_groups_serialize(
+        _param = await self._get_mutual_groups_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -2075,10 +2075,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2132,7 +2132,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutual_groups_serialize(
+        _param = await self._get_mutual_groups_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -2151,7 +2151,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2208,7 +2208,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutual_groups_serialize(
+        _param = await self._get_mutual_groups_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -2229,7 +2229,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_mutual_groups_serialize(
+    async def _get_mutual_groups_serialize(
         self,
         user_id,
         n,
@@ -2285,7 +2285,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/mutuals/groups',
             path_params=_path_params,
@@ -2348,7 +2348,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutuals_serialize(
+        _param = await self._get_mutuals_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2365,10 +2365,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2416,7 +2416,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutuals_serialize(
+        _param = await self._get_mutuals_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2433,7 +2433,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2484,7 +2484,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_mutuals_serialize(
+        _param = await self._get_mutuals_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2503,7 +2503,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_mutuals_serialize(
+    async def _get_mutuals_serialize(
         self,
         user_id,
         _request_auth,
@@ -2549,7 +2549,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/mutuals',
             path_params=_path_params,
@@ -2612,7 +2612,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_private_profile_serialize(
+        _param = await self._get_private_profile_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2629,10 +2629,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2680,7 +2680,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_private_profile_serialize(
+        _param = await self._get_private_profile_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2697,7 +2697,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2748,7 +2748,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_private_profile_serialize(
+        _param = await self._get_private_profile_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2767,7 +2767,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_private_profile_serialize(
+    async def _get_private_profile_serialize(
         self,
         user_id,
         _request_auth,
@@ -2813,7 +2813,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/profile/{userId}/private',
             path_params=_path_params,
@@ -2876,7 +2876,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_public_profile_serialize(
+        _param = await self._get_public_profile_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2893,10 +2893,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2944,7 +2944,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_public_profile_serialize(
+        _param = await self._get_public_profile_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2961,7 +2961,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3012,7 +3012,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_public_profile_serialize(
+        _param = await self._get_public_profile_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3031,7 +3031,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_public_profile_serialize(
+    async def _get_public_profile_serialize(
         self,
         user_id,
         _request_auth,
@@ -3077,7 +3077,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/profile/{userId}',
             path_params=_path_params,
@@ -3140,7 +3140,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_serialize(
+        _param = await self._get_user_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3157,10 +3157,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3208,7 +3208,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_serialize(
+        _param = await self._get_user_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3225,7 +3225,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3276,7 +3276,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_serialize(
+        _param = await self._get_user_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3295,7 +3295,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_serialize(
+    async def _get_user_serialize(
         self,
         user_id,
         _request_auth,
@@ -3341,7 +3341,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}',
             path_params=_path_params,
@@ -3407,7 +3407,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_all_group_permissions_serialize(
+        _param = await self._get_user_all_group_permissions_serialize(
             user_id=user_id,
             group_ids=group_ids,
             _request_auth=_request_auth,
@@ -3425,10 +3425,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3479,7 +3479,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_all_group_permissions_serialize(
+        _param = await self._get_user_all_group_permissions_serialize(
             user_id=user_id,
             group_ids=group_ids,
             _request_auth=_request_auth,
@@ -3497,7 +3497,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3551,7 +3551,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_all_group_permissions_serialize(
+        _param = await self._get_user_all_group_permissions_serialize(
             user_id=user_id,
             group_ids=group_ids,
             _request_auth=_request_auth,
@@ -3571,7 +3571,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_all_group_permissions_serialize(
+    async def _get_user_all_group_permissions_serialize(
         self,
         user_id,
         group_ids,
@@ -3622,7 +3622,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/groups/permissions',
             path_params=_path_params,
@@ -3686,7 +3686,7 @@ class UsersApi:
         """ # noqa: E501
         warnings.warn("GET /users/{username}/name is deprecated.", DeprecationWarning)
 
-        _param = self._get_user_by_name_serialize(
+        _param = await self._get_user_by_name_serialize(
             username=username,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3703,10 +3703,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3755,7 +3755,7 @@ class UsersApi:
         """ # noqa: E501
         warnings.warn("GET /users/{username}/name is deprecated.", DeprecationWarning)
 
-        _param = self._get_user_by_name_serialize(
+        _param = await self._get_user_by_name_serialize(
             username=username,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3772,7 +3772,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3824,7 +3824,7 @@ class UsersApi:
         """ # noqa: E501
         warnings.warn("GET /users/{username}/name is deprecated.", DeprecationWarning)
 
-        _param = self._get_user_by_name_serialize(
+        _param = await self._get_user_by_name_serialize(
             username=username,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3843,7 +3843,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_by_name_serialize(
+    async def _get_user_by_name_serialize(
         self,
         username,
         _request_auth,
@@ -3889,7 +3889,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{username}/name',
             path_params=_path_params,
@@ -3962,7 +3962,7 @@ class UsersApi:
         """ # noqa: E501
         warnings.warn("GET /users/{userId}/feedback is deprecated.", DeprecationWarning)
 
-        _param = self._get_user_feedback_serialize(
+        _param = await self._get_user_feedback_serialize(
             user_id=user_id,
             content_id=content_id,
             n=n,
@@ -3982,10 +3982,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4043,7 +4043,7 @@ class UsersApi:
         """ # noqa: E501
         warnings.warn("GET /users/{userId}/feedback is deprecated.", DeprecationWarning)
 
-        _param = self._get_user_feedback_serialize(
+        _param = await self._get_user_feedback_serialize(
             user_id=user_id,
             content_id=content_id,
             n=n,
@@ -4063,7 +4063,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4124,7 +4124,7 @@ class UsersApi:
         """ # noqa: E501
         warnings.warn("GET /users/{userId}/feedback is deprecated.", DeprecationWarning)
 
-        _param = self._get_user_feedback_serialize(
+        _param = await self._get_user_feedback_serialize(
             user_id=user_id,
             content_id=content_id,
             n=n,
@@ -4146,7 +4146,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_feedback_serialize(
+    async def _get_user_feedback_serialize(
         self,
         user_id,
         content_id,
@@ -4207,7 +4207,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/feedback',
             path_params=_path_params,
@@ -4270,7 +4270,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_instances_serialize(
+        _param = await self._get_user_group_instances_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4288,10 +4288,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4339,7 +4339,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_instances_serialize(
+        _param = await self._get_user_group_instances_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4357,7 +4357,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4408,7 +4408,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_instances_serialize(
+        _param = await self._get_user_group_instances_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4428,7 +4428,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_group_instances_serialize(
+    async def _get_user_group_instances_serialize(
         self,
         user_id,
         _request_auth,
@@ -4474,7 +4474,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/instances/groups',
             path_params=_path_params,
@@ -4540,7 +4540,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_instances_for_group_serialize(
+        _param = await self._get_user_group_instances_for_group_serialize(
             user_id=user_id,
             group_id=group_id,
             _request_auth=_request_auth,
@@ -4559,10 +4559,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4613,7 +4613,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_instances_for_group_serialize(
+        _param = await self._get_user_group_instances_for_group_serialize(
             user_id=user_id,
             group_id=group_id,
             _request_auth=_request_auth,
@@ -4632,7 +4632,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4686,7 +4686,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_instances_for_group_serialize(
+        _param = await self._get_user_group_instances_for_group_serialize(
             user_id=user_id,
             group_id=group_id,
             _request_auth=_request_auth,
@@ -4707,7 +4707,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_group_instances_for_group_serialize(
+    async def _get_user_group_instances_for_group_serialize(
         self,
         user_id,
         group_id,
@@ -4756,7 +4756,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/instances/groups/{groupId}',
             path_params=_path_params,
@@ -4819,7 +4819,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_requests_serialize(
+        _param = await self._get_user_group_requests_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4836,10 +4836,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4887,7 +4887,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_requests_serialize(
+        _param = await self._get_user_group_requests_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4904,7 +4904,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4955,7 +4955,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_group_requests_serialize(
+        _param = await self._get_user_group_requests_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4974,7 +4974,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_group_requests_serialize(
+    async def _get_user_group_requests_serialize(
         self,
         user_id,
         _request_auth,
@@ -5020,7 +5020,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/groups/requested',
             path_params=_path_params,
@@ -5083,7 +5083,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_groups_serialize(
+        _param = await self._get_user_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5100,10 +5100,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5151,7 +5151,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_groups_serialize(
+        _param = await self._get_user_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5168,7 +5168,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5219,7 +5219,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_groups_serialize(
+        _param = await self._get_user_groups_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5238,7 +5238,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_groups_serialize(
+    async def _get_user_groups_serialize(
         self,
         user_id,
         _request_auth,
@@ -5284,7 +5284,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/groups',
             path_params=_path_params,
@@ -5347,7 +5347,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_note_serialize(
+        _param = await self._get_user_note_serialize(
             user_note_id=user_note_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5364,10 +5364,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5415,7 +5415,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_note_serialize(
+        _param = await self._get_user_note_serialize(
             user_note_id=user_note_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5432,7 +5432,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5483,7 +5483,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_note_serialize(
+        _param = await self._get_user_note_serialize(
             user_note_id=user_note_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5502,7 +5502,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_note_serialize(
+    async def _get_user_note_serialize(
         self,
         user_note_id,
         _request_auth,
@@ -5548,7 +5548,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/userNotes/{userNoteId}',
             path_params=_path_params,
@@ -5614,7 +5614,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_notes_serialize(
+        _param = await self._get_user_notes_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -5632,10 +5632,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5686,7 +5686,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_notes_serialize(
+        _param = await self._get_user_notes_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -5704,7 +5704,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5758,7 +5758,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_notes_serialize(
+        _param = await self._get_user_notes_serialize(
             n=n,
             offset=offset,
             _request_auth=_request_auth,
@@ -5778,7 +5778,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_notes_serialize(
+    async def _get_user_notes_serialize(
         self,
         n,
         offset,
@@ -5831,7 +5831,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/userNotes',
             path_params=_path_params,
@@ -5894,7 +5894,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_represented_group_serialize(
+        _param = await self._get_user_represented_group_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5911,10 +5911,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5962,7 +5962,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_represented_group_serialize(
+        _param = await self._get_user_represented_group_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5979,7 +5979,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6030,7 +6030,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_represented_group_serialize(
+        _param = await self._get_user_represented_group_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6049,7 +6049,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_represented_group_serialize(
+    async def _get_user_represented_group_serialize(
         self,
         user_id,
         _request_auth,
@@ -6095,7 +6095,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/groups/represented',
             path_params=_path_params,
@@ -6158,7 +6158,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_tutorial_status_serialize(
+        _param = await self._get_user_tutorial_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6175,10 +6175,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6226,7 +6226,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_tutorial_status_serialize(
+        _param = await self._get_user_tutorial_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6243,7 +6243,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6294,7 +6294,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_tutorial_status_serialize(
+        _param = await self._get_user_tutorial_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6313,7 +6313,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _get_user_tutorial_status_serialize(
+    async def _get_user_tutorial_status_serialize(
         self,
         user_id,
         _request_auth,
@@ -6359,7 +6359,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/tutorial',
             path_params=_path_params,
@@ -6425,7 +6425,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_tags_serialize(
+        _param = await self._remove_tags_serialize(
             user_id=user_id,
             change_user_tags_request=change_user_tags_request,
             _request_auth=_request_auth,
@@ -6444,10 +6444,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6498,7 +6498,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_tags_serialize(
+        _param = await self._remove_tags_serialize(
             user_id=user_id,
             change_user_tags_request=change_user_tags_request,
             _request_auth=_request_auth,
@@ -6517,7 +6517,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6571,7 +6571,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._remove_tags_serialize(
+        _param = await self._remove_tags_serialize(
             user_id=user_id,
             change_user_tags_request=change_user_tags_request,
             _request_auth=_request_auth,
@@ -6592,7 +6592,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _remove_tags_serialize(
+    async def _remove_tags_serialize(
         self,
         user_id,
         change_user_tags_request,
@@ -6654,7 +6654,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/users/{userId}/removeTags',
             path_params=_path_params,
@@ -6729,7 +6729,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_users_serialize(
+        _param = await self._search_users_serialize(
             search=search,
             developer_type=developer_type,
             n=n,
@@ -6751,10 +6751,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6814,7 +6814,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_users_serialize(
+        _param = await self._search_users_serialize(
             search=search,
             developer_type=developer_type,
             n=n,
@@ -6836,7 +6836,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6899,7 +6899,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._search_users_serialize(
+        _param = await self._search_users_serialize(
             search=search,
             developer_type=developer_type,
             n=n,
@@ -6923,7 +6923,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _search_users_serialize(
+    async def _search_users_serialize(
         self,
         search,
         developer_type,
@@ -6991,7 +6991,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users',
             path_params=_path_params,
@@ -7060,7 +7060,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_badge_serialize(
+        _param = await self._update_badge_serialize(
             user_id=user_id,
             badge_id=badge_id,
             update_user_badge_request=update_user_badge_request,
@@ -7081,10 +7081,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7138,7 +7138,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_badge_serialize(
+        _param = await self._update_badge_serialize(
             user_id=user_id,
             badge_id=badge_id,
             update_user_badge_request=update_user_badge_request,
@@ -7159,7 +7159,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7216,7 +7216,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_badge_serialize(
+        _param = await self._update_badge_serialize(
             user_id=user_id,
             badge_id=badge_id,
             update_user_badge_request=update_user_badge_request,
@@ -7239,7 +7239,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _update_badge_serialize(
+    async def _update_badge_serialize(
         self,
         user_id,
         badge_id,
@@ -7304,7 +7304,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/users/{userId}/badges/{badgeId}',
             path_params=_path_params,
@@ -7370,7 +7370,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_user_serialize(
+        _param = await self._update_user_serialize(
             user_id=user_id,
             update_user_request=update_user_request,
             _request_auth=_request_auth,
@@ -7389,10 +7389,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7443,7 +7443,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_user_serialize(
+        _param = await self._update_user_serialize(
             user_id=user_id,
             update_user_request=update_user_request,
             _request_auth=_request_auth,
@@ -7462,7 +7462,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7516,7 +7516,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_user_serialize(
+        _param = await self._update_user_serialize(
             user_id=user_id,
             update_user_request=update_user_request,
             _request_auth=_request_auth,
@@ -7537,7 +7537,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _update_user_serialize(
+    async def _update_user_serialize(
         self,
         user_id,
         update_user_request,
@@ -7599,7 +7599,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/users/{userId}',
             path_params=_path_params,
@@ -7662,7 +7662,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_user_note_serialize(
+        _param = await self._update_user_note_serialize(
             update_user_note_request=update_user_note_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7679,10 +7679,10 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7730,7 +7730,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_user_note_serialize(
+        _param = await self._update_user_note_serialize(
             update_user_note_request=update_user_note_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7747,7 +7747,7 @@ class UsersApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7798,7 +7798,7 @@ class UsersApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_user_note_serialize(
+        _param = await self._update_user_note_serialize(
             update_user_note_request=update_user_note_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7817,7 +7817,7 @@ class UsersApi:
         return response_data.response
 
 
-    def _update_user_note_serialize(
+    async def _update_user_note_serialize(
         self,
         update_user_note_request,
         _request_auth,
@@ -7876,7 +7876,7 @@ class UsersApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/userNotes',
             path_params=_path_params,

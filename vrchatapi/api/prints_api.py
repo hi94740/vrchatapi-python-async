@@ -84,7 +84,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_print_serialize(
+        _param = await self._delete_print_serialize(
             print_id=print_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -101,10 +101,10 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -152,7 +152,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_print_serialize(
+        _param = await self._delete_print_serialize(
             print_id=print_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -169,7 +169,7 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -220,7 +220,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_print_serialize(
+        _param = await self._delete_print_serialize(
             print_id=print_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -239,7 +239,7 @@ class PrintsApi:
         return response_data.response
 
 
-    def _delete_print_serialize(
+    async def _delete_print_serialize(
         self,
         print_id,
         _request_auth,
@@ -285,7 +285,7 @@ class PrintsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/prints/{printId}',
             path_params=_path_params,
@@ -354,7 +354,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._edit_print_serialize(
+        _param = await self._edit_print_serialize(
             print_id=print_id,
             image=image,
             note=note,
@@ -373,10 +373,10 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -430,7 +430,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._edit_print_serialize(
+        _param = await self._edit_print_serialize(
             print_id=print_id,
             image=image,
             note=note,
@@ -449,7 +449,7 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -506,7 +506,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._edit_print_serialize(
+        _param = await self._edit_print_serialize(
             print_id=print_id,
             image=image,
             note=note,
@@ -527,7 +527,7 @@ class PrintsApi:
         return response_data.response
 
 
-    def _edit_print_serialize(
+    async def _edit_print_serialize(
         self,
         print_id,
         image,
@@ -592,7 +592,7 @@ class PrintsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/prints/{printId}',
             path_params=_path_params,
@@ -655,7 +655,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_print_serialize(
+        _param = await self._get_print_serialize(
             print_id=print_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -672,10 +672,10 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -723,7 +723,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_print_serialize(
+        _param = await self._get_print_serialize(
             print_id=print_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -740,7 +740,7 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -791,7 +791,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_print_serialize(
+        _param = await self._get_print_serialize(
             print_id=print_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -810,7 +810,7 @@ class PrintsApi:
         return response_data.response
 
 
-    def _get_print_serialize(
+    async def _get_print_serialize(
         self,
         print_id,
         _request_auth,
@@ -856,7 +856,7 @@ class PrintsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/prints/{printId}',
             path_params=_path_params,
@@ -919,7 +919,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_prints_serialize(
+        _param = await self._get_user_prints_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -937,10 +937,10 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -988,7 +988,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_prints_serialize(
+        _param = await self._get_user_prints_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1006,7 +1006,7 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1057,7 +1057,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_prints_serialize(
+        _param = await self._get_user_prints_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1077,7 +1077,7 @@ class PrintsApi:
         return response_data.response
 
 
-    def _get_user_prints_serialize(
+    async def _get_user_prints_serialize(
         self,
         user_id,
         _request_auth,
@@ -1123,7 +1123,7 @@ class PrintsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/prints/user/{userId}',
             path_params=_path_params,
@@ -1198,7 +1198,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_print_serialize(
+        _param = await self._upload_print_serialize(
             image=image,
             timestamp=timestamp,
             note=note,
@@ -1219,10 +1219,10 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1282,7 +1282,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_print_serialize(
+        _param = await self._upload_print_serialize(
             image=image,
             timestamp=timestamp,
             note=note,
@@ -1303,7 +1303,7 @@ class PrintsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1366,7 +1366,7 @@ class PrintsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._upload_print_serialize(
+        _param = await self._upload_print_serialize(
             image=image,
             timestamp=timestamp,
             note=note,
@@ -1389,7 +1389,7 @@ class PrintsApi:
         return response_data.response
 
 
-    def _upload_print_serialize(
+    async def _upload_print_serialize(
         self,
         image,
         timestamp,
@@ -1460,7 +1460,7 @@ class PrintsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/prints',
             path_params=_path_params,

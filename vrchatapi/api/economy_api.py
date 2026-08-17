@@ -117,7 +117,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_product_serialize(
+        _param = await self._create_product_serialize(
             create_product_request=create_product_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -134,10 +134,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -185,7 +185,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_product_serialize(
+        _param = await self._create_product_serialize(
             create_product_request=create_product_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -202,7 +202,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -253,7 +253,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_product_serialize(
+        _param = await self._create_product_serialize(
             create_product_request=create_product_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -272,7 +272,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _create_product_serialize(
+    async def _create_product_serialize(
         self,
         create_product_request,
         _request_auth,
@@ -331,7 +331,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/products',
             path_params=_path_params,
@@ -394,7 +394,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_product_listing_direct_serialize(
+        _param = await self._create_product_listing_direct_serialize(
             create_listing_request=create_listing_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -411,10 +411,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -462,7 +462,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_product_listing_direct_serialize(
+        _param = await self._create_product_listing_direct_serialize(
             create_listing_request=create_listing_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -479,7 +479,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -530,7 +530,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._create_product_listing_direct_serialize(
+        _param = await self._create_product_listing_direct_serialize(
             create_listing_request=create_listing_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -549,7 +549,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _create_product_listing_direct_serialize(
+    async def _create_product_listing_direct_serialize(
         self,
         create_listing_request,
         _request_auth,
@@ -608,7 +608,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/listing',
             path_params=_path_params,
@@ -671,7 +671,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_product_serialize(
+        _param = await self._delete_product_serialize(
             product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -688,10 +688,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -739,7 +739,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_product_serialize(
+        _param = await self._delete_product_serialize(
             product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -756,7 +756,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -807,7 +807,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_product_serialize(
+        _param = await self._delete_product_serialize(
             product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -826,7 +826,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _delete_product_serialize(
+    async def _delete_product_serialize(
         self,
         product_id,
         _request_auth,
@@ -872,7 +872,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/products/{productId}',
             path_params=_path_params,
@@ -938,7 +938,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_product_listing_direct_serialize(
+        _param = await self._delete_product_listing_direct_serialize(
             product_id=product_id,
             hydrate=hydrate,
             _request_auth=_request_auth,
@@ -956,10 +956,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1010,7 +1010,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_product_listing_direct_serialize(
+        _param = await self._delete_product_listing_direct_serialize(
             product_id=product_id,
             hydrate=hydrate,
             _request_auth=_request_auth,
@@ -1028,7 +1028,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1082,7 +1082,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_product_listing_direct_serialize(
+        _param = await self._delete_product_listing_direct_serialize(
             product_id=product_id,
             hydrate=hydrate,
             _request_auth=_request_auth,
@@ -1102,7 +1102,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _delete_product_listing_direct_serialize(
+    async def _delete_product_listing_direct_serialize(
         self,
         product_id,
         hydrate,
@@ -1153,7 +1153,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/listing/{productId}',
             path_params=_path_params,
@@ -1213,7 +1213,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_active_licenses_serialize(
+        _param = await self._get_active_licenses_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1229,10 +1229,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1277,7 +1277,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_active_licenses_serialize(
+        _param = await self._get_active_licenses_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1293,7 +1293,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1341,7 +1341,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_active_licenses_serialize(
+        _param = await self._get_active_licenses_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -1359,7 +1359,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_active_licenses_serialize(
+    async def _get_active_licenses_serialize(
         self,
         _request_auth,
         _content_type,
@@ -1402,7 +1402,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/licenses/active',
             path_params=_path_params,
@@ -1465,7 +1465,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_balance_serialize(
+        _param = await self._get_balance_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1482,10 +1482,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1533,7 +1533,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_balance_serialize(
+        _param = await self._get_balance_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1550,7 +1550,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1601,7 +1601,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_balance_serialize(
+        _param = await self._get_balance_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1620,7 +1620,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_balance_serialize(
+    async def _get_balance_serialize(
         self,
         user_id,
         _request_auth,
@@ -1666,7 +1666,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/balance',
             path_params=_path_params,
@@ -1729,7 +1729,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_balance_earnings_serialize(
+        _param = await self._get_balance_earnings_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1746,10 +1746,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1797,7 +1797,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_balance_earnings_serialize(
+        _param = await self._get_balance_earnings_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1814,7 +1814,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1865,7 +1865,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_balance_earnings_serialize(
+        _param = await self._get_balance_earnings_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1884,7 +1884,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_balance_earnings_serialize(
+    async def _get_balance_earnings_serialize(
         self,
         user_id,
         _request_auth,
@@ -1930,7 +1930,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/balance/earnings',
             path_params=_path_params,
@@ -1993,7 +1993,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_bulk_gift_purchases_serialize(
+        _param = await self._get_bulk_gift_purchases_serialize(
             most_recent=most_recent,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2010,10 +2010,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2061,7 +2061,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_bulk_gift_purchases_serialize(
+        _param = await self._get_bulk_gift_purchases_serialize(
             most_recent=most_recent,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2078,7 +2078,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2129,7 +2129,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_bulk_gift_purchases_serialize(
+        _param = await self._get_bulk_gift_purchases_serialize(
             most_recent=most_recent,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2148,7 +2148,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_bulk_gift_purchases_serialize(
+    async def _get_bulk_gift_purchases_serialize(
         self,
         most_recent,
         _request_auth,
@@ -2196,7 +2196,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/bulk/gift/purchases',
             path_params=_path_params,
@@ -2256,7 +2256,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_subscriptions_serialize(
+        _param = await self._get_current_subscriptions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2272,10 +2272,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2320,7 +2320,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_subscriptions_serialize(
+        _param = await self._get_current_subscriptions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2336,7 +2336,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2384,7 +2384,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_current_subscriptions_serialize(
+        _param = await self._get_current_subscriptions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -2402,7 +2402,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_current_subscriptions_serialize(
+    async def _get_current_subscriptions_serialize(
         self,
         _request_auth,
         _content_type,
@@ -2445,7 +2445,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/auth/user/subscription',
             path_params=_path_params,
@@ -2517,7 +2517,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_earnings_metrics_serialize(
+        _param = await self._get_earnings_metrics_serialize(
             seller_id=seller_id,
             metric_date_start=metric_date_start,
             metric_date_end=metric_date_end,
@@ -2537,10 +2537,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2597,7 +2597,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_earnings_metrics_serialize(
+        _param = await self._get_earnings_metrics_serialize(
             seller_id=seller_id,
             metric_date_start=metric_date_start,
             metric_date_end=metric_date_end,
@@ -2617,7 +2617,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2677,7 +2677,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_earnings_metrics_serialize(
+        _param = await self._get_earnings_metrics_serialize(
             seller_id=seller_id,
             metric_date_start=metric_date_start,
             metric_date_end=metric_date_end,
@@ -2699,7 +2699,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_earnings_metrics_serialize(
+    async def _get_earnings_metrics_serialize(
         self,
         seller_id,
         metric_date_start,
@@ -2762,7 +2762,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/metrics/earnings',
             path_params=_path_params,
@@ -2825,7 +2825,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_account_serialize(
+        _param = await self._get_economy_account_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2842,10 +2842,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -2893,7 +2893,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_account_serialize(
+        _param = await self._get_economy_account_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2910,7 +2910,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -2961,7 +2961,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_account_serialize(
+        _param = await self._get_economy_account_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -2980,7 +2980,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_economy_account_serialize(
+    async def _get_economy_account_serialize(
         self,
         user_id,
         _request_auth,
@@ -3026,7 +3026,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/economy/account',
             path_params=_path_params,
@@ -3089,7 +3089,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_balances_serialize(
+        _param = await self._get_economy_balances_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3106,10 +3106,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3157,7 +3157,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_balances_serialize(
+        _param = await self._get_economy_balances_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3174,7 +3174,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3225,7 +3225,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_balances_serialize(
+        _param = await self._get_economy_balances_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3244,7 +3244,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_economy_balances_serialize(
+    async def _get_economy_balances_serialize(
         self,
         user_id,
         _request_auth,
@@ -3290,7 +3290,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/economy/balances',
             path_params=_path_params,
@@ -3353,7 +3353,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_payout_status_serialize(
+        _param = await self._get_economy_payout_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3370,10 +3370,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3421,7 +3421,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_payout_status_serialize(
+        _param = await self._get_economy_payout_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3438,7 +3438,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3489,7 +3489,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_payout_status_serialize(
+        _param = await self._get_economy_payout_status_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3508,7 +3508,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_economy_payout_status_serialize(
+    async def _get_economy_payout_status_serialize(
         self,
         user_id,
         _request_auth,
@@ -3554,7 +3554,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/economy/payouts/status',
             path_params=_path_params,
@@ -3617,7 +3617,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_payouts_serialize(
+        _param = await self._get_economy_payouts_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3634,10 +3634,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3685,7 +3685,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_payouts_serialize(
+        _param = await self._get_economy_payouts_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3702,7 +3702,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -3753,7 +3753,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_economy_payouts_serialize(
+        _param = await self._get_economy_payouts_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3772,7 +3772,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_economy_payouts_serialize(
+    async def _get_economy_payouts_serialize(
         self,
         user_id,
         _request_auth,
@@ -3818,7 +3818,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/economy/payouts/list',
             path_params=_path_params,
@@ -3881,7 +3881,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_license_group_serialize(
+        _param = await self._get_license_group_serialize(
             license_group_id=license_group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3898,10 +3898,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -3949,7 +3949,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_license_group_serialize(
+        _param = await self._get_license_group_serialize(
             license_group_id=license_group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -3966,7 +3966,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4017,7 +4017,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_license_group_serialize(
+        _param = await self._get_license_group_serialize(
             license_group_id=license_group_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4036,7 +4036,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_license_group_serialize(
+    async def _get_license_group_serialize(
         self,
         license_group_id,
         _request_auth,
@@ -4082,7 +4082,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/licenseGroups/{licenseGroupId}',
             path_params=_path_params,
@@ -4148,7 +4148,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_listing_serialize(
+        _param = await self._get_product_listing_serialize(
             product_id=product_id,
             hydrate=hydrate,
             _request_auth=_request_auth,
@@ -4166,10 +4166,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4220,7 +4220,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_listing_serialize(
+        _param = await self._get_product_listing_serialize(
             product_id=product_id,
             hydrate=hydrate,
             _request_auth=_request_auth,
@@ -4238,7 +4238,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4292,7 +4292,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_listing_serialize(
+        _param = await self._get_product_listing_serialize(
             product_id=product_id,
             hydrate=hydrate,
             _request_auth=_request_auth,
@@ -4312,7 +4312,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_product_listing_serialize(
+    async def _get_product_listing_serialize(
         self,
         product_id,
         hydrate,
@@ -4363,7 +4363,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/listing/{productId}',
             path_params=_path_params,
@@ -4427,7 +4427,7 @@ class EconomyApi:
         """ # noqa: E501
         warnings.warn("GET /products/{productId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_product_listing_alternate_serialize(
+        _param = await self._get_product_listing_alternate_serialize(
             product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4444,10 +4444,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4496,7 +4496,7 @@ class EconomyApi:
         """ # noqa: E501
         warnings.warn("GET /products/{productId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_product_listing_alternate_serialize(
+        _param = await self._get_product_listing_alternate_serialize(
             product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4513,7 +4513,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4565,7 +4565,7 @@ class EconomyApi:
         """ # noqa: E501
         warnings.warn("GET /products/{productId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_product_listing_alternate_serialize(
+        _param = await self._get_product_listing_alternate_serialize(
             product_id=product_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -4584,7 +4584,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_product_listing_alternate_serialize(
+    async def _get_product_listing_alternate_serialize(
         self,
         product_id,
         _request_auth,
@@ -4630,7 +4630,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/products/{productId}',
             path_params=_path_params,
@@ -4711,7 +4711,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_listings_serialize(
+        _param = await self._get_product_listings_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -4734,10 +4734,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -4803,7 +4803,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_listings_serialize(
+        _param = await self._get_product_listings_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -4826,7 +4826,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -4895,7 +4895,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_listings_serialize(
+        _param = await self._get_product_listings_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -4920,7 +4920,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_product_listings_serialize(
+    async def _get_product_listings_serialize(
         self,
         user_id,
         n,
@@ -4996,7 +4996,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/listings',
             path_params=_path_params,
@@ -5059,7 +5059,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_serialize(
+        _param = await self._get_product_purchase_serialize(
             product_purchase_id=product_purchase_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5076,10 +5076,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5127,7 +5127,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_serialize(
+        _param = await self._get_product_purchase_serialize(
             product_purchase_id=product_purchase_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5144,7 +5144,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5195,7 +5195,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_serialize(
+        _param = await self._get_product_purchase_serialize(
             product_purchase_id=product_purchase_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5214,7 +5214,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_product_purchase_serialize(
+    async def _get_product_purchase_serialize(
         self,
         product_purchase_id,
         _request_auth,
@@ -5260,7 +5260,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/purchases/{productPurchaseId}',
             path_params=_path_params,
@@ -5344,7 +5344,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_history_serialize(
+        _param = await self._get_product_purchase_history_serialize(
             user_id=user_id,
             n=n,
             date_min=date_min,
@@ -5368,10 +5368,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5440,7 +5440,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_history_serialize(
+        _param = await self._get_product_purchase_history_serialize(
             user_id=user_id,
             n=n,
             date_min=date_min,
@@ -5464,7 +5464,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5536,7 +5536,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_history_serialize(
+        _param = await self._get_product_purchase_history_serialize(
             user_id=user_id,
             n=n,
             date_min=date_min,
@@ -5562,7 +5562,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_product_purchase_history_serialize(
+    async def _get_product_purchase_history_serialize(
         self,
         user_id,
         n,
@@ -5661,7 +5661,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/economy/transactions',
             path_params=_path_params,
@@ -5724,7 +5724,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_stacks_serialize(
+        _param = await self._get_product_purchase_stacks_serialize(
             product_purchase_id=product_purchase_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5741,10 +5741,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -5792,7 +5792,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_stacks_serialize(
+        _param = await self._get_product_purchase_stacks_serialize(
             product_purchase_id=product_purchase_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5809,7 +5809,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -5860,7 +5860,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchase_stacks_serialize(
+        _param = await self._get_product_purchase_stacks_serialize(
             product_purchase_id=product_purchase_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -5879,7 +5879,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_product_purchase_stacks_serialize(
+    async def _get_product_purchase_stacks_serialize(
         self,
         product_purchase_id,
         _request_auth,
@@ -5925,7 +5925,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/purchases/{productPurchaseId}/stacks',
             path_params=_path_params,
@@ -6006,7 +6006,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchases_serialize(
+        _param = await self._get_product_purchases_serialize(
             buyer_id=buyer_id,
             seller_id=seller_id,
             n=n,
@@ -6029,10 +6029,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6098,7 +6098,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchases_serialize(
+        _param = await self._get_product_purchases_serialize(
             buyer_id=buyer_id,
             seller_id=seller_id,
             n=n,
@@ -6121,7 +6121,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6190,7 +6190,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_product_purchases_serialize(
+        _param = await self._get_product_purchases_serialize(
             buyer_id=buyer_id,
             seller_id=seller_id,
             n=n,
@@ -6215,7 +6215,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_product_purchases_serialize(
+    async def _get_product_purchases_serialize(
         self,
         buyer_id,
         seller_id,
@@ -6293,7 +6293,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/purchases',
             path_params=_path_params,
@@ -6353,7 +6353,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_subscription_serialize(
+        _param = await self._get_recent_subscription_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6369,10 +6369,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6417,7 +6417,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_subscription_serialize(
+        _param = await self._get_recent_subscription_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6433,7 +6433,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6481,7 +6481,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_recent_subscription_serialize(
+        _param = await self._get_recent_subscription_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6499,7 +6499,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_recent_subscription_serialize(
+    async def _get_recent_subscription_serialize(
         self,
         _request_auth,
         _content_type,
@@ -6542,7 +6542,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/subscription/recent',
             path_params=_path_params,
@@ -6602,7 +6602,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_seller_eligibility_serialize(
+        _param = await self._get_seller_eligibility_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6618,10 +6618,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6666,7 +6666,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_seller_eligibility_serialize(
+        _param = await self._get_seller_eligibility_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6682,7 +6682,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6730,7 +6730,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_seller_eligibility_serialize(
+        _param = await self._get_seller_eligibility_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -6748,7 +6748,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_seller_eligibility_serialize(
+    async def _get_seller_eligibility_serialize(
         self,
         _request_auth,
         _content_type,
@@ -6791,7 +6791,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/seller/eligibility',
             path_params=_path_params,
@@ -6855,7 +6855,7 @@ class EconomyApi:
         """ # noqa: E501
         warnings.warn("GET /Steam/transactions/{transactionId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_steam_transaction_serialize(
+        _param = await self._get_steam_transaction_serialize(
             transaction_id=transaction_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6872,10 +6872,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -6924,7 +6924,7 @@ class EconomyApi:
         """ # noqa: E501
         warnings.warn("GET /Steam/transactions/{transactionId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_steam_transaction_serialize(
+        _param = await self._get_steam_transaction_serialize(
             transaction_id=transaction_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -6941,7 +6941,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -6993,7 +6993,7 @@ class EconomyApi:
         """ # noqa: E501
         warnings.warn("GET /Steam/transactions/{transactionId} is deprecated.", DeprecationWarning)
 
-        _param = self._get_steam_transaction_serialize(
+        _param = await self._get_steam_transaction_serialize(
             transaction_id=transaction_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -7012,7 +7012,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_steam_transaction_serialize(
+    async def _get_steam_transaction_serialize(
         self,
         transaction_id,
         _request_auth,
@@ -7058,7 +7058,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/Steam/transactions/{transactionId}',
             path_params=_path_params,
@@ -7118,7 +7118,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_steam_transactions_serialize(
+        _param = await self._get_steam_transactions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7134,10 +7134,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7182,7 +7182,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_steam_transactions_serialize(
+        _param = await self._get_steam_transactions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7198,7 +7198,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7246,7 +7246,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_steam_transactions_serialize(
+        _param = await self._get_steam_transactions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7264,7 +7264,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_steam_transactions_serialize(
+    async def _get_steam_transactions_serialize(
         self,
         _request_auth,
         _content_type,
@@ -7307,7 +7307,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/Steam/transactions',
             path_params=_path_params,
@@ -7376,7 +7376,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_store_serialize(
+        _param = await self._get_store_serialize(
             store_id=store_id,
             hydrate_listings=hydrate_listings,
             hydrate_products=hydrate_products,
@@ -7395,10 +7395,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7452,7 +7452,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_store_serialize(
+        _param = await self._get_store_serialize(
             store_id=store_id,
             hydrate_listings=hydrate_listings,
             hydrate_products=hydrate_products,
@@ -7471,7 +7471,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7528,7 +7528,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_store_serialize(
+        _param = await self._get_store_serialize(
             store_id=store_id,
             hydrate_listings=hydrate_listings,
             hydrate_products=hydrate_products,
@@ -7549,7 +7549,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_store_serialize(
+    async def _get_store_serialize(
         self,
         store_id,
         hydrate_listings,
@@ -7607,7 +7607,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/store',
             path_params=_path_params,
@@ -7676,7 +7676,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_store_shelves_serialize(
+        _param = await self._get_store_shelves_serialize(
             store_id=store_id,
             hydrate_listings=hydrate_listings,
             fetch=fetch,
@@ -7695,10 +7695,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -7752,7 +7752,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_store_shelves_serialize(
+        _param = await self._get_store_shelves_serialize(
             store_id=store_id,
             hydrate_listings=hydrate_listings,
             fetch=fetch,
@@ -7771,7 +7771,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -7828,7 +7828,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_store_shelves_serialize(
+        _param = await self._get_store_shelves_serialize(
             store_id=store_id,
             hydrate_listings=hydrate_listings,
             fetch=fetch,
@@ -7849,7 +7849,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_store_shelves_serialize(
+    async def _get_store_shelves_serialize(
         self,
         store_id,
         hydrate_listings,
@@ -7907,7 +7907,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/store/shelves',
             path_params=_path_params,
@@ -7967,7 +7967,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_subscriptions_serialize(
+        _param = await self._get_subscriptions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -7983,10 +7983,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8031,7 +8031,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_subscriptions_serialize(
+        _param = await self._get_subscriptions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8047,7 +8047,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -8095,7 +8095,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_subscriptions_serialize(
+        _param = await self._get_subscriptions_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8113,7 +8113,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_subscriptions_serialize(
+    async def _get_subscriptions_serialize(
         self,
         _request_auth,
         _content_type,
@@ -8156,7 +8156,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/subscriptions',
             path_params=_path_params,
@@ -8216,7 +8216,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tilia_status_serialize(
+        _param = await self._get_tilia_status_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8232,10 +8232,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8280,7 +8280,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tilia_status_serialize(
+        _param = await self._get_tilia_status_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8296,7 +8296,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -8344,7 +8344,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tilia_status_serialize(
+        _param = await self._get_tilia_status_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8362,7 +8362,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_tilia_status_serialize(
+    async def _get_tilia_status_serialize(
         self,
         _request_auth,
         _content_type,
@@ -8405,7 +8405,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/tilia/status',
             path_params=_path_params,
@@ -8468,7 +8468,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tilia_tos_serialize(
+        _param = await self._get_tilia_tos_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8485,10 +8485,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8536,7 +8536,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tilia_tos_serialize(
+        _param = await self._get_tilia_tos_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8553,7 +8553,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -8604,7 +8604,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_tilia_tos_serialize(
+        _param = await self._get_tilia_tos_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -8623,7 +8623,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_tilia_tos_serialize(
+    async def _get_tilia_tos_serialize(
         self,
         user_id,
         _request_auth,
@@ -8669,7 +8669,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/tilia/tos',
             path_params=_path_params,
@@ -8729,7 +8729,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_token_bundles_serialize(
+        _param = await self._get_token_bundles_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8745,10 +8745,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -8793,7 +8793,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_token_bundles_serialize(
+        _param = await self._get_token_bundles_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8809,7 +8809,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -8857,7 +8857,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_token_bundles_serialize(
+        _param = await self._get_token_bundles_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
@@ -8875,7 +8875,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_token_bundles_serialize(
+    async def _get_token_bundles_serialize(
         self,
         _request_auth,
         _content_type,
@@ -8918,7 +8918,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/tokenBundles',
             path_params=_path_params,
@@ -8984,7 +8984,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_credits_eligible_serialize(
+        _param = await self._get_user_credits_eligible_serialize(
             user_id=user_id,
             subscription_id=subscription_id,
             _request_auth=_request_auth,
@@ -9002,10 +9002,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -9056,7 +9056,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_credits_eligible_serialize(
+        _param = await self._get_user_credits_eligible_serialize(
             user_id=user_id,
             subscription_id=subscription_id,
             _request_auth=_request_auth,
@@ -9074,7 +9074,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9128,7 +9128,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_credits_eligible_serialize(
+        _param = await self._get_user_credits_eligible_serialize(
             user_id=user_id,
             subscription_id=subscription_id,
             _request_auth=_request_auth,
@@ -9148,7 +9148,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_user_credits_eligible_serialize(
+    async def _get_user_credits_eligible_serialize(
         self,
         user_id,
         subscription_id,
@@ -9199,7 +9199,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/credits/eligible',
             path_params=_path_params,
@@ -9265,7 +9265,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_subscription_eligible_serialize(
+        _param = await self._get_user_subscription_eligible_serialize(
             user_id=user_id,
             steam_id=steam_id,
             _request_auth=_request_auth,
@@ -9283,10 +9283,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -9337,7 +9337,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_subscription_eligible_serialize(
+        _param = await self._get_user_subscription_eligible_serialize(
             user_id=user_id,
             steam_id=steam_id,
             _request_auth=_request_auth,
@@ -9355,7 +9355,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9409,7 +9409,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_subscription_eligible_serialize(
+        _param = await self._get_user_subscription_eligible_serialize(
             user_id=user_id,
             steam_id=steam_id,
             _request_auth=_request_auth,
@@ -9429,7 +9429,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_user_subscription_eligible_serialize(
+    async def _get_user_subscription_eligible_serialize(
         self,
         user_id,
         steam_id,
@@ -9480,7 +9480,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/users/{userId}/subscription/eligible',
             path_params=_path_params,
@@ -9543,7 +9543,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_tilia_kyc_serialize(
+        _param = await self._get_user_tilia_kyc_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -9560,10 +9560,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -9611,7 +9611,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_tilia_kyc_serialize(
+        _param = await self._get_user_tilia_kyc_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -9628,7 +9628,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9679,7 +9679,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_user_tilia_kyc_serialize(
+        _param = await self._get_user_tilia_kyc_serialize(
             user_id=user_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -9698,7 +9698,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _get_user_tilia_kyc_serialize(
+    async def _get_user_tilia_kyc_serialize(
         self,
         user_id,
         _request_auth,
@@ -9744,7 +9744,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/tilia/kyc',
             path_params=_path_params,
@@ -9816,7 +9816,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_stores_serialize(
+        _param = await self._list_stores_serialize(
             seller_id=seller_id,
             management_pov=management_pov,
             n=n,
@@ -9836,10 +9836,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -9896,7 +9896,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_stores_serialize(
+        _param = await self._list_stores_serialize(
             seller_id=seller_id,
             management_pov=management_pov,
             n=n,
@@ -9916,7 +9916,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -9976,7 +9976,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_stores_serialize(
+        _param = await self._list_stores_serialize(
             seller_id=seller_id,
             management_pov=management_pov,
             n=n,
@@ -9998,7 +9998,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _list_stores_serialize(
+    async def _list_stores_serialize(
         self,
         seller_id,
         management_pov,
@@ -10061,7 +10061,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/economy/stores',
             path_params=_path_params,
@@ -10130,7 +10130,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_user_products_serialize(
+        _param = await self._list_user_products_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -10149,10 +10149,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -10206,7 +10206,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_user_products_serialize(
+        _param = await self._list_user_products_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -10225,7 +10225,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -10282,7 +10282,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._list_user_products_serialize(
+        _param = await self._list_user_products_serialize(
             user_id=user_id,
             n=n,
             offset=offset,
@@ -10303,7 +10303,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _list_user_products_serialize(
+    async def _list_user_products_serialize(
         self,
         user_id,
         n,
@@ -10359,7 +10359,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/user/{userId}/products',
             path_params=_path_params,
@@ -10422,7 +10422,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._purchase_product_listing_serialize(
+        _param = await self._purchase_product_listing_serialize(
             purchase_product_listing_request=purchase_product_listing_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -10439,10 +10439,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -10490,7 +10490,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._purchase_product_listing_serialize(
+        _param = await self._purchase_product_listing_serialize(
             purchase_product_listing_request=purchase_product_listing_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -10507,7 +10507,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -10558,7 +10558,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._purchase_product_listing_serialize(
+        _param = await self._purchase_product_listing_serialize(
             purchase_product_listing_request=purchase_product_listing_request,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -10577,7 +10577,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _purchase_product_listing_serialize(
+    async def _purchase_product_listing_serialize(
         self,
         purchase_product_listing_request,
         _request_auth,
@@ -10636,7 +10636,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/economy/purchase/listing',
             path_params=_path_params,
@@ -10702,7 +10702,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_product_serialize(
+        _param = await self._update_product_serialize(
             product_id=product_id,
             update_product_request=update_product_request,
             _request_auth=_request_auth,
@@ -10720,10 +10720,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -10774,7 +10774,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_product_serialize(
+        _param = await self._update_product_serialize(
             product_id=product_id,
             update_product_request=update_product_request,
             _request_auth=_request_auth,
@@ -10792,7 +10792,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -10846,7 +10846,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_product_serialize(
+        _param = await self._update_product_serialize(
             product_id=product_id,
             update_product_request=update_product_request,
             _request_auth=_request_auth,
@@ -10866,7 +10866,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _update_product_serialize(
+    async def _update_product_serialize(
         self,
         product_id,
         update_product_request,
@@ -10928,7 +10928,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/products/{productId}',
             path_params=_path_params,
@@ -10997,7 +10997,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_product_listing_direct_serialize(
+        _param = await self._update_product_listing_direct_serialize(
             product_id=product_id,
             update_listing_request=update_listing_request,
             hydrate=hydrate,
@@ -11016,10 +11016,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -11073,7 +11073,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_product_listing_direct_serialize(
+        _param = await self._update_product_listing_direct_serialize(
             product_id=product_id,
             update_listing_request=update_listing_request,
             hydrate=hydrate,
@@ -11092,7 +11092,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -11149,7 +11149,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_product_listing_direct_serialize(
+        _param = await self._update_product_listing_direct_serialize(
             product_id=product_id,
             update_listing_request=update_listing_request,
             hydrate=hydrate,
@@ -11170,7 +11170,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _update_product_listing_direct_serialize(
+    async def _update_product_listing_direct_serialize(
         self,
         product_id,
         update_listing_request,
@@ -11237,7 +11237,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/listing/{productId}',
             path_params=_path_params,
@@ -11303,7 +11303,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_tilia_tos_serialize(
+        _param = await self._update_tilia_tos_serialize(
             user_id=user_id,
             update_tilia_tos_request=update_tilia_tos_request,
             _request_auth=_request_auth,
@@ -11321,10 +11321,10 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -11375,7 +11375,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_tilia_tos_serialize(
+        _param = await self._update_tilia_tos_serialize(
             user_id=user_id,
             update_tilia_tos_request=update_tilia_tos_request,
             _request_auth=_request_auth,
@@ -11393,7 +11393,7 @@ class EconomyApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -11447,7 +11447,7 @@ class EconomyApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._update_tilia_tos_serialize(
+        _param = await self._update_tilia_tos_serialize(
             user_id=user_id,
             update_tilia_tos_request=update_tilia_tos_request,
             _request_auth=_request_auth,
@@ -11467,7 +11467,7 @@ class EconomyApi:
         return response_data.response
 
 
-    def _update_tilia_tos_serialize(
+    async def _update_tilia_tos_serialize(
         self,
         user_id,
         update_tilia_tos_request,
@@ -11529,7 +11529,7 @@ class EconomyApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='PUT',
             resource_path='/user/{userId}/tilia/tos',
             path_params=_path_params,

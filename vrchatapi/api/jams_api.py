@@ -89,7 +89,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_jam_submission_serialize(
+        _param = await self._delete_jam_submission_serialize(
             jam_id=jam_id,
             jam_submission_id=jam_submission_id,
             _request_auth=_request_auth,
@@ -109,10 +109,10 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -163,7 +163,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_jam_submission_serialize(
+        _param = await self._delete_jam_submission_serialize(
             jam_id=jam_id,
             jam_submission_id=jam_submission_id,
             _request_auth=_request_auth,
@@ -183,7 +183,7 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -237,7 +237,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._delete_jam_submission_serialize(
+        _param = await self._delete_jam_submission_serialize(
             jam_id=jam_id,
             jam_submission_id=jam_submission_id,
             _request_auth=_request_auth,
@@ -259,7 +259,7 @@ class JamsApi:
         return response_data.response
 
 
-    def _delete_jam_submission_serialize(
+    async def _delete_jam_submission_serialize(
         self,
         jam_id,
         jam_submission_id,
@@ -308,7 +308,7 @@ class JamsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='DELETE',
             resource_path='/jams/{jamId}/submissions/{jamSubmissionId}',
             path_params=_path_params,
@@ -371,7 +371,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jam_serialize(
+        _param = await self._get_jam_serialize(
             jam_id=jam_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -388,10 +388,10 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -439,7 +439,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jam_serialize(
+        _param = await self._get_jam_serialize(
             jam_id=jam_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -456,7 +456,7 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -507,7 +507,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jam_serialize(
+        _param = await self._get_jam_serialize(
             jam_id=jam_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -526,7 +526,7 @@ class JamsApi:
         return response_data.response
 
 
-    def _get_jam_serialize(
+    async def _get_jam_serialize(
         self,
         jam_id,
         _request_auth,
@@ -572,7 +572,7 @@ class JamsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/jams/{jamId}',
             path_params=_path_params,
@@ -641,7 +641,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jam_submissions_serialize(
+        _param = await self._get_jam_submissions_serialize(
             jam_id=jam_id,
             content_id=content_id,
             submitter_id=submitter_id,
@@ -660,10 +660,10 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -717,7 +717,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jam_submissions_serialize(
+        _param = await self._get_jam_submissions_serialize(
             jam_id=jam_id,
             content_id=content_id,
             submitter_id=submitter_id,
@@ -736,7 +736,7 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -793,7 +793,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jam_submissions_serialize(
+        _param = await self._get_jam_submissions_serialize(
             jam_id=jam_id,
             content_id=content_id,
             submitter_id=submitter_id,
@@ -814,7 +814,7 @@ class JamsApi:
         return response_data.response
 
 
-    def _get_jam_submissions_serialize(
+    async def _get_jam_submissions_serialize(
         self,
         jam_id,
         content_id,
@@ -870,7 +870,7 @@ class JamsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/jams/{jamId}/submissions',
             path_params=_path_params,
@@ -933,7 +933,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jams_serialize(
+        _param = await self._get_jams_serialize(
             type=type,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -949,10 +949,10 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1000,7 +1000,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jams_serialize(
+        _param = await self._get_jams_serialize(
             type=type,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1016,7 +1016,7 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1067,7 +1067,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._get_jams_serialize(
+        _param = await self._get_jams_serialize(
             type=type,
             _request_auth=_request_auth,
             _content_type=_content_type,
@@ -1085,7 +1085,7 @@ class JamsApi:
         return response_data.response
 
 
-    def _get_jams_serialize(
+    async def _get_jams_serialize(
         self,
         type,
         _request_auth,
@@ -1133,7 +1133,7 @@ class JamsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='GET',
             resource_path='/jams',
             path_params=_path_params,
@@ -1199,7 +1199,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_jam_content_serialize(
+        _param = await self._submit_jam_content_serialize(
             jam_id=jam_id,
             create_jam_submission_request=create_jam_submission_request,
             _request_auth=_request_auth,
@@ -1218,10 +1218,10 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return (await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
-        ).data
+        )).data
 
 
     @validate_call
@@ -1272,7 +1272,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_jam_content_serialize(
+        _param = await self._submit_jam_content_serialize(
             jam_id=jam_id,
             create_jam_submission_request=create_jam_submission_request,
             _request_auth=_request_auth,
@@ -1291,7 +1291,7 @@ class JamsApi:
             _request_timeout=_request_timeout
         )
         await response_data.read()
-        return self.api_client.response_deserialize(
+        return await self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
@@ -1345,7 +1345,7 @@ class JamsApi:
         :return: Returns the result object.
         """ # noqa: E501
 
-        _param = self._submit_jam_content_serialize(
+        _param = await self._submit_jam_content_serialize(
             jam_id=jam_id,
             create_jam_submission_request=create_jam_submission_request,
             _request_auth=_request_auth,
@@ -1366,7 +1366,7 @@ class JamsApi:
         return response_data.response
 
 
-    def _submit_jam_content_serialize(
+    async def _submit_jam_content_serialize(
         self,
         jam_id,
         create_jam_submission_request,
@@ -1428,7 +1428,7 @@ class JamsApi:
             'authCookie'
         ]
 
-        return self.api_client.param_serialize(
+        return await self.api_client.param_serialize(
             method='POST',
             resource_path='/jams/{jamId}/submissions',
             path_params=_path_params,
