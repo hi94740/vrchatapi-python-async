@@ -15,6 +15,7 @@ the async conversion:
 
 import base64
 import json
+from unittest.mock import AsyncMock, Mock
 
 import aiohttp
 from multidict import CIMultiDict
@@ -275,6 +276,29 @@ async def test_request_timeout_maps_to_client_timeout():
     await rest_client.request("GET", "http://localhost/x", _request_timeout=30)
     assert captured["timeout"].total == 30
     await rest_client.close()
+
+
+@pytest.mark.asyncio
+async def test_ssl_context_is_built_lazily_off_the_event_loop(monkeypatch):
+    from vrchatapi import rest as rest_module
+
+    config = Configuration(host="http://localhost")
+    build_context = Mock()
+    monkeypatch.setattr(rest_module.ssl, "create_default_context", build_context)
+    build_context.reset_mock()
+    rest_client = rest_module.RESTClientObject(config)
+
+    build_context.assert_not_called()
+
+    ssl_context = Mock()
+    to_thread = AsyncMock(return_value=ssl_context)
+    monkeypatch.setattr(rest_module.asyncio, "to_thread", to_thread)
+    monkeypatch.setattr(rest_client, "_create_pool_manager", Mock(return_value=Mock()))
+
+    await rest_client._ensure_session()
+
+    to_thread.assert_awaited_once_with(rest_client._build_ssl_context)
+    assert rest_client.ssl_context is ssl_context
 
 
 @pytest.mark.asyncio

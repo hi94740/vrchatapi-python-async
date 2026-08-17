@@ -144,6 +144,9 @@ fi
 # Enable Global cookies (aiohttp) and async rest fixes
 patch ./vrchatapi/rest.py < ./patches/rest_async.patch
 
+# Build the SSL context lazily to keep disk I/O off consumers' event loops
+patch ./vrchatapi/rest.py < ./patches/lazy_ssl.patch
+
 # Make 2fa required error readable
 patch ./vrchatapi/api_client.py < ./patches/2fa_verify_readable.patch
 
