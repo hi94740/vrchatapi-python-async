@@ -275,7 +275,7 @@ class VRChatAccount:
                 raise
             except StopAsyncIteration:
                 pass
-            except TimeoutError:
+            except asyncio.TimeoutError:
                 timed_out = True
             except Exception:
                 _LOGGER.warning("Pipeline disconnected", exc_info=True)
