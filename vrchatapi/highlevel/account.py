@@ -9,7 +9,7 @@ from typing import Any, cast
 
 import vrchatapi
 from vrchatapi.exceptions import UnauthorizedException
-from vrchatapi.websocket import VRChatEvent
+from vrchatapi.websocket import VRChatEvent, VRChatWebSocket
 
 from .api import VRChatAPI
 from .presence import (
@@ -86,6 +86,8 @@ class VRChatAccount:
         self.available = False
         self.closed = False
         self._runner: asyncio.Task[None] | None = None
+        self._receiver: asyncio.Task[None] | None = None
+        self._pipeline_activity = asyncio.Event()
         self._tasks: set[asyncio.Task[Any]] = set()
         self._event_tasks: dict[str | None, asyncio.Task[None]] = {}
         self._recovery_lock = asyncio.Lock()
@@ -134,6 +136,7 @@ class VRChatAccount:
             self.ws = await self.api.ws_connect()
             await self.fetch_users()
             self._set_available(True)
+            self._receiver = asyncio.create_task(self._receive(self.ws))
             self._runner = asyncio.create_task(self._run())
         except BaseException:
             await self.close()
@@ -238,20 +241,27 @@ class VRChatAccount:
         async with self._recovery_lock:
             if self.closed or self.api is not failed_api:
                 return
-            # Discard old pipeline work before applying the replacement snapshot.
-            pending = list(self._event_tasks.values())
-            for task in pending:
-                task.cancel()
-            await asyncio.gather(*pending, return_exceptions=True)
-            self._event_tasks.clear()
             replacement = failed_api.copy()
             old_ws = self.ws
             self.api = replacement
             try:
                 await self.authenticate()
-                self.ws = await replacement.ws_connect()
+                new_ws = await replacement.ws_connect()
+                await self._stop_receiver()
+                # Discard old pipeline work before applying the replacement snapshot.
+                pending = list(self._event_tasks.values())
+                for task in pending:
+                    task.cancel()
+                await asyncio.gather(*pending, return_exceptions=True)
+                self._event_tasks.clear()
+                self.ws = new_ws
+                self._receiver = asyncio.create_task(self._receive(new_ws))
                 await self.fetch_users()
             except BaseException:
+                if self.ws is not old_ws:
+                    await self._stop_receiver()
+                if self._receiver is None and not self.closed and old_ws is not None:
+                    self._receiver = asyncio.create_task(self._receive(old_ws))
                 self.api = failed_api
                 self.ws = old_ws
                 await replacement.close()
@@ -259,22 +269,37 @@ class VRChatAccount:
             await failed_api.close()
             self._set_available(True)
 
+    async def _stop_receiver(self) -> None:
+        receiver = self._receiver
+        self._receiver = None
+        if receiver is not None:
+            receiver.cancel()
+            await asyncio.gather(receiver, return_exceptions=True)
+
+    async def _receive(self, ws: VRChatWebSocket) -> None:
+        try:
+            async for event in ws:
+                self._dispatch_event(event)
+                self._pipeline_activity.set()
+        finally:
+            self._pipeline_activity.set()
+
     async def _run(self) -> None:
         while not self.closed:
             failed_api = self.api
             timed_out = False
             try:
                 # Application traffic, not heartbeat frames, refreshes this deadline.
-                iterator = self.ws.__aiter__()
                 while not self.closed:
-                    event = await asyncio.wait_for(
-                        iterator.__anext__(), self.inactive_timeout
+                    self._pipeline_activity.clear()
+                    if self._receiver is not None and self._receiver.done():
+                        self._receiver.result()
+                        break
+                    await asyncio.wait_for(
+                        self._pipeline_activity.wait(), self.inactive_timeout
                     )
-                    self._dispatch_event(event)
             except asyncio.CancelledError:
                 raise
-            except StopAsyncIteration:
-                pass
             except asyncio.TimeoutError:
                 timed_out = True
             except Exception:
@@ -310,6 +335,8 @@ class VRChatAccount:
         tasks = list(self._tasks)
         if self._runner is not None:
             tasks.append(self._runner)
+        if self._receiver is not None:
+            tasks.append(self._receiver)
         for task in tasks:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)

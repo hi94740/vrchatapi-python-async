@@ -416,6 +416,174 @@ async def test_failed_recovery_closes_replacement(account: VRChatAccount) -> Non
     replacement.close.assert_awaited_once()
 
 
+@pytest.mark.parametrize("stage", ["get_current_user", "ws_connect"])
+async def test_timeout_keeps_processing_old_pipeline_until_replacement(
+    account: VRChatAccount, stage: str
+) -> None:
+    account.inactive_timeout = 0.01
+    await account.start()
+    old_api = account.api
+    old_ws = account.ws
+    old_receiver = account._receiver
+    new_ws = Pipeline()
+    started = asyncio.Event()
+    proceed = asyncio.Event()
+    recovered = asyncio.Event()
+    availability: list[bool] = []
+    account.on_available = availability.append
+    changed = asyncio.Event()
+    account.on_user = lambda user, world: changed.set()
+    replacement = Mock(
+        get_current_user=AsyncMock(return_value=CURRENT.copy()),
+        get_friends=AsyncMock(return_value=[]),
+        get_user=AsyncMock(return_value=FRIEND.copy()),
+        ws_connect=AsyncMock(return_value=new_ws),
+        close=AsyncMock(side_effect=new_ws.close),
+    )
+    result = getattr(replacement, stage).return_value
+
+    async def wait_for_replacement() -> object:
+        started.set()
+        await proceed.wait()
+        return result
+
+    async def close_old() -> None:
+        await old_ws.close()
+        recovered.set()
+
+    getattr(replacement, stage).side_effect = wait_for_replacement
+    old_api.copy.return_value = replacement
+    old_api.close.side_effect = close_old
+    await asyncio.wait_for(started.wait(), 1)
+    old_ws.events.put_nowait(
+        VRChatEvent(
+            "user-update",
+            {"userId": "usr_friend", "user": {"statusDescription": "during recovery"}},
+        )
+    )
+    await asyncio.wait_for(changed.wait(), 1)
+    assert account.users["usr_friend"].data["statusDescription"] == "during recovery"
+    assert not old_ws.closed
+    assert availability == []
+    account.inactive_timeout = 600
+    proceed.set()
+    await asyncio.wait_for(recovered.wait(), 1)
+    assert old_receiver.done()
+    assert old_ws.closed
+    assert account.ws is new_ws
+    changed.clear()
+    new_ws.events.put_nowait(
+        VRChatEvent(
+            "user-update",
+            {"userId": "usr_friend", "user": {"statusDescription": "replacement"}},
+        )
+    )
+    await asyncio.wait_for(changed.wait(), 1)
+    assert account.users["usr_friend"].data["statusDescription"] == "replacement"
+    assert availability == []
+    receiver = account._receiver
+    await account.close()
+    assert receiver.done()
+    assert new_ws.closed
+
+
+async def test_replacement_receives_events_during_snapshot(
+    account: VRChatAccount,
+) -> None:
+    await account.start()
+    old_api = account.api
+    new_ws = Pipeline()
+    fetching = asyncio.Event()
+    proceed = asyncio.Event()
+    changed = asyncio.Event()
+    account.on_user = lambda user, world: changed.set()
+
+    async def fetch_user(user_id: str) -> dict:
+        fetching.set()
+        await proceed.wait()
+        return FRIEND.copy()
+
+    old_api.copy.return_value = Mock(
+        get_current_user=AsyncMock(return_value=CURRENT.copy()),
+        get_friends=AsyncMock(return_value=[]),
+        get_user=AsyncMock(side_effect=fetch_user),
+        ws_connect=AsyncMock(return_value=new_ws),
+        close=AsyncMock(side_effect=new_ws.close),
+    )
+    recovery = account.create_task(account._recover(old_api))
+    await asyncio.wait_for(fetching.wait(), 1)
+    changed.clear()
+    new_ws.events.put_nowait(
+        VRChatEvent(
+            "user-update",
+            {"userId": "usr_friend", "user": {"statusDescription": "during snapshot"}},
+        )
+    )
+    await asyncio.wait_for(changed.wait(), 1)
+    assert account.users["usr_friend"].data["statusDescription"] == "during snapshot"
+    proceed.set()
+    await asyncio.wait_for(recovery, 1)
+
+
+async def test_failed_snapshot_resumes_old_pipeline(account: VRChatAccount) -> None:
+    await account.start()
+    old_api = account.api
+    old_ws = account.ws
+    new_ws = Pipeline()
+    replacement = Mock(
+        get_current_user=AsyncMock(return_value=CURRENT.copy()),
+        get_friends=AsyncMock(return_value=[]),
+        get_user=AsyncMock(side_effect=RuntimeError("snapshot failed")),
+        ws_connect=AsyncMock(return_value=new_ws),
+        close=AsyncMock(side_effect=new_ws.close),
+    )
+    old_api.copy.return_value = replacement
+    with pytest.raises(RuntimeError, match="snapshot failed"):
+        await account._recover(old_api)
+    assert account.ws is old_ws
+    assert account.api is old_api
+    assert new_ws.closed
+    assert not old_ws.closed
+    changed = asyncio.Event()
+    account.on_user = lambda user, world: changed.set()
+    old_ws.events.put_nowait(
+        VRChatEvent(
+            "user-update",
+            {"userId": "usr_friend", "user": {"statusDescription": "after failure"}},
+        )
+    )
+    await asyncio.wait_for(changed.wait(), 1)
+    assert account.users["usr_friend"].data["statusDescription"] == "after failure"
+    assert account.available
+
+
+async def test_close_during_timeout_recovery_stops_receiver(
+    account: VRChatAccount,
+) -> None:
+    account.inactive_timeout = 0.01
+    await account.start()
+    old_ws = account.ws
+    receiver = account._receiver
+    started = asyncio.Event()
+
+    async def authenticate() -> dict:
+        started.set()
+        await asyncio.Event().wait()
+        return CURRENT.copy()
+
+    replacement = Mock(
+        get_current_user=AsyncMock(side_effect=authenticate), close=AsyncMock()
+    )
+    account.api.copy.return_value = replacement
+    await asyncio.wait_for(started.wait(), 1)
+    await asyncio.wait_for(account.close(), 1)
+    assert receiver.done()
+    assert account._runner.done()
+    assert old_ws.closed
+    assert not account.available
+    replacement.close.assert_awaited_once()
+
+
 async def test_external_cache_is_not_closed(account: VRChatAccount) -> None:
     cache = WorldCache(AsyncMock())
     other = VRChatAccount(Mock(close=AsyncMock()), "other", worlds=cache)
