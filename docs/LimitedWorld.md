@@ -11,14 +11,17 @@ Name | Type | Description | Notes
 **capacity** | **int** |  | 
 **created_at** | **datetime** |  | 
 **default_content_settings** | [**InstanceContentSettings**](InstanceContentSettings.md) |  | [optional] 
+**disabled_prop_abilities** | **List[object]** |  | [optional] 
 **favorites** | **int** |  | [default to 0]
 **heat** | **int** |  | [default to 0]
 **id** | **str** | WorldID be \&quot;offline\&quot; on User profiles if you are not friends with that user. | 
 **image_url** | **str** |  | 
+**is_hype_train_eligible** | **bool** |  | [optional] 
 **labs_publication_date** | **str** |  | 
 **name** | **str** |  | 
 **occupants** | **int** |  | [default to 0]
 **organization** | **str** |  | [default to 'vrchat']
+**pending_upload** | **bool** |  | [optional] 
 **popularity** | **int** |  | [default to 0]
 **preview_youtube_id** | **str** |  | [optional] 
 **publication_date** | **str** |  | 

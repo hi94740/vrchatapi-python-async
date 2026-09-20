@@ -10,8 +10,15 @@ Name | Type | Description | Notes
 **id** | **str** |  | 
 **listing_ids** | **List[str]** |  | 
 **listings** | [**List[ProductListing]**](ProductListing.md) |  | [optional] 
+**shelf_background_image_id** | **str** |  | [optional] 
+**shelf_client_banner_image_id** | **str** |  | [optional] 
 **shelf_description** | **str** |  | 
+**shelf_icon_image_id** | **str** |  | [optional] 
 **shelf_layout** | **str** |  | 
+**shelf_mobile_hero_banner_image_id** | **str** |  | [optional] 
+**shelf_mobile_logo_image_id** | **str** |  | [optional] 
+**shelf_mobile_secondary_banner_image_id** | **str** |  | [optional] 
+**shelf_tab_background_image_id** | **str** |  | [optional] 
 **shelf_title** | **str** |  | 
 **updated_at** | **datetime** |  | 
 

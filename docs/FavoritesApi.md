@@ -7,7 +7,9 @@ Method | HTTP request | Description
 [**add_favorite**](FavoritesApi.md#add_favorite) | **POST** /favorites | Add Favorite
 [**clear_favorite_group**](FavoritesApi.md#clear_favorite_group) | **DELETE** /favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId} | Clear Favorite Group
 [**get_favorite_group**](FavoritesApi.md#get_favorite_group) | **GET** /favorite/group/{favoriteGroupType}/{favoriteGroupName}/{userId} | Show Favorite Group
+[**get_favorite_group_contents**](FavoritesApi.md#get_favorite_group_contents) | **GET** /favorites/groups/{favoriteGroupType}/{favoriteGroupName} | List Favorite Group Contents
 [**get_favorite_groups**](FavoritesApi.md#get_favorite_groups) | **GET** /favorite/groups | List Favorite Groups
+[**get_favorite_groups_by_type**](FavoritesApi.md#get_favorite_groups_by_type) | **GET** /favorites/groups/{favoriteGroupType} | List Favorite Groups By Type
 [**get_favorite_limits**](FavoritesApi.md#get_favorite_limits) | **GET** /auth/user/favoritelimits | Get Favorite Limits
 [**get_favorites**](FavoritesApi.md#get_favorites) | **GET** /favorites | List Favorites
 [**remove_favorite**](FavoritesApi.md#remove_favorite) | **DELETE** /favorites/{favoriteId} | Remove Favorite
@@ -268,8 +270,93 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_favorite_group_contents**
+> FavoriteGroupContents get_favorite_group_contents(favorite_group_type, favorite_group_name, owner_id=owner_id)
+
+List Favorite Group Contents
+
+List the favorites in a group, each alongside the object it points at.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.favorite_group_contents import FavoriteGroupContents
+from vrchatapi.models.favorite_type import FavoriteType
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.FavoritesApi(api_client)
+    favorite_group_type = 'friend' # FavoriteType | The type of group to fetch, must be a valid FavoriteType. (default to 'friend')
+    favorite_group_name = 'group_0' # str | The name of the group to fetch, must be a name of a FavoriteGroup. (default to 'group_0')
+    owner_id = 'owner_id_example' # str | The user whose favorite group to return. Must be a user ID. (optional)
+
+    try:
+        # List Favorite Group Contents
+        api_response = await api_instance.get_favorite_group_contents(favorite_group_type, favorite_group_name, owner_id=owner_id)
+        print("The response of FavoritesApi->get_favorite_group_contents:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FavoritesApi->get_favorite_group_contents: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **favorite_group_type** | [**FavoriteType**](.md)| The type of group to fetch, must be a valid FavoriteType. | [default to &#39;friend&#39;]
+ **favorite_group_name** | **str**| The name of the group to fetch, must be a name of a FavoriteGroup. | [default to &#39;group_0&#39;]
+ **owner_id** | **str**| The user whose favorite group to return. Must be a user ID. | [optional] 
+
+### Return type
+
+[**FavoriteGroupContents**](FavoriteGroupContents.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns the favorites in a group, each alongside the object it points at. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_favorite_groups**
-> List[FavoriteGroup] get_favorite_groups(n=n, offset=offset, user_id=user_id, owner_id=owner_id)
+> List[FavoriteGroup] get_favorite_groups(n=n, offset=offset, type=type, user_id=user_id, owner_id=owner_id)
 
 List Favorite Groups
 
@@ -282,6 +369,7 @@ Return a list of favorite groups owned by a user. Returns the same information a
 ```python
 import vrchatapi
 from vrchatapi.models.favorite_group import FavoriteGroup
+from vrchatapi.models.favorite_type import FavoriteType
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -308,12 +396,13 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     api_instance = vrchatapi.FavoritesApi(api_client)
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
+    type = 'friend' # FavoriteType | Filter to a single favorite group type. (optional) (default to 'friend')
     user_id = 'user_id_example' # str | Target user to see information on, admin-only. (optional)
-    owner_id = 'owner_id_example' # str | The owner whose favorite groups to return. Must be a UserID. (optional)
+    owner_id = 'owner_id_example' # str | The user whose favorite groups to return. Must be a user ID. (optional)
 
     try:
         # List Favorite Groups
-        api_response = await api_instance.get_favorite_groups(n=n, offset=offset, user_id=user_id, owner_id=owner_id)
+        api_response = await api_instance.get_favorite_groups(n=n, offset=offset, type=type, user_id=user_id, owner_id=owner_id)
         print("The response of FavoritesApi->get_favorite_groups:\n")
         pprint(api_response)
     except Exception as e:
@@ -329,8 +418,9 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
+ **type** | [**FavoriteType**](.md)| Filter to a single favorite group type. | [optional] [default to &#39;friend&#39;]
  **user_id** | **str**| Target user to see information on, admin-only. | [optional] 
- **owner_id** | **str**| The owner whose favorite groups to return. Must be a UserID. | [optional] 
+ **owner_id** | **str**| The user whose favorite groups to return. Must be a user ID. | [optional] 
 
 ### Return type
 
@@ -350,6 +440,89 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a list of FavoriteGroup objects. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_favorite_groups_by_type**
+> FavoriteGroupList get_favorite_groups_by_type(favorite_group_type, owner_id=owner_id)
+
+List Favorite Groups By Type
+
+List a user's favorite groups of one type.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.favorite_group_list import FavoriteGroupList
+from vrchatapi.models.favorite_type import FavoriteType
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.FavoritesApi(api_client)
+    favorite_group_type = 'friend' # FavoriteType | The type of group to fetch, must be a valid FavoriteType. (default to 'friend')
+    owner_id = 'owner_id_example' # str | The user whose favorite groups to return. Must be a user ID. (optional)
+
+    try:
+        # List Favorite Groups By Type
+        api_response = await api_instance.get_favorite_groups_by_type(favorite_group_type, owner_id=owner_id)
+        print("The response of FavoritesApi->get_favorite_groups_by_type:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling FavoritesApi->get_favorite_groups_by_type: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **favorite_group_type** | [**FavoriteType**](.md)| The type of group to fetch, must be a valid FavoriteType. | [default to &#39;friend&#39;]
+ **owner_id** | **str**| The user whose favorite groups to return. Must be a user ID. | [optional] 
+
+### Return type
+
+[**FavoriteGroupList**](FavoriteGroupList.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns a single FavoriteGroupList object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -592,8 +765,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Success response after removing a favorite. |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to show information about a non-existent favorite. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

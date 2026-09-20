@@ -149,3 +149,51 @@ a configurable application-level heartbeat (default 30s;
 [examples/examples-source/websocket.py](examples/examples-source/websocket.py)
 and the [Websocket API reference](https://vrchat.community/websocket) for
 details.
+
+## High-level account API
+
+`vrchatapi.highlevel` adds a dictionary-based API and a live account snapshot.
+The existing generated model-based API remains unchanged. Responses retain
+unknown fields, explicit nulls and missing fields, including partial updates.
+
+```python
+from vrchatapi.highlevel import VRChatAPI, VRChatAccount
+
+api = VRChatAPI(
+    {"username": "user", "password": "password"},
+    user_agent="MyApplication/1.0 contact@example.com",
+)
+# get_current_user and verify2_fa / verify2_fa_email_code can also be used
+# separately for interactive authentication. Persist api.cookie in your app.
+current_user = await api.get_current_user()
+account = VRChatAccount(
+    api,
+    current_user["id"],
+    on_user=lambda user, world_changed: print(user.id, user.data),
+    on_remove=lambda user_id: print("Removed", user_id),
+    on_available=lambda available: print("Connected", available),
+)
+try:
+    await account.start(current_user)
+    # Keep your application's event loop running while using account.users.
+finally:
+    await account.close()
+```
+
+The account owns its REST client, pipeline and default world cache. It fetches
+friend pages, resolves missing users, applies pipeline changes in receive order,
+and refreshes authentication and snapshots after disconnection. Authentication
+failures are exposed through `on_auth_error`; initial setup errors are raised.
+`on_authenticated` is an optional async callback for saving `api.cookie`.
+Other callbacks are synchronous and must not block the event loop.
+
+Each account has its own world cache by default. For deliberate sharing, pass
+an explicit `WorldCache(fetch_world)` to multiple accounts and close it after
+all consumers stop. A caller-supplied cache is never closed by an account.
+World requests are deduplicated; cancelling one waiter does not cancel other
+waiters. Closing the owner cancels pending fetches and retries.
+
+The source of this API lives in `client/highlevel/`. `generate.sh` copies it to
+`vrchatapi/highlevel/` after regeneration; edit the source, not the shipped copy.
+`tools/stamp_version.py VERSION` stamps local release builds using the same
+version step as generation. Release `1.21.0` includes this API.

@@ -5,12 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **str** |  | [optional] 
-**current_avatar_tags** | **List[str]** |  | [optional] 
-**current_avatar_thumbnail_image_url** | **str** | When profilePicOverride is not empty, use it instead. | [optional] 
+**id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | [optional] 
 **display_name** | **str** |  | [optional] 
-**profile_pic_override** | **str** |  | [optional] 
-**user_icon** | **str** |  | [optional] 
 
 ## Example
 

@@ -139,7 +139,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single GroupGalleryImage object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -223,7 +224,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupRoleID objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -391,7 +393,8 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects. |  -  |
 **400** | Bad request error response when banning a user |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -474,7 +477,7 @@ Name | Type | Description  | Notes
 **400** | Bad request error response when banning a user |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to block a group you already have blocked. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -553,7 +556,7 @@ void (empty response body)
 **200** | OK |  -  |
 **400** | You can&#39;t cancel a join request if you didn&#39;t request to join․ |  -  |
 **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -635,7 +638,8 @@ Name | Type | Description  | Notes
 **200** | Successful response after cancelling a group transfer. |  -  |
 **400** | Error response when trying to cancel a transfer for a group without a pending transfer. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -799,8 +803,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a single GroupAnnouncement object. |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -884,7 +889,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single GroupGallery object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -967,7 +973,7 @@ void (empty response body)
 **400** | Bad request error response when creating a group invite. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Forbidden error response when creating a group invite. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1051,7 +1057,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single GroupRole object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1136,7 +1143,7 @@ Name | Type | Description  | Notes
 **200** | Successful response after declining a group invite. |  -  |
 **400** | Bad request error response when declining a group invite. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1219,7 +1226,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful response after deleting a Group. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1300,7 +1307,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful response after deleting/clearing the group announcement. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1383,7 +1391,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful response after deleting a group gallery. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1469,7 +1478,7 @@ Name | Type | Description  | Notes
 **200** | Successful response after deleting a group gallery image. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to delete a submission to a group&#39;s gallery when the user does not have permission to do so. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1632,6 +1641,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Response after deleting a group post. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
 **404** | Response after deleting a group post. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1715,12 +1725,13 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupRole objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
 **404** | Error response when trying to perform operations on a group you are not member of. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_group**
-> Group get_group(group_id, include_roles=include_roles)
+> Group get_group(group_id, include_roles=include_roles, purpose=purpose)
 
 Get Group by ID
 
@@ -1759,10 +1770,11 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     api_instance = vrchatapi.GroupsApi(api_client)
     group_id = 'group_id_example' # str | Must be a valid group ID.
     include_roles = True # bool | Include roles for the Group object. Defaults to false. (optional)
+    purpose = 'purpose_example' # str |  (optional)
 
     try:
         # Get Group by ID
-        api_response = await api_instance.get_group(group_id, include_roles=include_roles)
+        api_response = await api_instance.get_group(group_id, include_roles=include_roles, purpose=purpose)
         print("The response of GroupsApi->get_group:\n")
         pprint(api_response)
     except Exception as e:
@@ -1778,6 +1790,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **group_id** | **str**| Must be a valid group ID. | 
  **include_roles** | **bool**| Include roles for the Group object. Defaults to false. | [optional] 
+ **purpose** | **str**|  | [optional] 
 
 ### Return type
 
@@ -1798,7 +1811,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single Group object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1881,7 +1894,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single GroupAnnouncement object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1961,7 +1975,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupAuditLogEntryTypes. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2056,7 +2071,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupAudit objects, wrapped in new pagination format. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2142,12 +2158,12 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing permissions. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_group_gallery_images**
-> List[GroupGalleryImage] get_group_gallery_images(group_id, group_gallery_id, n=n, offset=offset, approved=approved)
+> GetGroupGalleryImages200Response get_group_gallery_images(group_id, group_gallery_id, n=n, offset=offset, v=v, approved=approved)
 
 Get Group Gallery Images
 
@@ -2159,7 +2175,7 @@ Returns a list of images for a Group gallery.
 
 ```python
 import vrchatapi
-from vrchatapi.models.group_gallery_image import GroupGalleryImage
+from vrchatapi.models.get_group_gallery_images200_response import GetGroupGalleryImages200Response
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -2188,11 +2204,12 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     group_gallery_id = 'group_gallery_id_example' # str | Must be a valid group gallery ID.
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
+    v = 56 # int | Response version. `2` wraps the images in a paginated object. (optional)
     approved = True # bool | If specified, only returns images that have been approved or not approved. (optional)
 
     try:
         # Get Group Gallery Images
-        api_response = await api_instance.get_group_gallery_images(group_id, group_gallery_id, n=n, offset=offset, approved=approved)
+        api_response = await api_instance.get_group_gallery_images(group_id, group_gallery_id, n=n, offset=offset, v=v, approved=approved)
         print("The response of GroupsApi->get_group_gallery_images:\n")
         pprint(api_response)
     except Exception as e:
@@ -2210,11 +2227,12 @@ Name | Type | Description  | Notes
  **group_gallery_id** | **str**| Must be a valid group gallery ID. | 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
+ **v** | **int**| Response version. &#x60;2&#x60; wraps the images in a paginated object. | [optional] 
  **approved** | **bool**| If specified, only returns images that have been approved or not approved. | [optional] 
 
 ### Return type
 
-[**List[GroupGalleryImage]**](GroupGalleryImage.md)
+[**GetGroupGalleryImages200Response**](GetGroupGalleryImages200Response.md)
 
 ### Authorization
 
@@ -2229,9 +2247,9 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of GroupGalleryImage objects. |  -  |
+**200** | Returns a list of GroupGalleryImage objects, wrapped in a paginated object when &#x60;v&#x60; is &#x60;2&#x60;. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2312,7 +2330,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupInstance objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2398,7 +2417,7 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2482,7 +2501,7 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2574,7 +2593,7 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects. |  -  |
 **400** | Error response when trying to search list of users with an invalid request. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2656,7 +2675,8 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupPermission objects. |  -  |
 **400** | Error response when trying to search list of users with an invalid request. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2830,7 +2850,7 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects. |  -  |
 **400** | Bad request error response when responding to a group join request |  -  |
 **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -2987,7 +3007,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupRole objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3071,7 +3092,7 @@ Name | Type | Description  | Notes
 **200** | Returns a single GroupTransferable object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3156,7 +3177,7 @@ Name | Type | Description  | Notes
 **200** | Successful response after initiating or completing a group transfer. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to transfer a group to an ineligible target user. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3243,7 +3264,7 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects. |  -  |
 **400** | Error response when trying to join a group that the user is already a member of. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3327,7 +3348,7 @@ Name | Type | Description  | Notes
 **200** | Successful response after deleting a group member. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3405,7 +3426,7 @@ void (empty response body)
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **403** | Error response when trying to perform operations on a group you are not member of. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3489,7 +3510,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupRoleID objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3572,7 +3594,8 @@ void (empty response body)
 |-------------|-------------|------------------|
 **200** | OK |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3660,7 +3683,7 @@ Name | Type | Description  | Notes
 **200** | Returns a list of GroupMember objects from a search. |  -  |
 **400** | Error response when trying to search list of users with an invalid request. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3816,7 +3839,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupMember objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3899,8 +3923,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a single Group object. |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3986,7 +4011,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single GroupGallery object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4072,7 +4098,8 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of GroupMember objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing group. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -4158,6 +4185,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a GroupPost object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
+**403** | Error response when trying to perform operations on a group you are not member of. |  -  |
 **404** | Response after deleting a group post. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

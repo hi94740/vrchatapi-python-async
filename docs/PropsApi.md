@@ -7,10 +7,7 @@ Method | HTTP request | Description
 [**create_prop**](PropsApi.md#create_prop) | **POST** /props | Create Prop
 [**delete_prop**](PropsApi.md#delete_prop) | **DELETE** /props/{propId} | Delete Prop
 [**get_prop**](PropsApi.md#get_prop) | **GET** /props/{propId} | Get Prop
-[**get_prop_publish_status**](PropsApi.md#get_prop_publish_status) | **GET** /props/{propId}/publish | Get Prop Publish Status
 [**list_props**](PropsApi.md#list_props) | **GET** /props | List Props
-[**publish_prop**](PropsApi.md#publish_prop) | **PUT** /props/{propId}/publish | Publish Prop
-[**unpublish_prop**](PropsApi.md#unpublish_prop) | **DELETE** /props/{propId}/publish | Unpublish Prop
 [**update_prop**](PropsApi.md#update_prop) | **PUT** /props/{propId} | Update Prop
 
 
@@ -171,7 +168,7 @@ void (empty response body)
 **200** | The Prop is successfully deleted. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing permissions. |  -  |
-**404** | Error response when trying to perform operations on a non-existing prop. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -252,94 +249,12 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single Prop object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to perform operations on a non-existing prop. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_prop_publish_status**
-> PropPublishStatus get_prop_publish_status(prop_id)
-
-Get Prop Publish Status
-
-Returns a PropPublishStatus object.
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.prop_publish_status import PropPublishStatus
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.PropsApi(api_client)
-    prop_id = 'prop_id_example' # str | Prop ID.
-
-    try:
-        # Get Prop Publish Status
-        api_response = await api_instance.get_prop_publish_status(prop_id)
-        print("The response of PropsApi->get_prop_publish_status:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PropsApi->get_prop_publish_status: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **prop_id** | **str**| Prop ID. | 
-
-### Return type
-
-[**PropPublishStatus**](PropPublishStatus.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single PropPublishStatus object. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-**403** | Error response due to missing permissions. |  -  |
-**404** | Error response when trying to perform operations on a non-existing prop. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_props**
-> List[Prop] list_props(author_id, n=n, offset=offset)
+> List[Prop] list_props(n=n, offset=offset, author_id=author_id)
 
 List Props
 
@@ -376,13 +291,13 @@ configuration.api_key['authCookie'] = os.environ["API_KEY"]
 async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.PropsApi(api_client)
-    author_id = 'author_id_example' # str | Must be a valid user ID.
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
+    author_id = 'author_id_example' # str | Must be a valid user ID. (optional)
 
     try:
         # List Props
-        api_response = await api_instance.list_props(author_id, n=n, offset=offset)
+        api_response = await api_instance.list_props(n=n, offset=offset, author_id=author_id)
         print("The response of PropsApi->list_props:\n")
         pprint(api_response)
     except Exception as e:
@@ -396,9 +311,9 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **author_id** | **str**| Must be a valid user ID. | 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
+ **author_id** | **str**| Must be a valid user ID. | [optional] 
 
 ### Return type
 
@@ -420,170 +335,6 @@ Name | Type | Description  | Notes
 **200** | Returns a list of Prop objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing permissions. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **publish_prop**
-> PropPublishStatus publish_prop(prop_id)
-
-Publish Prop
-
-Publish a Prop and return the updated PropPublishStatus object.
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.prop_publish_status import PropPublishStatus
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.PropsApi(api_client)
-    prop_id = 'prop_id_example' # str | Prop ID.
-
-    try:
-        # Publish Prop
-        api_response = await api_instance.publish_prop(prop_id)
-        print("The response of PropsApi->publish_prop:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PropsApi->publish_prop: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **prop_id** | **str**| Prop ID. | 
-
-### Return type
-
-[**PropPublishStatus**](PropPublishStatus.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single PropPublishStatus object. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-**403** | Error response due to missing permissions. |  -  |
-**404** | Error response when trying to perform operations on a non-existing prop. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **unpublish_prop**
-> PropPublishStatus unpublish_prop(prop_id)
-
-Unpublish Prop
-
-Unpublish a Prop and return the updated PropPublishStatus object.
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.prop_publish_status import PropPublishStatus
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.PropsApi(api_client)
-    prop_id = 'prop_id_example' # str | Prop ID.
-
-    try:
-        # Unpublish Prop
-        api_response = await api_instance.unpublish_prop(prop_id)
-        print("The response of PropsApi->unpublish_prop:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling PropsApi->unpublish_prop: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **prop_id** | **str**| Prop ID. | 
-
-### Return type
-
-[**PropPublishStatus**](PropPublishStatus.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single PropPublishStatus object. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-**403** | Error response due to missing permissions. |  -  |
-**404** | Error response when trying to perform operations on a non-existing prop. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -666,9 +417,10 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a single Prop object. |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing permissions. |  -  |
-**404** | Error response when trying to perform operations on a non-existing prop. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

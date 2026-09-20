@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **near_field_ild_nudge** | **float** | Unknown | 
 **near_field_ild_nudge_distance** | **float** | Unknown | 
 **near_field_ild_nudge_ear_radius** | **float** | Unknown | 
+**near_field_ild_nudge_ear_translate** | **float** |  | [optional] 
 **per_ear_directionality_ear_radius** | **float** | Unknown | 
 **per_ear_directionality_fade_distance** | **float** | Unknown | 
 **per_ear_directionality_max_scale** | **float** | Unknown | 
@@ -17,6 +18,7 @@ Name | Type | Description | Notes
 **tracking_scale_max** | **float** | Unknown | 
 **tracking_scale_min** | **float** | Unknown | 
 **tracking_scale_multiplier** | **float** | Unknown | 
+**use_legacy_ild_nudging** | **bool** |  | [optional] 
 
 ## Example
 

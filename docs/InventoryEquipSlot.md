@@ -7,7 +7,13 @@
 
 * `DRONE` (value: `'drone'`)
 
+* `ICONFRAME` (value: `'iconFrame'`)
+
+* `NAMEPLATEEFFECT` (value: `'nameplateEffect'`)
+
 * `PORTAL` (value: `'portal'`)
+
+* `PROFILEEFFECT` (value: `'profileEffect'`)
 
 * `WARP` (value: `'warp'`)
 

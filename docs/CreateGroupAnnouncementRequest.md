@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **image_id** | **str** |  | [optional] 
 **send_notification** | **bool** | Send notification to group members. | [optional] [default to False]
-**text** | **str** | Announcement text | [optional] 
+**text** | **str** | Announcement text | 
 **title** | **str** | Announcement title | 
 
 ## Example

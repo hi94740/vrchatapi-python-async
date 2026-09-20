@@ -12,12 +12,14 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **default_content_settings** | [**InstanceContentSettings**](InstanceContentSettings.md) |  | [optional] 
 **description** | **str** |  | 
+**disabled_prop_abilities** | **List[object]** |  | [optional] 
 **favorites** | **int** |  | [optional] [default to 0]
 **featured** | **bool** |  | [default to False]
 **heat** | **int** |  | [default to 0]
 **id** | **str** | WorldID be \&quot;offline\&quot; on User profiles if you are not friends with that user. | 
 **image_url** | **str** |  | 
 **instances** | **List[List[object]]** | Will always be an empty list when unauthenticated. | [optional] 
+**is_hype_train_eligible** | **bool** |  | [optional] 
 **labs_publication_date** | **str** |  | 
 **name** | **str** |  | 
 **namespace** | **str** |  | [optional] 
@@ -30,6 +32,7 @@ Name | Type | Description | Notes
 **publication_date** | **str** |  | 
 **recommended_capacity** | **int** |  | 
 **release_status** | [**ReleaseStatus**](ReleaseStatus.md) |  | [default to ReleaseStatus.PUBLIC]
+**slim_instances** | **List[object]** |  | [optional] 
 **store_id** | **str** |  | [optional] 
 **tags** | **List[str]** |   | 
 **thumbnail_image_url** | **str** |  | 

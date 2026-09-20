@@ -5,6 +5,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**acquisition** | **str** |  | [optional] 
+**attribution** | **object** |  | [optional] 
 **collections** | **List[str]** |  | 
 **created_at** | **datetime** |  | 
 **default_attributes** | [**Dict[str, InventoryDefaultAttributesValue]**](InventoryDefaultAttributesValue.md) |  | 
@@ -20,6 +22,7 @@ Name | Type | Description | Notes
 **is_seen** | **bool** |  | 
 **item_type** | [**InventoryItemType**](InventoryItemType.md) |  | [default to InventoryItemType.BUNDLE]
 **item_type_label** | **str** |  | 
+**last_equipped** | **Dict[str, object]** |  | [optional] 
 **metadata** | [**InventoryMetadata**](InventoryMetadata.md) |  | 
 **name** | **str** |  | 
 **quantifiable** | **bool** |  | 

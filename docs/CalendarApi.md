@@ -183,7 +183,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Successful response after deleting a calendar event. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to download ICS calendar of a non-existent calendar entry, get such a calendar entry, or get the next event for a group that lacks any future scheduled events. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -708,6 +708,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single CalendarEvent object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -778,12 +779,12 @@ No authorization required
 |-------------|-------------|------------------|
 **200** | iCalendar file download |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to download ICS calendar of a non-existent calendar entry, get such a calendar entry, or get the next event for a group that lacks any future scheduled events. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_group_calendar_events**
-> PaginatedCalendarEventList get_group_calendar_events(group_id, var_date=var_date, n=n, offset=offset)
+> PaginatedCalendarEventList get_group_calendar_events(group_id, var_date=var_date, n=n, offset=offset, limit=limit, after=after, sort=sort)
 
 List a group's calendar events
 
@@ -824,10 +825,13 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     var_date = '2013-10-20T19:20:30+01:00' # datetime | The month to search in. (optional)
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
+    limit = 100 # int | The maximum number of entries to get. (optional)
+    after = '2013-10-20T19:20:30+01:00' # datetime | Only return events starting after this date. (optional)
+    sort = 'startTime_ascending' # str |  (optional)
 
     try:
         # List a group's calendar events
-        api_response = await api_instance.get_group_calendar_events(group_id, var_date=var_date, n=n, offset=offset)
+        api_response = await api_instance.get_group_calendar_events(group_id, var_date=var_date, n=n, offset=offset, limit=limit, after=after, sort=sort)
         print("The response of CalendarApi->get_group_calendar_events:\n")
         pprint(api_response)
     except Exception as e:
@@ -845,6 +849,9 @@ Name | Type | Description  | Notes
  **var_date** | **datetime**| The month to search in. | [optional] 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
+ **limit** | **int**| The maximum number of entries to get. | [optional] 
+ **after** | **datetime**| Only return events starting after this date. | [optional] 
+ **sort** | **str**|  | [optional] 
 
 ### Return type
 
@@ -873,7 +880,7 @@ Name | Type | Description  | Notes
 
 Get next calendar event
 
-Get the closest future calendar event scheduled for a group
+Return the closest future calendar event scheduled for a group. A group with no future scheduled events answers 404.
 
 ### Example
 
@@ -945,7 +952,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single CalendarEvent object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response when trying to download ICS calendar of a non-existent calendar entry, get such a calendar entry, or get the next event for a group that lacks any future scheduled events. |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

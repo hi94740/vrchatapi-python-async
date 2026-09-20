@@ -10,33 +10,31 @@ Method | HTTP request | Description
 [**delete_product_listing_direct**](EconomyApi.md#delete_product_listing_direct) | **DELETE** /listing/{productId} | Delete Product Listing
 [**get_active_licenses**](EconomyApi.md#get_active_licenses) | **GET** /economy/licenses/active | Get Active Licenses
 [**get_balance**](EconomyApi.md#get_balance) | **GET** /user/{userId}/balance | Get Balance
-[**get_balance_earnings**](EconomyApi.md#get_balance_earnings) | **GET** /user/{userId}/balance/earnings | Get Balance Earnings
 [**get_bulk_gift_purchases**](EconomyApi.md#get_bulk_gift_purchases) | **GET** /user/bulk/gift/purchases | Get Bulk Gift Purchases
 [**get_current_subscriptions**](EconomyApi.md#get_current_subscriptions) | **GET** /auth/user/subscription | Get Current Subscriptions
 [**get_earnings_metrics**](EconomyApi.md#get_earnings_metrics) | **GET** /economy/metrics/earnings | Get Earnings Metrics
 [**get_economy_account**](EconomyApi.md#get_economy_account) | **GET** /user/{userId}/economy/account | Get Economy Account
+[**get_economy_balance**](EconomyApi.md#get_economy_balance) | **GET** /user/{userId}/economy/balance | Get Economy Balance
 [**get_economy_balances**](EconomyApi.md#get_economy_balances) | **GET** /user/{userId}/economy/balances | Get Economy Balances
 [**get_economy_payout_status**](EconomyApi.md#get_economy_payout_status) | **GET** /user/{userId}/economy/payouts/status | Get Economy Payout Status
 [**get_economy_payouts**](EconomyApi.md#get_economy_payouts) | **GET** /user/{userId}/economy/payouts/list | Get Economy Payouts
+[**get_economy_status**](EconomyApi.md#get_economy_status) | **GET** /economy/status | Get Economy Status
 [**get_license_group**](EconomyApi.md#get_license_group) | **GET** /licenseGroups/{licenseGroupId} | Get License Group
 [**get_product_listing**](EconomyApi.md#get_product_listing) | **GET** /listing/{productId} | Get Product Listing
 [**get_product_listing_alternate**](EconomyApi.md#get_product_listing_alternate) | **GET** /products/{productId} | Get Product Listing (alternate)
+[**get_product_listing_products**](EconomyApi.md#get_product_listing_products) | **GET** /listing/{productId}/products | Get Product Listing Products
 [**get_product_listings**](EconomyApi.md#get_product_listings) | **GET** /user/{userId}/listings | Get User Product Listings
 [**get_product_purchase**](EconomyApi.md#get_product_purchase) | **GET** /economy/purchases/{productPurchaseId} | Get Product Purchase
 [**get_product_purchase_history**](EconomyApi.md#get_product_purchase_history) | **GET** /user/{userId}/economy/transactions | Get Product Purchase History
 [**get_product_purchase_stacks**](EconomyApi.md#get_product_purchase_stacks) | **GET** /economy/purchases/{productPurchaseId}/stacks | Get Product Purchase Stacks
 [**get_product_purchases**](EconomyApi.md#get_product_purchases) | **GET** /economy/purchases | Get Product Purchases
 [**get_recent_subscription**](EconomyApi.md#get_recent_subscription) | **GET** /user/subscription/recent | Get Recent Subscription
-[**get_seller_eligibility**](EconomyApi.md#get_seller_eligibility) | **GET** /economy/seller/eligibility | Get Seller Eligibility
 [**get_steam_transaction**](EconomyApi.md#get_steam_transaction) | **GET** /Steam/transactions/{transactionId} | Get Steam Transaction
 [**get_steam_transactions**](EconomyApi.md#get_steam_transactions) | **GET** /Steam/transactions | List Steam Transactions
 [**get_store**](EconomyApi.md#get_store) | **GET** /economy/store | Get Store
 [**get_store_shelves**](EconomyApi.md#get_store_shelves) | **GET** /economy/store/shelves | Get Store Shelves
 [**get_subscriptions**](EconomyApi.md#get_subscriptions) | **GET** /subscriptions | List Subscriptions
-[**get_tilia_status**](EconomyApi.md#get_tilia_status) | **GET** /tilia/status | Get Tilia Status
-[**get_tilia_tos**](EconomyApi.md#get_tilia_tos) | **GET** /user/{userId}/tilia/tos | Get Tilia TOS Agreement Status
 [**get_token_bundles**](EconomyApi.md#get_token_bundles) | **GET** /tokenBundles | List Token Bundles
-[**get_user_credits_eligible**](EconomyApi.md#get_user_credits_eligible) | **GET** /users/{userId}/credits/eligible | Get User Credits Eligibility
 [**get_user_subscription_eligible**](EconomyApi.md#get_user_subscription_eligible) | **GET** /users/{userId}/subscription/eligible | Get User Subscription Eligibility
 [**get_user_tilia_kyc**](EconomyApi.md#get_user_tilia_kyc) | **GET** /user/{userId}/tilia/kyc | Get User Tilia KYC
 [**list_stores**](EconomyApi.md#list_stores) | **GET** /economy/stores | List Stores
@@ -44,7 +42,6 @@ Method | HTTP request | Description
 [**purchase_product_listing**](EconomyApi.md#purchase_product_listing) | **POST** /economy/purchase/listing | Purchase Product Listing
 [**update_product**](EconomyApi.md#update_product) | **PUT** /products/{productId} | Update Product
 [**update_product_listing_direct**](EconomyApi.md#update_product_listing_direct) | **PUT** /listing/{productId} | Update Product Listing
-[**update_tilia_tos**](EconomyApi.md#update_tilia_tos) | **PUT** /user/{userId}/tilia/tos | Update Tilia TOS Agreement Status
 
 
 # **create_product**
@@ -452,7 +449,7 @@ This endpoint does not need any parameter.
 
 Get Balance
 
-Gets the balance of a user
+Return the balance of a user.
 
 ### Example
 
@@ -494,86 +491,6 @@ async with vrchatapi.ApiClient(configuration) as api_client:
         pprint(api_response)
     except Exception as e:
         print("Exception when calling EconomyApi->get_balance: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id** | **str**| Must be a valid user ID. | 
-
-### Return type
-
-[**Balance**](Balance.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single Balance object. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_balance_earnings**
-> Balance get_balance_earnings(user_id)
-
-Get Balance Earnings
-
-Gets the balance of a user from earnings
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.balance import Balance
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.EconomyApi(api_client)
-    user_id = 'user_id_example' # str | Must be a valid user ID.
-
-    try:
-        # Get Balance Earnings
-        api_response = await api_instance.get_balance_earnings(user_id)
-        print("The response of EconomyApi->get_balance_earnings:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EconomyApi->get_balance_earnings: %s\n" % e)
 ```
 
 
@@ -763,7 +680,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_earnings_metrics**
-> EarningsMetrics get_earnings_metrics(seller_id, metric_date_start=metric_date_start, metric_date_end=metric_date_end, group_by_duration=group_by_duration)
+> EarningsMetrics get_earnings_metrics(metric_date_start=metric_date_start, metric_date_end=metric_date_end, seller_id=seller_id, group_by_duration=group_by_duration)
 
 Get Earnings Metrics
 
@@ -800,14 +717,14 @@ configuration.api_key['authCookie'] = os.environ["API_KEY"]
 async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.EconomyApi(api_client)
-    seller_id = 'seller_id_example' # str | Seller to retrieve economy metrics for.
     metric_date_start = '2026-03-28T23:00:00.000Z' # str | Lower bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps. (optional)
     metric_date_end = '2026-04-04T21:59:59.999Z' # str | Upper bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps. (optional)
+    seller_id = 'seller_id_example' # str | Filter results by seller. (optional)
     group_by_duration = 'days' # str | Time bucket size for economy metrics. Observed values include `days` and `years`. (optional)
 
     try:
         # Get Earnings Metrics
-        api_response = await api_instance.get_earnings_metrics(seller_id, metric_date_start=metric_date_start, metric_date_end=metric_date_end, group_by_duration=group_by_duration)
+        api_response = await api_instance.get_earnings_metrics(metric_date_start=metric_date_start, metric_date_end=metric_date_end, seller_id=seller_id, group_by_duration=group_by_duration)
         print("The response of EconomyApi->get_earnings_metrics:\n")
         pprint(api_response)
     except Exception as e:
@@ -821,9 +738,9 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **seller_id** | **str**| Seller to retrieve economy metrics for. | 
  **metric_date_start** | **str**| Lower bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps. | [optional] 
  **metric_date_end** | **str**| Upper bound for economy metrics queries. Observed formats include both date-only and full ISO timestamps. | [optional] 
+ **seller_id** | **str**| Filter results by seller. | [optional] 
  **group_by_duration** | **str**| Time bucket size for economy metrics. Observed values include &#x60;days&#x60; and &#x60;years&#x60;. | [optional] 
 
 ### Return type
@@ -849,7 +766,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_economy_account**
-> EconomyAccount get_economy_account(user_id)
+> EconomyAccount get_economy_account(user_id, get_limits=get_limits)
 
 Get Economy Account
 
@@ -887,10 +804,11 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.EconomyApi(api_client)
     user_id = 'user_id_example' # str | Must be a valid user ID.
+    get_limits = True # bool | Include the account's spending limits in the response. (optional)
 
     try:
         # Get Economy Account
-        api_response = await api_instance.get_economy_account(user_id)
+        api_response = await api_instance.get_economy_account(user_id, get_limits=get_limits)
         print("The response of EconomyApi->get_economy_account:\n")
         pprint(api_response)
     except Exception as e:
@@ -905,6 +823,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **str**| Must be a valid user ID. | 
+ **get_limits** | **bool**| Include the account&#39;s spending limits in the response. | [optional] 
 
 ### Return type
 
@@ -924,6 +843,86 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a single EconomyAccount object. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_economy_balance**
+> Balance get_economy_balance(user_id)
+
+Get Economy Balance
+
+Return the balance of a user's economy account.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.balance import Balance
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.EconomyApi(api_client)
+    user_id = 'user_id_example' # str | Must be a valid user ID.
+
+    try:
+        # Get Economy Balance
+        api_response = await api_instance.get_economy_balance(user_id)
+        print("The response of EconomyApi->get_economy_balance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EconomyApi->get_economy_balance: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| Must be a valid user ID. | 
+
+### Return type
+
+[**Balance**](Balance.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns a single Balance object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1084,6 +1083,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns an EconomyPayoutStatus object. |  -  |
+**400** | Error response when the account is not in a state that supports the request, such as an account never onboarded for payouts. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1164,6 +1164,82 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns an EconomyPayoutList object. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_economy_status**
+> EconomyStatus get_economy_status()
+
+Get Economy Status
+
+Get whether the economy is accepting requests.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.economy_status import EconomyStatus
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.EconomyApi(api_client)
+
+    try:
+        # Get Economy Status
+        api_response = await api_instance.get_economy_status()
+        print("The response of EconomyApi->get_economy_status:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EconomyApi->get_economy_status: %s\n" % e)
+```
+
+
+
+### Parameters
+
+This endpoint does not need any parameter.
+
+### Return type
+
+[**EconomyStatus**](EconomyStatus.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns a single EconomyStatus object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1410,6 +1486,86 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
+# **get_product_listing_products**
+> List[Product] get_product_listing_products(product_id)
+
+Get Product Listing Products
+
+List the products a listing sells.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.product import Product
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.EconomyApi(api_client)
+    product_id = 'product_id_example' # str | Must be a valid product ID.
+
+    try:
+        # Get Product Listing Products
+        api_response = await api_instance.get_product_listing_products(product_id)
+        print("The response of EconomyApi->get_product_listing_products:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling EconomyApi->get_product_listing_products: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **product_id** | **str**| Must be a valid product ID. | 
+
+### Return type
+
+[**List[Product]**](Product.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** | Returns a list of Product objects. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
 # **get_product_listings**
 > List[ProductListing] get_product_listings(user_id, n=n, offset=offset, hydrate=hydrate, listing_type=listing_type, group_id=group_id, active=active)
 
@@ -1499,6 +1655,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a list of ProductListing objects. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
+**403** | Error response when requesting another user&#39;s product listings. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -1758,7 +1915,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_product_purchases**
-> List[ProductPurchase] get_product_purchases(buyer_id, seller_id=seller_id, n=n, offset=offset, most_recent=most_recent, sort=sort, order=order)
+> List[ProductPurchase] get_product_purchases(active=active, buyer_id=buyer_id, receiver_id=receiver_id, seller_id=seller_id, n=n, offset=offset, most_recent=most_recent, sort=sort, order=order)
 
 Get Product Purchases
 
@@ -1797,7 +1954,9 @@ configuration.api_key['authCookie'] = os.environ["API_KEY"]
 async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.EconomyApi(api_client)
-    buyer_id = 'buyer_id_example' # str | Must be a valid user ID.
+    active = True # bool | Filter for users' listings and inventory bundles. (optional)
+    buyer_id = 'buyer_id_example' # str | Must be a valid user ID. (optional)
+    receiver_id = 'receiver_id_example' # str | Must be a valid user ID. (optional)
     seller_id = 'seller_id_example' # str | Filter results by seller. (optional)
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
@@ -1807,7 +1966,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
     try:
         # Get Product Purchases
-        api_response = await api_instance.get_product_purchases(buyer_id, seller_id=seller_id, n=n, offset=offset, most_recent=most_recent, sort=sort, order=order)
+        api_response = await api_instance.get_product_purchases(active=active, buyer_id=buyer_id, receiver_id=receiver_id, seller_id=seller_id, n=n, offset=offset, most_recent=most_recent, sort=sort, order=order)
         print("The response of EconomyApi->get_product_purchases:\n")
         pprint(api_response)
     except Exception as e:
@@ -1821,7 +1980,9 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **buyer_id** | **str**| Must be a valid user ID. | 
+ **active** | **bool**| Filter for users&#39; listings and inventory bundles. | [optional] 
+ **buyer_id** | **str**| Must be a valid user ID. | [optional] 
+ **receiver_id** | **str**| Must be a valid user ID. | [optional] 
  **seller_id** | **str**| Filter results by seller. | [optional] 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
@@ -1852,7 +2013,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_recent_subscription**
-> UserSubscription get_recent_subscription()
+> UserSubscription get_recent_subscription(user_id=user_id)
 
 Get Recent Subscription
 
@@ -1889,10 +2050,11 @@ configuration.api_key['authCookie'] = os.environ["API_KEY"]
 async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.EconomyApi(api_client)
+    user_id = 'user_id_example' # str | Filter by UserID. (optional)
 
     try:
         # Get Recent Subscription
-        api_response = await api_instance.get_recent_subscription()
+        api_response = await api_instance.get_recent_subscription(user_id=user_id)
         print("The response of EconomyApi->get_recent_subscription:\n")
         pprint(api_response)
     except Exception as e:
@@ -1903,7 +2065,10 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| Filter by UserID. | [optional] 
 
 ### Return type
 
@@ -1923,82 +2088,6 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a UserSubscription object. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_seller_eligibility**
-> SellerEligibility get_seller_eligibility()
-
-Get Seller Eligibility
-
-Get the eligibility of the currently authenticated user to become a seller
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.seller_eligibility import SellerEligibility
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.EconomyApi(api_client)
-
-    try:
-        # Get Seller Eligibility
-        api_response = await api_instance.get_seller_eligibility()
-        print("The response of EconomyApi->get_seller_eligibility:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EconomyApi->get_seller_eligibility: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**SellerEligibility**](SellerEligibility.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single SellerEligibility object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2160,7 +2249,7 @@ This endpoint does not need any parameter.
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_store**
-> Store get_store(store_id, hydrate_listings=hydrate_listings, hydrate_products=hydrate_products)
+> Store get_store(store_id, hydrate_context=hydrate_context, hydrate_listings=hydrate_listings, hydrate_products=hydrate_products)
 
 Get Store
 
@@ -2198,12 +2287,13 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.EconomyApi(api_client)
     store_id = 'store_id_example' # str | 
+    hydrate_context = True # bool |  (optional)
     hydrate_listings = True # bool | Listings fields will be populated. (optional)
     hydrate_products = True # bool | Products fields will be populated. (optional)
 
     try:
         # Get Store
-        api_response = await api_instance.get_store(store_id, hydrate_listings=hydrate_listings, hydrate_products=hydrate_products)
+        api_response = await api_instance.get_store(store_id, hydrate_context=hydrate_context, hydrate_listings=hydrate_listings, hydrate_products=hydrate_products)
         print("The response of EconomyApi->get_store:\n")
         pprint(api_response)
     except Exception as e:
@@ -2218,6 +2308,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **store_id** | **str**|  | 
+ **hydrate_context** | **bool**|  | [optional] 
  **hydrate_listings** | **bool**| Listings fields will be populated. | [optional] 
  **hydrate_products** | **bool**| Products fields will be populated. | [optional] 
 
@@ -2329,7 +2420,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_subscriptions**
-> List[Subscription] get_subscriptions()
+> List[Subscription] get_subscriptions(gifts=gifts, recurring=recurring)
 
 List Subscriptions
 
@@ -2366,10 +2457,12 @@ configuration.api_key['authCookie'] = os.environ["API_KEY"]
 async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.EconomyApi(api_client)
+    gifts = True # bool | Return giftable subscriptions instead of standard ones. (optional)
+    recurring = True # bool | Return recurring subscriptions instead of standard ones. (optional)
 
     try:
         # List Subscriptions
-        api_response = await api_instance.get_subscriptions()
+        api_response = await api_instance.get_subscriptions(gifts=gifts, recurring=recurring)
         print("The response of EconomyApi->get_subscriptions:\n")
         pprint(api_response)
     except Exception as e:
@@ -2380,7 +2473,11 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
 ### Parameters
 
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **gifts** | **bool**| Return giftable subscriptions instead of standard ones. | [optional] 
+ **recurring** | **bool**| Return recurring subscriptions instead of standard ones. | [optional] 
 
 ### Return type
 
@@ -2400,162 +2497,6 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a list of Subscription objects. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_tilia_status**
-> TiliaStatus get_tilia_status()
-
-Get Tilia Status
-
-Gets the status of Tilia integration
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.tilia_status import TiliaStatus
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.EconomyApi(api_client)
-
-    try:
-        # Get Tilia Status
-        api_response = await api_instance.get_tilia_status()
-        print("The response of EconomyApi->get_tilia_status:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EconomyApi->get_tilia_status: %s\n" % e)
-```
-
-
-
-### Parameters
-
-This endpoint does not need any parameter.
-
-### Return type
-
-[**TiliaStatus**](TiliaStatus.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single TiliaStatus object. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_tilia_tos**
-> TiliaTOS get_tilia_tos(user_id)
-
-Get Tilia TOS Agreement Status
-
-Gets the status of the agreement of a user to the Tilia TOS
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.tilia_tos import TiliaTOS
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.EconomyApi(api_client)
-    user_id = 'user_id_example' # str | Must be a valid user ID.
-
-    try:
-        # Get Tilia TOS Agreement Status
-        api_response = await api_instance.get_tilia_tos(user_id)
-        print("The response of EconomyApi->get_tilia_tos:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EconomyApi->get_tilia_tos: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id** | **str**| Must be a valid user ID. | 
-
-### Return type
-
-[**TiliaTOS**](TiliaTOS.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single TiliaTOS object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2632,88 +2573,6 @@ This endpoint does not need any parameter.
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a list of TokenBundle objects. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **get_user_credits_eligible**
-> UserCreditsEligible get_user_credits_eligible(user_id, subscription_id)
-
-Get User Credits Eligibility
-
-Get the user's eligibility status for subscriptions based on available credits.
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.user_credits_eligible import UserCreditsEligible
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.EconomyApi(api_client)
-    user_id = 'user_id_example' # str | Must be a valid user ID.
-    subscription_id = 'subscription_id_example' # str | 
-
-    try:
-        # Get User Credits Eligibility
-        api_response = await api_instance.get_user_credits_eligible(user_id, subscription_id)
-        print("The response of EconomyApi->get_user_credits_eligible:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EconomyApi->get_user_credits_eligible: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id** | **str**| Must be a valid user ID. | 
- **subscription_id** | **str**|  | 
-
-### Return type
-
-[**UserCreditsEligible**](UserCreditsEligible.md)
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a single UserCreditsEligible object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2876,16 +2735,17 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a TiliaKyc object. |  -  |
+**400** | Error response when the account is not in a state that supports the request, such as an account never onboarded for payouts. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **list_stores**
-> List[Store] list_stores(seller_id=seller_id, management_pov=management_pov, n=n, offset=offset)
+> List[Store] list_stores(seller_id, management_pov=management_pov, n=n, offset=offset)
 
 List Stores
 
-Lists stores, optionally filtered to a seller and adjusted for management views.
+List a seller's stores, adjusted for management views.
 
 ### Example
 
@@ -2918,14 +2778,14 @@ configuration.api_key['authCookie'] = os.environ["API_KEY"]
 async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.EconomyApi(api_client)
-    seller_id = 'seller_id_example' # str | Filter results by seller. (optional)
+    seller_id = 'seller_id_example' # str | Seller to scope the results to.
     management_pov = true # bool | Return stores from the seller management point of view. (optional)
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
 
     try:
         # List Stores
-        api_response = await api_instance.list_stores(seller_id=seller_id, management_pov=management_pov, n=n, offset=offset)
+        api_response = await api_instance.list_stores(seller_id, management_pov=management_pov, n=n, offset=offset)
         print("The response of EconomyApi->list_stores:\n")
         pprint(api_response)
     except Exception as e:
@@ -2939,7 +2799,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **seller_id** | **str**| Filter results by seller. | [optional] 
+ **seller_id** | **str**| Seller to scope the results to. | 
  **management_pov** | **bool**| Return stores from the seller management point of view. | [optional] 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
@@ -2962,7 +2822,9 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a list of Store objects. |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
+**403** | Error response when the seller&#39;s stores are unavailable to the caller. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -3295,88 +3157,6 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a single ProductListing object. |  -  |
-**401** | Error response due to missing auth cookie. |  -  |
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
-
-# **update_tilia_tos**
-> object update_tilia_tos(user_id, update_tilia_tos_request=update_tilia_tos_request)
-
-Update Tilia TOS Agreement Status
-
-Updates the status of the agreement of a user to the Tilia TOS
-
-### Example
-
-* Api Key Authentication (authCookie):
-
-```python
-import vrchatapi
-from vrchatapi.models.update_tilia_tos_request import UpdateTiliaTOSRequest
-from vrchatapi.rest import ApiException
-from pprint import pprint
-
-# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
-# See configuration.py for a list of all supported configuration parameters.
-configuration = vrchatapi.Configuration(
-    host = "https://api.vrchat.cloud/api/1"
-)
-
-# The client must configure the authentication and authorization parameters
-# in accordance with the API server security policy.
-# Examples for each auth method are provided below, use the example that
-# satisfies your auth use case.
-
-# Configure API key authorization: authCookie
-configuration.api_key['authCookie'] = os.environ["API_KEY"]
-
-# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
-# configuration.api_key_prefix['authCookie'] = 'Bearer'
-
-# Enter a context with an instance of the API client
-async with vrchatapi.ApiClient(configuration) as api_client:
-    # Create an instance of the API class
-    api_instance = vrchatapi.EconomyApi(api_client)
-    user_id = 'user_id_example' # str | Must be a valid user ID.
-    update_tilia_tos_request = vrchatapi.UpdateTiliaTOSRequest() # UpdateTiliaTOSRequest |  (optional)
-
-    try:
-        # Update Tilia TOS Agreement Status
-        api_response = await api_instance.update_tilia_tos(user_id, update_tilia_tos_request=update_tilia_tos_request)
-        print("The response of EconomyApi->update_tilia_tos:\n")
-        pprint(api_response)
-    except Exception as e:
-        print("Exception when calling EconomyApi->update_tilia_tos: %s\n" % e)
-```
-
-
-
-### Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **user_id** | **str**| Must be a valid user ID. | 
- **update_tilia_tos_request** | [**UpdateTiliaTOSRequest**](UpdateTiliaTOSRequest.md)|  | [optional] 
-
-### Return type
-
-**object**
-
-### Authorization
-
-[authCookie](../README.md#authCookie)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-### HTTP response details
-
-| Status code | Description | Response headers |
-|-------------|-------------|------------------|
-**200** | Returns a UserSubscription object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

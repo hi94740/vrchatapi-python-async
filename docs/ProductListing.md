@@ -7,7 +7,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **active** | **bool** |  | 
 **archived** | **bool** |  | [optional] 
+**attribution** | [**ProductListingAttribution**](ProductListingAttribution.md) |  | [optional] 
 **buyer_refundable** | **bool** |  | 
+**collab_user_display_name** | **str** |  | [optional] 
+**collab_user_id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | [optional] 
 **created** | **datetime** |  | [optional] 
 **description** | **str** |  | 
 **display_name** | **str** |  | 
@@ -17,6 +20,8 @@ Name | Type | Description | Notes
 **group_id** | **str** |  | [optional] 
 **group_name** | **str** |  | [optional] 
 **has_avatar** | **bool** |  | 
+**has_companion** | **bool** |  | [optional] 
+**has_inventory** | **bool** |  | [optional] 
 **has_udon** | **bool** |  | 
 **hydrated_products** | [**List[Product]**](Product.md) |  | [optional] 
 **id** | **str** |  | 
@@ -28,17 +33,18 @@ Name | Type | Description | Notes
 **price_tokens** | **int** |  | 
 **product_ids** | **List[str]** |  | 
 **product_type** | [**ProductType**](ProductType.md) |  | [default to ProductType.UDON]
-**products** | **List[object]** |  | 
+**product_types** | **List[str]** |  | [optional] 
+**products** | **List[str]** | Product ids. The products themselves arrive in &#x60;hydratedProducts&#x60;. | 
 **purchase_count** | **int** |  | [optional] 
 **purchase_count_quantity** | **int** |  | [optional] 
 **quantifiable** | **bool** |  | [optional] 
 **recurrable** | **bool** |  | 
-**refundable** | **bool** |  | 
+**refundable** | **bool** |  | [optional] 
 **seller_display_name** | **str** |  | 
 **seller_id** | **str** |  | 
 **sold_by_vrc** | **bool** |  | [optional] 
 **stackable** | **bool** |  | 
-**store_ids** | **List[str]** |  | 
+**store_ids** | **List[str]** |  | [optional] 
 **subtitle** | **str** |  | [optional] 
 **tags** | **List[str]** |  | [optional] 
 **updated** | **datetime** |  | [optional] 

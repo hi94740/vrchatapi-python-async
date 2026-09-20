@@ -51,6 +51,13 @@ Hand-maintained — the generator never emits these:
   shipped `vrchatapi/websocket.py` is a generated output with a hand-maintained
   source. Never edit `vrchatapi/websocket.py` directly — edit
   `websocket/websocket.py` and re-copy.
+- `client/highlevel/` — canonical high-level account, API and world-cache sources,
+  copied to `vrchatapi/highlevel/` by `generate.sh`. Edit the canonical sources
+  and re-copy; never edit the shipped copies directly. `types.py` contains the
+  local high-level runtime additions; its `_generated_types.py` companion is
+  generated from the bundled OpenAPI document by `tools/generate_highlevel_types.py`.
+- `tools/stamp_version.py` — release version stamping shared by generation and
+  local package builds.
 - `examples/`, `AGENTS.md`, `LICENSE` — documentation, kept async.
 - `tests/`, `pytest.ini` — hand-written test suite. It lives in `tests/` (plural)
   so it never collides with the generator's `test/` (singular, ignored).
@@ -79,8 +86,10 @@ Requirements on PATH:
   the `@openapitools/openapi-generator-cli` npm package is a convenient way to
   install it and reads `openapitools.json` automatically. Needs **Java 11+**.
 - `git` and `redocly` — only needed when fetching the spec from GitHub.
-- `yq` — only needed when `<version>` is omitted (the version is then read
-  from the spec's `info.version`).
+- `yq`, Ruby, or PyYAML — one is needed to parse the bundled YAML when
+  generating the high-level TypedDict definitions. `yq` is also needed when
+  `<version>` is omitted (the version is then read from the spec's
+  `info.version`).
 
 ```bash
 # Follow the latest specification (main branch), bundle it with redocly, regenerate:

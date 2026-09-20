@@ -5,21 +5,26 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**attribution** | **object** |  | [optional] 
 **author_id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | 
 **collections** | **List[str]** |  | 
 **created_at** | **datetime** |  | 
 **default_attributes** | **object** |  | 
 **description** | **str** |  | 
+**drop_status** | **str** |  | [optional] 
 **equip_slots** | **List[str]** |  | 
 **flags** | **List[str]** |  | 
 **id** | **str** |  | 
 **image_url** | **str** |  | 
+**initial_toggle_state** | **bool** |  | [optional] 
 **item_type** | [**InventoryItemType**](InventoryItemType.md) |  | [default to InventoryItemType.BUNDLE]
 **item_type_label** | **str** |  | 
 **metadata** | [**InventoryMetadata**](InventoryMetadata.md) |  | [optional] 
 **name** | **str** |  | 
 **notification_details** | [**InventoryNotificationDetails**](InventoryNotificationDetails.md) |  | [optional] 
-**status** | **str** |  | 
+**product_id** | **str** |  | [optional] 
+**published_listings** | **List[str]** |  | [optional] 
+**status** | **str** |  | [optional] 
 **tags** | **List[str]** |  | 
 **updated_at** | **datetime** |  | 
 **validate_user_attributes** | **bool** |  | 

@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **base_permissions** | [**List[GroupPermissions]**](GroupPermissions.md) |  | 
 **description** | **str** |  | 
 **name** | **str** |  | 
-**roles** | [**GroupRoleTemplateValuesRoles**](GroupRoleTemplateValuesRoles.md) |  | 
+**roles** | [**List[GroupRoleTemplateRole]**](GroupRoleTemplateRole.md) |  | 
 
 ## Example
 

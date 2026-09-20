@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **posts** | [**List[GroupPost]**](GroupPost.md) |  | [optional] 
+**total** | **int** |  | [optional] 
 
 ## Example
 

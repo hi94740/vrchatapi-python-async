@@ -6,14 +6,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **created_at** | **datetime** |  | [optional] 
+**default_role** | **bool** |  | [optional] [default to False]
 **description** | **str** |  | [optional] 
 **group_id** | **str** |  | [optional] 
 **id** | **str** |  | [optional] 
+**is_added_on_join** | **bool** |  | [optional] [default to False]
 **is_management_role** | **bool** |  | [optional] [default to False]
 **is_self_assignable** | **bool** |  | [optional] [default to False]
 **name** | **str** |  | [optional] 
 **order** | **int** |  | [optional] 
 **permissions** | [**List[GroupPermissions]**](GroupPermissions.md) |  | [optional] 
+**product_id** | **str** |  | [optional] 
 **requires_purchase** | **bool** |  | [optional] [default to False]
 **requires_two_factor** | **bool** |  | [optional] [default to False]
 **updated_at** | **datetime** |  | [optional] 

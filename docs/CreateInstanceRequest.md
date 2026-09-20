@@ -7,9 +7,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **age_gate** | **bool** |  | [optional] [default to False]
 **calendar_entry_id** | **str** |  | [optional] 
-**can_request_invite** | **bool** | Only applies to invite type instances to make them invite+ | [optional] [default to False]
+**can_request_invite** | **bool** | Makes a private instance invite+. A friends instance is rejected. | [optional] [default to False]
+**category_id** | **str** |  | [optional] 
 **closed_at** | **datetime** | The time after which users won&#39;t be allowed to join the instance. This doesn&#39;t work for public instances. | [optional] 
 **content_settings** | [**InstanceContentSettings**](InstanceContentSettings.md) |  | [optional] 
+**description** | **str** |  | [optional] 
 **display_name** | **str** |  | [optional] 
 **group_access_type** | [**GroupAccessType**](GroupAccessType.md) |  | [optional] [default to GroupAccessType.MEMBERS]
 **hard_close** | **bool** | Currently unused, but will eventually be a flag to set if the closing of the instance should kick people. | [optional] [default to False]
@@ -21,6 +23,7 @@ Name | Type | Description | Notes
 **region** | [**InstanceRegion**](InstanceRegion.md) |  | [default to InstanceRegion.US]
 **role_ids** | **List[str]** | Group roleIds that are allowed to join if the type is \&quot;group\&quot; and groupAccessType is \&quot;member\&quot; | [optional] 
 **type** | [**InstanceType**](InstanceType.md) |  | 
+**vibe_ids** | **List[str]** |  | [optional] 
 **world_id** | **str** | WorldID be \&quot;offline\&quot; on User profiles if you are not friends with that user. | 
 
 ## Example

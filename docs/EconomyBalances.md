@@ -6,7 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **balance** | **int** |  | 
-**earnings** | **int** |  | 
+**earnings** | **int** |  | [optional] 
 **standard** | **int** |  | 
 
 ## Example

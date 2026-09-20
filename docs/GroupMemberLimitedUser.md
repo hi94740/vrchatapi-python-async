@@ -6,13 +6,15 @@ Only visible via the /groups/:groupId/members endpoint, **not** when fetching a 
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**current_avatar_tags** | **List[str]** |  | [optional] 
-**current_avatar_thumbnail_image_url** | **str** |  | [optional] 
+**banner_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**banner_type** | **str** |  | [optional] 
+**banner_url** | **str** |  | [optional] 
 **display_name** | **str** |  | [optional] 
+**icon_frame** | **str** |  | [optional] 
 **icon_url** | **str** |  | [optional] 
 **id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | [optional] 
-**profile_pic_override** | **str** |  | [optional] 
-**thumbnail_url** | **str** |  | [optional] 
+**nameplate_effect** | **str** |  | [optional] 
+**profile_effect** | **str** |  | [optional] 
 
 ## Example
 

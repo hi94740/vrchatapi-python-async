@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **created_at** | **datetime** |  | 
 **data** | **Dict[str, str]** |  | 
 **details** | [**NotificationV2DetailsBoop**](NotificationV2DetailsBoop.md) |  | [optional] 
+**display_data** | **object** |  | [optional] 
 **expires_at** | **datetime** |  | 
 **expiry_after_seen** | **int** |  | 
 **id** | **str** |  | 

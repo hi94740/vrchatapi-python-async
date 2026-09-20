@@ -24,6 +24,7 @@ Name | Type | Description | Notes
 **is_draft** | **bool** |  | [optional] 
 **languages** | **List[str]** | Languages that might be spoken at this event | [optional] 
 **occurrence_kind** | [**CalendarEventOccurrenceKind**](CalendarEventOccurrenceKind.md) |  | [optional] [default to CalendarEventOccurrenceKind.SINGLE]
+**occurrence_modified** | **bool** |  | [optional] 
 **owner_id** | **str** |  | [optional] 
 **platforms** | [**List[CalendarEventPlatform]**](CalendarEventPlatform.md) |  | [optional] 
 **recurrence** | [**CalendarEventRecurrence**](CalendarEventRecurrence.md) |  | [optional] 

@@ -5,7 +5,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**content** | [**InfoPushDataArticleContent**](InfoPushDataArticleContent.md) |  | [optional] 
+**content** | [**List[InfoPushDataArticleContent]**](InfoPushDataArticleContent.md) |  | [optional] 
+**embedded_link_data** | [**List[InfoPushEmbeddedLink]**](InfoPushEmbeddedLink.md) |  | [optional] 
+**jump_links** | **List[str]** |  | [optional] 
+**more_info_links** | [**List[InfoPushEmbeddedLink]**](InfoPushEmbeddedLink.md) |  | [optional] 
+**section_links** | **List[str]** |  | [optional] 
 
 ## Example
 

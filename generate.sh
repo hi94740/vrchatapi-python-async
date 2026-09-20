@@ -20,7 +20,8 @@ set -euo pipefail
 # Requirements:
 #   - openapi-generator CLI (version pinned in openapitools.json, needs Java 11+)
 #   - git and redocly (only when fetching the spec from the specification repo)
-#   - yq (only when <version> is omitted)
+#   - yq, Ruby, or PyYAML (for high-level TypedDict generation); yq is also
+#     needed when <version> is omitted
 #   - patch, perl, python3 (python3 for tools/make_models_lenient.py)
 
 # ---- Package metadata (single source of truth) -----------------------------
@@ -101,9 +102,13 @@ openapi-generator generate \
 -i "${WORK_DIR}/openapi.yaml" \
 --http-user-agent="vrchatapi-py"
 
+# Generate the dictionary types used by the high-level API from the same
+# bundled document as the generated REST client.
+python3 tools/generate_highlevel_types.py \
+  "${WORK_DIR}/openapi.yaml" client/highlevel/_generated_types.py
+
 # Stamp version and fix metadata (Echo to trim whitespace)
-perl -pi -e "s/VERSION = \"1.0.0\"/VERSION = \"$VERSION\"/" ./setup.py
-perl -pi -e "s/__version__ = \"1.0.0\"/__version__ = \"$VERSION\"/" ./vrchatapi/__init__.py
+python3 tools/stamp_version.py "$VERSION"
 perl -pi -e "s/description=\"VRChat API Documentation\"/description=\"$DESCRIPTION\"/" ./setup.py
 perl -pi -e "s/keywords=\[\"OpenAPI\", \"OpenAPI-Generator\", \"VRChat API Documentation\"\]/keywords=$KEYWORDS/" ./setup.py
 # author/author_email come from the spec's info.contact by default; override
@@ -133,6 +138,8 @@ done
 # generated tree is produced. The copy-back runs even with --no-patch so the
 # pristine baseline is a faithful picture of the full pipeline output.
 cp websocket/websocket.py vrchatapi/websocket.py
+mkdir -p vrchatapi/highlevel
+cp client/highlevel/*.py vrchatapi/highlevel/
 
 # Stop here for the pristine baseline: exactly the state the `patch` steps
 # below operate on. Useful for rewriting patches when upstream changes.

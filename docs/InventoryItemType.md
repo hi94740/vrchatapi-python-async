@@ -9,7 +9,13 @@
 
 * `EMOJI` (value: `'emoji'`)
 
+* `ICONFRAME` (value: `'iconFrame'`)
+
+* `NAMEPLATEEFFECT` (value: `'nameplateEffect'`)
+
 * `PORTALSKIN` (value: `'portalskin'`)
+
+* `PROFILEEFFECT` (value: `'profileEffect'`)
 
 * `PROP` (value: `'prop'`)
 

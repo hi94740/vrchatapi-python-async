@@ -107,6 +107,7 @@ Name | Type | Description  | Notes
 **200** | Returns a single InviteMessage object. |  -  |
 **400** | Error response when trying to get an Invite Message with a negative slot number. |  -  |
 **401** | Error response due to missing authorization to perform that action. |  -  |
+**403** | Error response due to missing authorization to perform that action. |  -  |
 **404** | Error response when trying to get an Invite Message with a too high slot number. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -281,7 +282,7 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns a single SentNotification object. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
-**404** | Error response due to non existent instance |  -  |
+**404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -364,6 +365,7 @@ Name | Type | Description  | Notes
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
 **200** | Returns a single SentNotification object. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to invite someone whom you are not friends with. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -718,6 +720,7 @@ Name | Type | Description  | Notes
 **200** | Returns a list of InviteMessage objects. |  -  |
 **400** | Error response when trying to update an Invite Message with an invalid slot number. |  -  |
 **401** | Error response due to missing authorization to perform that action. |  -  |
+**403** | Error response due to missing authorization to perform that action. |  -  |
 **404** | Error response when trying to reset an Invite Message whose slot doesn&#39;t exist. |  -  |
 **429** | Error response when trying to update an Invite Message before the cooldown has expired. |  -  |
 

@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **player_order_factor** | **int** | Unknown | 
 **slow_update_factor_threshold** | **int** | Unknown | 
 **use_direct_player_serialization** | **bool** | Unknown | 
+**use_sparse_rotation_for_player_serialization** | **bool** |  | [optional] 
 **view_segment_length** | **int** | Unknown | 
 
 ## Example

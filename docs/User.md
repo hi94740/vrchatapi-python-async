@@ -5,22 +5,22 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**accepted_privacy_version** | **int** |  | [optional] 
+**accepted_tos_version** | **int** |  | [optional] 
+**account_deletion_date** | **str** |  | [optional] 
+**account_deletion_log** | **List[object]** |  | [optional] 
 **age_verification_status** | [**AgeVerificationStatus**](AgeVerificationStatus.md) |  | 
 **age_verified** | **bool** | &#x60;true&#x60; if, user is age verified (not 18+). | 
 **allow_avatar_copying** | **bool** |  | [default to True]
-**badges** | [**List[Badge]**](Badge.md) |   | [optional] 
+**apple_details** | **Dict[str, object]** |  | [optional] 
+**banner_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
 **banner_type** | **str** |  | [optional] 
 **banner_url** | **str** |  | [optional] 
-**bio** | **str** |  | 
-**bio_links** | **List[str]** |  | 
-**current_avatar_image_url** | **str** | When profilePicOverride is not empty, use it instead. | 
-**current_avatar_tags** | **List[str]** |  | 
-**current_avatar_thumbnail_image_url** | **str** | When profilePicOverride is not empty, use it instead. | 
 **date_joined** | **date** |  | 
 **developer_type** | [**DeveloperType**](DeveloperType.md) |  | [default to DeveloperType.NONE]
 **display_name** | **str** | A users visual display name. This is what shows up in-game, and can different from their &#x60;username&#x60;. Changing display name is restricted to a cooldown period. | 
 **friend_key** | **str** |  | 
-**friend_request_status** | **str** |  | [optional] 
+**friend_request_status** | **str** | State of a friend request between the caller and this user. VRChat sends the string &#x60;\&quot;null\&quot;&#x60;, not JSON &#x60;null&#x60;. | [optional] 
 **icon_frame** | **str** |  | [optional] 
 **icon_url** | **str** |  | [optional] 
 **id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | 
@@ -36,8 +36,6 @@ Name | Type | Description | Notes
 **note** | **str** |  | [optional] 
 **platform** | **str** |  | [optional] 
 **profile_effect** | **str** |  | [optional] 
-**profile_pic_override** | **str** |  | 
-**profile_pic_override_thumbnail** | **str** |  | 
 **pronouns** | **str** |  | 
 **state** | [**UserState**](UserState.md) |  | [default to UserState.OFFLINE]
 **status** | [**UserStatus**](UserStatus.md) |  | [default to UserStatus.OFFLINE]
@@ -46,8 +44,6 @@ Name | Type | Description | Notes
 **traveling_to_instance** | **str** |  | [optional] 
 **traveling_to_location** | **str** |  | [optional] 
 **traveling_to_world** | **str** |  | [optional] 
-**user_icon** | **str** |  | 
-**username** | **str** | -| A users unique name, used during login. This is different from &#x60;displayName&#x60; which is what shows up in-game. A users &#x60;username&#x60; can never be changed.&#39; **DEPRECATED:** VRChat API no longer return usernames of other users. [See issue by Tupper for more information](https://github.com/pypy-vrc/VRCX/issues/429). | [optional] 
 **world_id** | **str** | WorldID be \&quot;offline\&quot; on User profiles if you are not friends with that user. | [optional] 
 
 ## Example

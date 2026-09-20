@@ -6,6 +6,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **display_name** | **str** |  | 
+**reverted** | **bool** |  | 
 **updated_at** | **datetime** |  | 
 
 ## Example

@@ -5,9 +5,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**id** | **str** |  | [optional] 
 **image_url** | **str** |  | [optional] 
 **on_pressed** | [**InfoPushDataClickable**](InfoPushDataClickable.md) |  | [optional] 
 **text** | **str** |  | [optional] 
+**title** | **str** |  | [optional] 
+**video_url** | **str** |  | [optional] 
 
 ## Example
 
