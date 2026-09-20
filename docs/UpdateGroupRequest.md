@@ -12,7 +12,6 @@ Name | Type | Description | Notes
 **languages** | **List[str]** | 3 letter language code | [optional] 
 **links** | **List[str]** |  | [optional] 
 **name** | **str** |  | [optional] 
-**nameplate_id** | **str** |  | [optional] 
 **rules** | **str** |  | [optional] 
 **short_code** | **str** |  | [optional] 
 **tags** | **List[str]** |   | [optional] 

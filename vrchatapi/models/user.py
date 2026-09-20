@@ -117,7 +117,7 @@ class User(BaseModel):
     age_verified: Optional[StrictBool] = Field(default=None, validation_alias=AliasChoices("ageVerified", "age_verified"), serialization_alias="ageVerified", description="`true` if, user is age verified (not 18+).")
     allow_avatar_copying: Optional[StrictBool] = Field(default=None, validation_alias=AliasChoices("allowAvatarCopying", "allow_avatar_copying"), serialization_alias="allowAvatarCopying")
     apple_details: Optional[Dict[str, Any]] = Field(default=None, validation_alias=AliasChoices("appleDetails", "apple_details"), serialization_alias="appleDetails")
-    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor")
     banner_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerType", "banner_type"), serialization_alias="bannerType")
     banner_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerUrl", "banner_url"), serialization_alias="bannerUrl")
     date_joined: Optional[date] = None

@@ -113,13 +113,13 @@ class PublicProfile(BaseModel):
     """ # noqa: E501
     age_verification_status: Optional[AgeVerificationStatus] = Field(default=None, validation_alias=AliasChoices("ageVerificationStatus", "age_verification_status"), serialization_alias="ageVerificationStatus")
     age_verified: Optional[StrictBool] = Field(default=None, validation_alias=AliasChoices("ageVerified", "age_verified"), serialization_alias="ageVerified", description="`true` if, user is age verified (not 18+).")
-    background_gradient_bottom: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientBottom", "background_gradient_bottom"), serialization_alias="backgroundGradientBottom", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
-    background_gradient_top: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientTop", "background_gradient_top"), serialization_alias="backgroundGradientTop", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    background_gradient_bottom: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientBottom", "background_gradient_bottom"), serialization_alias="backgroundGradientBottom", description="Hex colour without a leading `#`.")
+    background_gradient_top: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientTop", "background_gradient_top"), serialization_alias="backgroundGradientTop", description="Hex colour without a leading `#`.")
     background_template_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundTemplateId", "background_template_id"), serialization_alias="backgroundTemplateId")
     background_texture_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundTextureId", "background_texture_id"), serialization_alias="backgroundTextureId")
     background_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundType", "background_type"), serialization_alias="backgroundType")
     badges: Optional[List[Badge]] = None
-    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor")
     banner_custom_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerCustomUrl", "banner_custom_url"), serialization_alias="bannerCustomUrl")
     banner_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerType", "banner_type"), serialization_alias="bannerType")
     banner_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerUrl", "banner_url"), serialization_alias="bannerUrl")
@@ -147,10 +147,10 @@ class PublicProfile(BaseModel):
     represented_group: Optional[ProfileRepresentedGroup] = Field(default=None, validation_alias=AliasChoices("representedGroup", "represented_group"), serialization_alias="representedGroup")
     status: Optional[UserStatus] = UserStatus.OFFLINE
     status_description: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("statusDescription", "status_description"), serialization_alias="statusDescription")
-    theme_button_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeButtonColor", "theme_button_color"), serialization_alias="themeButtonColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
-    theme_icon_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeIconColor", "theme_icon_color"), serialization_alias="themeIconColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    theme_button_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeButtonColor", "theme_button_color"), serialization_alias="themeButtonColor", description="Hex colour without a leading `#`.")
+    theme_icon_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeIconColor", "theme_icon_color"), serialization_alias="themeIconColor", description="Hex colour without a leading `#`.")
     theme_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeId", "theme_id"), serialization_alias="themeId")
-    theme_subtext_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeSubtextColor", "theme_subtext_color"), serialization_alias="themeSubtextColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    theme_subtext_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeSubtextColor", "theme_subtext_color"), serialization_alias="themeSubtextColor", description="Hex colour without a leading `#`.")
     themes: Optional[List[Any]] = None
     total_public_worlds_count: Optional[StrictInt] = Field(default=None, validation_alias=AliasChoices("totalPublicWorldsCount", "total_public_worlds_count"), serialization_alias="totalPublicWorldsCount")
     trust_tags: Optional[List[Annotated[str, Field(min_length=1, strict=True)]]] = Field(default=None, validation_alias=AliasChoices("trustTags", "trust_tags"), serialization_alias="trustTags")

@@ -103,11 +103,11 @@ class APIConfigProfileDefaults(BaseModel):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """ # noqa: E501
-    background_gradient_bottom: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientBottom", "background_gradient_bottom"), serialization_alias="backgroundGradientBottom", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
-    background_gradient_top: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientTop", "background_gradient_top"), serialization_alias="backgroundGradientTop", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
-    theme_button_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeButtonColor", "theme_button_color"), serialization_alias="themeButtonColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
-    theme_icon_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeIconColor", "theme_icon_color"), serialization_alias="themeIconColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
-    theme_subtext_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeSubtextColor", "theme_subtext_color"), serialization_alias="themeSubtextColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    background_gradient_bottom: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientBottom", "background_gradient_bottom"), serialization_alias="backgroundGradientBottom", json_schema_extra={"examples": ["9933FF"]})
+    background_gradient_top: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundGradientTop", "background_gradient_top"), serialization_alias="backgroundGradientTop", json_schema_extra={"examples": ["00C48A"]})
+    theme_button_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeButtonColor", "theme_button_color"), serialization_alias="themeButtonColor", json_schema_extra={"examples": ["009599"]})
+    theme_icon_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeIconColor", "theme_icon_color"), serialization_alias="themeIconColor", json_schema_extra={"examples": ["6BE4FA"]})
+    theme_subtext_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("themeSubtextColor", "theme_subtext_color"), serialization_alias="themeSubtextColor", json_schema_extra={"examples": ["A9A9A9"]})
     openapi_types: ClassVar[Dict[str, str]] = {
         "background_gradient_bottom": "str",
         "background_gradient_top": "str",

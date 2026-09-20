@@ -104,7 +104,7 @@ class MutualFriend(BaseModel):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """ # noqa: E501
-    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Hex colour without a leading `#`.", json_schema_extra={"examples": ["3cc92c"]})
     banner_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerType", "banner_type"), serialization_alias="bannerType", json_schema_extra={"examples": ["color"]})
     banner_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerUrl", "banner_url"), serialization_alias="bannerUrl")
     display_name: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("displayName", "display_name"), serialization_alias="displayName")

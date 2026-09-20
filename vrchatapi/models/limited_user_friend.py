@@ -107,7 +107,7 @@ class LimitedUserFriend(BaseModel):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """ # noqa: E501
-    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor")
     banner_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerType", "banner_type"), serialization_alias="bannerType")
     banner_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerUrl", "banner_url"), serialization_alias="bannerUrl")
     developer_type: Optional[DeveloperType] = Field(default=None, validation_alias=AliasChoices("developerType", "developer_type"), serialization_alias="developerType")

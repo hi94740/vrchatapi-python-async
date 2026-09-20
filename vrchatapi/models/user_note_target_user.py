@@ -103,7 +103,7 @@ class UserNoteTargetUser(BaseModel):
       attribute_map (dict): The key is attribute name
                             and the value is json key in definition.
     """ # noqa: E501
-    id: Optional[StrictStr] = Field(default=None, description="A users unique ID, usually in the form of `usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469`. Legacy players can have old IDs in the form of `8JoV9XEdpo`. The ID can never be changed.", json_schema_extra={"examples": ["usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469"]})
+    id: Optional[StrictStr] = Field(default=None, json_schema_extra={"examples": ["unt_e9074848-d107-4019-b4aa-bbd19e67660d"]})
     display_name: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("displayName", "display_name"), serialization_alias="displayName")
     openapi_types: ClassVar[Dict[str, str]] = {
         "id": "str",

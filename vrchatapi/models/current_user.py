@@ -125,7 +125,7 @@ class CurrentUser(BaseModel):
     apple_details: Optional[Dict[str, Any]] = Field(default=None, validation_alias=AliasChoices("appleDetails", "apple_details"), serialization_alias="appleDetails")
     apple_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("appleId", "apple_id"), serialization_alias="appleId")
     auth_token: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("authToken", "auth_token"), serialization_alias="authToken", description="The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register)")
-    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor")
     banner_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerType", "banner_type"), serialization_alias="bannerType")
     banner_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerUrl", "banner_url"), serialization_alias="bannerUrl")
     completed_tutorials: Optional[List[StrictStr]] = Field(default=None, validation_alias=AliasChoices("completedTutorials", "completed_tutorials"), serialization_alias="completedTutorials")

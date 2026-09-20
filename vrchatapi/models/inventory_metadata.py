@@ -109,8 +109,8 @@ class InventoryMetadata(BaseModel):
     asset_bundle_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("assetBundleId", "asset_bundle_id"), serialization_alias="assetBundleId")
     assets: Optional[List[InventoryAsset]] = None
     file_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("fileId", "file_id"), serialization_alias="fileId")
-    gradient_end: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("gradientEnd", "gradient_end"), serialization_alias="gradientEnd", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
-    gradient_start: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("gradientStart", "gradient_start"), serialization_alias="gradientStart", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    gradient_end: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("gradientEnd", "gradient_end"), serialization_alias="gradientEnd", description="Hex colour without a leading `#`.")
+    gradient_start: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("gradientStart", "gradient_start"), serialization_alias="gradientStart", description="Hex colour without a leading `#`.")
     image_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("imageUrl", "image_url"), serialization_alias="imageUrl")
     inventory_items_to_instantiate: Optional[List[StrictStr]] = Field(default=None, validation_alias=AliasChoices("inventoryItemsToInstantiate", "inventory_items_to_instantiate"), serialization_alias="inventoryItemsToInstantiate", description="Only in bundles")
     mask_tag: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("maskTag", "mask_tag"), serialization_alias="maskTag")

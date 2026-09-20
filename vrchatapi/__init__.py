@@ -21,6 +21,7 @@ __all__ = [
     "AuthenticationApi",
     "AvatarsApi",
     "CalendarApi",
+    "DeprecatedApi",
     "EconomyApi",
     "FavoritesApi",
     "FilesApi",
@@ -422,6 +423,7 @@ __all__ = [
 from vrchatapi.api.authentication_api import AuthenticationApi as AuthenticationApi
 from vrchatapi.api.avatars_api import AvatarsApi as AvatarsApi
 from vrchatapi.api.calendar_api import CalendarApi as CalendarApi
+from vrchatapi.api.deprecated_api import DeprecatedApi as DeprecatedApi
 from vrchatapi.api.economy_api import EconomyApi as EconomyApi
 from vrchatapi.api.favorites_api import FavoritesApi as FavoritesApi
 from vrchatapi.api.files_api import FilesApi as FilesApi

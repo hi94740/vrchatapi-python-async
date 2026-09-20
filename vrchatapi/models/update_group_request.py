@@ -112,7 +112,6 @@ class UpdateGroupRequest(BaseModel):
     languages: Optional[Annotated[List[Annotated[str, Field(strict=True, max_length=3)]], Field(max_length=3)]] = Field(default=None, description="3 letter language code")
     links: Optional[Annotated[List[StrictStr], Field(max_length=3)]] = None
     name: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=64)]] = None
-    nameplate_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("nameplateId", "nameplate_id"), serialization_alias="nameplateId")
     rules: Optional[StrictStr] = None
     short_code: Optional[Annotated[str, Field(min_length=3, strict=True, max_length=6)]] = Field(default=None, validation_alias=AliasChoices("shortCode", "short_code"), serialization_alias="shortCode")
     tags: Optional[List[Annotated[str, Field(min_length=1, strict=True)]]] = Field(default=None, description=" ")
@@ -124,7 +123,6 @@ class UpdateGroupRequest(BaseModel):
         "languages": "List[str]",
         "links": "List[str]",
         "name": "str",
-        "nameplate_id": "str",
         "rules": "str",
         "short_code": "str",
         "tags": "List[str]"
@@ -138,12 +136,11 @@ class UpdateGroupRequest(BaseModel):
         "languages": "languages",
         "links": "links",
         "name": "name",
-        "nameplate_id": "nameplateId",
         "rules": "rules",
         "short_code": "shortCode",
         "tags": "tags"
     }
-    __properties: ClassVar[List[str]] = ["bannerId", "description", "iconId", "joinState", "languages", "links", "name", "nameplateId", "rules", "shortCode", "tags"]
+    __properties: ClassVar[List[str]] = ["bannerId", "description", "iconId", "joinState", "languages", "links", "name", "rules", "shortCode", "tags"]
 
     @classmethod
     def __preprocess_input_names(
@@ -163,9 +160,6 @@ class UpdateGroupRequest(BaseModel):
         if "joinState" not in obj and "join_state" in obj:
             obj["joinState"] = obj["join_state"]
         obj.pop("join_state", None)
-        if "nameplateId" not in obj and "nameplate_id" in obj:
-            obj["nameplateId"] = obj["nameplate_id"]
-        obj.pop("nameplate_id", None)
         if "shortCode" not in obj and "short_code" in obj:
             obj["shortCode"] = obj["short_code"]
         obj.pop("short_code", None)
@@ -225,7 +219,6 @@ class UpdateGroupRequest(BaseModel):
             ("languages" if serialize else "languages"): _to_legacy_value(getattr(self, "languages", None), serialize),
             ("links" if serialize else "links"): _to_legacy_value(getattr(self, "links", None), serialize),
             ("name" if serialize else "name"): _to_legacy_value(getattr(self, "name", None), serialize),
-            ("nameplateId" if serialize else "nameplate_id"): _to_legacy_value(getattr(self, "nameplate_id", None), serialize),
             ("rules" if serialize else "rules"): _to_legacy_value(getattr(self, "rules", None), serialize),
             ("shortCode" if serialize else "short_code"): _to_legacy_value(getattr(self, "short_code", None), serialize),
             ("tags" if serialize else "tags"): _to_legacy_value(getattr(self, "tags", None), serialize),
@@ -258,11 +251,6 @@ class UpdateGroupRequest(BaseModel):
         # and model_fields_set contains the field
         if self.icon_id is None and "icon_id" in self.model_fields_set:
             _dict['iconId'] = None
-
-        # set to None if nameplate_id (nullable) is None
-        # and model_fields_set contains the field
-        if self.nameplate_id is None and "nameplate_id" in self.model_fields_set:
-            _dict['nameplateId'] = None
 
         return _dict
 
@@ -303,7 +291,6 @@ class UpdateGroupRequest(BaseModel):
             "languages": obj.get("languages"),
             "links": obj.get("links"),
             "name": obj.get("name"),
-            "nameplateId": obj.get("nameplateId"),
             "rules": obj.get("rules"),
             "shortCode": obj.get("shortCode"),
             "tags": obj.get("tags")

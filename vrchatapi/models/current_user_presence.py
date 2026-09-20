@@ -106,7 +106,7 @@ class CurrentUserPresence(BaseModel):
     avatar_image_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("avatarImageUrl", "avatar_image_url"), serialization_alias="avatarImageUrl")
     avatar_thumbnail: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("avatarThumbnail", "avatar_thumbnail"), serialization_alias="avatarThumbnail")
     banner: Optional[StrictStr] = None
-    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor")
     banner_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerType", "banner_type"), serialization_alias="bannerType")
     banner_url: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerUrl", "banner_url"), serialization_alias="bannerUrl")
     current_avatar_tags: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("currentAvatarTags", "current_avatar_tags"), serialization_alias="currentAvatarTags")

@@ -105,7 +105,7 @@ class UpdateProfileRequest(BaseModel):
     """ # noqa: E501
     background_texture_id: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundTextureId", "background_texture_id"), serialization_alias="backgroundTextureId")
     background_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("backgroundType", "background_type"), serialization_alias="backgroundType")
-    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Six hexadecimal digits, without a leading `#`. May be empty.", json_schema_extra={"examples": ["3cc92c"]})
+    banner_color: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerColor", "banner_color"), serialization_alias="bannerColor", description="Hex colour without a leading `#`.")
     banner_type: Optional[StrictStr] = Field(default=None, validation_alias=AliasChoices("bannerType", "banner_type"), serialization_alias="bannerType")
     bio: Optional[StrictStr] = None
     bio_links: Optional[List[StrictStr]] = Field(default=None, validation_alias=AliasChoices("bioLinks", "bio_links"), serialization_alias="bioLinks")
