@@ -349,8 +349,9 @@ async def test_world_names_cache_updates_and_reuses_snapshot() -> None:
     first = cache.get("wrld_first", {"name": "B"})
     cache.get("wrld_second", {"name": "A"})
     cache.get("wrld_duplicate", {"name": "B"})
+    cache.get("wrld_empty", {"name": ""})
     cache.get("wrld_unknown")
-    assert cache.sorted_names == ("A", "B")
+    assert cache.sorted_names == ("A", "B", "wrld_empty")
     names = cache.sorted_names
     assert cache.sorted_names is names
 
@@ -359,12 +360,12 @@ async def test_world_names_cache_updates_and_reuses_snapshot() -> None:
     observed = []
     first.subscribe(lambda _: observed.append(cache.sorted_names))
     first.data = {"name": "C"}
-    assert observed == [("A", "B", "C")]
-    assert cache.sorted_names == ("A", "B", "C")
+    assert observed == [("A", "B", "C", "wrld_empty")]
+    assert cache.sorted_names == ("A", "B", "C", "wrld_empty")
     first.data = None
-    assert cache.sorted_names == ("A", "B")
+    assert cache.sorted_names == ("A", "B", "wrld_empty")
     first.data = {"name": "D"}
-    assert cache.sorted_names == ("A", "B", "D")
+    assert cache.sorted_names == ("A", "B", "D", "wrld_empty")
     other = WorldCache(AsyncMock())
     assert other.sorted_names == ()
     fetch.assert_not_awaited()

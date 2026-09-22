@@ -38,7 +38,7 @@ class WorldCache:
             self._sorted_names = tuple(
                 sorted(
                     {
-                        name
+                        name or world.id
                         for world in self.registry.values()
                         if (data := world.data) is not None
                         and (name := data.get("name")) is not None
