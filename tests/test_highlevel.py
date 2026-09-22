@@ -12,6 +12,8 @@ from test_async_sdk import MockVRCServer
 from vrchatapi.exceptions import UnauthorizedException
 from vrchatapi.highlevel import (
     AccountIdMismatch,
+    TwoFactorAuthChallenge,
+    TwoFactorAuthRequired,
     VRChatAccount,
     VRChatAPI,
     VRChatUser,
@@ -123,6 +125,20 @@ async def test_cookie_copy_user_agent_and_close() -> None:
             assert copied.cookie == {}
             assert api.cookie == {"auth": "token"}
     await api.close()
+
+
+async def test_cookie_uses_configured_host() -> None:
+    server = MockVRCServer()
+    await server.start()
+    try:
+        async with VRChatAPI() as api:
+            api.api_client.configuration.host = server.base_url
+            api.cookie = {"auth": "token"}
+            assert api.cookie == {"auth": "token"}
+            await api.get_current_user()
+            assert server.seen[0][1].get("Cookie") == "auth=token"
+    finally:
+        await server.stop()
 
 
 async def test_start_snapshot_and_notifications(account: VRChatAccount) -> None:
@@ -866,3 +882,81 @@ async def test_pending_pipeline_fetch_cancelled_before_teardown(
     await asyncio.wait_for(operations[operation](), 1)
     assert cancelled.is_set()
     assert "usr_new" not in account.users
+
+
+@pytest.mark.parametrize(
+    ("raw_body", "challenge"),
+    [
+        pytest.param(
+            '{"requiresTwoFactorAuth":["totp","otp"]}',
+            TwoFactorAuthChallenge.TOTP,
+            id="totp",
+        ),
+        pytest.param(
+            '{ "requiresTwoFactorAuth": ["otp", "totp"] }',
+            TwoFactorAuthChallenge.TOTP,
+            id="reordered-and-spaced",
+        ),
+        pytest.param(
+            '{"requiresTwoFactorAuth":["totp"]}',
+            TwoFactorAuthChallenge.TOTP,
+            id="totp-only",
+        ),
+        pytest.param(
+            '{"requiresTwoFactorAuth":["emailOtp"]}',
+            TwoFactorAuthChallenge.EMAIL_OTP,
+            id="email",
+        ),
+        pytest.param(
+            '{"extra":true,"requiresTwoFactorAuth":["emailOtp"]}',
+            TwoFactorAuthChallenge.EMAIL_OTP,
+            id="extra-field",
+        ),
+    ],
+)
+async def test_typed_two_factor_challenge(
+    raw_body: str, challenge: TwoFactorAuthChallenge
+) -> None:
+    server = MockVRCServer()
+    server.raw_body = raw_body
+    await server.start()
+    try:
+        async with VRChatAPI() as api:
+            api.api_client.configuration.host = server.base_url
+            with pytest.raises(TwoFactorAuthRequired) as exc:
+                await api.get_current_user()
+            assert exc.value.challenge is challenge
+            assert isinstance(exc.value, UnauthorizedException)
+            assert exc.value.status == 200
+            assert exc.value.body == raw_body
+    finally:
+        await server.stop()
+
+
+@pytest.mark.parametrize(
+    ("status", "body"),
+    [
+        pytest.param(
+            401,
+            {"error": {"message": "Invalid credentials", "status_code": 401}},
+            id="invalid-credentials",
+        ),
+        pytest.param(200, {"requiresTwoFactorAuth": ["unknown"]}, id="unsupported"),
+        pytest.param(200, {"requiresTwoFactorAuth": "totp"}, id="malformed"),
+        pytest.param(200, {"requiresTwoFactorAuth": []}, id="empty"),
+    ],
+)
+async def test_non_challenge_auth_error(status: int, body: dict) -> None:
+    server = MockVRCServer()
+    server.status = status
+    server.body = body
+    await server.start()
+    try:
+        async with VRChatAPI() as api:
+            api.api_client.configuration.host = server.base_url
+            with pytest.raises(UnauthorizedException) as exc:
+                await api.get_current_user()
+            assert not isinstance(exc.value, TwoFactorAuthRequired)
+            assert exc.value.status == status
+    finally:
+        await server.stop()

@@ -180,6 +180,14 @@ finally:
     await account.close()
 ```
 
+For interactive login, catch `vrchatapi.highlevel.TwoFactorAuthRequired` and
+branch on its `challenge`: `TwoFactorAuthChallenge.EMAIL_OTP` uses
+`verify2_fa_email_code`, while `TwoFactorAuthChallenge.TOTP` uses `verify2_fa`.
+Then call `get_current_user` again. Classification uses the response's
+`requiresTwoFactorAuth` field, independent of exception wording. The exception
+is also an `UnauthorizedException`; unsupported challenges remain ordinary
+`UnauthorizedException` errors.
+
 The account owns its REST client, pipeline and default world cache. It fetches
 friend pages, resolves missing users, applies pipeline changes in receive order,
 and refreshes authentication and snapshots after disconnection. Authentication

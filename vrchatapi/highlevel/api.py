@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
+from enum import Enum
 from functools import cached_property
 from http.cookiejar import Cookie
+import json
 from typing import cast
+from urllib.parse import urlsplit
 
 import vrchatapi
 from vrchatapi.websocket import DEFAULT_USER_AGENT, VRChatWebSocket
@@ -14,13 +17,51 @@ from .types import CurrentUser, User, VRChatAuthCookie, World
 
 CONF_COOKIE_AUTH = "auth"
 CONF_COOKIE_2FA = "twoFactorAuth"
-VRCHAT_API_HOST = "api.vrchat.cloud"
+
+
+class TwoFactorAuthChallenge(str, Enum):
+    """Supported two-factor authentication challenges."""
+
+    TOTP = "totp"
+    EMAIL_OTP = "emailOtp"
+
+
+class TwoFactorAuthRequired(vrchatapi.exceptions.UnauthorizedException):
+    """Authentication requires a code for the indicated challenge."""
+
+    def __init__(self, challenge: TwoFactorAuthChallenge, *, http_resp=None) -> None:
+        self.challenge = challenge
+        super().__init__(
+            status=200,
+            reason="Two-factor authentication required",
+            http_resp=http_resp,
+        )
 
 
 class _DictionaryApiClient(vrchatapi.ApiClient):
     """Use the SDK's authentication/error handling without lossy model conversion."""
 
     async def response_deserialize(self, response_data, response_types_map=None):
+        if response_data.status == 200 and response_data.data:
+            try:
+                payload = json.loads(response_data.data)
+            except ValueError:
+                payload = None
+            if isinstance(payload, dict) and "requiresTwoFactorAuth" in payload:
+                methods = payload["requiresTwoFactorAuth"]
+                if isinstance(methods, list):
+                    for challenge in (
+                        TwoFactorAuthChallenge.EMAIL_OTP,
+                        TwoFactorAuthChallenge.TOTP,
+                    ):
+                        if challenge.value in methods:
+                            raise TwoFactorAuthRequired(
+                                challenge, http_resp=response_data
+                            )
+                raise vrchatapi.exceptions.UnauthorizedException(
+                    http_resp=response_data,
+                    reason="Unsupported two-factor authentication challenge",
+                )
         response_types_map = dict(response_types_map or {})
         if 200 <= response_data.status < 300:
             response_types_map[str(response_data.status)] = "object"
@@ -144,14 +185,14 @@ class VRChatAPI:
         await self.close()
 
 
-def make_cookie(name: str, value: str) -> Cookie:
+def make_cookie(name: str, value: str, domain: str) -> Cookie:
     return Cookie(
         0,
         name,
         value,
         None,
         False,
-        VRCHAT_API_HOST,
+        domain,
         True,
         False,
         "/",
@@ -168,18 +209,24 @@ def make_cookie(name: str, value: str) -> Cookie:
 def set_cookie_dict(
     api: vrchatapi.ApiClient, cookie: VRChatAuthCookie | None = None
 ) -> None:
+    domain = urlsplit(api.configuration.host).hostname
+    if domain is None:
+        raise ValueError(f"Invalid API host: {api.configuration.host!r}")
     for name in (CONF_COOKIE_AUTH, CONF_COOKIE_2FA):
         if cookie and (value := cookie.get(name)):
-            api.rest_client.cookie_jar.set_cookie(make_cookie(name, value))
+            api.rest_client.cookie_jar.set_cookie(make_cookie(name, value, domain))
 
 
 def get_cookie_dict(api: vrchatapi.ApiClient) -> VRChatAuthCookie:
+    domain = urlsplit(api.configuration.host).hostname
+    if domain is None:
+        raise ValueError(f"Invalid API host: {api.configuration.host!r}")
     return cast(
         VRChatAuthCookie,
         {
             cookie.name: cookie.value
             for cookie in api.rest_client.cookie_jar
-            if cookie.domain == VRCHAT_API_HOST
+            if cookie.domain == domain
             and cookie.path == "/"
             and cookie.name in (CONF_COOKIE_AUTH, CONF_COOKIE_2FA)
             and cookie.value
