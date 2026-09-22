@@ -193,6 +193,12 @@ Other callbacks are synchronous and must not block the event loop.
 Each account has its own world cache by default. For deliberate sharing, pass
 an explicit `WorldCache(fetch_world)` to multiple accounts and close it after
 all consumers stop. A caller-supplied cache is never closed by an account.
+
+`WorldCache.sorted_names` returns a cached, sorted tuple of unique names from
+loaded worlds without fetching metadata. Update metadata with `cache.get(id, data)`
+or assignment to `world.data`; in-place changes to the data dictionary or direct
+mutation of `cache.registry` bypass name-cache invalidation. Name changes, cache
+additions, pruning, and closure invalidate or clear the cached result.
 World requests are deduplicated; cancelling one waiter does not cancel other
 waiters. Closing the owner cancels pending fetches and retries.
 
@@ -218,7 +224,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "vrchatapi-async"
-VERSION = "1.21.0.post1"
+VERSION = "1.21.0post1"
 PYTHON_REQUIRES = ">= 3.10"
 REQUIRES = [
     "python-dateutil >= 2.8.2",
@@ -435,6 +441,12 @@ Other callbacks are synchronous and must not block the event loop.
 Each account has its own world cache by default. For deliberate sharing, pass
 an explicit `WorldCache(fetch_world)` to multiple accounts and close it after
 all consumers stop. A caller-supplied cache is never closed by an account.
+
+`WorldCache.sorted_names` returns a cached, sorted tuple of unique names from
+loaded worlds without fetching metadata. Update metadata with `cache.get(id, data)`
+or assignment to `world.data`; in-place changes to the data dictionary or direct
+mutation of `cache.registry` bypass name-cache invalidation. Name changes, cache
+additions, pruning, and closure invalidate or clear the cached result.
 World requests are deduplicated; cancelling one waiter does not cancel other
 waiters. Closing the owner cancels pending fetches and retries.
 
