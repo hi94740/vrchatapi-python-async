@@ -25,6 +25,27 @@ class WorldCache:
         self.registry: dict[str, VRChatWorldData] = {}
         self.last_pruned = datetime.min.replace(tzinfo=timezone.utc)
         self.closed = False
+        self._sorted_names: tuple[str, ...] | None = None
+
+    @property
+    def sorted_names(self) -> tuple[str, ...]:
+        """Return unique loaded world names without fetching metadata.
+
+        Update worlds through get() or by assigning world.data. Direct mutation
+        of registry or world.data dictionaries bypasses cache invalidation.
+        """
+        if self._sorted_names is None:
+            self._sorted_names = tuple(
+                sorted(
+                    {
+                        name
+                        for world in self.registry.values()
+                        if (data := world.data) is not None
+                        and (name := data.get("name")) is not None
+                    }
+                )
+            )
+        return self._sorted_names
 
     def get(self, world_id: str, data: World | None = None) -> VRChatWorldData:
         if self.closed:
@@ -40,9 +61,11 @@ class WorldCache:
                     and world.task is None
                 ):
                     del self.registry[key]
+                    self._sorted_names = None
             self.last_pruned = now
         if (world := self.registry.get(world_id)) is None:
             world = self.registry[world_id] = VRChatWorldData(self, world_id, data)
+            self._sorted_names = None
         elif data is not None:
             world.data = data
         return world
@@ -56,6 +79,7 @@ class WorldCache:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
         self.registry.clear()
+        self._sorted_names = ()
 
 
 class VRChatWorldData:
@@ -77,6 +101,10 @@ class VRChatWorldData:
 
     @data.setter
     def data(self, value: World | None) -> None:
+        old_name = self._data.get("name") if self._data is not None else None
+        new_name = value.get("name") if value is not None else None
+        if old_name != new_name:
+            self.cache._sorted_names = None
         self._data = value
         self.last_updated = datetime.now(timezone.utc)
         for callback in list(self.subscribers):

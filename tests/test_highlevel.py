@@ -312,6 +312,7 @@ async def test_private_location_clears_previous_destination(
 async def test_world_fetch_shared_and_cancellation_isolated() -> None:
     fetch = AsyncMock(return_value={"id": "wrld_test", "name": "World"})
     cache = WorldCache(fetch)
+    assert cache.sorted_names == ()
     world = cache.get("wrld_test")
     first = asyncio.create_task(world.get_data())
     second = asyncio.create_task(world.get_data())
@@ -320,7 +321,58 @@ async def test_world_fetch_shared_and_cancellation_isolated() -> None:
     with pytest.raises(asyncio.CancelledError):
         await first
     assert (await second)["name"] == "World"
+    assert cache.sorted_names == ("World",)
     fetch.assert_awaited_once()
+    await cache.close()
+
+
+async def test_world_names_cache_updates_and_reuses_snapshot() -> None:
+    fetch = AsyncMock()
+    cache = WorldCache(fetch)
+    assert cache.sorted_names == ()
+    first = cache.get("wrld_first", {"name": "B"})
+    cache.get("wrld_second", {"name": "A"})
+    cache.get("wrld_duplicate", {"name": "B"})
+    cache.get("wrld_unknown")
+    assert cache.sorted_names == ("A", "B")
+    names = cache.sorted_names
+    assert cache.sorted_names is names
+
+    cache.get("wrld_first", {"name": "B", "description": "Updated"})
+    assert cache.sorted_names is names
+    observed = []
+    first.subscribe(lambda _: observed.append(cache.sorted_names))
+    first.data = {"name": "C"}
+    assert observed == [("A", "B", "C")]
+    assert cache.sorted_names == ("A", "B", "C")
+    first.data = None
+    assert cache.sorted_names == ("A", "B")
+    first.data = {"name": "D"}
+    assert cache.sorted_names == ("A", "B", "D")
+    other = WorldCache(AsyncMock())
+    assert other.sorted_names == ()
+    fetch.assert_not_awaited()
+    await cache.close()
+    assert cache.sorted_names == ()
+    await other.close()
+
+
+async def test_world_names_cache_prunes_duplicate_names() -> None:
+    cache = WorldCache(AsyncMock())
+    first = cache.get("wrld_first", {"name": "Shared"})
+    second = cache.get("wrld_second", {"name": "Shared"})
+    assert cache.sorted_names == ("Shared",)
+
+    first.last_updated = datetime.now(timezone.utc) - timedelta(days=2)
+    cache.last_pruned = datetime.min.replace(tzinfo=timezone.utc)
+    cache.get("wrld_unknown")
+    assert "wrld_first" not in cache.registry
+    assert cache.sorted_names == ("Shared",)
+
+    second.last_updated = datetime.now(timezone.utc) - timedelta(days=2)
+    cache.last_pruned = datetime.min.replace(tzinfo=timezone.utc)
+    cache.get("wrld_unknown")
+    assert cache.sorted_names == ()
     await cache.close()
 
 
