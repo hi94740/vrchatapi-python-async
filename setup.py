@@ -183,6 +183,14 @@ finally:
     await account.close()
 ```
 
+For interactive login, catch `vrchatapi.highlevel.TwoFactorAuthRequired` and
+branch on its `challenge`: `TwoFactorAuthChallenge.EMAIL_OTP` uses
+`verify2_fa_email_code`, while `TwoFactorAuthChallenge.TOTP` uses `verify2_fa`.
+Then call `get_current_user` again. Classification uses the response's
+`requiresTwoFactorAuth` field, independent of exception wording. The exception
+is also an `UnauthorizedException`; unsupported challenges remain ordinary
+`UnauthorizedException` errors.
+
 The account owns its REST client, pipeline and default world cache. It fetches
 friend pages, resolves missing users, applies pipeline changes in receive order,
 and refreshes authentication and snapshots after disconnection. Authentication
@@ -224,7 +232,7 @@ from setuptools import setup, find_packages  # noqa: H301
 # prerequisite: setuptools
 # http://pypi.python.org/pypi/setuptools
 NAME = "vrchatapi-async"
-VERSION = "1.21.0post2"
+VERSION = "1.21.0"
 PYTHON_REQUIRES = ">= 3.10"
 REQUIRES = [
     "python-dateutil >= 2.8.2",
@@ -430,6 +438,14 @@ try:
 finally:
     await account.close()
 ```
+
+For interactive login, catch `vrchatapi.highlevel.TwoFactorAuthRequired` and
+branch on its `challenge`: `TwoFactorAuthChallenge.EMAIL_OTP` uses
+`verify2_fa_email_code`, while `TwoFactorAuthChallenge.TOTP` uses `verify2_fa`.
+Then call `get_current_user` again. Classification uses the response's
+`requiresTwoFactorAuth` field, independent of exception wording. The exception
+is also an `UnauthorizedException`; unsupported challenges remain ordinary
+`UnauthorizedException` errors.
 
 The account owns its REST client, pipeline and default world cache. It fetches
 friend pages, resolves missing users, applies pipeline changes in receive order,
