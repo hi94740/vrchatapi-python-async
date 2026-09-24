@@ -9,7 +9,7 @@ from typing import Any, cast
 
 import vrchatapi
 from vrchatapi.exceptions import UnauthorizedException
-from vrchatapi.websocket import VRChatEvent, VRChatWebSocket
+from vrchatapi.websocket import VRChatEvent, VRChatWebSocket, VRChatWebSocketError
 
 from .api import VRChatAPI
 from .presence import (
@@ -60,6 +60,10 @@ class VRChatAccount:
         worlds: WorldCache | None = None,
         on_user: Callable[[VRChatUser, bool], None] | None = None,
         on_remove: Callable[[str], None] | None = None,
+        on_event: Callable[
+            [VRChatEvent | VRChatWebSocketError, HighLevelUserData | None], None
+        ]
+        | None = None,
         on_available: Callable[[bool], None] | None = None,
         on_auth_error: Callable[[Exception], None] | None = None,
         on_authenticated: Callable[[VRChatAPI], Awaitable[None]] | None = None,
@@ -78,6 +82,7 @@ class VRChatAccount:
         self._owns_worlds = worlds is None
         self.on_user = on_user
         self.on_remove = on_remove
+        self.on_event = on_event
         self.on_available = on_available
         self.on_auth_error = on_auth_error
         self.on_authenticated = on_authenticated
@@ -133,7 +138,7 @@ class VRChatAccount:
     async def start(self, initial: CurrentUser | None = None) -> None:
         try:
             await self.authenticate(initial)
-            self.ws = await self.api.ws_connect()
+            self.ws = await self._connect_ws(self.api)
             await self.fetch_users()
             self._set_available(True)
             self._receiver = asyncio.create_task(self._receive(self.ws))
@@ -141,6 +146,13 @@ class VRChatAccount:
         except BaseException:
             await self.close()
             raise
+
+    async def _connect_ws(self, api: VRChatAPI) -> VRChatWebSocket:
+        return await api.ws_connect(on_error=self._handle_ws_error)
+
+    def _handle_ws_error(self, error: Exception) -> None:
+        if isinstance(error, VRChatWebSocketError) and error.raw is not None:
+            self._notify(self.on_event, error, None)
 
     async def _get_friends(self, offline: bool) -> list[User]:
         ids = self.current_user_data["offlineFriends" if offline else "onlineFriends"]
@@ -194,6 +206,7 @@ class VRChatAccount:
     async def handle_event(self, event: VRChatEvent) -> None:
         content = event.content
         if not isinstance(content, dict):
+            self._notify(self.on_event, event, None)
             return
         if isinstance(world := content.get("world"), dict) and (
             world_id := process_vrchat_string(world.get("id"))
@@ -204,7 +217,19 @@ class VRChatAccount:
         if world_id and world_id not in VRCHAT_SPECIAL_LOCATION_STRINGS:
             content["travelingToWorldId"] = world_id
             self.create_task(self.worlds.get(world_id).get_data())
-        if (user_id := content.get("userId")) is None:
+        user_id = content.get("userId")
+        old_user = self.users.get(user_id) if user_id is not None else None
+        self._notify(
+            self.on_event,
+            VRChatEvent(
+                type=event.type,
+                content=content,
+                raw=event.raw,
+                raw_content=event.raw_content,
+            ),
+            old_user.data.copy() if old_user is not None else None,
+        )
+        if user_id is None:
             return
         if event.type == "friend-delete":
             self.remove_user(user_id)
@@ -246,7 +271,7 @@ class VRChatAccount:
             self.api = replacement
             try:
                 await self.authenticate()
-                new_ws = await replacement.ws_connect()
+                new_ws = await self._connect_ws(replacement)
                 await self._stop_receiver()
                 # Discard old pipeline work before applying the replacement snapshot.
                 pending = list(self._event_tasks.values())

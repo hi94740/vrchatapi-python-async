@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from enum import Enum
 from functools import cached_property
 from http.cookiejar import Cookie
@@ -11,7 +11,10 @@ from typing import cast
 from urllib.parse import urlsplit
 
 import vrchatapi
-from vrchatapi.websocket import DEFAULT_USER_AGENT, VRChatWebSocket
+from vrchatapi.websocket import (
+    DEFAULT_USER_AGENT,
+    VRChatWebSocket,
+)
 
 from .types import CurrentUser, User, VRChatAuthCookie, World
 
@@ -83,6 +86,7 @@ class VRChatAPI:
             vrchatapi.Configuration(
                 username=self.config.get("username"),
                 password=self.config.get("password"),
+                proxy=self.config.get("proxy"),
             )
         )
         self.api_client.user_agent = user_agent
@@ -153,9 +157,19 @@ class VRChatAPI:
     async def get_world(self, world_id: str) -> World:
         return cast(World, await self.worlds_api.get_world(world_id))
 
-    async def ws_connect(self) -> VRChatWebSocket:
+    async def ws_connect(
+        self,
+        *,
+        on_error: Callable[[Exception], None] | None = None,
+    ) -> VRChatWebSocket:
         # The account owns authentication recovery and reconnect snapshots.
-        ws = VRChatWebSocket.from_client(self.api_client, auto_reconnect=False)
+        ws = VRChatWebSocket.from_client(
+            self.api_client,
+            auto_reconnect=False,
+            proxy=self.api_client.configuration.proxy,
+        )
+        if on_error is not None:
+            ws.on_error(on_error)
         try:
             await ws.connect()
         except BaseException:

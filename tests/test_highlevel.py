@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import asyncio
 from datetime import datetime, timedelta, timezone
-from unittest.mock import AsyncMock, Mock
+from unittest.mock import AsyncMock, Mock, patch
 
 import pytest
 from test_async_sdk import MockVRCServer
@@ -20,7 +20,7 @@ from vrchatapi.highlevel import (
     WorldCache,
 )
 from vrchatapi.highlevel.presence import is_user_in_game
-from vrchatapi.websocket import VRChatEvent
+from vrchatapi.websocket import VRChatEvent, VRChatWebSocketError
 
 CURRENT = {
     "id": "usr_self",
@@ -124,6 +124,32 @@ async def test_cookie_copy_user_agent_and_close() -> None:
             copied.clear_cookie()
             assert copied.cookie == {}
             assert api.cookie == {"auth": "token"}
+    await api.close()
+
+
+async def test_proxy_is_preserved_by_api_copy() -> None:
+    async with VRChatAPI({"proxy": "http://proxy.example:8080"}) as api:
+        assert api.api_client.configuration.proxy == "http://proxy.example:8080"
+        async with api.copy() as copied:
+            assert copied.api_client.configuration.proxy == "http://proxy.example:8080"
+
+
+async def test_ws_connect_uses_proxy_and_registers_errors_before_connect() -> None:
+    api = VRChatAPI({"proxy": "http://proxy.example:8080"})
+    api.cookie = {"auth": "token"}
+    handler = Mock()
+    operations = []
+    ws = Mock(
+        on_error=Mock(side_effect=lambda callback: operations.append("on_error")),
+        connect=AsyncMock(side_effect=lambda: operations.append("connect")),
+        close=AsyncMock(),
+    )
+    with patch("vrchatapi.highlevel.api.VRChatWebSocket.from_client") as factory:
+        factory.return_value = ws
+        await api.ws_connect(on_error=handler)
+    assert factory.call_args.kwargs["proxy"] == "http://proxy.example:8080"
+    ws.on_error.assert_called_once_with(handler)
+    assert operations == ["on_error", "connect"]
     await api.close()
 
 
@@ -424,7 +450,7 @@ async def test_recovery_replaces_and_closes_connection(account: VRChatAccount) -
     replacement.get_user = AsyncMock(return_value=FRIEND)
     replacement.get_friends = AsyncMock(return_value=[])
     replacement.ws_connect = AsyncMock(
-        side_effect=lambda: operations.append("connect") or Pipeline()
+        side_effect=lambda **kwargs: operations.append("connect") or Pipeline()
     )
     replacement.close = AsyncMock()
     old.copy.return_value = replacement
@@ -458,7 +484,7 @@ async def test_timeout_recovery_keeps_account_available(
     replacement.get_user = AsyncMock(return_value=FRIEND)
     replacement.get_friends = AsyncMock(return_value=[])
     replacement.ws_connect = AsyncMock(
-        side_effect=lambda: operations.append("connect") or Pipeline()
+        side_effect=lambda **kwargs: operations.append("connect") or Pipeline()
     )
     replacement.close = AsyncMock()
     old.copy.return_value = replacement
@@ -511,7 +537,7 @@ async def test_timeout_keeps_processing_old_pipeline_until_replacement(
     )
     result = getattr(replacement, stage).return_value
 
-    async def wait_for_replacement() -> object:
+    async def wait_for_replacement(**kwargs: object) -> object:
         started.set()
         await proceed.wait()
         return result
@@ -674,6 +700,59 @@ async def test_pipeline_events_processed_in_order(account: VRChatAccount) -> Non
     await asyncio.wait_for(changed.wait(), 1)
     assert account.users["usr_friend"].data["statusDescription"] == "new"
     assert account.users["usr_friend"].data["displayName"] == "Friend"
+
+
+async def test_on_event_receives_snapshot_and_survives_recovery(
+    account: VRChatAccount,
+) -> None:
+    await account.start()
+    seen = []
+    notified = asyncio.Event()
+
+    def on_event(event, old_user) -> None:
+        seen.append((event, old_user))
+        notified.set()
+
+    account.on_event = on_event
+    old_data = account.users["usr_friend"].data.copy()
+    account.ws.events.put_nowait(
+        VRChatEvent(
+            "user-update",
+            {"userId": "usr_friend", "user": {"statusDescription": "first"}},
+        )
+    )
+    await asyncio.wait_for(notified.wait(), 1)
+    assert seen[0][0].content["userId"] == "usr_friend"
+    assert seen[0][1] == old_data
+
+    new_ws = Pipeline()
+    old_api = account.api
+    old_api.copy.return_value = Mock(
+        get_current_user=AsyncMock(return_value=CURRENT.copy()),
+        get_friends=AsyncMock(return_value=[]),
+        get_user=AsyncMock(return_value=FRIEND.copy()),
+        ws_connect=AsyncMock(return_value=new_ws),
+        close=AsyncMock(side_effect=new_ws.close),
+    )
+    await account._recover(old_api)
+    notified.clear()
+    new_ws.events.put_nowait(
+        VRChatEvent(
+            "user-update",
+            {"userId": "usr_friend", "user": {"statusDescription": "second"}},
+        )
+    )
+    await asyncio.wait_for(notified.wait(), 1)
+    assert seen[1][0].content["user"]["statusDescription"] == "second"
+    assert seen[1][1]["displayName"] == "Friend"
+
+
+async def test_on_event_receives_pipeline_error(account: VRChatAccount) -> None:
+    seen = []
+    account.on_event = lambda event, old_user: seen.append((event, old_user))
+    error = VRChatWebSocketError("denied", raw='{"err":"denied"}')
+    account._handle_ws_error(error)
+    assert seen == [(error, None)]
 
 
 async def test_disconnect_auth_failure_notifies_and_stops(

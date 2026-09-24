@@ -235,6 +235,7 @@ class VRChatWebSocket:
         reconnect_max_delay: float = 60.0,
         heartbeat_interval: Optional[float] = DEFAULT_HEARTBEAT_INTERVAL,
         session: Optional[aiohttp.ClientSession] = None,
+        proxy: Optional[str] = None,
     ) -> None:
         if not auth_token:
             raise ValueError("auth_token is required")
@@ -244,6 +245,7 @@ class VRChatWebSocket:
         self._auto_reconnect = auto_reconnect
         self._reconnect_max_delay = max(0.0, reconnect_max_delay)
         self._heartbeat_interval = heartbeat_interval
+        self._proxy = proxy
 
         self._session = session
         self._owned_session = session is None
@@ -465,7 +467,7 @@ class VRChatWebSocket:
         url = f"{self._endpoint.rstrip('/')}/?authToken={quote(self._auth_token, safe='')}"
         headers = {"User-Agent": self._user_agent}
         try:
-            ws = await session.ws_connect(url, headers=headers)
+            ws = await session.ws_connect(url, headers=headers, proxy=self._proxy)
         except Exception:
             # Do not leak a freshly-created session on a failed connect;
             # close it so callers do not accumulate resources.

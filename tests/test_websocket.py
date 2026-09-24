@@ -9,6 +9,7 @@ import asyncio
 import json
 import time
 from types import SimpleNamespace
+from unittest.mock import AsyncMock
 
 import aiohttp
 import pytest
@@ -156,6 +157,23 @@ async def test_auth_token_is_url_encoded(pipeline_server):
     # unquoted "&" / "=" would have split the query string.
     query, _ = pipeline_server.connections[0]
     assert query["authToken"] == token
+
+
+@pytest.mark.asyncio
+async def test_connect_uses_configured_proxy():
+    socket = SimpleNamespace(closed=False, close=AsyncMock())
+    session = SimpleNamespace(ws_connect=AsyncMock(return_value=socket))
+    ws = VRChatWebSocket(
+        auth_token="authcookie_test",
+        session=session,
+        proxy="http://proxy.example:8080",
+        heartbeat_interval=None,
+    )
+
+    await ws._connect_once()
+
+    assert session.ws_connect.await_args.kwargs["proxy"] == "http://proxy.example:8080"
+    await ws.close()
 
 
 # ---------------------------------------------------------------------------
