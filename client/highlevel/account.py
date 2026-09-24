@@ -350,8 +350,12 @@ class VRChatAccount:
         try:
             return await failed_api.update_user(user_id, data)
         except UnauthorizedException:
-            await self._recover(failed_api)
-            return await self.api.update_user(user_id, data)
+            try:
+                await self._recover(failed_api)
+                return await self.api.update_user(user_id, data)
+            except (UnauthorizedException, AccountIdMismatch) as exc:
+                self._notify(self.on_auth_error, exc)
+                raise
 
     async def close(self) -> None:
         if self.closed:

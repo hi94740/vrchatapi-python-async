@@ -856,6 +856,49 @@ async def test_reauthentication_retries_user_update(account: VRChatAccount) -> N
     old.close.assert_awaited_once()
 
 
+async def test_user_update_recovery_auth_failure_notifies(
+    account: VRChatAccount,
+) -> None:
+    old = account.api
+    old.update_user = AsyncMock(side_effect=UnauthorizedException())
+    replacement = Mock(spec=VRChatAPI)
+    replacement.get_current_user = AsyncMock(side_effect=UnauthorizedException())
+    replacement.close = AsyncMock()
+    old.copy.return_value = replacement
+    notified: list[Exception] = []
+    account.on_auth_error = notified.append
+
+    with pytest.raises(UnauthorizedException) as exc_info:
+        await account.update_user("usr_friend", Mock())
+
+    assert notified == [exc_info.value]
+    assert account.api is old
+    replacement.close.assert_awaited_once()
+
+
+async def test_user_update_retry_auth_failure_notifies(
+    account: VRChatAccount,
+) -> None:
+    old = account.api
+    old.update_user = AsyncMock(side_effect=UnauthorizedException())
+    replacement = Mock(spec=VRChatAPI)
+    replacement.get_current_user = AsyncMock(return_value=CURRENT)
+    replacement.get_user = AsyncMock(return_value=FRIEND)
+    replacement.get_friends = AsyncMock(return_value=[])
+    replacement.ws_connect = AsyncMock(return_value=Pipeline())
+    replacement.close = AsyncMock()
+    replacement.update_user = AsyncMock(side_effect=UnauthorizedException())
+    old.copy.return_value = replacement
+    notified: list[Exception] = []
+    account.on_auth_error = notified.append
+
+    with pytest.raises(UnauthorizedException) as exc_info:
+        await account.update_user("usr_friend", Mock())
+
+    assert notified == [exc_info.value]
+    replacement.update_user.assert_awaited_once()
+
+
 @pytest.mark.parametrize(
     "content",
     [
