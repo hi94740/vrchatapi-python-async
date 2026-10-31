@@ -42,6 +42,8 @@ env:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    env:
+      REGENERATE: ${{ github.event_name == 'repository_dispatch' || inputs.release == 'latest' || inputs.release == 'prerelease' }}
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
@@ -51,10 +53,10 @@ jobs:
           ref: ${{ inputs.ref || github.ref }}
 
       - uses: vrchatapi/specification/.github/actions/setup-generator@main
-        if: inputs.release != 'post'
+        if: env.REGENERATE == 'true'
 
       - uses: vrchatapi/specification/.github/actions/download@main
-        if: inputs.release != 'post'
+        if: env.REGENERATE == 'true'
         with:
           bundle: openapi-legacy.yaml
 
@@ -63,6 +65,11 @@ jobs:
         run: |
           if [ "${{ inputs.release }}" = "post" ]; then
             version="$(python tools/prepare_post_release.py "${VERSION_POSTPEND}")"
+            echo "version=${version}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
+          if [ "${REGENERATE}" != "true" ]; then
+            version="$(python -c 'import ast; from pathlib import Path; print(next(ast.literal_eval(node.value) for node in ast.parse(Path("vrchatapi/__init__.py").read_text()).body if isinstance(node, ast.Assign) and any(isinstance(target, ast.Name) and target.id == "__version__" for target in node.targets)))')"
             echo "version=${version}" >> $GITHUB_OUTPUT
             exit 0
           fi
@@ -81,7 +88,7 @@ jobs:
           echo "version=${version/-nightly./.dev}" >> $GITHUB_OUTPUT
 
       - run: bash ./generate.sh "${{ steps.version.outputs.version }}" openapi-legacy.yaml
-        if: inputs.release != 'post'
+        if: env.REGENERATE == 'true'
 
       - uses: actions/upload-artifact@v7
         with:
