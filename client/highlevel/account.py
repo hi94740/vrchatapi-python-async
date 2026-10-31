@@ -5,7 +5,7 @@ from __future__ import annotations
 import asyncio
 import logging
 from collections.abc import Awaitable, Callable, Mapping
-from typing import Any, cast
+from typing import Any, TypeVar, cast
 
 import vrchatapi
 from vrchatapi.exceptions import UnauthorizedException
@@ -21,6 +21,7 @@ from .types import CurrentUser, HighLevelUserData, User
 from .world import WorldCache
 
 _LOGGER = logging.getLogger(__name__)
+_Result = TypeVar("_Result")
 
 
 async def _gather(*awaitables):
@@ -48,8 +49,10 @@ class VRChatAccount:
     """Own a live account, exposing synchronous change notifications.
 
     Call start before using the snapshot and close on teardown. The account owns
-    its API and, unless supplied explicitly, its world cache. Callbacks run on
-    the event loop and must not block. An injected cache remains caller-owned.
+    its API and, unless supplied explicitly, its world cache. Notifications run
+    synchronously on the event loop and must not block. Supplying an awaitable
+    before_user_remove hook enables queued membership changes and waits for
+    cleanup before removing a user. An injected cache remains caller-owned.
     """
 
     def __init__(
@@ -60,6 +63,7 @@ class VRChatAccount:
         worlds: WorldCache | None = None,
         on_user: Callable[[VRChatUser, bool], None] | None = None,
         on_remove: Callable[[str], None] | None = None,
+        before_user_remove: Callable[[str], Awaitable[None]] | None = None,
         on_event: Callable[
             [VRChatEvent | VRChatWebSocketError, HighLevelUserData | None], None
         ]
@@ -82,6 +86,7 @@ class VRChatAccount:
         self._owns_worlds = worlds is None
         self.on_user = on_user
         self.on_remove = on_remove
+        self.before_user_remove = before_user_remove
         self.on_event = on_event
         self.on_available = on_available
         self.on_auth_error = on_auth_error
@@ -95,6 +100,10 @@ class VRChatAccount:
         self._pipeline_activity = asyncio.Event()
         self._tasks: set[asyncio.Task[Any]] = set()
         self._event_tasks: dict[str | None, asyncio.Task[None]] = {}
+        self._mutation_tasks: dict[str, asyncio.Task[Any]] = {}
+        self._active_mutations: dict[str, asyncio.Task[Any]] = {}
+        self._removing: set[str] = set()
+        self._user_versions: dict[str, int] = {}
         self._recovery_lock = asyncio.Lock()
         self.ws = None
 
@@ -165,45 +174,189 @@ class VRChatAccount:
         return [friend for page in pages for friend in page]
 
     async def fetch_users(self) -> None:
+        versions = self._user_versions.copy()
+        friend_ids = list(self.current_user_data["friends"])
         offline, online = await _gather(
             self._get_friends(True), self._get_friends(False)
         )
-        friend_ids = self.current_user_data["friends"]
+        if not self.transactional:
+            friend_ids = self.current_user_data["friends"]
         for user_id in list(self.users):
             if user_id != self.account_id and user_id not in friend_ids:
-                self.remove_user(user_id)
-        self.set_user(self.current_user_data)
+                if self.transactional:
+
+                    async def remove(user_id=user_id):
+                        if self._user_versions.get(user_id, 0) == versions.get(
+                            user_id, 0
+                        ):
+                            await self._remove_user(user_id)
+
+                    await asyncio.shield(self._queue_user_operation(user_id, remove))
+                else:
+                    self.remove_user(user_id)
+        await self.async_set_user(self.current_user_data)
         for data in (*offline, *online):
-            self.set_user(data)
+            await self._set_snapshot_user(data, versions.get(data["id"], 0))
         fetched = {data["id"] for data in (*offline, *online)}
         missing = await _gather(
             *(self.api.get_user(i) for i in friend_ids if i not in fetched)
         )
         for data in missing:
-            self.set_user(data)
+            await self._set_snapshot_user(data, versions.get(data["id"], 0))
 
-    def set_user(
-        self, data: User | CurrentUser, overwrite: bool = True
-    ) -> VRChatUser:
+    async def _set_snapshot_user(self, data: User, version: int) -> None:
+        if not self.transactional:
+            self.set_user(data)
+            return
+
+        async def apply() -> None:
+            if self._user_versions.get(data["id"], 0) == version:
+                self._set_user(data)
+
+        await asyncio.shield(self._queue_user_operation(data["id"], apply))
+
+    @property
+    def transactional(self) -> bool:
+        """Whether membership changes await consumer lifecycle cleanup."""
+        return self.before_user_remove is not None
+
+    def _require_sync_mode(self) -> None:
+        if self.transactional:
+            raise RuntimeError(
+                "Use request_* or async_* user methods in transactional mode"
+            )
+
+    def _queue_user_operation(
+        self, user_id: str, operation: Callable[[], Awaitable[_Result]]
+    ) -> asyncio.Task[_Result]:
+        if self.closed:
+            raise RuntimeError("Account is closed")
+        previous = self._mutation_tasks.get(user_id)
+        if previous is not None and previous.done():
+            previous = None
+
+        async def run() -> _Result:
+            # Even an eager task factory must leave the current notification stack.
+            await asyncio.sleep(0)
+            if previous is not None:
+                await asyncio.shield(previous)
+            if self.closed:
+                raise RuntimeError("Account is closed")
+            current = asyncio.current_task()
+            assert current is not None
+            self._active_mutations[user_id] = current
+            try:
+                return await operation()
+            finally:
+                self._active_mutations.pop(user_id, None)
+
+        task = self.create_task(run())
+        self._mutation_tasks[user_id] = task
+
+        def done(completed: asyncio.Task[_Result]) -> None:
+            if self._mutation_tasks.get(user_id) is completed:
+                self._mutation_tasks.pop(user_id)
+
+        task.add_done_callback(done)
+        return task
+
+    def _check_self_wait(self, user_id: str) -> None:
+        if asyncio.current_task() is self._active_mutations.get(user_id):
+            raise RuntimeError("A user operation cannot await its own queue")
+
+    def set_user(self, data: User | CurrentUser, overwrite: bool = True) -> VRChatUser:
+        self._require_sync_mode()
+        return self._set_user(data, overwrite)
+
+    def _set_user(self, data: User | CurrentUser, overwrite: bool = True) -> VRChatUser:
+        if data["id"] in self._removing:
+            raise RuntimeError("User removal has not completed")
         if (user := self.users.get(data["id"])) is None:
             user = VRChatUser(self, data["id"])
             self.users[user.id] = user
+            self._user_versions[user.id] = self._user_versions.get(user.id, 0) + 1
             user.data = data
         elif overwrite:
             user.data = data
         return user
 
-    async def ensure_user(self, user_id: str) -> VRChatUser:
+    def request_set_user(
+        self, data: User | CurrentUser, overwrite: bool = True
+    ) -> asyncio.Task[VRChatUser]:
+        """Queue a user update without mutating data in the calling stack."""
+        snapshot = data.copy()
+
+        async def apply() -> VRChatUser:
+            return self._set_user(snapshot, overwrite)
+
+        return self._queue_user_operation(data["id"], apply)
+
+    async def async_set_user(
+        self, data: User | CurrentUser, overwrite: bool = True
+    ) -> VRChatUser:
+        """Wait for a queued update, or retain immediate legacy notifications."""
+        if not self.transactional:
+            return self.set_user(data, overwrite)
+        self._check_self_wait(data["id"])
+        return await asyncio.shield(self.request_set_user(data, overwrite))
+
+    async def _ensure_user(self, user_id: str) -> VRChatUser:
         if (user := self.users.get(user_id)) is not None:
             return user
-        return self.set_user(await self.api.get_user(user_id), overwrite=False)
+        return self._set_user(await self.api.get_user(user_id), overwrite=False)
+
+    async def ensure_user(self, user_id: str) -> VRChatUser:
+        if not self.transactional:
+            return await self._ensure_user(user_id)
+        self._check_self_wait(user_id)
+        return await asyncio.shield(
+            self._queue_user_operation(user_id, lambda: self._ensure_user(user_id))
+        )
 
     def remove_user(self, user_id: str) -> None:
+        self._require_sync_mode()
         if (user := self.users.pop(user_id, None)) is not None:
             user.close()
             self._notify(self.on_remove, user_id)
 
+    async def _remove_user(self, user_id: str) -> None:
+        if (user := self.users.get(user_id)) is None:
+            return
+        self._removing.add(user_id)
+        # Fail closed: unsuccessful cleanup keeps the user pending removal.
+        if self.before_user_remove is not None:
+            await self.before_user_remove(user_id)
+        user.close()
+        self.users.pop(user_id)
+        self._user_versions[user_id] = self._user_versions.get(user_id, 0) + 1
+        self._removing.discard(user_id)
+        self._notify(self.on_remove, user_id)
+
+    def request_remove_user(self, user_id: str) -> asyncio.Task[None]:
+        """Queue removal; the returned task completes after consumer cleanup."""
+        return self._queue_user_operation(user_id, lambda: self._remove_user(user_id))
+
+    async def async_remove_user(self, user_id: str) -> None:
+        """Wait for removal without invalidating an active notification stack."""
+        if not self.transactional:
+            self.remove_user(user_id)
+            return
+        self._check_self_wait(user_id)
+        await asyncio.shield(self.request_remove_user(user_id))
+
     async def handle_event(self, event: VRChatEvent) -> None:
+        user_id = (
+            event.content.get("userId") if isinstance(event.content, dict) else None
+        )
+        if self.transactional and user_id is not None:
+            self._check_self_wait(user_id)
+            await asyncio.shield(
+                self._queue_user_operation(user_id, lambda: self._apply_event(event))
+            )
+            return
+        await self._apply_event(event)
+
+    async def _apply_event(self, event: VRChatEvent) -> None:
         content = event.content
         if not isinstance(content, dict):
             self._notify(self.on_event, event, None)
@@ -232,9 +385,12 @@ class VRChatAccount:
         if user_id is None:
             return
         if event.type == "friend-delete":
-            self.remove_user(user_id)
+            if self.transactional:
+                await self._remove_user(user_id)
+            else:
+                self.remove_user(user_id)
             return
-        user = await self.ensure_user(user_id)
+        user = await self._ensure_user(user_id)
         user.apply_event(event.type, content)
 
     def _dispatch_event(self, event: VRChatEvent) -> None:
@@ -279,6 +435,7 @@ class VRChatAccount:
                     task.cancel()
                 await asyncio.gather(*pending, return_exceptions=True)
                 self._event_tasks.clear()
+                await asyncio.gather(*tuple(self._mutation_tasks.values()))
                 self.ws = new_ws
                 self._receiver = asyncio.create_task(self._receive(new_ws))
                 await self.fetch_users()
@@ -361,7 +518,8 @@ class VRChatAccount:
         if self.closed:
             return
         self.closed = True
-        tasks = list(self._tasks)
+        current_task = asyncio.current_task()
+        tasks = [task for task in self._tasks if task is not current_task]
         if self._runner is not None:
             tasks.append(self._runner)
         if self._receiver is not None:
@@ -370,6 +528,7 @@ class VRChatAccount:
             task.cancel()
         await asyncio.gather(*tasks, return_exceptions=True)
         self._event_tasks.clear()
+        self._mutation_tasks.clear()
         for user in self.users.values():
             user.close()
         if self._owns_worlds:
@@ -386,6 +545,7 @@ class VRChatUser:
         self.id = user_id
         self.world = None
         self._data: HighLevelUserData = {}
+        self.closed = False
 
     @property
     def data(self) -> HighLevelUserData:
@@ -393,6 +553,15 @@ class VRChatUser:
 
     @data.setter
     def data(self, value: Mapping[str, Any]) -> None:
+        if self.account.transactional and (
+            self.closed or self.account.users.get(self.id) is not self
+        ):
+            raise RuntimeError("User is no longer current")
+        if self.account.transactional and (
+            asyncio.current_task() is not self.account._active_mutations.get(self.id)
+            or self.id in self.account._removing
+        ):
+            raise RuntimeError("Use queued account methods to update user data")
         value = cast(HighLevelUserData, dict(value))
         value["friend_of"] = self.account.account_id
         presence = value.get("presence") or {}
@@ -406,7 +575,9 @@ class VRChatUser:
             or "offline"
         )
         value["location"] = location
-        destination_id, _ = parse_vrchat_location_string(value.get("travelingToLocation"))
+        destination_id, _ = parse_vrchat_location_string(
+            value.get("travelingToLocation")
+        )
         value.pop("travelingToWorldId", None)
         if destination_id and destination_id not in VRCHAT_SPECIAL_LOCATION_STRINGS:
             value["travelingToWorldId"] = destination_id
@@ -432,6 +603,13 @@ class VRChatUser:
         return None
 
     def _world_updated(self, _data) -> None:
+        if self.account.transactional and (
+            self.closed
+            or self.account.closed
+            or self.account.users.get(self.id) is not self
+            or self.id in self.account._removing
+        ):
+            return
         self.account._notify(self.account.on_user, self, True)
 
     def apply_event(self, event_type: str, content: dict) -> None:
@@ -478,7 +656,27 @@ class VRChatUser:
         self.data = merged
 
     async def update_user(self, request: vrchatapi.UpdateUserRequest) -> None:
+        if self.account.transactional and (
+            self.closed or self.account.users.get(self.id) is not self
+        ):
+            raise RuntimeError("User is no longer current")
+        if self.account.transactional:
+            self.account._check_self_wait(self.id)
         new_data = await self.account.update_user(self.id, request)
+
+        async def apply() -> None:
+            if self.account.transactional and (
+                self.closed or self.account.users.get(self.id) is not self
+            ):
+                return
+            self._apply_user_update(new_data)
+
+        if self.account.transactional:
+            await asyncio.shield(self.account._queue_user_operation(self.id, apply))
+        else:
+            await apply()
+
+    def _apply_user_update(self, new_data: User | CurrentUser) -> None:
         old_data = self.data.copy()
         presence = new_data.get("presence") or {}
         if process_vrchat_string(new_data.get("location")) is not None or any(
@@ -490,5 +688,6 @@ class VRChatUser:
         self.data = {**old_data, **new_data}
 
     def close(self) -> None:
+        self.closed = True
         if self.world is not None:
             self.world.unsubscribe(self._world_updated)

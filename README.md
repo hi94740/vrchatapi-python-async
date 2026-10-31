@@ -211,3 +211,47 @@ The source of this API lives in `client/highlevel/`. `generate.sh` copies it to
 `vrchatapi/highlevel/` after regeneration; edit the source, not the shipped copy.
 `tools/stamp_version.py VERSION` stamps local release builds using the same
 version step as generation. Release `1.21.0` includes this API.
+
+### Transactional user lifecycle
+
+Consumers with asynchronous resource cleanup can opt in by passing
+`before_user_remove: Callable[[str], Awaitable[None]]` to `VRChatAccount`.
+Without this hook, existing synchronous `set_user`, `remove_user`, `on_user`
+and `on_remove` behavior is unchanged.
+
+In this mode, use `await account.async_set_user(data)` and
+`await account.async_remove_user(user_id)`. A synchronous notification handler
+can instead call `account.request_set_user(data)` or
+`account.request_remove_user(user_id)`; these return completion tasks and never
+change the user mapping inside the current notification stack, even with an
+eager task factory. Do not await a same-user queued task from its own operation
+or removal hook. The `async_*` methods reject this self-wait; a hook that calls
+`request_*` must not await the returned same-user task.
+
+Operations for the same user are ordered; other users remain independent. The
+removal hook runs while `account.users[user_id]` still references the current
+user. It should stop discovery, cancel and await pending consumer work, and
+remove consumer resources. Once it succeeds, the SDK closes the user's world
+subscription, removes the mapping entry, and invokes the existing synchronous
+`on_remove(user_id)` notification. A queued re-add cannot run before this
+sequence completes. Pending removal suppresses that user's world notifications.
+
+A hook exception or cancellation does **not** commit removal. The user stays in
+a pending-removal state, updates are rejected, and the task reports the error.
+After fixing the consumer cleanup failure, retry `async_remove_user(user_id)`;
+cleanup must therefore be idempotent. An operation already queued behind a failed
+operation also fails rather than applying against a partially cleaned-up user.
+There is no automatic timeout that silently discards data. Consumers should
+bound their own cleanup and report failures. Cancelling a caller awaiting an
+`async_*` operation does not cancel the account-owned transaction; `close()`
+cancels and drains account-owned work on teardown.
+
+In transactional mode, synchronous membership methods and direct assignments to
+`VRChatUser.data` raise `RuntimeError`. Treat exposed mappings as read-only;
+mutating `account.users` or nested data dictionaries directly bypasses the
+lifecycle contract. The SDK routes pipeline and snapshot membership changes
+through the same queues. Membership generations prevent a snapshot started
+before a deletion from resurrecting that user, and a late update on an old user
+object cannot alter its replacement. Shared world fetches remain cache-owned;
+consumer cancellation through `world.get_data()` does not cancel another
+consumer's fetch.
