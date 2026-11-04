@@ -163,10 +163,12 @@ class TypedDictGenerator:
         if "$ref" in schema:
             name = self._ref_name(schema["$ref"])
             target = self.schemas[name]
-            if self._is_object(target):
+            if self._is_object(target) and target.get("properties"):
                 type_name = self._collect(name, target)
             else:
-                type_name = self._scalar_type(target)
+                # References to maps, arrays and nullable scalars retain the
+                # same shape as inline schemas, rather than empty TypedDicts.
+                type_name = self._type_expression(parent, property_name, target)
         elif schema.get("type") == "array":
             items = schema.get("items", {})
             type_name = (

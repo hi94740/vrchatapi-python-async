@@ -56,6 +56,9 @@ Hand-maintained — the generator never emits these:
   and re-copy; never edit the shipped copies directly. `types.py` contains the
   local high-level runtime additions; its `_generated_types.py` companion is
   generated from the bundled OpenAPI document by `tools/generate_highlevel_types.py`.
+- `specification.json`, `tools/download_spec.py` — pinned public OpenAPI 3.0
+  release asset and SHA256 verification.
+- `tools/check_source_release.py` — validation for exact source-only stable releases.
 - `tools/stamp_version.py` — release version stamping shared by generation and
   local package builds.
 - `examples/`, `AGENTS.md`, `LICENSE` — documentation, kept async.
@@ -85,25 +88,22 @@ Requirements on PATH:
 - `openapi-generator` CLI — version pinned in `openapitools.json` (`7.24.0`);
   the `@openapitools/openapi-generator-cli` npm package is a convenient way to
   install it and reads `openapitools.json` automatically. Needs **Java 11+**.
-- `git` and `redocly` — only needed when fetching the spec from GitHub.
 - `yq`, Ruby, or PyYAML — one is needed to parse the bundled YAML when
-  generating the high-level TypedDict definitions. `yq` is also needed when
-  `<version>` is omitted (the version is then read from the spec's
-  `info.version`).
+  generating the high-level TypedDict definitions and reading `info.version`.
 
 ```bash
-# Follow the latest specification (main branch), bundle it with redocly, regenerate:
-bash generate.sh <version>          # e.g. 1.20.8
+# Download and verify the release pinned in specification.json:
+bash generate.sh                   # currently 1.23.0
 
 # Or use a pre-bundled single-file spec (deterministic, pinned):
-bash generate.sh <version> /path/to/openapi-legacy.yaml
+bash generate.sh <version> /path/to/openapi-3.0.yaml
 
 # Pristine baseline for patch work (stops before patches/ and model
 # post-processing — see "How to add / update a patch" below):
-bash generate.sh --no-patch <version> /path/to/openapi-legacy.yaml
+bash generate.sh --no-patch <version> /path/to/openapi-3.0.yaml
 
-# <version> may be omitted; it defaults to the spec's info.version (needs yq):
-bash generate.sh /path/to/openapi-legacy.yaml
+# <version> may be omitted; it defaults to the spec's info.version (uses the same YAML reader):
+bash generate.sh /path/to/openapi-3.0.yaml
 ```
 
 `generate.sh` does, in order: fetch+bundle the spec (or copy the given file) →
@@ -133,11 +133,12 @@ permission.
 
 ### Spec version policy
 
-`generate.sh` follows the specification's `main` branch by default. To pin a
-specific spec version, pass a bundled spec file. The repo's "legacy" bundle is
-produced by `redocly bundle legacy-yaml` inside a clone of
-`vrchatapi/specification` (the `legacy-yaml` API applies the `remove-x-internal`
-decorator); this is what the previous synchronous SDK was generated from.
+`generate.sh` defaults to the tag, OpenAPI 3.0 asset, and SHA256 in
+`specification.json`. Update this pin deliberately when adopting another
+specification release; never silently switch to a moving main/nightly bundle.
+The source schema is OpenAPI 3.2, so older generators must use the published
+`openapi-3.0.yaml` asset. To experiment with another version, pass its bundled
+file explicitly. CI verifies the pin before regenerating.
 
 ## Behavior patches (patches/)
 
@@ -150,7 +151,7 @@ generator does not emit. Do not remove or weaken them without a strong reason.
 | `2fa_verify_readable.patch` | `api_client.py` | 2FA / email-2FA response bodies raise `UnauthorizedException` with `status=200` and a readable `reason` ("2 Factor Authentication verification is required" / "Email ..."). |
 | `safe_param_symbols.patch` | `configuration.py` | `safe_chars_for_path_param = '~()'` so path params keep `~()`. |
 | `encode_basic_auth.patch` | `configuration.py` | Username/password are URL-encoded before base64 in `get_basic_auth_token()`. |
-| `mime_type_fix.patch` | `models/mime_type.py` | The spec contains a full-width `＋` in `image/svg+xml`, which produces an invalid Python identifier; this patch renames it to `IMAGE_SLASH_SVG_XML` with the ASCII value. |
+| `mime_type_alias.patch` | `models/mime_type.py` | Upstream corrected `image/svg+xml`; retain `IMAGE_SLASH_SVG_XML` as a compatibility alias for the generated `IMAGE_SLASH_SVG_PLUS_XML`. |
 
 Boolean query parameters (`True`/`False` → `true`/`false`) are already handled
 by the generator (`parameters_to_url_query`) — no patch needed. Non-2xx status
@@ -257,7 +258,8 @@ stored. The `publish` job in `.github/workflows/ci.yaml` requests
 `pypa/gh-action-pypi-publish` exchanges the OIDC token automatically (no
 `password` input).
 
-Before publishing, the `JamesIves/github-pages-deploy-action` step
+For `latest`, `prerelease`, and repository dispatches, the
+`JamesIves/github-pages-deploy-action` step
 **auto-commits the freshly regenerated tree to `main`** with a
 "Upgrade Python SDK to spec <version>" message, using `GITHUB_TOKEN` (needs
 `contents: write`; no PAT). Despite the action's name this is **not** serving a
@@ -276,19 +278,25 @@ release gate is human approval, not a branch check. On `workflow_dispatch` the
 `release` input selects the mode:
 
 - `none` (default) — CI only (generate/test/build/install), skip publish.
-- `latest` — publish the latest spec version (read from the spec's
-  `info.version`), no version typing needed.
+- `latest` — regenerate and publish the checksum-pinned spec version.
+- `regenerate` — generate the pinned specification, run all test/build/install
+  gates, and commit the generated outputs to the selected branch. Refuses a
+  changed branch head and never force-pushes or publishes.
+- `source` — publish the exact checked-in stable version after validating it
+  matches the pin. Does not regenerate or synchronize the branch onto main.
+  Use this for a reviewed stable upgrade branch. The suffix must be empty.
+- `post` — publish a source-only `.postN` fix using the existing spec base,
+  without synchronizing main.
 - `prerelease` — publish `info.version` + `version_postfix` (e.g. `rc1` →
   `1.20.8rc1`), which PyPI treats as a prerelease; `version_postfix` is
   required in this mode.
 
-Human approval is configured on the `pypi` GitHub environment, **not** in the
-workflow YAML: Settings → Environments → `pypi` → Required reviewers. Until a
-reviewer approves, the job is paused after the preceding generate/test/build/
-install jobs finish. A GitHub environment does *not* restrict which branch can
-publish — PyPI's trusted publisher validates owner/repo/workflow (and, if
-registered, the environment name) but never the ref; restrict branches in the
-workflow `if` if that is ever wanted.
+The `pypi` environment supplies trusted publishing but is **not automatically
+an approval gate**. Required reviewers must be explicitly enabled in GitHub
+settings to pause a release. Without them, a release dispatch publishes as
+soon as test/build/install pass. PyPI validates the configured owner, repo,
+workflow and environment, not the source ref. Verify the exact branch, commit,
+version, and successful CI before dispatching an authorized release.
 
 PyPI-side setup (one time): register a **pending publisher** for the
 `vrchatapi-async` project with this repository's owner/name, workflow
@@ -296,7 +304,8 @@ PyPI-side setup (one time): register a **pending publisher** for the
 
 ## Common maintenance tasks
 
-- **Bump the spec / regenerate:** `bash generate.sh <version>` and commit the
+- **Bump the spec / regenerate:** update `specification.json`, run
+  `bash generate.sh`, and commit the
   regenerated output together with any patch updates.
 - **Add a behavior fix:** prefer a patch under `patches/` (see workflow above).
 - **Upgrade openapi-generator:** edit `openapitools.json`, then verify the gate:

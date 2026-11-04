@@ -100,6 +100,47 @@ Compared to [the synchronous SDK](https://github.com/vrchatapi/vrchatapi-python)
   `~()` safe path-parameter charset and the lowercase boolean query parameters
   behave exactly like the synchronous SDK.
 
+## Specification 1.23 upgrade
+
+This release uses stable specification **1.23.0**, its published OpenAPI 3.0
+bundle, and OpenAPI Generator 7.24.0. The release tag, source commit and asset
+SHA256 are recorded in `specification.json`; `bash generate.sh` downloads and
+verifies that exact bundle. The removed `openapi-legacy.yaml` bundle is no
+longer used.
+
+The high-level dictionary API, WebSocket client, authentication, and async
+calling conventions remain unchanged. The old high-level
+`CurrentUserPlatformHistoryInner` name and `MIMEType.IMAGE_SLASH_SVG_XML` enum
+member remain available as aliases.
+
+For callers of generated APIs and models:
+
+- `get_current_user()` now returns `CurrentUserLoginResponse`; `get_user()`
+  returns `UserResponse`. High-level methods still return raw dictionaries.
+- `update_user_note()` may return a string when clearing a note;
+  `get_group_gallery_images()` may return a list or a paginated object.
+- `get_cosmetic_index()` is renamed `get_cosmetics()`. Tilia, earnings,
+  eligibility, and prop-publishing operations removed upstream are no longer
+  generated.
+- Several creation requests now have narrower enums and no implicit defaults.
+  Supply the intended release status, MIME type, region or product type.
+- `UpdateUserRequest` retains its existing `status="offline"` default. For a
+  description-only change, pass `status=None` explicitly.
+
+See the upstream [1.22 migration notes](https://github.com/vrchatapi/specification/releases/tag/v1.22.0)
+and [1.23 changes](https://github.com/vrchatapi/specification/releases/tag/v1.23.0)
+for the complete generated API changes. The OpenAPI 3.0 bundle flattens unions,
+so generated models are not identical to the discriminated 3.1/3.2 schemas.
+
+CI's `regenerate` mode generates and tests the pinned SDK, then commits only
+the generated outputs back to the selected branch. It refuses to push if that
+branch moved during the run and never force-pushes or publishes.
+
+Maintainers can publish a verified checked-in stable version with CI's `source`
+release mode. This runs the test/build/install gates and publishes without
+regenerating or writing the branch onto `main`. Dispatching a release can publish
+immediately unless GitHub environment reviewers are configured.
+
 ## Contributing
 
 Contributions are welcome, but do not add features that should be handled by the OpenAPI specification.

@@ -9,9 +9,10 @@ on:
     inputs:
       release:
         description: >-
-          Release mode: none = CI only (default), latest = publish the latest
-          spec version, prerelease = publish spec version + version_postfix,
-          post = publish checked-in SDK sources without updating the spec
+          Release mode: none = CI only (default), latest = publish the pinned
+          spec version, prerelease = publish pinned version + version_postfix,
+          post = publish a source-only post release, source = publish checked-in version,
+          regenerate = generate, test and commit the pinned SDK on this branch
         required: false
         type: choice
         default: none
@@ -20,6 +21,8 @@ on:
           - latest
           - prerelease
           - post
+          - source
+          - regenerate
       version_postfix:
         description: Version suffix, e.g. rc1, dev1 or .post6 (required for prerelease or post)
         required: false
@@ -43,26 +46,33 @@ jobs:
   generate:
     runs-on: ubuntu-latest
     env:
-      REGENERATE: ${{ github.event_name == 'repository_dispatch' || inputs.release == 'latest' || inputs.release == 'prerelease' }}
+      REGENERATE: ${{ github.event_name == 'repository_dispatch' || inputs.release == 'latest' || inputs.release == 'prerelease' || inputs.release == 'regenerate' }}
     outputs:
       version: ${{ steps.version.outputs.version }}
     steps:
       - uses: actions/checkout@v7
         with:
           repository: ${{ github.repository }}
-          ref: ${{ inputs.ref || github.ref }}
+          ref: ${{ inputs.ref || github.sha }}
 
-      - uses: vrchatapi/specification/.github/actions/setup-generator@main
+      - uses: vrchatapi/specification/.github/actions/setup-generator@5011d3fddc3db20bed5aedefac53b0ba4640038f
         if: env.REGENERATE == 'true'
 
-      - uses: vrchatapi/specification/.github/actions/download@main
+      - run: python tools/download_spec.py openapi-3.0.yaml
         if: env.REGENERATE == 'true'
-        with:
-          bundle: openapi-legacy.yaml
 
       # PyPI wants `.dev` where the specification says `-nightly.`
       - id: version
         run: |
+          if [ "${{ inputs.release }}" = "source" ] && [ -n "${VERSION_POSTPEND}" ]; then
+            echo "::error::source releases use the checked-in version without a suffix"
+            exit 1
+          fi
+          if [ "${{ inputs.release }}" = "source" ]; then
+            version="$(python tools/check_source_release.py)"
+            echo "version=${version}" >> $GITHUB_OUTPUT
+            exit 0
+          fi
           if [ "${{ inputs.release }}" = "post" ]; then
             version="$(python tools/prepare_post_release.py "${VERSION_POSTPEND}")"
             echo "version=${version}" >> $GITHUB_OUTPUT
@@ -75,19 +85,23 @@ jobs:
           fi
           version=""
           if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            version="${PASSED_VERSION}"
+            version="$(python tools/download_spec.py --version)"
+            if [ "${PASSED_VERSION}" != "${version}" ]; then
+              echo "::error::Update specification.json before releasing a different specification"
+              exit 1
+            fi
           elif [ "${{ inputs.release }}" = "prerelease" ]; then
             if [ -z "${VERSION_POSTPEND}" ]; then
               echo "::error::version_postfix is required when release = prerelease"
               exit 1
             fi
-            version="$(yq -r '.info.version' openapi-legacy.yaml)${VERSION_POSTPEND}"
+            version="$(python tools/download_spec.py --version)${VERSION_POSTPEND}"
           fi
-          # Fall back to the latest version from the spec when none is given
-          version="${version:-$(yq -r '.info.version' openapi-legacy.yaml)}"
+          # Fall back to the checksum-pinned specification version.
+          version="${version:-$(python tools/download_spec.py --version)}"
           echo "version=${version/-nightly./.dev}" >> $GITHUB_OUTPUT
 
-      - run: bash ./generate.sh "${{ steps.version.outputs.version }}" openapi-legacy.yaml
+      - run: bash ./generate.sh "${{ steps.version.outputs.version }}" openapi-3.0.yaml
         if: env.REGENERATE == 'true'
 
       - uses: actions/upload-artifact@v7
@@ -174,6 +188,53 @@ jobs:
           assert Version(vrchatapi.__version__) == expected
           PY
 
+  commit_generated:
+    needs: [generate, test, build, install]
+    if: github.event_name == 'workflow_dispatch' && inputs.release == 'regenerate'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ github.sha }}
+
+      # The artifact is a complete generated tree. Remove disposable output
+      # first so files removed by the new specification are not retained.
+      - run: rm -rf vrchatapi docs
+
+      - uses: actions/download-artifact@v8
+        with:
+          name: python-generated
+
+      - name: Commit verified generation to the selected branch
+        env:
+          TARGET_BRANCH: ${{ github.ref_name }}
+          DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+          EXPECTED_HEAD: ${{ github.sha }}
+          SDK_VERSION: ${{ needs.generate.outputs.version }}
+        run: |
+          if [ "$TARGET_BRANCH" = "$DEFAULT_BRANCH" ]; then
+            echo "::error::Regenerate on a working branch, not the default branch"
+            exit 1
+          fi
+          current=$(git ls-remote origin "refs/heads/$TARGET_BRANCH" | cut -f1)
+          if [ "$current" != "$EXPECTED_HEAD" ]; then
+            echo "::error::The selected branch changed; refusing to overwrite newer work"
+            exit 1
+          fi
+          git add -A -- vrchatapi docs client/highlevel/_generated_types.py \
+            setup.py setup.cfg requirements.txt test-requirements.txt tox.ini \
+            .gitlab-ci.yml .openapi-generator .openapi-generator-ignore
+          if git diff --cached --quiet; then
+            echo "The generated SDK already matches the selected branch"
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m "Regenerate verified SDK $SDK_VERSION"
+          git push origin "HEAD:refs/heads/$TARGET_BRANCH"
+
   publish:
     needs:
       - generate
@@ -182,12 +243,11 @@ jobs:
       - install
     if: >
       github.event_name == 'repository_dispatch' ||
-      (github.event_name == 'workflow_dispatch' && inputs.release != 'none')
+      (github.event_name == 'workflow_dispatch' && inputs.release != 'none' && inputs.release != 'regenerate')
     runs-on: ubuntu-latest
-    # Human approval before publishing is configured on the `pypi` GitHub
-    # environment (Settings -> Environments -> pypi -> Required reviewers).
-    # Any branch may trigger a (pre)release via workflow_dispatch /
-    # repository_dispatch; approval is the release gate.
+    # This environment supplies PyPI trusted publishing. It is not an approval
+    # gate unless Required reviewers are explicitly enabled in GitHub settings.
+    # Source releases publish the tested branch without modifying main.
     environment: pypi
     permissions:
       contents: write
@@ -196,15 +256,16 @@ jobs:
       - uses: actions/checkout@v7
         with:
           repository: ${{ github.repository }}
+          ref: ${{ inputs.ref || github.sha }}
 
       - uses: actions/download-artifact@v8
         with:
           name: python-generated
 
-      - run: rm -f openapi-legacy.yaml
+      - run: rm -f openapi-3.0.yaml
 
       - uses: JamesIves/github-pages-deploy-action@v4.9.0
-        if: inputs.release != 'post'
+        if: inputs.release != 'post' && inputs.release != 'source'
         with:
           branch: main
           folder: .
@@ -217,4 +278,4 @@ jobs:
 
       - uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          skip-existing: ${{ inputs.release != 'post' }}
+          skip-existing: ${{ inputs.release != 'post' && inputs.release != 'source' }}

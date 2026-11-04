@@ -10,18 +10,15 @@ set -euo pipefail
 #                   upstream spec/generator changes force you to rewrite patches.
 #   <version>       SDK version written to setup.py and vrchatapi/__init__.py
 #                   (e.g. 1.20.8). Optional: when omitted it is read from the
-#                   spec's `info.version` (needs `yq`), with `-nightly.` -> `.dev`
+#                   spec's `info.version`, with `-nightly.` -> `.dev`
 #                   like the CI workflow does.
 #   [openapi.yaml]  Optional path to a pre-bundled single-file OpenAPI spec.
-#                   When omitted, the latest spec is fetched from
-#                   https://github.com/vrchatapi/specification (main branch)
-#                   and bundled with `redocly`.
+#                   When omitted, the release asset pinned in specification.json
+#                   is downloaded and checked against its SHA256.
 #
 # Requirements:
 #   - openapi-generator CLI (version pinned in openapitools.json, needs Java 11+)
-#   - git and redocly (only when fetching the spec from the specification repo)
-#   - yq, Ruby, or PyYAML (for high-level TypedDict generation); yq is also
-#     needed when <version> is omitted
+#   - yq, Ruby, or PyYAML (for parsing YAML and high-level TypedDict generation)
 #   - patch, perl, python3 (python3 for tools/make_models_lenient.py)
 
 # ---- Package metadata (single source of truth) -----------------------------
@@ -67,19 +64,13 @@ if [ -n "${SPEC_FILE}" ]
 then
   cp "${SPEC_FILE}" "${WORK_DIR}/openapi.yaml"
 else
-  git clone --depth 1 https://github.com/vrchatapi/specification.git "${WORK_DIR}/specification" >/dev/null 2>&1
-  (cd "${WORK_DIR}/specification" && redocly bundle legacy-yaml >/dev/null)
-  cp "${WORK_DIR}/specification/dist/openapi-legacy.yaml" "${WORK_DIR}/openapi.yaml"
+  python3 tools/download_spec.py "${WORK_DIR}/openapi.yaml"
 fi
 
 # Version defaults to the spec's `info.version`; PyPI wants `.dev` where the
 # specification says `-nightly.` (same normalization as the CI workflow).
 if [ -z "${VERSION}" ]; then
-  if ! command -v yq >/dev/null 2>&1; then
-    echo "yq is required to read <version> from the spec; pass <version> explicitly or install yq." >&2
-    exit 1
-  fi
-  VERSION="$(yq -r '.info.version' "${WORK_DIR}/openapi.yaml")"
+  VERSION="$(python3 -c 'from pathlib import Path; import sys; from tools.generate_highlevel_types import _load_document; print(_load_document(Path(sys.argv[1]))["info"]["version"])' "${WORK_DIR}/openapi.yaml")"
   if [ -z "${VERSION}" ] || [ "${VERSION}" = "null" ]; then
     echo "Could not read info.version from the spec; pass <version> explicitly." >&2
     exit 1
@@ -167,8 +158,9 @@ patch ./vrchatapi/configuration.py < ./patches/safe_param_symbols.patch
 # Add URL encoding to basic auth parameters
 patch ./vrchatapi/configuration.py < ./patches/encode_basic_auth.patch
 
-# Fix invalid enum identifier produced from the spec's full-width '+' in image/svg+xml
-patch ./vrchatapi/models/mime_type.py < ./patches/mime_type_fix.patch
+# The upstream ASCII '+' now generates SVG_PLUS_XML. Keep the old public
+# SVG_XML spelling as an enum alias for existing SDK consumers.
+patch ./vrchatapi/models/mime_type.py < ./patches/mime_type_alias.patch
 
 # Remove backup files created by `patch` when hunks apply at an offset
 find vrchatapi -type f -name '*.orig' -delete
