@@ -1,0 +1,98 @@
+# GroupAuditLogEntryData
+
+
+## Properties
+
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**author_id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | [optional] 
+**image_id** | **str** |  | [optional] 
+**send_notification** | **bool** |  | [optional] 
+**text** | **object** |  | [optional] 
+**title** | **object** |  | [optional] 
+**access_type** | [**CalendarEventAccess**](CalendarEventAccess.md) |  | [optional] [default to CalendarEventAccess.PUBLIC]
+**description** | **object** |  | [optional] 
+**type** | **str** | The type of calendar entry. | [optional] 
+**category** | **str** | The category of the event. | [optional] 
+**close_instance_after_end_minutes** | **int** | Minutes after the event ends to close the instance. | [optional] 
+**created_at** | **datetime** |  | [optional] 
+**deleted_at** | **datetime** | The deletion timestamp. | [optional] 
+**duration_in_ms** | **int** | The duration of the event in milliseconds. | [optional] 
+**ends_at** | **datetime** | The end timestamp. | [optional] 
+**featured** | **bool** | Whether the event is featured. | [optional] 
+**guest_early_join_minutes** | **int** | Minutes before the start that guests can join. | [optional] 
+**host_early_join_minutes** | **int** | Minutes before the start that hosts can join. | [optional] 
+**interested_user_count** | **int** | The number of interested users. | [optional] 
+**is_draft** | **bool** | Whether the event is a draft. | [optional] 
+**languages** | **object** |  | [optional] 
+**occurrence_kind** | [**CalendarEventOccurrenceKind**](CalendarEventOccurrenceKind.md) |  | [optional] [default to CalendarEventOccurrenceKind.SINGLE]
+**occurrence_modified** | **str** |  | [optional] 
+**owner_id** | **str** |  | [optional] 
+**platforms** | **List[str]** | The supported platforms. | [optional] 
+**recurrence** | [**CalendarEventRecurrence**](CalendarEventRecurrence.md) |  | [optional] 
+**role_ids** | **List[str]** |  | [optional] 
+**series_id** | **str** | The ID of the recurring series the event belongs to. | [optional] 
+**short_code** | **object** |  | [optional] 
+**starts_at** | **datetime** | The start timestamp. | [optional] 
+**tags** | **object** |  | [optional] 
+**updated_at** | **datetime** |  | [optional] 
+**uses_instance_overflow** | **bool** | Whether the event uses instance overflow. | [optional] 
+**banner_id** | **object** |  | [optional] 
+**banner_version** | **int** |  | [optional] 
+**discoverability** | [**GroupAuditLogEntryDataGroupCreateDiscoverability**](GroupAuditLogEntryDataGroupCreateDiscoverability.md) |  | [optional] 
+**galleries** | [**List[GroupAuditLogEntryDataGroupCreateGallery]**](GroupAuditLogEntryDataGroupCreateGallery.md) |  | [optional] 
+**icon_id** | **object** |  | [optional] 
+**icon_version** | **int** |  | [optional] 
+**join_state** | **object** |  | [optional] 
+**name** | **object** |  | [optional] 
+**privacy** | [**GroupPrivacy**](GroupPrivacy.md) |  | [optional] [default to GroupPrivacy.DEFAULT]
+**rules** | **object** |  | [optional] 
+**members_only** | **object** |  | [optional] 
+**role_ids_to_auto_approve** | **List[str]** | The role IDs whose submissions are approved automatically. | [optional] 
+**role_ids_to_manage** | **List[str]** | The role IDs that can manage the gallery. | [optional] 
+**role_ids_to_submit** | **List[str]** | The role IDs that can submit to the gallery. | [optional] 
+**role_ids_to_view** | **List[str]** | The role IDs that can view the gallery. | [optional] 
+**message** | **str** | The announcement message. | [optional] 
+**group_access_type** | [**GroupAccessType**](GroupAccessType.md) |  | [optional] [default to GroupAccessType.MEMBERS]
+**calendar_entry_id** | **str** |  | [optional] 
+**location** | **str** | Represents a unique location, consisting of a world identifier and an instance identifier, or \&quot;offline\&quot; if the user is not on your friends list. | [optional] 
+**role_id** | **str** |  | [optional] 
+**role_name** | **str** | The name of the role that was assigned or unassigned. | [optional] 
+**manager_notes** | [**GroupAuditLogEntryStringChange**](GroupAuditLogEntryStringChange.md) |  | [optional] 
+**visibility** | [**GroupPostVisibility**](GroupPostVisibility.md) |  | [optional] 
+**editor_id** | **object** |  | [optional] 
+**image_url** | **str** | The URL of the post image. | [optional] 
+**is_added_on_join** | **object** |  | [optional] 
+**is_self_assignable** | **object** |  | [optional] 
+**order** | **object** |  | [optional] 
+**permissions** | **object** |  | [optional] 
+**requires_purchase** | **bool** | Whether the role requires a purchase. | [optional] 
+**requires_two_factor** | **object** |  | [optional] 
+**group_id** | **str** |  | [optional] 
+**last_updated_by_user_id** | **str** | A users unique ID, usually in the form of &#x60;usr_c1644b5b-3ca4-45b4-97c6-a2a0de70d469&#x60;. Legacy players can have old IDs in the form of &#x60;8JoV9XEdpo&#x60;. The ID can never be changed. | [optional] 
+**default_role** | **bool** | Whether the role is the group&#39;s default role. | [optional] 
+**is_management_role** | **bool** | Whether the role is a management role. | [optional] 
+**allow_group_join_prompt** | [**GroupAuditLogEntryBooleanChange**](GroupAuditLogEntryBooleanChange.md) |  | [optional] 
+**links** | [**GroupAuditLogEntryStringListChange**](GroupAuditLogEntryStringListChange.md) |  | [optional] 
+**nameplate_id** | [**GroupAuditLogEntryFileIDChange**](GroupAuditLogEntryFileIDChange.md) |  | [optional] 
+
+## Example
+
+```python
+from vrchatapi.models.group_audit_log_entry_data import GroupAuditLogEntryData
+
+# TODO update the JSON string below
+json = "{}"
+# create an instance of GroupAuditLogEntryData from a JSON string
+group_audit_log_entry_data_instance = GroupAuditLogEntryData.from_json(json)
+# print the JSON string representation of the object
+print(GroupAuditLogEntryData.to_json())
+
+# convert the object into a dict
+group_audit_log_entry_data_dict = group_audit_log_entry_data_instance.to_dict()
+# create an instance of GroupAuditLogEntryData from a dict
+group_audit_log_entry_data_from_dict = GroupAuditLogEntryData.from_dict(group_audit_log_entry_data_dict)
+```
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+
+

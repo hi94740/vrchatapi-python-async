@@ -13,7 +13,7 @@ from ._generated_types import (
     AccountDeletionLog,
     Badge,
     CurrentUser,
-    CurrentUserPlatformHistoryInner,
+    PlatformHistoryEntry as CurrentUserPlatformHistoryInner,  # Preserve the public 1.21 name.
     CurrentUserPresence,
     DiscordDetails,
     InstanceContentSettings,

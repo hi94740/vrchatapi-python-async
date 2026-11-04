@@ -28,10 +28,12 @@ class CurrentUser(TypedDict, total=False):
     acceptedTOSVersion: int
     accountDeletionDate: str | None
     accountDeletionLog: list[AccountDeletionLog] | None
+    accountStanding: str
     activeFriends: list[str]
     ageVerificationStatus: str
     ageVerified: bool
     allowAvatarCopying: bool
+    allowWorldsToCountFriendsInInstance: bool
     appleDetails: dict[str, Any]
     appleId: str
     authToken: str
@@ -90,7 +92,7 @@ class CurrentUser(TypedDict, total=False):
     personalizationOptOut: bool
     picoId: str
     platform: str
-    platform_history: list[CurrentUserPlatformHistoryInner]
+    platform_history: list[PlatformHistoryEntry]
     presence: CurrentUserPresence
     profileEffect: str
     pronouns: str
@@ -134,7 +136,7 @@ class PastDisplayName(TypedDict, total=False):
     updated_at: str
 
 
-class CurrentUserPlatformHistoryInner(TypedDict, total=False):
+class PlatformHistoryEntry(TypedDict, total=False):
     isMobile: bool
     platform: str | None
     recorded: str
@@ -191,6 +193,7 @@ class User(TypedDict, total=False):
     bannerUrl: str
     date_joined: str
     developerType: str
+    discordId: str
     displayName: str
     friendKey: str
     friendRequestStatus: str
@@ -269,9 +272,10 @@ class UnityPackage(TypedDict, total=False):
     impostorizerVersion: str
     performanceRating: str
     platform: str
-    pluginUrl: str
+    pluginUrl: str | None
     pluginUrlObject: dict[str, Any]
     scanStatus: str
+    transpilerVersion: str
     unitySortNumber: int
     unityVersion: str
     variant: str
@@ -284,7 +288,7 @@ __all__ = [
     "CurrentUser",
     "DiscordDetails",
     "PastDisplayName",
-    "CurrentUserPlatformHistoryInner",
+    "PlatformHistoryEntry",
     "CurrentUserPresence",
     "InstanceContentSettings",
     "User",

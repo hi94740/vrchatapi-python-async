@@ -7,11 +7,17 @@
 
 * `UPDATED_AT` (value: `'_updated_at'`)
 
+* `CONTAINS` (value: `'contains'`)
+
 * `CREATED` (value: `'created'`)
+
+* `EXACT` (value: `'exact'`)
 
 * `FAVORITES` (value: `'favorites'`)
 
 * `HEAT` (value: `'heat'`)
+
+* `HOTNESS` (value: `'hotness'`)
 
 * `LABSPUBLICATIONDATE` (value: `'labsPublicationDate'`)
 
@@ -34,6 +40,8 @@
 * `REPORTSCORE` (value: `'reportScore'`)
 
 * `SHUFFLE` (value: `'shuffle'`)
+
+* `TRENDING` (value: `'trending'`)
 
 * `TRUST` (value: `'trust'`)
 

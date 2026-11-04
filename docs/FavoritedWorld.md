@@ -1,7 +1,6 @@
 # FavoritedWorld
 
 
-
 ## Properties
 
 Name | Type | Description | Notes
@@ -31,10 +30,10 @@ Name | Type | Description | Notes
 **recommended_capacity** | **int** |  | [optional] 
 **release_status** | [**ReleaseStatus**](ReleaseStatus.md) |  | [default to ReleaseStatus.PUBLIC]
 **store_id** | **str** |  | [optional] 
-**tags** | **List[str]** |   | [optional] 
+**tags** | **List[str]** |  | [optional] 
 **thumbnail_image_url** | **str** |  | 
 **udon_products** | **List[str]** |  | [optional] 
-**unity_packages** | [**List[UnityPackage]**](UnityPackage.md) |   | [optional] 
+**unity_packages** | [**List[UnityPackage]**](UnityPackage.md) |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 **url_list** | **List[str]** |  | [optional] 
 **version** | **int** |  | [optional] 

@@ -7,7 +7,7 @@ Method | HTTP request | Description
 [**consume_own_inventory_item**](InventoryApi.md#consume_own_inventory_item) | **PUT** /inventory/{inventoryItemId}/consume | Consume Own Inventory Item
 [**delete_own_inventory_item**](InventoryApi.md#delete_own_inventory_item) | **DELETE** /inventory/{inventoryItemId} | Delete Own Inventory Item
 [**equip_own_inventory_item**](InventoryApi.md#equip_own_inventory_item) | **PUT** /inventory/{inventoryItemId}/equip | Equip Own Inventory Item
-[**get_cosmetic_index**](InventoryApi.md#get_cosmetic_index) | **GET** /cosmetics/index/{itemType} | List Cosmetics
+[**get_cosmetics**](InventoryApi.md#get_cosmetics) | **GET** /cosmetics/index/{itemType} | List Cosmetics
 [**get_inventory**](InventoryApi.md#get_inventory) | **GET** /inventory | Get Inventory
 [**get_inventory_collections**](InventoryApi.md#get_inventory_collections) | **GET** /inventory/collections | List Inventory Collections
 [**get_inventory_drops**](InventoryApi.md#get_inventory_drops) | **GET** /inventory/drops | List Inventory Drops
@@ -98,7 +98,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventoryConsumptionResults object. |  -  |
+**200** |  |  -  |
 **400** | Error response when trying to consume an InventoryItem lacking the consumable flag. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
@@ -179,7 +179,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an SuccessFlag object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -262,14 +262,14 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventoryItem object. |  -  |
+**200** |  |  -  |
 **400** | Error response when trying to equip an InventoryItem lacking the equippable flag. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_cosmetic_index**
-> List[InventoryTemplate] get_cosmetic_index(item_type)
+# **get_cosmetics**
+> List[InventoryTemplate] get_cosmetics(item_type)
 
 List Cosmetics
 
@@ -310,11 +310,11 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 
     try:
         # List Cosmetics
-        api_response = await api_instance.get_cosmetic_index(item_type)
-        print("The response of InventoryApi->get_cosmetic_index:\n")
+        api_response = await api_instance.get_cosmetics(item_type)
+        print("The response of InventoryApi->get_cosmetics:\n")
         pprint(api_response)
     except Exception as e:
-        print("Exception when calling InventoryApi->get_cosmetic_index: %s\n" % e)
+        print("Exception when calling InventoryApi->get_cosmetics: %s\n" % e)
 ```
 
 
@@ -343,7 +343,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of InventoryTemplate objects. |  -  |
+**200** |  |  -  |
 **400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
@@ -366,6 +366,7 @@ from vrchatapi.models.inventory import Inventory
 from vrchatapi.models.inventory_equip_slot import InventoryEquipSlot
 from vrchatapi.models.inventory_flag import InventoryFlag
 from vrchatapi.models.inventory_item_type import InventoryItemType
+from vrchatapi.models.inventory_sort_order import InventorySortOrder
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -394,7 +395,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
     holder_id = 'holder_id_example' # str | The UserID of the owner of the inventory; defaults to the currently authenticated user. (optional)
     equip_slot = '' # InventoryEquipSlot | Filter for inventory retrieval. (optional) (default to '')
-    order = 'order_example' # str | Sort order for inventory retrieval. (optional)
+    order = vrchatapi.InventorySortOrder() # InventorySortOrder | Sort order for inventory retrieval. (optional)
     tags = 'tags_example' # str | Filter tags for inventory retrieval (comma-separated). (optional)
     types = 'bundle' # InventoryItemType | Filter for inventory retrieval. (optional) (default to 'bundle')
     flags = 'instantiatable' # InventoryFlag | Filter flags for inventory retrieval (comma-separated). (optional) (default to 'instantiatable')
@@ -424,7 +425,7 @@ Name | Type | Description  | Notes
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
  **holder_id** | **str**| The UserID of the owner of the inventory; defaults to the currently authenticated user. | [optional] 
  **equip_slot** | [**InventoryEquipSlot**](.md)| Filter for inventory retrieval. | [optional] [default to &#39;&#39;]
- **order** | **str**| Sort order for inventory retrieval. | [optional] 
+ **order** | [**InventorySortOrder**](.md)| Sort order for inventory retrieval. | [optional] 
  **tags** | **str**| Filter tags for inventory retrieval (comma-separated). | [optional] 
  **types** | [**InventoryItemType**](.md)| Filter for inventory retrieval. | [optional] [default to &#39;bundle&#39;]
  **flags** | [**InventoryFlag**](.md)| Filter flags for inventory retrieval (comma-separated). | [optional] [default to &#39;instantiatable&#39;]
@@ -451,7 +452,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an Inventory object. |  -  |
+**200** |  |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing permissions. |  -  |
 
@@ -527,7 +529,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of strings. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -607,7 +609,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of InventoryDrop objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -687,7 +689,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventoryTemplate object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -767,7 +769,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventoryItem object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -847,7 +849,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of UserCosmetic objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -929,7 +931,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventoryItem object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1010,7 +1012,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single RewardRedemptionResult object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1095,7 +1097,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an OkStatus object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1177,7 +1179,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventorySpawn object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1257,7 +1259,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventorySpawn object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1337,7 +1339,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a string. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1420,7 +1422,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns an InventoryItem object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

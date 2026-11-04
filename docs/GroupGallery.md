@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **id** | **str** |  | [optional] 
 **members_only** | **bool** | Whether the gallery is members only. | [optional] [default to False]
 **name** | **str** | Name of the gallery. | [optional] 
-**role_ids_to_auto_approve** | **List[str]** |   | [optional] 
-**role_ids_to_manage** | **List[str]** |   | [optional] 
-**role_ids_to_submit** | **List[str]** |   | [optional] 
-**role_ids_to_view** | **List[str]** |   | [optional] 
+**role_ids_to_auto_approve** | **List[str]** |  | [optional] 
+**role_ids_to_manage** | **List[str]** |  | [optional] 
+**role_ids_to_submit** | **List[str]** |  | [optional] 
+**role_ids_to_view** | **List[str]** |  | [optional] 
 **updated_at** | **datetime** |  | [optional] 
 
 ## Example

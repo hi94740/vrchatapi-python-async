@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **ids** | **List[str]** |  | [optional] 
 **ips_query** | [**InfoPushIpsQuery**](InfoPushIpsQuery.md) |  | [optional] 
 **max_cells** | **int** |  | [optional] 
-**name** | **str** |  | [optional] 
+**name** | **object** |  | [optional] 
 **type** | **str** |  | [optional] 
 
 ## Example

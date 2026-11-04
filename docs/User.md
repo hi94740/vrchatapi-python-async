@@ -12,12 +12,13 @@ Name | Type | Description | Notes
 **age_verification_status** | [**AgeVerificationStatus**](AgeVerificationStatus.md) |  | 
 **age_verified** | **bool** | &#x60;true&#x60; if, user is age verified (not 18+). | 
 **allow_avatar_copying** | **bool** |  | [default to True]
-**apple_details** | **Dict[str, object]** |  | [optional] 
-**banner_color** | **str** |  | [optional] 
-**banner_type** | **str** |  | [optional] 
+**apple_details** | **object** | Details of an account on another service linked to this one. | [optional] 
+**banner_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**banner_type** | [**BannerType**](BannerType.md) |  | [optional] 
 **banner_url** | **str** |  | [optional] 
 **date_joined** | **date** |  | 
 **developer_type** | [**DeveloperType**](DeveloperType.md) |  | [default to DeveloperType.NONE]
+**discord_id** | **str** |  | [optional] 
 **display_name** | **str** | A users visual display name. This is what shows up in-game, and can different from their &#x60;username&#x60;. Changing display name is restricted to a cooldown period. | 
 **friend_key** | **str** |  | 
 **friend_request_status** | **str** | State of a friend request between the caller and this user. VRChat sends the string &#x60;\&quot;null\&quot;&#x60;, not JSON &#x60;null&#x60;. | [optional] 
@@ -27,8 +28,8 @@ Name | Type | Description | Notes
 **instance_id** | **str** | InstanceID can be \&quot;offline\&quot; on User profiles if you are not friends with that user and \&quot;private\&quot; if you are friends and user is in private instance. | [optional] 
 **is_economy_creator** | **bool** |  | [optional] 
 **is_friend** | **bool** | Either their &#x60;friendKey&#x60;, or empty string if you are not friends. Unknown usage. | 
-**last_activity** | **str** | Either a date-time or empty string. | 
-**last_login** | **str** | Either a date-time or empty string. | 
+**last_activity** | **str** |  | 
+**last_login** | **str** |  | 
 **last_mobile** | **str** |  | [optional] 
 **last_platform** | **str** | This is normally &#x60;android&#x60;, &#x60;ios&#x60;, &#x60;standalonewindows&#x60;, &#x60;web&#x60;, or the empty value &#x60;&#x60;, but also supposedly can be any random Unity version such as &#x60;2019.2.4-801-Release&#x60; or &#x60;2019.2.2-772-Release&#x60; or even &#x60;unknownplatform&#x60;. | 
 **location** | **str** | Represents a unique location, consisting of a world identifier and an instance identifier, or \&quot;offline\&quot; if the user is not on your friends list. | [optional] 
@@ -40,7 +41,7 @@ Name | Type | Description | Notes
 **state** | [**UserState**](UserState.md) |  | [default to UserState.OFFLINE]
 **status** | [**UserStatus**](UserStatus.md) |  | [default to UserStatus.OFFLINE]
 **status_description** | **str** |  | 
-**tags** | **List[str]** |   | 
+**tags** | **List[str]** |  | 
 **traveling_to_instance** | **str** |  | [optional] 
 **traveling_to_location** | **str** |  | [optional] 
 **traveling_to_world** | **str** |  | [optional] 

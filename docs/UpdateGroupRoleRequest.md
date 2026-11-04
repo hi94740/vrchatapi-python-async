@@ -6,10 +6,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **description** | **str** |  | [optional] 
-**is_self_assignable** | **bool** |  | [optional] [default to False]
+**is_added_on_join** | **bool** |  | [optional] 
+**is_self_assignable** | **bool** |  | [optional] 
 **name** | **str** |  | [optional] 
 **order** | **int** |  | [optional] 
 **permissions** | [**List[GroupPermissions]**](GroupPermissions.md) |  | [optional] 
+**requires_two_factor** | **bool** |  | [optional] 
 
 ## Example
 

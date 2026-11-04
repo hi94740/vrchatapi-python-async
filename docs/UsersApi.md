@@ -6,6 +6,8 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**add_tags**](UsersApi.md#add_tags) | **POST** /users/{userId}/addTags | Add User Tags
 [**check_user_persistence_exists**](UsersApi.md#check_user_persistence_exists) | **GET** /users/{userId}/{worldId}/persist/exists | Check User Persistence Exists
+[**clear_user_tutorials**](UsersApi.md#clear_user_tutorials) | **DELETE** /users/{userId}/tutorial | Clear User Tutorials
+[**complete_user_tutorial**](UsersApi.md#complete_user_tutorial) | **POST** /users/{userId}/tutorial | Complete User Tutorial
 [**delete_all_user_persistence_data**](UsersApi.md#delete_all_user_persistence_data) | **DELETE** /users/{userId}/persist | Delete All User Persistence Data
 [**delete_user_persistence**](UsersApi.md#delete_user_persistence) | **DELETE** /users/{userId}/{worldId}/persist | Delete User Persistence
 [**get_age_verification_status**](UsersApi.md#get_age_verification_status) | **GET** /ageVerification/status | Get Age Verification Status
@@ -116,7 +118,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single CurrentUser object. |  -  |
+**200** |  |  -  |
 **400** | Error response when a user attempts to add an invalid, restricted, or duplicate tag to their profile, attempts to add tags above the limit for their profile, or attempts to remove invalid, restricted, or absent tag from their profile. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing permissions. |  -  |
@@ -201,6 +203,176 @@ void (empty response body)
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when querying another user&#39;s persistence data. The body carries only a message string, without the nested &#x60;error&#x60; object every other response in this description uses. |  -  |
 **404** | The user does not have persistence data for the given world. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **clear_user_tutorials**
+> CurrentUser clear_user_tutorials(user_id, x_platform=x_platform, x_store=x_store)
+
+Clear User Tutorials
+
+Clears every tutorial the user completed on a platform, whatever `X-Platform` and `X-Store` name, and returns the current user. Tutorials of other kinds, such as `platform-agnostic:custom:onboarding-tutorial-world:v1`, stay completed.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.current_user import CurrentUser
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.UsersApi(api_client)
+    user_id = 'user_id_example' # str | Must be a valid user ID.
+    x_platform = 'standalonewindows' # str | The platform the tutorial belongs to. `standalonewindows`, `android` and `ios` are kept; any other value is recorded as `null`. (optional)
+    x_store = 'steam' # str | The store the tutorial belongs to, recorded as sent. (optional)
+
+    try:
+        # Clear User Tutorials
+        api_response = await api_instance.clear_user_tutorials(user_id, x_platform=x_platform, x_store=x_store)
+        print("The response of UsersApi->clear_user_tutorials:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->clear_user_tutorials: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| Must be a valid user ID. | 
+ **x_platform** | **str**| The platform the tutorial belongs to. &#x60;standalonewindows&#x60;, &#x60;android&#x60; and &#x60;ios&#x60; are kept; any other value is recorded as &#x60;null&#x60;. | [optional] 
+ **x_store** | **str**| The store the tutorial belongs to, recorded as sent. | [optional] 
+
+### Return type
+
+[**CurrentUser**](CurrentUser.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+**403** | A user can clear only their own tutorials. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **complete_user_tutorial**
+> CurrentUser complete_user_tutorial(user_id, x_platform=x_platform, x_store=x_store)
+
+Complete User Tutorial
+
+Marks the tutorial named by `X-Platform` and `X-Store` completed, and returns the current user.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.current_user import CurrentUser
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.UsersApi(api_client)
+    user_id = 'user_id_example' # str | Must be a valid user ID.
+    x_platform = 'standalonewindows' # str | The platform the tutorial belongs to. `standalonewindows`, `android` and `ios` are kept; any other value is recorded as `null`. (optional)
+    x_store = 'steam' # str | The store the tutorial belongs to, recorded as sent. (optional)
+
+    try:
+        # Complete User Tutorial
+        api_response = await api_instance.complete_user_tutorial(user_id, x_platform=x_platform, x_store=x_store)
+        print("The response of UsersApi->complete_user_tutorial:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling UsersApi->complete_user_tutorial: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **user_id** | **str**| Must be a valid user ID. | 
+ **x_platform** | **str**| The platform the tutorial belongs to. &#x60;standalonewindows&#x60;, &#x60;android&#x60; and &#x60;ios&#x60; are kept; any other value is recorded as &#x60;null&#x60;. | [optional] 
+ **x_store** | **str**| The store the tutorial belongs to, recorded as sent. | [optional] 
+
+### Return type
+
+[**CurrentUser**](CurrentUser.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+**403** | A user can complete only their own tutorials. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -433,7 +605,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single AgeVerificationStatusResult object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -513,7 +685,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Group objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -593,7 +765,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Group objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -677,7 +849,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of MutualFriend objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -761,7 +933,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of LimitedUserGroups objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -841,7 +1013,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Mutuals object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1005,13 +1177,13 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a user&#39;s public profile. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user**
-> User get_user(user_id)
+> UserResponse get_user(user_id)
 
 Get User by ID
 
@@ -1023,7 +1195,7 @@ Get public user information about a specific user using their ID.
 
 ```python
 import vrchatapi
-from vrchatapi.models.user import User
+from vrchatapi.models.user_response import UserResponse
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -1070,7 +1242,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**User**](User.md)
+[**UserResponse**](UserResponse.md)
 
 ### Authorization
 
@@ -1085,7 +1257,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Return a single User object.  Requesting your own ID returns your full &#x60;CurrentUser&#x60; record instead, carrying the private fields (&#x60;emailVerified&#x60;, &#x60;steamDetails&#x60;, &#x60;twoFactorAuthEnabled&#x60;, …) that never appear in responses for another user. |  -  |
+**200** | Requesting your own ID returns your full &#x60;CurrentUser&#x60; record, carrying the private fields (&#x60;emailVerified&#x60;, &#x60;steamDetails&#x60;, &#x60;twoFactorAuthEnabled&#x60;, …) that never appear in responses for another user. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
@@ -1174,7 +1346,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_by_name**
-> User get_user_by_name(username)
+> UserResponse get_user_by_name(username)
 
 Get User by Username
 
@@ -1189,7 +1361,7 @@ now requires admin credentials. [See issue by Tupper for more information](https
 
 ```python
 import vrchatapi
-from vrchatapi.models.user import User
+from vrchatapi.models.user_response import UserResponse
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -1236,7 +1408,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**User**](User.md)
+[**UserResponse**](UserResponse.md)
 
 ### Authorization
 
@@ -1251,7 +1423,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Return a single User object.  Requesting your own ID returns your full &#x60;CurrentUser&#x60; record instead, carrying the private fields (&#x60;emailVerified&#x60;, &#x60;steamDetails&#x60;, &#x60;twoFactorAuthEnabled&#x60;, …) that never appear in responses for another user. |  -  |
+**200** | Requesting your own ID returns your full &#x60;CurrentUser&#x60; record, carrying the private fields (&#x60;emailVerified&#x60;, &#x60;steamDetails&#x60;, &#x60;twoFactorAuthEnabled&#x60;, …) that never appear in responses for another user. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing Administrator credentials. |  -  |
 
@@ -1332,7 +1504,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a UserClientConfig object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1342,7 +1514,7 @@ Name | Type | Description  | Notes
 
 Get User Feedback
 
-Get user's submitted feedback
+Get user's submitted feedback. VRChat staff note that [moderation reports](https://vrchat.community/reference/get-moderation-reports) replace the feedback system in [Feedback deprecated](https://github.com/vrchatapi/specification/issues/535), December 5, 2025.
 
 ### Example
 
@@ -1418,13 +1590,13 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Feedback objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_group_instances**
-> GetUserGroupInstances200Response get_user_group_instances(user_id)
+> UserGroupInstanceListResponse get_user_group_instances(user_id)
 
 Get User Group Instances
 
@@ -1436,7 +1608,7 @@ Returns a list of group instances for a user
 
 ```python
 import vrchatapi
-from vrchatapi.models.get_user_group_instances200_response import GetUserGroupInstances200Response
+from vrchatapi.models.user_group_instance_list_response import UserGroupInstanceListResponse
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -1483,7 +1655,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetUserGroupInstances200Response**](GetUserGroupInstances200Response.md)
+[**UserGroupInstanceListResponse**](UserGroupInstanceListResponse.md)
 
 ### Authorization
 
@@ -1498,14 +1670,14 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Instance objects with a fetched at time. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying get group instances of another user. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_group_instances_for_group**
-> GetUserGroupInstances200Response get_user_group_instances_for_group(user_id, group_id)
+> UserGroupInstanceListResponse get_user_group_instances_for_group(user_id, group_id)
 
 Get User Group Instances for a specific Group
 
@@ -1517,7 +1689,7 @@ Returns a list of a group's instances for a user
 
 ```python
 import vrchatapi
-from vrchatapi.models.get_user_group_instances200_response import GetUserGroupInstances200Response
+from vrchatapi.models.user_group_instance_list_response import UserGroupInstanceListResponse
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -1566,7 +1738,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GetUserGroupInstances200Response**](GetUserGroupInstances200Response.md)
+[**UserGroupInstanceListResponse**](UserGroupInstanceListResponse.md)
 
 ### Authorization
 
@@ -1581,7 +1753,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Instance objects with a fetched at time. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying get group instances of another user. |  -  |
 
@@ -1662,7 +1834,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Group objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1742,7 +1914,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of LimitedUserGroups objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1822,7 +1994,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single UserNote object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1904,7 +2076,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of UserNote objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1984,17 +2156,17 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | OK |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **get_user_tutorial_status**
-> TutorialStatus get_user_tutorial_status(user_id)
+> TutorialStatus get_user_tutorial_status(user_id, x_platform=x_platform, x_store=x_store)
 
 Get User Tutorial Status
 
-Gets the status of completed or outstanding tutorials for the specified user.
+Gets the status of completed or outstanding tutorials for the specified user. `tutorialKey` and `completed` describe the tutorial named by `X-Platform` and `X-Store`.
 
 ### Example
 
@@ -2028,10 +2200,12 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.UsersApi(api_client)
     user_id = 'user_id_example' # str | Must be a valid user ID.
+    x_platform = 'standalonewindows' # str | The platform the tutorial belongs to. `standalonewindows`, `android` and `ios` are kept; any other value is recorded as `null`. (optional)
+    x_store = 'steam' # str | The store the tutorial belongs to, recorded as sent. (optional)
 
     try:
         # Get User Tutorial Status
-        api_response = await api_instance.get_user_tutorial_status(user_id)
+        api_response = await api_instance.get_user_tutorial_status(user_id, x_platform=x_platform, x_store=x_store)
         print("The response of UsersApi->get_user_tutorial_status:\n")
         pprint(api_response)
     except Exception as e:
@@ -2046,6 +2220,8 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **user_id** | **str**| Must be a valid user ID. | 
+ **x_platform** | **str**| The platform the tutorial belongs to. &#x60;standalonewindows&#x60;, &#x60;android&#x60; and &#x60;ios&#x60; are kept; any other value is recorded as &#x60;null&#x60;. | [optional] 
+ **x_store** | **str**| The store the tutorial belongs to, recorded as sent. | [optional] 
 
 ### Return type
 
@@ -2064,7 +2240,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single TutorialStatus object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -2147,7 +2323,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single CurrentUser object. |  -  |
+**200** |  |  -  |
 **400** | Error response when a user attempts to add an invalid, restricted, or duplicate tag to their profile, attempts to add tags above the limit for their profile, or attempts to remove invalid, restricted, or absent tag from their profile. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to missing permissions. |  -  |
@@ -2155,7 +2331,7 @@ Name | Type | Description  | Notes
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **search_users**
-> List[LimitedUserSearch] search_users(search=search, developer_type=developer_type, n=n, offset=offset, is_internal_variant=is_internal_variant)
+> List[LimitedUserSearch] search_users(search=search, developer_type=developer_type, sort=sort, custom_fields=custom_fields, n=n, offset=offset, is_internal_variant=is_internal_variant)
 
 Search All Users
 
@@ -2168,6 +2344,7 @@ Search and list any users by text query
 ```python
 import vrchatapi
 from vrchatapi.models.limited_user_search import LimitedUserSearch
+from vrchatapi.models.user_search_sort import UserSearchSort
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -2194,13 +2371,15 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     api_instance = vrchatapi.UsersApi(api_client)
     search = 'search_example' # str | Searches by `displayName`. Will return empty array if search query is empty or missing. (optional)
     developer_type = 'developer_type_example' # str | Active user by developer type, none for normal users and internal for moderators (optional)
+    sort = vrchatapi.UserSearchSort() # UserSearchSort | The order to return users in. (optional)
+    custom_fields = 'custom_fields_example' # str | A comma-separated list of field names. (optional)
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
     is_internal_variant = false # bool | Not quite sure what this actually does (exists on the website but doesn't seem to be used) (optional)
 
     try:
         # Search All Users
-        api_response = await api_instance.search_users(search=search, developer_type=developer_type, n=n, offset=offset, is_internal_variant=is_internal_variant)
+        api_response = await api_instance.search_users(search=search, developer_type=developer_type, sort=sort, custom_fields=custom_fields, n=n, offset=offset, is_internal_variant=is_internal_variant)
         print("The response of UsersApi->search_users:\n")
         pprint(api_response)
     except Exception as e:
@@ -2216,6 +2395,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search** | **str**| Searches by &#x60;displayName&#x60;. Will return empty array if search query is empty or missing. | [optional] 
  **developer_type** | **str**| Active user by developer type, none for normal users and internal for moderators | [optional] 
+ **sort** | [**UserSearchSort**](.md)| The order to return users in. | [optional] 
+ **custom_fields** | **str**| A comma-separated list of field names. | [optional] 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
  **is_internal_variant** | **bool**| Not quite sure what this actually does (exists on the website but doesn&#39;t seem to be used) | [optional] 
@@ -2237,7 +2418,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of LimitedUserSearch objects. |  -  |
+**200** |  |  -  |
 **400** | Error response when trying to search list of users with an invalid request. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
@@ -2405,7 +2586,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a user&#39;s public profile. |  -  |
+**200** |  |  -  |
 **400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
@@ -2489,7 +2670,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single CurrentUser object. |  -  |
+**200** |  |  -  |
 **400** | Error response when a user attempts to change a property without supplying their current password. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when updating a user other than yourself. |  -  |
@@ -2574,13 +2755,13 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a UserClientConfig object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
 # **update_user_note**
-> UserNote update_user_note(update_user_note_request)
+> object update_user_note(update_user_note_request)
 
 Update User Note
 
@@ -2593,7 +2774,6 @@ Updates the currently authenticated user's note on a user
 ```python
 import vrchatapi
 from vrchatapi.models.update_user_note_request import UpdateUserNoteRequest
-from vrchatapi.models.user_note import UserNote
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -2640,7 +2820,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**UserNote**](UserNote.md)
+**object**
 
 ### Authorization
 
@@ -2655,7 +2835,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single UserNote object. |  -  |
+**200** | An empty &#x60;note&#x60; clears the note and returns a string in place of the &#x60;UserNote&#x60;. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)

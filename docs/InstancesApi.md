@@ -6,12 +6,15 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**close_instance**](InstancesApi.md#close_instance) | **DELETE** /instances/{worldId}:{instanceId} | Close Instance
 [**create_instance**](InstancesApi.md#create_instance) | **POST** /instances | Create Instance
+[**discover_instances**](InstancesApi.md#discover_instances) | **GET** /instances/discover | Discover Instances
+[**get_active_instances**](InstancesApi.md#get_active_instances) | **GET** /instances/active | List Active Instances
 [**get_instance**](InstancesApi.md#get_instance) | **GET** /instances/{worldId}:{instanceId} | Get Instance
 [**get_instance_by_short_name**](InstancesApi.md#get_instance_by_short_name) | **GET** /instances/s/{shortName} | Get Instance By Short Name
 [**get_instance_categories**](InstancesApi.md#get_instance_categories) | **GET** /instanceCategories | List Instance Categories
 [**get_instance_vibes**](InstancesApi.md#get_instance_vibes) | **GET** /instanceVibes | List Instance Vibes
 [**get_recent_locations**](InstancesApi.md#get_recent_locations) | **GET** /instances/recent | List Recent Locations
 [**get_short_name**](InstancesApi.md#get_short_name) | **GET** /instances/{worldId}:{instanceId}/shortName | Get Instance Short Name
+[**update_instance**](InstancesApi.md#update_instance) | **PUT** /instances/{worldId}:{instanceId} | Update Instance
 
 
 # **close_instance**
@@ -97,7 +100,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Instance object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response due to not being allowed to close an instance |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
@@ -180,7 +183,185 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Instance object. |  -  |
+**200** |  |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **discover_instances**
+> InstanceDiscovery discover_instances(n=n, region=region, platform=platform, world_id=world_id, group_id=group_id, vibe=vibe, category=category)
+
+Discover Instances
+
+Returns instances to discover, in an order that changes between requests.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.create_instance_request_region import CreateInstanceRequestRegion
+from vrchatapi.models.instance_discovery import InstanceDiscovery
+from vrchatapi.models.instance_discovery_platform import InstanceDiscoveryPlatform
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.InstancesApi(api_client)
+    n = 56 # int | The number of instances to return. (optional)
+    region = vrchatapi.CreateInstanceRequestRegion() # CreateInstanceRequestRegion | Return only instances in this region. (optional)
+    platform = vrchatapi.InstanceDiscoveryPlatform() # InstanceDiscoveryPlatform | The platform to discover instances for. (optional)
+    world_id = ['world_id_example'] # List[str] | Return only instances of these worlds. (optional)
+    group_id = ['group_id_example'] # List[str] | Return only instances of these groups. (optional)
+    vibe = ['vibe_example'] # List[str] |  (optional)
+    category = 'category_example' # str |  (optional)
+
+    try:
+        # Discover Instances
+        api_response = await api_instance.discover_instances(n=n, region=region, platform=platform, world_id=world_id, group_id=group_id, vibe=vibe, category=category)
+        print("The response of InstancesApi->discover_instances:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InstancesApi->discover_instances: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **n** | **int**| The number of instances to return. | [optional] 
+ **region** | [**CreateInstanceRequestRegion**](.md)| Return only instances in this region. | [optional] 
+ **platform** | [**InstanceDiscoveryPlatform**](.md)| The platform to discover instances for. | [optional] 
+ **world_id** | [**List[str]**](str.md)| Return only instances of these worlds. | [optional] 
+ **group_id** | [**List[str]**](str.md)| Return only instances of these groups. | [optional] 
+ **vibe** | [**List[str]**](str.md)|  | [optional] 
+ **category** | **str**|  | [optional] 
+
+### Return type
+
+[**InstanceDiscovery**](InstanceDiscovery.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **get_active_instances**
+> List[Instance] get_active_instances(n=n, offset=offset)
+
+List Active Instances
+
+Returns active instances, the most populated first.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.instance import Instance
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.InstancesApi(api_client)
+    n = 56 # int | The number of instances to return. (optional)
+    offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
+
+    try:
+        # List Active Instances
+        api_response = await api_instance.get_active_instances(n=n, offset=offset)
+        print("The response of InstancesApi->get_active_instances:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InstancesApi->get_active_instances: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **n** | **int**| The number of instances to return. | [optional] 
+ **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
+
+### Return type
+
+[**List[Instance]**](Instance.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
 **400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
@@ -265,7 +446,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Instance object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -345,7 +526,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Instance object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
@@ -422,7 +603,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of InstanceCategory objects. |  -  |
+**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -497,7 +678,7 @@ This endpoint does not need any parameter.
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of InstanceVibe objects. |  -  |
+**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -577,7 +758,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of LocationIDs. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -661,6 +842,98 @@ Name | Type | Description  | Notes
 |-------------|-------------|------------------|
 **200** | Returns an instance secureName and/or shortName. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
+
+# **update_instance**
+> Instance update_instance(world_id, instance_id, update_instance_request)
+
+Update Instance
+
+Set or remove the calendar event linked to a group instance.
+
+Updating a group instance requires both the `group-instance-manage` and `group-instance-calendar-link` permissions.
+
+The event must begin within the next six hours or have ended within the previous six hours.
+
+### Example
+
+* Api Key Authentication (authCookie):
+
+```python
+import vrchatapi
+from vrchatapi.models.instance import Instance
+from vrchatapi.models.update_instance_request import UpdateInstanceRequest
+from vrchatapi.rest import ApiException
+from pprint import pprint
+
+# Defining the host is optional and defaults to https://api.vrchat.cloud/api/1
+# See configuration.py for a list of all supported configuration parameters.
+configuration = vrchatapi.Configuration(
+    host = "https://api.vrchat.cloud/api/1"
+)
+
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
+
+# Enter a context with an instance of the API client
+async with vrchatapi.ApiClient(configuration) as api_client:
+    # Create an instance of the API class
+    api_instance = vrchatapi.InstancesApi(api_client)
+    world_id = 'world_id_example' # str | Must be a valid world ID.
+    instance_id = 'instance_id_example' # str | Must be a valid instance ID.
+    update_instance_request = vrchatapi.UpdateInstanceRequest() # UpdateInstanceRequest | 
+
+    try:
+        # Update Instance
+        api_response = await api_instance.update_instance(world_id, instance_id, update_instance_request)
+        print("The response of InstancesApi->update_instance:\n")
+        pprint(api_response)
+    except Exception as e:
+        print("Exception when calling InstancesApi->update_instance: %s\n" % e)
+```
+
+
+
+### Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **world_id** | **str**| Must be a valid world ID. | 
+ **instance_id** | **str**| Must be a valid instance ID. | 
+ **update_instance_request** | [**UpdateInstanceRequest**](UpdateInstanceRequest.md)|  | 
+
+### Return type
+
+[**Instance**](Instance.md)
+
+### Authorization
+
+[authCookie](../README.md#authCookie)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+### HTTP response details
+
+| Status code | Description | Response headers |
+|-------------|-------------|------------------|
+**200** |  |  -  |
+**400** | Error response when an instance&#39;s calendar event link cannot be updated |  -  |
+**401** | Error response due to missing auth cookie. |  -  |
+**403** | Error response when the caller lacks permission to manage the instance or its calendar link |  -  |
+**404** | Error response when the instance does not exist or the requested calendar event belongs to another group |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 

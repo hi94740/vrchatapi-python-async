@@ -96,7 +96,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Avatar object. |  -  |
+**200** |  |  -  |
 **400** | Error response due to missing permissions. |  -  |
 **401** | Error response when set featured to true without being an admin. |  -  |
 
@@ -177,7 +177,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Avatar object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
@@ -336,7 +336,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a Service Status. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Avatar object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
@@ -432,6 +432,7 @@ List avatar styles.
 
 ### Example
 
+* Api Key Authentication (authCookie):
 
 ```python
 import vrchatapi
@@ -445,6 +446,16 @@ configuration = vrchatapi.Configuration(
     host = "https://api.vrchat.cloud/api/1"
 )
 
+# The client must configure the authentication and authorization parameters
+# in accordance with the API server security policy.
+# Examples for each auth method are provided below, use the example that
+# satisfies your auth use case.
+
+# Configure API key authorization: authCookie
+configuration.api_key['authCookie'] = os.environ["API_KEY"]
+
+# Uncomment below to setup prefix (e.g. Bearer) for API key, if needed
+# configuration.api_key_prefix['authCookie'] = 'Bearer'
 
 # Enter a context with an instance of the API client
 async with vrchatapi.ApiClient(configuration) as api_client:
@@ -472,7 +483,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[authCookie](../README.md#authCookie)
 
 ### HTTP request headers
 
@@ -483,7 +494,7 @@ No authorization required
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of AvatarStyle objects. |  -  |
+**200** |  |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
@@ -503,7 +514,7 @@ import vrchatapi
 from vrchatapi.models.avatar import Avatar
 from vrchatapi.models.order_option import OrderOption
 from vrchatapi.models.release_status import ReleaseStatus
-from vrchatapi.models.sort_option import SortOption
+from vrchatapi.models.sort_option_avatar import SortOptionAvatar
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -529,7 +540,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.AvatarsApi(api_client)
     featured = True # bool | Filters on featured results. (optional)
-    sort = 'popularity' # SortOption | The sort order of the results. (optional) (default to 'popularity')
+    sort = vrchatapi.SortOptionAvatar() # SortOptionAvatar | The sort order of the results. (optional)
     n = 60 # int | The number of objects to return. (optional) (default to 60)
     order = 'descending' # OrderOption | Result ordering (optional) (default to 'descending')
     offset = 56 # int | A zero-based offset from the default object sorting from where search results start. (optional)
@@ -559,7 +570,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **featured** | **bool**| Filters on featured results. | [optional] 
- **sort** | [**SortOption**](.md)| The sort order of the results. | [optional] [default to &#39;popularity&#39;]
+ **sort** | [**SortOptionAvatar**](.md)| The sort order of the results. | [optional] 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
  **order** | [**OrderOption**](.md)| Result ordering | [optional] [default to &#39;descending&#39;]
  **offset** | **int**| A zero-based offset from the default object sorting from where search results start. | [optional] 
@@ -589,7 +600,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Avatar objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to see favorited avatars of another user without sufficient admin permissions. |  -  |
 
@@ -748,7 +759,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Avatar objects. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -828,7 +839,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Avatar object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to see another users current avatar without sufficient admin permissions. |  -  |
 
@@ -850,7 +861,7 @@ import vrchatapi
 from vrchatapi.models.avatar import Avatar
 from vrchatapi.models.order_option import OrderOption
 from vrchatapi.models.release_status import ReleaseStatus
-from vrchatapi.models.sort_option import SortOption
+from vrchatapi.models.sort_option_avatar import SortOptionAvatar
 from vrchatapi.rest import ApiException
 from pprint import pprint
 
@@ -876,7 +887,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
     # Create an instance of the API class
     api_instance = vrchatapi.AvatarsApi(api_client)
     featured = True # bool | Filters on featured results. (optional)
-    sort = 'popularity' # SortOption | The sort order of the results. (optional) (default to 'popularity')
+    sort = vrchatapi.SortOptionAvatar() # SortOptionAvatar | The sort order of the results. (optional)
     user = 'user_example' # str | Set to `me` for searching own avatars. (optional)
     user_id = 'user_id_example' # str | Filter by UserID. (optional)
     n = 60 # int | The number of objects to return. (optional) (default to 60)
@@ -907,7 +918,7 @@ async with vrchatapi.ApiClient(configuration) as api_client:
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **featured** | **bool**| Filters on featured results. | [optional] 
- **sort** | [**SortOption**](.md)| The sort order of the results. | [optional] [default to &#39;popularity&#39;]
+ **sort** | [**SortOptionAvatar**](.md)| The sort order of the results. | [optional] 
  **user** | **str**| Set to &#x60;me&#x60; for searching own avatars. | [optional] 
  **user_id** | **str**| Filter by UserID. | [optional] 
  **n** | **int**| The number of objects to return. | [optional] [default to 60]
@@ -938,7 +949,8 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a list of Avatar objects. |  -  |
+**200** |  |  -  |
+**400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
@@ -1018,7 +1030,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single CurrentUser object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
 
@@ -1099,7 +1111,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single CurrentUser object. |  -  |
+**200** |  |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **403** | Error response when trying to select a fallback avatar that is missing the fallback tag. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |
@@ -1184,7 +1196,7 @@ Name | Type | Description  | Notes
 
 | Status code | Description | Response headers |
 |-------------|-------------|------------------|
-**200** | Returns a single Avatar object. |  -  |
+**200** |  |  -  |
 **400** | The request failed validation. VRChat validates the request before it looks up the resource, so this response is returned even when the ID in the path does not exist. The message names the offending field or parameter. |  -  |
 **401** | Error response due to missing auth cookie. |  -  |
 **404** | The requested resource does not exist. The message varies by resource and by route, and only some name the id. Worlds sometimes answer &#x60;model &lt;worldId&gt; not found&#x60; instead of &#x60;World &lt;worldId&gt; not found&#x60;. |  -  |

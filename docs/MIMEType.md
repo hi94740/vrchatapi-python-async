@@ -27,7 +27,7 @@
 
 * `IMAGE_SLASH_PNG` (value: `'image/png'`)
 
-* `IMAGE_SLASH_SVG＋XML` (value: `'image/svg＋xml'`)
+* `IMAGE_SLASH_SVG_PLUS_XML` (value: `'image/svg+xml'`)
 
 * `IMAGE_SLASH_TIFF` (value: `'image/tiff'`)
 

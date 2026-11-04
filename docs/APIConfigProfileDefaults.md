@@ -1,16 +1,16 @@
 # APIConfigProfileDefaults
 
-Default profile theme colours, each a hex RGB triplet without a leading `#`.
+Default profile theme colors.
 
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**background_gradient_bottom** | **str** |  | [optional] 
-**background_gradient_top** | **str** |  | [optional] 
-**theme_button_color** | **str** |  | [optional] 
-**theme_icon_color** | **str** |  | [optional] 
-**theme_subtext_color** | **str** |  | [optional] 
+**background_gradient_bottom** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**background_gradient_top** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**theme_button_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**theme_icon_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**theme_subtext_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
 
 ## Example
 

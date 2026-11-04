@@ -1,14 +1,13 @@
 # Favorite
 
 
-
 ## Properties
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **favorite_id** | **str** | MUST be either AvatarID, UserID or WorldID. | 
 **id** | **str** |  | 
-**tags** | **List[str]** |   | 
+**tags** | **List[str]** |  | 
 **type** | [**FavoriteType**](FavoriteType.md) |  | [default to FavoriteType.FRIEND]
 
 ## Example

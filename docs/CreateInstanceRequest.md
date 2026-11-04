@@ -20,7 +20,7 @@ Name | Type | Description | Notes
 **owner_id** | **str** | A groupId if the instance type is \&quot;group\&quot;, null if instance type is public, or a userId otherwise | [optional] 
 **player_persistence_enabled** | **bool** |  | [optional] 
 **queue_enabled** | **bool** |  | [optional] [default to False]
-**region** | [**InstanceRegion**](InstanceRegion.md) |  | [default to InstanceRegion.US]
+**region** | [**CreateInstanceRequestRegion**](CreateInstanceRequestRegion.md) |  | 
 **role_ids** | **List[str]** | Group roleIds that are allowed to join if the type is \&quot;group\&quot; and groupAccessType is \&quot;member\&quot; | [optional] 
 **type** | [**InstanceType**](InstanceType.md) |  | 
 **vibe_ids** | **List[str]** |  | [optional] 

@@ -18,7 +18,7 @@ Name | Type | Description | Notes
 **preview_youtube_id** | **str** |  | [optional] 
 **recommended_capacity** | **int** |  | [optional] 
 **release_status** | [**ReleaseStatus**](ReleaseStatus.md) |  | [optional] [default to ReleaseStatus.PUBLIC]
-**tags** | **List[str]** |   | [optional] 
+**tags** | **List[str]** |  | [optional] 
 **unity_package_url** | **str** |  | [optional] 
 **unity_version** | **str** |  | [optional] [default to '5.3.4p1']
 **url_list** | **List[str]** |  | [optional] 

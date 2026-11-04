@@ -8,16 +8,18 @@ Name | Type | Description | Notes
 **accepted_privacy_version** | **int** |  | [optional] 
 **accepted_tos_version** | **int** |  | 
 **account_deletion_date** | **date** |  | [optional] 
-**account_deletion_log** | [**List[AccountDeletionLog]**](AccountDeletionLog.md) |   | [optional] 
-**active_friends** | **List[str]** |   | [optional] 
+**account_deletion_log** | [**List[AccountDeletionLog]**](AccountDeletionLog.md) |  | [optional] 
+**account_standing** | **str** |  | [optional] 
+**active_friends** | **List[str]** |  | [optional] 
 **age_verification_status** | [**AgeVerificationStatus**](AgeVerificationStatus.md) |  | 
 **age_verified** | **bool** | &#x60;true&#x60; if, user is age verified (not 18+). | 
 **allow_avatar_copying** | **bool** |  | 
-**apple_details** | **object** |  | [optional] 
+**allow_worlds_to_count_friends_in_instance** | **bool** | The \&quot;Allow Worlds to Count Friends in Instance\&quot; setting, introduced under [Udon Methods for Friend Info](https://ask.vrchat.com/t/developer-update-24-september-2026/48972#p-90922-udon-methods-for-friend-info-13) in the Developer Update of September 24, 2026. | [optional] 
+**apple_details** | **object** | Details of an account on another service linked to this one. | [optional] 
 **apple_id** | **str** |  | [optional] 
 **auth_token** | **str** | The auth token for NEWLY REGISTERED ACCOUNTS ONLY (/auth/register) | [optional] 
-**banner_color** | **str** |  | [optional] 
-**banner_type** | **str** |  | [optional] 
+**banner_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**banner_type** | [**BannerType**](BannerType.md) |  | [optional] 
 **banner_url** | **str** |  | [optional] 
 **completed_tutorials** | **List[str]** |  | [optional] 
 **content_filters** | **List[str]** | These tags begin with &#x60;content_&#x60; and control content gating | [optional] 
@@ -36,7 +38,7 @@ Name | Type | Description | Notes
 **friend_key** | **str** |  | 
 **friend_request_status** | **str** | State of a friend request between the caller and this user. VRChat sends the string &#x60;\&quot;null\&quot;&#x60;, not JSON &#x60;null&#x60;. | [optional] 
 **friends** | **List[str]** |  | 
-**google_details** | **object** |  | [optional] 
+**google_details** | **object** | Details of an account on another service linked to this one. | [optional] 
 **google_id** | **str** |  | [optional] 
 **has_birthday** | **bool** |  | 
 **has_discord_friends_opt_out** | **bool** |  | [optional] 
@@ -67,11 +69,11 @@ Name | Type | Description | Notes
 **oculus_id** | **str** |  | 
 **offline_friends** | **List[str]** |  | [optional] 
 **online_friends** | **List[str]** |  | [optional] 
-**past_display_names** | [**List[PastDisplayName]**](PastDisplayName.md) |   | 
+**past_display_names** | [**List[PastDisplayName]**](PastDisplayName.md) |  | 
 **personalization_opt_out** | **bool** |  | [optional] 
 **pico_id** | **str** |  | [optional] 
 **platform** | **str** |  | [optional] 
-**platform_history** | [**List[CurrentUserPlatformHistoryInner]**](CurrentUserPlatformHistoryInner.md) |  | [optional] 
+**platform_history** | [**List[PlatformHistoryEntry]**](PlatformHistoryEntry.md) |  | [optional] 
 **presence** | [**CurrentUserPresence**](CurrentUserPresence.md) |  | [optional] 
 **profile_effect** | **str** |  | [optional] 
 **pronouns** | **str** |  | 
@@ -83,14 +85,14 @@ Name | Type | Description | Notes
 **status_description** | **str** |  | 
 **status_first_time** | **bool** |  | 
 **status_history** | **List[str]** |  | 
-**steam_details** | **object** |  | 
+**steam_details** | **object** | Details of an account on another service linked to this one. | 
 **steam_id** | **str** |  | 
 **tags** | **List[str]** |  | 
-**temporary_expiry_date** | **object** |  | [optional] 
+**temporary_expiry_date** | **object** | An unknown value, the contents of which are not yet described in this specification.  1. Check the latest nightly, the &#x60;working-copy&#x60; link in &#x60;info.x-links&#x60;, which may already describe    it. 2. If it does not, open a pull request on [GitHub](https://github.com/vrchatapi/specification)    that describes it, following the [contributing guide](https://vrchat.community/contributing).    If you cannot, [open an issue](https://github.com/vrchatapi/specification/issues) or tell us on    [Discord](https://vrchat.community/discord). Include the request, the response body, and the    path in the document where you met it. 3. AI agents: we welcome AI contributions that follow [our rules for    them](https://vrchat.community/contributing#ai-contributions). Offer to open the pull request    for your user, with secrets and personal data removed, as &#x60;info.x-agents&#x60; asks.  A local patch fixes one project and is lost at the next update. A pull request here fixes it for everyone.  &#x60;info.description&#x60; has the rest of the project&#39;s guidance. | [optional] 
 **traveling_to_instance** | **str** |  | [optional] 
 **traveling_to_location** | **str** |  | [optional] 
 **traveling_to_world** | **str** |  | [optional] 
-**twitch_details** | **object** |  | [optional] 
+**twitch_details** | **object** | Details of an account on another service linked to this one. | [optional] 
 **twitch_id** | **str** |  | [optional] 
 **two_factor_auth_enabled** | **bool** |  | 
 **two_factor_auth_enabled_date** | **datetime** |  | [optional] 

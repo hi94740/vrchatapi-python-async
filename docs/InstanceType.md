@@ -1,7 +1,6 @@
 # InstanceType
 
 
-
 ## Enum
 
 * `FRIENDS` (value: `'friends'`)

@@ -6,9 +6,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **extension** | **str** |  | 
-**mime_type** | [**MIMEType**](MIMEType.md) |  | [default to MIMEType.IMAGE_SLASH_JPEG]
+**mime_type** | [**CreateFileRequestMIMEType**](CreateFileRequestMIMEType.md) |  | 
 **name** | **str** |  | 
-**tags** | **List[str]** |   | [optional] 
+**tags** | **List[str]** |  | [optional] 
 
 ## Example
 

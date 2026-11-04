@@ -6,8 +6,8 @@ User object received when querying mutual friends
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**banner_color** | **str** | Hex colour without a leading &#x60;#&#x60;. | [optional] 
-**banner_type** | **str** |  | [optional] 
+**banner_color** | **str** | Six hexadecimal digits, without a leading &#x60;#&#x60;. May be empty. | [optional] 
+**banner_type** | [**BannerType**](BannerType.md) |  | [optional] 
 **banner_url** | **str** |  | [optional] 
 **display_name** | **str** |  | 
 **icon_frame** | **str** |  | [optional] 

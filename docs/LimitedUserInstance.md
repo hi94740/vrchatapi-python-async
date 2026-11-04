@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **age_verified** | **bool** | &#x60;true&#x60; if, user is age verified (not 18+). | 
 **allow_avatar_copying** | **bool** |  | 
 **bio** | **str** |  | [optional] 
-**bio_links** | **List[str]** |   | [optional] 
-**current_avatar_image_url** | **str** | When profilePicOverride is not empty, use it instead. | 
-**current_avatar_tags** | **List[str]** |  | 
-**current_avatar_thumbnail_image_url** | **str** | When profilePicOverride is not empty, use it instead. | 
+**bio_links** | **List[str]** |  | [optional] 
+**current_avatar_image_url** | **str** | When profilePicOverride is not empty, use it instead. | [optional] 
+**current_avatar_tags** | **List[str]** |  | [optional] 
+**current_avatar_thumbnail_image_url** | **str** | When profilePicOverride is not empty, use it instead. | [optional] 
 **date_joined** | **datetime** |  | 
 **developer_type** | [**DeveloperType**](DeveloperType.md) |  | [default to DeveloperType.NONE]
 **display_name** | **str** |  | 
