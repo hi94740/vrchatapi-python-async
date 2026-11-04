@@ -9,6 +9,7 @@ import pytest
 
 from tools import download_spec
 from tools.generate_highlevel_types import ROOT_SCHEMAS, TypedDictGenerator
+from tools.stamp_package_readme import stamp
 
 
 def test_specification_pin():
@@ -82,6 +83,31 @@ def test_canonical_sources_match_shipped_copies():
     assert (root / "websocket/websocket.py").read_bytes() == (
         root / "vrchatapi/websocket.py"
     ).read_bytes()
+
+
+def test_package_readme_does_not_depend_on_upstream_banner(tmp_path):
+    setup = tmp_path / "setup.py"
+    readme = tmp_path / "README.md"
+    setup.write_text('setup(name="sdk", long_description="""Upstream text\nchanged""")\n')
+    readme.write_text('SDK description with "quotes", 中文, and a newline.\n')
+    stamp(setup, readme)
+    call = ast.parse(setup.read_text()).body[0].value
+    values = {keyword.arg: ast.literal_eval(keyword.value) for keyword in call.keywords}
+    assert values == {"name": "sdk", "long_description": readme.read_text()}
+    before = setup.read_bytes()
+    stamp(setup, readme)
+    assert setup.read_bytes() == before
+
+
+def test_package_readme_refuses_unexpected_setup_shape(tmp_path):
+    setup = tmp_path / "setup.py"
+    readme = tmp_path / "README.md"
+    setup.write_text('setup(name="sdk")\n')
+    readme.write_text("SDK description")
+    before = setup.read_bytes()
+    with pytest.raises(ValueError, match="long_description"):
+        stamp(setup, readme)
+    assert setup.read_bytes() == before
 
 
 @pytest.mark.parametrize("package_version", ["1.23.0", "1.21.0.post6"])

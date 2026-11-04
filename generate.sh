@@ -111,10 +111,8 @@ perl -pi -e "s/author_email=\"[^\"]*\"/author_email=\"${AUTHOR_EMAIL//@/\\@}\"/"
 # Declare the supported Python floor (matches the CI test matrix 3.10-3.14).
 perl -pi -e 's/^    install_requires=REQUIRES,$/    install_requires=REQUIRES,\n    python_requires=">=3.10",/' ./setup.py
 
-# Fix long_description error during pypi upload
-perl -pi -e 's/.*VRChat API Banner.*/abcdefvrc/g' ./setup.py
-perl -pi -e 'if (/abcdefvrc/) { local $/; open(my $fh, "<", "README.md") or die $!; my $content = <$fh>; close $fh; $_ = $content; }' ./setup.py
-perl -pi -e 's/abcdefvrc//g' ./setup.py
+# Keep our package description even when upstream changes its description/banner.
+python3 tools/stamp_package_readme.py
 
 # Remove messily pasted markdown at top of every file
 find vrchatapi -type f -exec perl -ni -e 'print unless /VRChat API Banner/' {} \;
