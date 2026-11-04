@@ -61,6 +61,7 @@ Hand-maintained — the generator never emits these:
 - `tools/check_source_release.py` — validation for exact source-only stable releases.
 - `tools/stamp_version.py` — release version stamping shared by generation and
   local package builds.
+- `tools/stamp_package_readme.py` — AST-based package README metadata stamping.
 - `examples/`, `AGENTS.md`, `LICENSE` — documentation, kept async.
 - `tests/`, `pytest.ini` — hand-written test suite. It lives in `tests/` (plural)
   so it never collides with the generator's `test/` (singular, ignored).
@@ -106,14 +107,16 @@ bash generate.sh --no-patch <version> /path/to/openapi-3.0.yaml
 bash generate.sh /path/to/openapi-3.0.yaml
 ```
 
-`generate.sh` does, in order: fetch+bundle the spec (or copy the given file) →
-resolve `<version>` (explicit arg, or the spec's `info.version` via `yq`, with
+`generate.sh` does, in order: download and verify the pinned bundle (or copy the
+given file) → resolve `<version>` (explicit arg, or the spec's `info.version`
+using the YAML reader, with
 `-nightly.` → `.dev` like the CI workflow) → `rm -rf vrchatapi docs` → generate
 (`-g python --library=asyncio
 --additional-properties=packageName=vrchatapi,projectName=vrchatapi-async,packageUrl=https://github.com/vrchatapi/vrchatapi-python,compatibleWithPythonLegacy=true`)
 → perl metadata fixes (stamps `VERSION` in `setup.py` and `__version__` in
 `vrchatapi/__init__.py`, plus description, keywords, author, author_email,
-`python_requires` (`>=3.10`), and `long_description` from `README.md` — all
+`python_requires` (`>=3.10`)) and AST-based `long_description` stamping from
+`README.md` — all
 metadata is declared in variables at
 the top of `generate.sh`) → strip the API banner from sources → preserve
 hand-maintained files via `.openapi-generator-ignore` → **with `--no-patch`,
@@ -273,8 +276,10 @@ Caveats:
   full-auto release, trigger from `main` (the default for `workflow_dispatch`).
 
 The `publish` job runs only on `repository_dispatch` or manual
-`workflow_dispatch` (not on push/PR), and **any branch may trigger it** — the
-release gate is human approval, not a branch check. On `workflow_dispatch` the
+`workflow_dispatch` (not on push/PR), and **any branch may trigger it**. The
+selected release mode and test/build/install jobs gate publishing; the `pypi`
+environment only adds a human approval gate when Required reviewers are enabled.
+On `workflow_dispatch` the
 `release` input selects the mode:
 
 - `none` (default) — CI only (generate/test/build/install), skip publish.

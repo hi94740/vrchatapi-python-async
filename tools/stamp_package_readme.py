@@ -19,6 +19,8 @@ def stamp(setup_path: Path, readme_path: Path) -> None:
             if keyword.arg != "long_description":
                 continue
             value = keyword.value
+            if value.end_lineno is None or value.end_col_offset is None:
+                raise ValueError("Generated long_description has no source location")
             lines = source.splitlines(keepends=True)
             start = sum(map(len, lines[: value.lineno - 1])) + value.col_offset
             end = sum(map(len, lines[: value.end_lineno - 1])) + value.end_col_offset
